@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--多状态布局默认id-->
+    <item name="base_state_layout_container" type="id" />
+    <!--刷新布局默认id-->
+    <item name="base_refresh_layout_container" type="id" />
+</resources>
