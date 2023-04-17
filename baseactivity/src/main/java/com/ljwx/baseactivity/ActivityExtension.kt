@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.gyf.immersionbar.ImmersionBar
+import com.ljwx.baseapp.showToast
 
 /**
  * 获取Activity根布局
@@ -26,10 +27,14 @@ val AppCompatActivity.rootLayout: View?
  */
 fun AppCompatActivity.initToolbar(@IdRes toolbarId: Int? = null): Toolbar? {
     // 使用通用id或自定义id
-    val toolbar = findViewById(toolbarId ?: R.id.base_activity_toolbar) as? Toolbar
-    setSupportActionBar(toolbar)
-    toolbar?.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
-    return toolbar
+    if (supportActionBar == null) {
+        val toolbar = findViewById(toolbarId ?: R.id.base_activity_toolbar) as? Toolbar
+        setSupportActionBar(toolbar)
+        toolbar?.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        return toolbar
+    } else {
+        return null
+    }
 }
 
 /**
@@ -65,4 +70,8 @@ fun AppCompatActivity.setStatusBarColor(fontDark: Boolean, @ColorRes barColor: I
 fun Activity.sendFinishAction(action: String) {
     val intent = Intent(action)
     LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+}
+
+fun Activity.showToast(content: String?) {
+    showToast(content)
 }

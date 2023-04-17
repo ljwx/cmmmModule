@@ -4,14 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.ljwx.baseapp.BaseViewModel
 import java.lang.reflect.ParameterizedType
 
-open abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel> :
-    BaseStateRefreshFragment() {
+open abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel>(@LayoutRes private val layoutRes: Int) :
+    BaseStateRefreshFragment(layoutRes) {
 
     /**
      * DataBinding
@@ -30,7 +31,7 @@ open abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : Base
     ): View? {
 
         // 设置DataBinding
-        mBinding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
+        mBinding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
         fastLayout()
         // 创建ViewModel
         val type = javaClass.genericSuperclass as ParameterizedType

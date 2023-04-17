@@ -7,7 +7,7 @@ import android.view.Gravity
 /**
  * 显示Toast弹窗
  */
-fun Context.showToast(gravity: Gravity, repeat: Boolean) {
+fun Context.showToast(content: String?, gravity: Int = Gravity.BOTTOM, repeat: Boolean = false) {
 
 }
 

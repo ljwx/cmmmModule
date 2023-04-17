@@ -1,29 +1,19 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
-    namespace 'com.ljwx.basemodule'
+    namespace 'com.ljwx.recyclerview'
     compileSdk 33
 
-    signingConfigs {
-        debug {
-            storeFile file('../ljwx.jks')
-            storePassword 'ljwx9527'
-            keyAlias 'android'
-            keyPassword 'ljwx9527'
-        }
-    }
-
     defaultConfig {
-        applicationId "com.ljwx.basemodule"
         minSdk 21
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -39,8 +29,8 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding = true
     }
 }
 
@@ -49,18 +39,9 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
-
-    implementation project(path: ":baseapp")
-    implementation project(path: ":basenetwork")
-    implementation project(path: ':baseactivity')
-    implementation project(path: ':basefragment')
-    implementation project(path: ':baserecyclerview')
-
+    api 'androidx.recyclerview:recyclerview:1.2.1'
 }

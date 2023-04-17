@@ -5,6 +5,7 @@ import androidx.annotation.ColorRes
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.gyf.immersionbar.ImmersionBar
+import com.ljwx.baseapp.showToast
 
 
 /**
@@ -31,4 +32,8 @@ fun Fragment.setStatusBarColor(fontDark: Boolean, @ColorRes barColor: Int) {
 fun Fragment.sendFinishAction(action: String) {
     val intent = Intent(action)
     LocalBroadcastManager.getInstance(requireContext()).sendBroadcast(intent)
+}
+
+fun Fragment.showToast(content: String?) {
+    context?.showToast(content)
 }
