@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/baseapp" />
             <option value="$PROJECT_DIR$/basefragment" />
             <option value="$PROJECT_DIR$/basenetwork" />
+            <option value="$PROJECT_DIR$/baserecyclerview" />
           </set>
         </option>
       </GradleProjectSettings>

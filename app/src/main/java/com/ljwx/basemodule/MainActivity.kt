@@ -1,15 +1,18 @@
 package com.ljwx.basemodule
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.ljwx.baseactivity.fast.FastMainActivity
+import com.ljwx.baseapp.BaseViewModel
+import com.ljwx.basemodule.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : FastMainActivity<ActivityMainBinding, BaseViewModel>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-
-
+        mTabLayout = mBinding.tabLayout
+        mViewPager = mBinding.viewPager
+        addTabFragment("loadmore", RecyclerViewFragment())
+        attachTabLayoutViewPager()
 
     }
 }

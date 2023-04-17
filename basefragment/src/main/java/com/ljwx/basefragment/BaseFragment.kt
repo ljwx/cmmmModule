@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 
-open abstract class BaseFragment : Fragment() {
+open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment() {
 
     open val TAG = this.javaClass.simpleName
 
@@ -16,10 +16,7 @@ open abstract class BaseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return LayoutInflater.from(requireContext()).inflate(getLayoutRes(), container, false)
+        return LayoutInflater.from(requireContext()).inflate(layoutResID, container, false)
     }
-
-    @LayoutRes
-    abstract fun getLayoutRes(): Int
 
 }

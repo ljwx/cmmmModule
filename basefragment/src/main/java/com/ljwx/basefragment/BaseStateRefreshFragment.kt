@@ -11,7 +11,7 @@ import com.ljwx.baseapp.page.IBasePage
 import com.ljwx.baseapp.LayoutStatus
 import com.ljwx.baseapp.PopupLoading
 
-open abstract class BaseStateRefreshFragment : BaseFragment(), IBasePage {
+open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) : BaseFragment(layoutResID), IBasePage {
 
 
     private val mPopupLoading by lazy {
