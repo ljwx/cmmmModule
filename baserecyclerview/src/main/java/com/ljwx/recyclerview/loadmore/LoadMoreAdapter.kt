@@ -97,7 +97,7 @@ class LoadMoreAdapter(
 
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addList(list: List<Any>, hasMore: Boolean = false, isRefresh: Boolean = false) {
+    fun addList(list: List<*>, hasMore: Boolean = false, isRefresh: Boolean = false) {
 
         val newList = if (isRefresh) list else (listOf<Any>() + currentList + list)
 
