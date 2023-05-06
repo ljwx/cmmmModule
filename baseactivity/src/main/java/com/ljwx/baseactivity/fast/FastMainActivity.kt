@@ -5,7 +5,7 @@ import androidx.databinding.ViewDataBinding
 import com.ljwx.baseactivity.showToast
 import com.ljwx.baseapp.BaseViewModel
 
-open class FastMainActivity<Binding : ViewDataBinding, ViewModel : BaseViewModel>(@LayoutRes layoutResID: Int) :
+open abstract class FastMainActivity<Binding : ViewDataBinding, ViewModel : BaseViewModel>(@LayoutRes layoutResID: Int) :
     FastTabLayoutActivity<Binding, ViewModel>(layoutResID) {
 
     /**

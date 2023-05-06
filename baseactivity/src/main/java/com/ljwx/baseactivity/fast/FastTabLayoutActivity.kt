@@ -1,5 +1,6 @@
 package com.ljwx.baseactivity.fast
 
+import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -13,9 +14,10 @@ import com.ljwx.baseapp.BaseViewModel
 open abstract class FastTabLayoutActivity<Binding : ViewDataBinding, ViewModel : BaseViewModel>(@LayoutRes layoutResID: Int) :
     BaseMVVMActivity<Binding, ViewModel>(layoutResID) {
 
-    protected lateinit var mTabLayout: TabLayout
-
-    protected lateinit var mViewPager: ViewPager2
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        attachTabLayoutViewPager()
+    }
 
     /**
      * fragment集合
@@ -26,17 +28,23 @@ open abstract class FastTabLayoutActivity<Binding : ViewDataBinding, ViewModel :
     /**
      * 添加tab和对应的fragment
      */
-    fun addTabFragment(tab: TabLayout.Tab, fragment: Fragment) {
+    fun addTabFragment(tab: TabLayout.Tab, fragment: Fragment, notify: Boolean = false) {
         mTabFragments[tab] = fragment
+        if (notify) {
+            getViewPager2().adapter?.notifyDataSetChanged()
+        }
     }
 
     /**
      * 添加tab名称和对应的fragment
      */
-    fun addTabFragment(tabName: String, fragment: Fragment) {
-        val tab = mTabLayout.newTab()
+    fun addTabFragment(tabName: String, fragment: Fragment, notify: Boolean = false) {
+        val tab = getTabLayout().newTab()
         tab.text = tabName
         mTabFragments[tab] = fragment
+        if (notify) {
+            getViewPager2().adapter?.notifyDataSetChanged()
+        }
     }
 
     /**
@@ -56,7 +64,7 @@ open abstract class FastTabLayoutActivity<Binding : ViewDataBinding, ViewModel :
         canScroll: Boolean = false,
         pageLimit: Int = 1,
     ) {
-        mViewPager.adapter = object : FragmentStateAdapter(this) {
+        getViewPager2().adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int {
                 return mTabFragments.size
             }
@@ -65,9 +73,9 @@ open abstract class FastTabLayoutActivity<Binding : ViewDataBinding, ViewModel :
                 return mTabFragments.values.toList()[position]
             }
         }
-        mViewPager.isUserInputEnabled = canScroll
-        mViewPager.offscreenPageLimit = pageLimit
-        TabLayoutMediator(mTabLayout, mViewPager) { tab, position ->
+        getViewPager2().isUserInputEnabled = canScroll
+        getViewPager2().offscreenPageLimit = pageLimit
+        TabLayoutMediator(getTabLayout(), getViewPager2()) { tab, position ->
             val tabItem = mTabFragments.keys.toList()[position]
             if (tabItem.customView != null) {
                 tab.customView = tabItem.customView
@@ -76,5 +84,9 @@ open abstract class FastTabLayoutActivity<Binding : ViewDataBinding, ViewModel :
             }
         }.attach()
     }
+
+    abstract fun getTabLayout(): TabLayout
+
+    abstract fun getViewPager2(): ViewPager2
 
 }
