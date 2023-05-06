@@ -19,4 +19,3 @@ class MainActivity : FastMainActivity<ActivityMainBinding, BaseViewModel>(R.layo
 
     }
 }
-
