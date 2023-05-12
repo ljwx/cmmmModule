@@ -27,16 +27,7 @@ class PopupLoading(val context: Context) {
         focusable: Boolean = true,
         canceledOnTouchOutside: Boolean = false,
     ) {
-        mLoadingRunnable = mLoadingRunnable ?: Runnable {
-            dialog.setCancelable(cancelable)
-            dialog.setCanceledOnTouchOutside(canceledOnTouchOutside)
-            if (show) {
-                dialog.show()
-            } else {
-                dialog.dismiss()
-            }
-        }
-        dialog.ownerActivity?.runOnUiThread(mLoadingRunnable)
+        dialog.show()
     }
 
 

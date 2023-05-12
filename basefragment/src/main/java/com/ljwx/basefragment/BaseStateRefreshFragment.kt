@@ -21,6 +21,8 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
         PopupLoading(requireContext())
     }
 
+    private var mLoadingRunnable: Runnable? = null
+
     /**
      * 多状态控件
      */
@@ -50,11 +52,21 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
     }
 
     override fun showPopLoading(show: Boolean, cancelable: Boolean, level: Int) {
-        mPopupLoading.showPopup(show)
+        if (!show || (isPopupLoadingShowing())) {
+            return
+        }
+        mLoadingRunnable = mLoadingRunnable ?: Runnable {
+//            mPopupLoading.setCancelable(cancelable)
+//            dialog.setCanceledOnTouchOutside(canceledOnTouchOutside)
+            mPopupLoading.showPopup(show)
+        }
+        activity?.runOnUiThread(mLoadingRunnable)
     }
 
     override fun dismissPopLoading(dismiss: Boolean) {
-        mPopupLoading.dismiss()
+        activity?.runOnUiThread {
+            mPopupLoading.dismiss()
+        }
     }
 
     override fun isPopupLoadingShowing(): Boolean = mPopupLoading.isShowing()
