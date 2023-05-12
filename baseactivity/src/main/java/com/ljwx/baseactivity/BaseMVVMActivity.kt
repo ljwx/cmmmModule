@@ -9,7 +9,7 @@ import com.ljwx.baseapp.BaseViewModel
 import java.lang.reflect.ParameterizedType
 
 open class BaseMVVMActivity<Binding : ViewDataBinding, ViewModel : BaseViewModel>(@LayoutRes val layoutResID: Int) :
-    BaseStateRefreshActivity() {
+    StateRefreshActivity() {
 
     /**
      * DataBinding
@@ -23,24 +23,24 @@ open class BaseMVVMActivity<Binding : ViewDataBinding, ViewModel : BaseViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         // 设置DataBinding
         mBinding = DataBindingUtil.setContentView(this, layoutResID)
-        fastLayout()
         // 创建ViewModel
         val type = javaClass.genericSuperclass as ParameterizedType
         val modelClass = type.actualTypeArguments.getOrNull(1) as Class<ViewModel>
         mViewModel = ViewModelProvider(this)[modelClass]
-
+        //快捷布局
+        quickLayout()
     }
 
     /**
      * 快速布局
      */
-    private fun fastLayout() {
+    protected fun quickLayout() {
         initToolbar()
         useCommonStateLayout()
         useCommonRefreshLayout()
     }
+
 
 }

@@ -38,7 +38,7 @@ open abstract class FastTabLayoutActivity<Binding : ViewDataBinding, ViewModel :
     /**
      * 添加tab名称和对应的fragment
      */
-    fun addTabFragment(tabName: String, fragment: Fragment, notify: Boolean = false) {
+    fun addTabFragment(tabName: String, fragment: Fragment, notify: Boolean = true) {
         val tab = getTabLayout().newTab()
         tab.text = tabName
         mTabFragments[tab] = fragment

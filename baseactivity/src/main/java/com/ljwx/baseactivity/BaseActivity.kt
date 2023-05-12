@@ -6,11 +6,20 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.gyf.immersionbar.ImmersionBar
+import com.ljwx.baseapp.page.IPageBroadcast
+import com.ljwx.baseapp.page.IPageStatusBar
+import com.ljwx.baseapp.page.IPageToolbar
 
-open class BaseActivity : AppCompatActivity() {
+open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPageBroadcast {
 
     open val TAG = this.javaClass.simpleName
+
+    private val mStatusBar by lazy {
+        ImmersionBar.with(this)
+    }
 
     /**
      * 结束当前页的广播
@@ -18,44 +27,87 @@ open class BaseActivity : AppCompatActivity() {
     private var mFinishReceiver: BroadcastReceiver? = null
 
     /**
-     * 结束广播的Intent
+     * 刷新广播
      */
-    private var mFinishIntent: IntentFilter? = null
+    private var mRefreshReceiver: BroadcastReceiver? = null
+
+    /**
+     * 注册广播的Intent
+     */
+    private var mBroadcastIntentFilter: IntentFilter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
 
+    override fun getStatusBarUtils(): ImmersionBar {
+        return mStatusBar;
+    }
 
-    /**
-     * 注册结束广播的action
-     *
-     * @param actions 多action,任一匹配则finish
-     */
-    fun registerFinishBroadcast(vararg actions: String) {
-        mFinishIntent = mFinishIntent ?: IntentFilter()
+    override fun setStatusBar(backgroundColor: Int, fontDark: Boolean): ImmersionBar {
+        mStatusBar
+            .reset()//解决状态栏和布局重叠问题
+            .fitsSystemWindows(true)//默认为false，当为true时一定要指定statusBarColor()
+            .statusBarColor(backgroundColor)
+            .statusBarDarkFont(fontDark)//状态栏字体是深色，不写默认为亮色
+            .init()
+        return mStatusBar
+    }
+
+    override fun initToolbar(toolbarId: Int?): Toolbar? {
+        // 使用通用id或自定义id
+        return if (supportActionBar == null) {
+            //默认通用id
+            val toolbar = findViewById(toolbarId ?: R.id.base_activity_toolbar) as? Toolbar
+            setSupportActionBar(toolbar)
+            toolbar?.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
+            toolbar
+        } else {
+            null
+        }
+    }
+
+    override fun setToolbarTitle(title: CharSequence) {
+        supportActionBar?.title = title
+    }
+
+    override fun registerFinishBroadcast(vararg actions: String?) {
+        mBroadcastIntentFilter = mBroadcastIntentFilter ?: IntentFilter()
         actions.forEach {
-            mFinishIntent?.addAction(it)
+            mBroadcastIntentFilter?.addAction(it)
         }
         mFinishReceiver = mFinishReceiver ?: (object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
-                if (mFinishIntent?.matchAction(intent.action) == true) {
-                    finish()
+                if (mBroadcastIntentFilter?.matchAction(intent.action) == true) {
+                    onPageFinish()
                 }
             }
         })
-        LocalBroadcastManager.getInstance(this).registerReceiver(mFinishReceiver!!, mFinishIntent!!)
+        LocalBroadcastManager.getInstance(this)
+            .registerReceiver(mFinishReceiver!!, mBroadcastIntentFilter!!)
     }
 
-    /**
-     * 注销页面结束广播
-     *
-     * @param action 注册过的action,为空则注销所有action广播
-     */
-    fun unregisterFinishBroadcast(action: String?) {
+    override fun registerRefreshBroadcast(vararg actions: String?) {
+        mBroadcastIntentFilter = mBroadcastIntentFilter ?: IntentFilter()
+        actions.forEach {
+            mBroadcastIntentFilter?.addAction(it)
+        }
+        mRefreshReceiver = mRefreshReceiver ?: (object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                if (mBroadcastIntentFilter?.matchAction(intent.action) == true) {
+                    onPageRefresh(intent.type)
+                }
+            }
+        })
+        LocalBroadcastManager.getInstance(this)
+            .registerReceiver(mRefreshReceiver!!, mBroadcastIntentFilter!!)
+    }
+
+
+    override fun unregisterBroadcast(action: String?) {
         if (action != null) {
-            val iterator = mFinishIntent?.actionsIterator()
+            val iterator = mBroadcastIntentFilter?.actionsIterator()
             while (iterator?.hasNext() == true) {
                 if (iterator.next() == action) {
                     iterator.remove()
@@ -69,11 +121,45 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
+    override fun sendFinishBroadcast(action: String?) {
+        if (action.isNullOrBlank()) {
+            return
+        }
+        val intent = Intent(action)
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+    }
+
+    override fun sendRefreshBroadcast(action: String?, type: String?) {
+        if (action.isNullOrBlank()) {
+            return
+        }
+        val intent = Intent(action)
+        type?.let {
+            intent.type = type
+        }
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+    }
+
+    override fun onPageFinish() {
+        finish()
+    }
+
+    override fun onPageRefresh(type: String?) {
+
+    }
 
     override fun onDestroy() {
         super.onDestroy()
+        mFinishReceiver?.let {
+            LocalBroadcastManager.getInstance(this).unregisterReceiver(it)
+        }
         mFinishReceiver = null
-        mFinishIntent = null
+        mRefreshReceiver?.let {
+            LocalBroadcastManager.getInstance(this).unregisterReceiver(it)
+        }
+        mRefreshReceiver = null
+        mBroadcastIntentFilter = null
     }
+
 
 }

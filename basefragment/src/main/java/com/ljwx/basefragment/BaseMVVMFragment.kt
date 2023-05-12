@@ -29,10 +29,9 @@ open abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : Base
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-
         // 设置DataBinding
         mBinding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
-        fastLayout()
+        quickLayout()
         // 创建ViewModel
         val type = javaClass.genericSuperclass as ParameterizedType
         val modelClass = type.actualTypeArguments.getOrNull(1) as Class<ViewModel>
@@ -44,7 +43,7 @@ open abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : Base
     /**
      * 快速布局
      */
-    private fun fastLayout() {
+    private fun quickLayout() {
         useCommonStateLayout()
         useCommonRefreshLayout()
     }

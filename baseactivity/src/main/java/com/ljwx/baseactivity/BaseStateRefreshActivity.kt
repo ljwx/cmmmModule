@@ -8,10 +8,13 @@ import com.ljwx.baseapp.PopupLoading
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.ljwx.baseapp.R
 import com.ljwx.baseapp.isMainThread
-import com.ljwx.baseapp.page.IBasePage
 import com.ljwx.baseapp.LayoutStatus
+import com.ljwx.baseapp.page.IPagePopLoading
+import com.ljwx.baseapp.page.IPageRefreshLayout
+import com.ljwx.baseapp.page.IPageStateLayout
 
-open class BaseStateRefreshActivity : BaseActivity(), IBasePage {
+open class StateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStateLayout,
+    IPageRefreshLayout {
 
     private val mPopupLoading by lazy {
         PopupLoading(this)
@@ -41,17 +44,18 @@ open class BaseStateRefreshActivity : BaseActivity(), IBasePage {
         super.onCreate(savedInstanceState)
 
 
-
     }
 
-    /**
-     * 显示悬浮弹窗
-     */
-    override fun showPopupLoading(show: Boolean, type: Int) {
+    override fun showPopLoading(show: Boolean, cancelable: Boolean, level: Int) {
         mPopupLoading.showPopup(show)
     }
 
+    override fun dismissPopLoading(dismiss: Boolean) {
+        mPopupLoading.dismiss()
+    }
+
     override fun isPopupLoadingShowing(): Boolean = mPopupLoading.isShowing()
+
 
     /*================================================================*/
 
@@ -105,15 +109,19 @@ open class BaseStateRefreshActivity : BaseActivity(), IBasePage {
             LayoutStatus.LOADING -> {
                 mStateLayout?.emptyLayout = layout
             }
+
             LayoutStatus.EMPTY -> {
                 mStateLayout?.emptyLayout = layout
             }
+
             LayoutStatus.ERROR -> {
                 mStateLayout?.errorLayout = layout
             }
+
             LayoutStatus.OFFLINE -> {
 
             }
+
             else -> {}
         }
     }
@@ -144,15 +152,19 @@ open class BaseStateRefreshActivity : BaseActivity(), IBasePage {
             LayoutStatus.LOADING -> {
                 mStateLayout?.showLoading(tag)
             }
+
             LayoutStatus.CONTENT -> {
                 mStateLayout?.showContent()
             }
+
             LayoutStatus.EMPTY -> {
                 mStateLayout?.showEmpty()
             }
+
             LayoutStatus.ERROR -> {
                 mStateLayout?.showError(tag)
             }
+
             LayoutStatus.OFFLINE -> {
 
             }
@@ -199,10 +211,6 @@ open class BaseStateRefreshActivity : BaseActivity(), IBasePage {
         }
     }
 
-
-    override fun networkException(exception: Exception) {
-
-    }
 
     override fun onDestroy() {
         super.onDestroy()
