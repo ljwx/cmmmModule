@@ -14,6 +14,7 @@ class MainActivity : FastMainActivity<ActivityMainBinding, BaseViewModel>(R.layo
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        addTabFragment("basefragment", BaseFragmentTest())
         addTabFragment("loadmore", RecyclerViewFragment())
         addTabFragment("javaTest", TestJavaFragment(0))
 

@@ -58,9 +58,11 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
     implementation project(path: ":baseapp")
+    implementation project(path: ":basescaffold")
     implementation project(path: ":basenetwork")
     implementation project(path: ':baseactivity')
     implementation project(path: ':basefragment')
     implementation project(path: ':baserecyclerview')
 
+    implementation 'io.github.ljwx:SplitTextView:0.3.8'
 }
