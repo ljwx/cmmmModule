@@ -7,11 +7,14 @@ import com.drake.statelayout.StateLayout
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.ljwx.baseapp.R
 import com.ljwx.baseapp.isMainThread
-import com.ljwx.baseapp.page.IBasePage
 import com.ljwx.baseapp.LayoutStatus
 import com.ljwx.baseapp.PopupLoading
+import com.ljwx.baseapp.page.IPagePopLoading
+import com.ljwx.baseapp.page.IPageRefreshLayout
+import com.ljwx.baseapp.page.IPageStateLayout
 
-open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) : BaseFragment(layoutResID), IBasePage {
+open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
+    BaseFragment(layoutResID), IPagePopLoading, IPageStateLayout, IPageRefreshLayout {
 
 
     private val mPopupLoading by lazy {
@@ -46,14 +49,16 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) : Base
 
     }
 
-    /**
-     * 显示悬浮弹窗
-     */
-    override fun showPopupLoading(show: Boolean, type: Int) {
+    override fun showPopLoading(show: Boolean, cancelable: Boolean, level: Int) {
         mPopupLoading.showPopup(show)
     }
 
+    override fun dismissPopLoading(dismiss: Boolean) {
+        mPopupLoading.dismiss()
+    }
+
     override fun isPopupLoadingShowing(): Boolean = mPopupLoading.isShowing()
+
 
     /*================================================================*/
 
@@ -107,15 +112,19 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) : Base
             LayoutStatus.LOADING -> {
                 mStateLayout?.emptyLayout = layout
             }
+
             LayoutStatus.EMPTY -> {
                 mStateLayout?.emptyLayout = layout
             }
+
             LayoutStatus.ERROR -> {
                 mStateLayout?.errorLayout = layout
             }
+
             LayoutStatus.OFFLINE -> {
 
             }
+
             else -> {}
         }
     }
@@ -146,15 +155,19 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) : Base
             LayoutStatus.LOADING -> {
                 mStateLayout?.showLoading(tag)
             }
+
             LayoutStatus.CONTENT -> {
                 mStateLayout?.showContent()
             }
+
             LayoutStatus.EMPTY -> {
                 mStateLayout?.showEmpty()
             }
+
             LayoutStatus.ERROR -> {
                 mStateLayout?.showError(tag)
             }
+
             LayoutStatus.OFFLINE -> {
 
             }
@@ -201,10 +214,6 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) : Base
         }
     }
 
-
-    override fun networkException(exception: Exception) {
-
-    }
 
     override fun onDestroy() {
         super.onDestroy()
