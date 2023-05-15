@@ -1,10 +1,11 @@
-package com.ljwx.basemodule
+package com.ljwx.basemodule.fragments
 
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import com.ljwx.baseapp.BaseViewModel
 import com.ljwx.basefragment.BaseMVVMFragment
+import com.ljwx.basemodule.R
 import com.ljwx.basemodule.databinding.FragmentRecyclerViewBinding
 import com.ljwx.recyclerview.bindingType
 import com.ljwx.recyclerview.loadmore.LoadMoreAdapter
