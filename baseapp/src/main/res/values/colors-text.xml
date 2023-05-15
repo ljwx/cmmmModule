@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="base_app_colorPrimary">#1E90FF</color>
+    <color name="base_app_textColorPrimary">#333</color>
+    <color name="base_app_textColorSecondary">#666</color>
+    <color name="base_app_textColorTertiary">#999</color>
+</resources>

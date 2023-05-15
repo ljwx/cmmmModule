@@ -1,4 +1,4 @@
-package com.ljwx.basemodule;
+package com.ljwx.basemodule.fragments;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 
 import com.ljwx.baseapp.BaseViewModel;
 import com.ljwx.basefragment.BaseMVVMFragment;
+import com.ljwx.basemodule.R;
 import com.ljwx.basemodule.databinding.FragmentJavaTestBinding;
 
 public class TestJavaFragment extends BaseMVVMFragment<FragmentJavaTestBinding, BaseViewModel> {

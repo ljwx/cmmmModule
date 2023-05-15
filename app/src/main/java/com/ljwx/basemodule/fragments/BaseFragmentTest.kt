@@ -1,16 +1,11 @@
-package com.ljwx.basemodule
+package com.ljwx.basemodule.fragments
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.lifecycleScope
 import com.ljwx.baseapp.BaseViewModel
-import com.ljwx.baseapp.LayoutStatus
 import com.ljwx.basefragment.BaseMVVMFragment
+import com.ljwx.basemodule.R
 import com.ljwx.basemodule.databinding.FragmentBaseFragmentBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class BaseFragmentTest :
     BaseMVVMFragment<FragmentBaseFragmentBinding, BaseViewModel>(R.layout.fragment_base_fragment) {
@@ -18,7 +13,7 @@ class BaseFragmentTest :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        showPopLoading(true)
+//        showPopLoading(true)
 //        lifecycleScope.launch(Dispatchers.IO){
 //            delay(2000)
 //            withContext(Dispatchers.Main){
