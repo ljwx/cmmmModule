@@ -80,7 +80,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         mFinishReceiver = mFinishReceiver ?: (object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
                 if (mBroadcastIntentFilter?.matchAction(intent.action) == true) {
-                    onPageFinish()
+                    onBroadcastPageFinish()
                 }
             }
         })
@@ -96,7 +96,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         mRefreshReceiver = mRefreshReceiver ?: (object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
                 if (mBroadcastIntentFilter?.matchAction(intent.action) == true) {
-                    onPageRefresh(intent.type)
+                    onBroadcastPageRefresh(intent.type)
                 }
             }
         })
@@ -140,11 +140,11 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
     }
 
-    override fun onPageFinish() {
+    override fun onBroadcastPageFinish() {
         finish()
     }
 
-    override fun onPageRefresh(type: String?) {
+    override fun onBroadcastPageRefresh(type: String?) {
 
     }
 

@@ -48,7 +48,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
         mFinishReceiver = mFinishReceiver ?: (object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
                 if (mBroadcastIntentFilter?.matchAction(intent.action) == true) {
-                    onPageFinish()
+                    onBroadcastPageFinish()
                 }
             }
         })
@@ -64,7 +64,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
         mRefreshReceiver = mRefreshReceiver ?: (object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
                 if (mBroadcastIntentFilter?.matchAction(intent.action) == true) {
-                    onPageRefresh(intent.type)
+                    onBroadcastPageRefresh(intent.type)
                 }
             }
         })
@@ -108,11 +108,11 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
         LocalBroadcastManager.getInstance(requireContext()).sendBroadcast(intent)
     }
 
-    override fun onPageFinish() {
+    override fun onBroadcastPageFinish() {
         activity?.finish()
     }
 
-    override fun onPageRefresh(type: String?) {
+    override fun onBroadcastPageRefresh(type: String?) {
 
     }
 
