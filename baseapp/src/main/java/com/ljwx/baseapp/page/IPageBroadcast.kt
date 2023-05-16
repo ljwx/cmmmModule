@@ -12,7 +12,7 @@ interface IPageBroadcast {
 
     fun sendRefreshBroadcast(action: String?, type: String? = null)
 
-    fun onPageFinish()
+    fun onBroadcastPageFinish()
 
-    fun onPageRefresh(type: String?)
+    fun onBroadcastPageRefresh(type: String?)
 }
