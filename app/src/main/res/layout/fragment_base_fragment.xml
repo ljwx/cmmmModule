@@ -12,7 +12,7 @@
             type="String" />
     </data>
 
-    <com.ljwx.basescaffold.CommonStateRefreshLayout
+    <com.ljwx.basescaffold.QuickStateRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:csrl_layout_empty="@layout/baseapp_state_layout_empty"
@@ -35,6 +35,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.ljwx.basescaffold.CommonStateRefreshLayout>
+    </com.ljwx.basescaffold.QuickStateRefreshLayout>
 
 </layout>
