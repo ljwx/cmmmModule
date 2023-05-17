@@ -11,12 +11,12 @@ import com.drake.statelayout.StateLayout
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 
 /**
- * 根布局基类
+ * 多状态及刷新控件快捷使用
  *
  * @author ljwx
  * @since 2022-05-20
  */
-open class CommonStateRefreshLayout @JvmOverloads constructor(
+open class QuickStateRefreshLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
@@ -201,7 +201,7 @@ open class CommonStateRefreshLayout @JvmOverloads constructor(
     private fun createStateLayout() {
         // 创建多状态布局
         mStateLayout = mStateLayout ?: StateLayout(context)
-        mStateLayout?.id = R.id.common_state_view_id
+        mStateLayout?.id = com.ljwx.baseapp.R.id.base_app_state_layout_id
         mStateLayout?.setRetryIds(R.id.common_state_retry_id)
         if (mLayoutLoading != null && mLayoutLoading != NO_ID) {
             mStateLayout?.loadingLayout = mLayoutLoading!!
@@ -220,7 +220,7 @@ open class CommonStateRefreshLayout @JvmOverloads constructor(
     private fun createRefreshLayout() {
         // 创建刷新布局
         mRefreshLayout = mRefreshLayout ?: SpecialRefreshLayout(context)
-        mRefreshLayout?.id = R.id.common_refresh_view_id
+        mRefreshLayout?.id = com.ljwx.baseapp.R.id.base_app_refresh_layout_id
     }
 
     override fun onFinishInflate() {
