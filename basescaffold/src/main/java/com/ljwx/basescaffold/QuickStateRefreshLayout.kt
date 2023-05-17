@@ -62,7 +62,7 @@ open class QuickStateRefreshLayout @JvmOverloads constructor(
             attr.recycle()
         }
         // 设置默认id
-        id = R.id.common_state_refresh_layout
+        id = R.id.base_scaffold_quick_state_refresh_layout
     }
 
     private fun getAttrLayoutId(attr: TypedArray) {
@@ -201,8 +201,8 @@ open class QuickStateRefreshLayout @JvmOverloads constructor(
     private fun createStateLayout() {
         // 创建多状态布局
         mStateLayout = mStateLayout ?: StateLayout(context)
-        mStateLayout?.id = com.ljwx.baseapp.R.id.base_app_state_layout_id
-        mStateLayout?.setRetryIds(R.id.common_state_retry_id)
+        mStateLayout?.id = com.ljwx.baseapp.R.id.base_app_quick_state_layout
+        mStateLayout?.setRetryIds(R.id.base_scaffold_state_retry_id)
         if (mLayoutLoading != null && mLayoutLoading != NO_ID) {
             mStateLayout?.loadingLayout = mLayoutLoading!!
         }
@@ -220,7 +220,7 @@ open class QuickStateRefreshLayout @JvmOverloads constructor(
     private fun createRefreshLayout() {
         // 创建刷新布局
         mRefreshLayout = mRefreshLayout ?: SpecialRefreshLayout(context)
-        mRefreshLayout?.id = com.ljwx.baseapp.R.id.base_app_refresh_layout_id
+        mRefreshLayout?.id = com.ljwx.baseapp.R.id.base_app_quick_refresh_layout
     }
 
     override fun onFinishInflate() {

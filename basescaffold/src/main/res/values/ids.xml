@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--CommonStateLayout布局id-->
-    <item name="common_state_refresh_layout" type="id" />
-    <!--刷新控件id-->
-    <item name="common_refresh_view_id" type="id" />
-    <!--StateLayout控件id-->
-    <item name="common_state_view_id" type="id" />
+    <!--QuickStateLayout布局id-->
+    <item name="base_scaffold_quick_state_refresh_layout" type="id" />
     <!--重试按钮id-->
-    <item name="common_state_retry_id" type="id" />
-    <!--空布局点击id-->
-    <item name="common_state_empty_click_id" type="id" />
+    <item name="base_scaffold_state_retry_id" type="id" />
 </resources>
