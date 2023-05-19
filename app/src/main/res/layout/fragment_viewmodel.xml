@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="data"
+            type="String" />
+    </data>
+
+    <com.ljwx.basescaffold.QuickStateRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:qsrl_layout_loading="@layout/baseapp_state_layout_loading"
+        app:qsrl_layout_model="just_state">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="asdfasdf" />
+
+    </com.ljwx.basescaffold.QuickStateRefreshLayout>
+
+</layout>
