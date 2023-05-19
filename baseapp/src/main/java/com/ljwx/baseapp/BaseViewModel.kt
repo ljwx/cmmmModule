@@ -1,9 +1,19 @@
 package com.ljwx.baseapp
 
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 
-class BaseViewModel : ViewModel() {
+abstract class BaseViewModel : ViewModel() ,DefaultLifecycleObserver{
 
+    init {
+        initRepository()
+    }
 
+    abstract fun initRepository()
+
+    override fun onStop(owner: LifecycleOwner) {
+        super.onStop(owner)
+    }
 
 }

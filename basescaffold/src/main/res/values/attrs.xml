@@ -2,18 +2,18 @@
 <resources>
 
     <!--多状态根布局-->
-    <declare-styleable name="CommonStateRefreshLayout">
-        <attr name="csrl_layout_model" format="integer">
+    <declare-styleable name="QuickStateRefreshLayout">
+        <attr name="qsrl_layout_model" format="integer">
             <enum name="none" value="0" />
             <enum name="just_state" value="1" />
             <enum name="just_refresh" value="2" />
             <enum name="state_refresh" value="3" />
             <enum name="refresh_state" value="4" />
         </attr>
-        <attr name="csrl_layout_loading" format="reference" />
-        <attr name="csrl_layout_empty" format="reference" />
-        <attr name="csrl_layout_error" format="reference" />
-        <attr name="csrl_layout_network" format="reference" />
+        <attr name="qsrl_layout_loading" format="reference" />
+        <attr name="qsrl_layout_empty" format="reference" />
+        <attr name="qsrl_layout_error" format="reference" />
+        <attr name="qsrl_layout_network" format="reference" />
     </declare-styleable>
 
 </resources>

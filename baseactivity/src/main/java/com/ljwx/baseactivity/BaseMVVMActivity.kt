@@ -23,14 +23,16 @@ open class BaseMVVMActivity<Binding : ViewDataBinding, ViewModel : BaseViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // 设置DataBinding
         mBinding = DataBindingUtil.setContentView(this, layoutResID)
-        // 创建ViewModel
+        initViewModel()
+        lifecycle.addObserver(mViewModel)
+        quickLayout()
+    }
+
+    private fun initViewModel() {
         val type = javaClass.genericSuperclass as ParameterizedType
         val modelClass = type.actualTypeArguments.getOrNull(1) as Class<ViewModel>
         mViewModel = ViewModelProvider(this)[modelClass]
-        //快捷布局
-        quickLayout()
     }
 
     /**
