@@ -12,13 +12,13 @@
             type="String" />
     </data>
 
-    <com.ljwx.basescaffold.CommonStateRefreshLayout
+    <com.ljwx.basescaffold.QuickStateRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:csrl_layout_empty="@layout/baseapp_state_layout_empty"
-        app:csrl_layout_error="@layout/baseapp_state_layout_error"
-        app:csrl_layout_loading="@layout/baseapp_state_layout_loading"
-        app:csrl_layout_model="refresh_state">
+        app:qsrl_layout_empty="@layout/baseapp_state_layout_empty"
+        app:qsrl_layout_error="@layout/baseapp_state_layout_error"
+        app:qsrl_layout_loading="@layout/baseapp_state_layout_loading"
+        app:qsrl_layout_model="refresh_state">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -35,6 +35,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.ljwx.basescaffold.CommonStateRefreshLayout>
+    </com.ljwx.basescaffold.QuickStateRefreshLayout>
 
 </layout>
