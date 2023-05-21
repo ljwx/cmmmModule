@@ -1,12 +1,12 @@
-package com.ljwx.recyclerview.quick.adapter
+package com.ljwx.recyclerview.adapter
 
 import android.util.Log
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.ListAdapter
-import com.ljwx.recyclerview.quick.diff.ItemDiffCallback
-import com.ljwx.recyclerview.quick.holder.ItemHolder
-import com.ljwx.recyclerview.quick.type.ItemType
+import com.ljwx.recyclerview.diff.ItemDiffCallback
+import com.ljwx.recyclerview.holder.ItemHolder
+import com.ljwx.recyclerview.itemtype.ItemType
 
 
 class SingleTypeAdapter<Item : Any, Holder : ItemHolder>(
@@ -26,4 +26,9 @@ class SingleTypeAdapter<Item : Any, Holder : ItemHolder>(
         Log.d(TAG, "onBindViewHolder:$position")
         itemType.bind(holder, getItem(position))
     }
+
+    fun addList(list: List<Item>) {
+        submitList(listOf<Item>() + currentList + list)
+    }
+
 }

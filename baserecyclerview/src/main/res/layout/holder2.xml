@@ -9,7 +9,7 @@
 
         <variable
             name="item"
-            type="String" />
+            type="Integer" />
 
         <variable
             name="onClick"
@@ -22,28 +22,10 @@
         android:layout_marginTop="15dp">
 
         <TextView
-            android:id="@+id/tv_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:background="#fedcba"
-            android:padding="15dp"
-            android:text='@{item}' />
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text='@{item}'
+            android:text='@{item+""}'
             tools:text="1" />
-
-        <TextView
-            android:id="@+id/tv_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:background="#abcdef"
-            android:padding="15dp"
-            android:text='@{item}' />
     </FrameLayout>
 </layout>

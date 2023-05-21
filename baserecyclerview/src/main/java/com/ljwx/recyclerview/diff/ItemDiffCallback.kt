@@ -1,4 +1,4 @@
-package com.ljwx.recyclerview.quick.diff
+package com.ljwx.recyclerview.diff
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil

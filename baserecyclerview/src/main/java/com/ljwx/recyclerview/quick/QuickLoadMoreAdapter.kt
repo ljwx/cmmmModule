@@ -1,4 +1,4 @@
-package com.ljwx.recyclerview.loadmore
+package com.ljwx.recyclerview.quick
 
 import android.annotation.SuppressLint
 import androidx.annotation.IdRes
@@ -9,15 +9,18 @@ import com.ljwx.recyclerview.loadmore.view.LoadMoreViewPresenter
 import com.ljwx.recyclerview.adapter.MultipleTypeAdapter
 import com.ljwx.recyclerview.diff.ItemDiffCallback
 import com.ljwx.recyclerview.holder.ItemHolder
-import com.ljwx.recyclerview.itemtype.ItemType
-import com.ljwx.recyclerview.itemtype.ItemTypeViewClass
+import com.ljwx.recyclerview.itemtype.*
+import com.ljwx.recyclerview.loadmore.LoadMoreTrigger
 import com.ljwx.recyclerview.loadmore.view.LoadMoreItem
 
 @Suppress("UNCHECKED_CAST", "MemberVisibilityCanBePrivate")
-class LoadMoreAdapter(
-    vararg itemTypes: ItemType<*, *>,
-    config: AsyncDifferConfig<Any> = AsyncDifferConfig.Builder(ItemDiffCallback()).build(),
-) : MultipleTypeAdapter(*itemTypes, config = config) {
+class QuickLoadMoreAdapter<Item : Any>(
+    itemClass: Class<Item>,
+    @LayoutRes
+    private val layoutResId: Int,
+    itemClick: ((ItemHolder, Item) -> Unit)? = null,
+) : MultipleTypeAdapter(config = AsyncDifferConfig.Builder(ItemDiffCallback()).build()),
+    ItemBindClick<Item> {
 
     companion object {
         const val STATE_LOADING = 0
@@ -29,6 +32,8 @@ class LoadMoreAdapter(
         const val STATE_ERROR = 5
     }
 
+    private var mItemType: ItemTypeLayout<Item>
+
     private val mLoadMoreItem = LoadMoreItem()
     private val mLoadMoreItemType =
         ItemTypeViewClass(LoadMoreItem::class.java, LoadMoreView::class.java) { holder, item ->
@@ -39,7 +44,12 @@ class LoadMoreAdapter(
 
     init {
         val loadMoreItem = mLoadMoreItemType as ItemType<Any, ItemHolder>
-        mItemTypes = arrayOf(loadMoreItem) + mItemTypes
+        mItemType = ItemTypeBinding(
+            itemClass,
+            layoutResId,
+            itemClick = itemClick
+        )
+        mItemTypes = arrayOf(loadMoreItem, (mItemType as ItemType<Any, ItemHolder>))
     }
 
     private var mLoadMoreVisible: Boolean = true
@@ -64,14 +74,6 @@ class LoadMoreAdapter(
     fun setLoadMoreComplete(@LayoutRes layout: Int) {
         mLoadMorePresenter.loadMoreCompleteLayout = layout
     }
-
-    /**
-     * 设置ItemType
-     */
-//    override fun setup(vararg types: ItemType<Any, ItemHolder>): MultipleTypeAdapter {
-//        return super.setup(loadMoreItemType as ItemType<Any, ItemHolder>, *types)
-//    }
-
 
     fun startLoading(online: Boolean = true) {
         if (currentList.isEmpty()) {
@@ -159,4 +161,20 @@ class LoadMoreAdapter(
             lp.isFullSpan = true
         }
     }
+
+    override fun setOnItemBind(binder: (ItemHolder, Item) -> Unit) {
+        mItemType.setOnItemBind(binder)
+    }
+
+    override fun setOnItemClick(itemClick: ((ItemHolder, Item) -> Unit)) {
+        mItemType.setOnItemClick(itemClick)
+    }
+
+    override fun setOnItemChildClick(
+        vararg ids: Int,
+        itemClick: ((ItemHolder, Item, Int) -> Unit)
+    ) {
+        mItemType.setOnItemChildClick(*ids, itemClick = itemClick)
+    }
+
 }
