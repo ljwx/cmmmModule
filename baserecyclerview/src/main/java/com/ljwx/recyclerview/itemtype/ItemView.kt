@@ -1,4 +1,4 @@
-package com.ljwx.recyclerview.quick.type
+package com.ljwx.recyclerview.itemtype
 
 
 interface ItemView<Item> {
