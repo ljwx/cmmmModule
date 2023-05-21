@@ -28,6 +28,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -43,4 +46,6 @@ dependencies {
     implementation  'io.github.scwang90:refresh-layout-kernel:2.0.6'
 
     implementation project(path: ':baseapp')
+    implementation project(path: ':basefragment')
+    implementation project(path: ':baserecyclerview')
 }
