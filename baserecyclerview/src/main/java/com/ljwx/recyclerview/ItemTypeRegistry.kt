@@ -1,7 +1,7 @@
 package com.ljwx.recyclerview
 
-import com.ljwx.recyclerview.quick.holder.ItemHolder
-import com.ljwx.recyclerview.quick.type.ItemType
+import com.ljwx.recyclerview.holder.ItemHolder
+import com.ljwx.recyclerview.itemtype.ItemType
 
 /**
  * ItemType容器类

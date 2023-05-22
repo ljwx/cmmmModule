@@ -4,10 +4,7 @@ import android.os.Bundle
 import com.ljwx.baseactivity.fast.FastMainActivity
 import com.ljwx.baseapp.BaseViewModel
 import com.ljwx.basemodule.databinding.ActivityMainBinding
-import com.ljwx.basemodule.fragments.BaseFragmentTest
-import com.ljwx.basemodule.fragments.BaseToolbarFragment
-import com.ljwx.basemodule.fragments.RecyclerViewFragment
-import com.ljwx.basemodule.fragments.TestJavaFragment
+import com.ljwx.basemodule.fragments.*
 
 class MainActivity : FastMainActivity<ActivityMainBinding, BaseViewModel>(R.layout.activity_main) {
 
@@ -20,7 +17,7 @@ class MainActivity : FastMainActivity<ActivityMainBinding, BaseViewModel>(R.layo
 
         addTabFragment("toolbar", BaseToolbarFragment())
         addTabFragment("basefragment", BaseFragmentTest())
-        addTabFragment("loadmore", RecyclerViewFragment())
+        addTabFragment("loadmore", LoadMoreFragment())
         addTabFragment("javaTest", TestJavaFragment(0))
 
     }

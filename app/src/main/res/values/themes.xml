@@ -19,7 +19,7 @@
         <item name="tabBackground">@android:color/transparent</item>
 
         <!--页面的背景颜色-->
-        <item name="android:colorBackground">#f7f7f7</item>
+<!--        <item name="android:colorBackground">#f7f7f7</item>-->
         <!--CheckBox,RadioButton,Switch选中颜色-->
         <item name="colorAccent">#ff0000</item>
         <!--CheckBox,RadioButton,Switch未选中颜色,暂无效-->

@@ -14,7 +14,7 @@
         android:text="error" />
 
     <TextView
-        android:id="@+id/common_state_retry_id"
+        android:id="@+id/base_scaffold_state_retry_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
