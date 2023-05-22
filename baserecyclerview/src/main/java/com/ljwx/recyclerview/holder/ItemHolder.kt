@@ -1,4 +1,4 @@
-package com.ljwx.recyclerview.quick.holder
+package com.ljwx.recyclerview.holder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

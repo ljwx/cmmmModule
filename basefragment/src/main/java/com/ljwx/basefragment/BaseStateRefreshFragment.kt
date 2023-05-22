@@ -78,7 +78,7 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
      * 快速使用状态布局
      */
     open fun useCommonStateLayout() {
-        val stateLayout = view?.findViewById<View>(R.id.base_app_state_layout_id)
+        val stateLayout = view?.findViewById<View>(R.id.base_app_quick_state_layout)
         if (stateLayout != null && stateLayout is StateLayout) {
             initStateLayout(stateLayout)
         }
@@ -88,7 +88,7 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
      * 快速使用刷新布局
      */
     open fun useCommonRefreshLayout() {
-        val refreshLayout = view?.findViewById<View>(R.id.base_app_refresh_layout_id)
+        val refreshLayout = view?.findViewById<View>(R.id.base_app_quick_refresh_layout)
         if (refreshLayout != null && refreshLayout is SmartRefreshLayout) {
             initRefreshLayout(refreshLayout)
         }
