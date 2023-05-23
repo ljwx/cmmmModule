@@ -13,7 +13,7 @@ import com.ljwx.baseapp.page.IPagePopLoading
 import com.ljwx.baseapp.page.IPageRefreshLayout
 import com.ljwx.baseapp.page.IPageStateLayout
 
-open class StateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStateLayout,
+open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStateLayout,
     IPageRefreshLayout {
 
     private val mPopupLoading by lazy {

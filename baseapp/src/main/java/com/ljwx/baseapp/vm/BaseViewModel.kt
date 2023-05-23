@@ -1,4 +1,4 @@
-package com.ljwx.baseapp
+package com.ljwx.baseapp.vm
 
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner

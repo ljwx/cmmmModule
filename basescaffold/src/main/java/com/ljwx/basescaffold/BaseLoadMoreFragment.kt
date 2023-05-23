@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
-import com.ljwx.baseapp.BaseViewModel
+import com.ljwx.baseapp.vm.BaseViewModel
 import com.ljwx.basefragment.BaseMVVMFragment
 import com.ljwx.recyclerview.quick.QuickLoadMoreAdapter
 

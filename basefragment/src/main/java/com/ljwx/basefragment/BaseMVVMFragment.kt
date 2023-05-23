@@ -1,20 +1,14 @@
-package com.ljwx.baseactivity
+package com.ljwx.basefragment
 
 import android.os.Bundle
 import androidx.annotation.LayoutRes
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
-import com.ljwx.baseapp.BaseViewModel
+import com.ljwx.baseapp.vm.BaseViewModel
 import java.lang.reflect.ParameterizedType
 
-open class BaseMVVMActivity<Binding : ViewDataBinding, ViewModel : BaseViewModel>(@LayoutRes val layoutResID: Int) :
-    StateRefreshActivity() {
-
-    /**
-     * DataBinding
-     */
-    protected lateinit var mBinding: Binding
+open abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel>(@LayoutRes layoutRes: Int) :
+    BaseBindingFragment<Binding>(layoutRes) {
 
     /**
      * ViewModel
@@ -23,26 +17,10 @@ open class BaseMVVMActivity<Binding : ViewDataBinding, ViewModel : BaseViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, layoutResID)
-        initViewModel()
-        lifecycle.addObserver(mViewModel)
-        quickLayout()
-    }
-
-    private fun initViewModel() {
         val type = javaClass.genericSuperclass as ParameterizedType
         val modelClass = type.actualTypeArguments.getOrNull(1) as Class<ViewModel>
         mViewModel = ViewModelProvider(this)[modelClass]
+        lifecycle.addObserver(mViewModel)
     }
-
-    /**
-     * 快速布局
-     */
-    protected fun quickLayout() {
-        initToolbar()
-        useCommonStateLayout()
-        useCommonRefreshLayout()
-    }
-
 
 }

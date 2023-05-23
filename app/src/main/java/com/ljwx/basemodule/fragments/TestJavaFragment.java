@@ -6,12 +6,13 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.ljwx.baseapp.BaseViewModel;
+import com.ljwx.baseapp.vm.BaseViewModel;
+import com.ljwx.baseapp.vm.EmptyViewModel;
 import com.ljwx.basefragment.BaseMVVMFragment;
 import com.ljwx.basemodule.R;
 import com.ljwx.basemodule.databinding.FragmentJavaTestBinding;
 
-public class TestJavaFragment extends BaseMVVMFragment<FragmentJavaTestBinding, BaseViewModel> {
+public class TestJavaFragment extends BaseMVVMFragment<FragmentJavaTestBinding, EmptyViewModel> {
 
     public TestJavaFragment(int layoutResID) {
         super(R.layout.fragment_java_test);
