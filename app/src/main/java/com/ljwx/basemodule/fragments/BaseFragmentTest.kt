@@ -20,7 +20,6 @@ class BaseFragmentTest :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        showPopLoading(true)
         showStateLayout(LayoutStatus.LOADING)
         lifecycleScope.launch(Dispatchers.IO) {
             delay(2000)

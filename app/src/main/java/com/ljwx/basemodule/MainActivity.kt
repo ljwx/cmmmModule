@@ -16,6 +16,7 @@ class MainActivity : FastMainActivity<ActivityMainBinding, EmptyViewModel>(R.lay
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        addTabFragment("vmFragment", ViewModelFragment())
         addTabFragment("toolbar", BaseToolbarFragment())
         addTabFragment("basefragment", BaseFragmentTest())
         addTabFragment("loadmore", LoadMoreFragment())
