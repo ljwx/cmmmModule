@@ -1,7 +1,7 @@
 package com.ljwx.basemodule.vm
 
 import androidx.lifecycle.MutableLiveData
-import com.ljwx.baseapp.BaseViewModel
+import com.ljwx.baseapp.vm.BaseViewModel
 
 class TestViewModel : BaseViewModel() {
 

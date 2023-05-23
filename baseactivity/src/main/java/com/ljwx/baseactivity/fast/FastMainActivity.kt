@@ -3,7 +3,7 @@ package com.ljwx.baseactivity.fast
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import com.ljwx.baseactivity.showToast
-import com.ljwx.baseapp.BaseViewModel
+import com.ljwx.baseapp.vm.BaseViewModel
 
 open abstract class FastMainActivity<Binding : ViewDataBinding, ViewModel : BaseViewModel>(@LayoutRes layoutResID: Int) :
     FastTabLayoutActivity<Binding, ViewModel>(layoutResID) {

@@ -3,8 +3,9 @@ package com.ljwx.basemodule.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
-import com.ljwx.baseapp.BaseViewModel
+import com.ljwx.baseapp.vm.BaseViewModel
 import com.ljwx.baseapp.LayoutStatus
+import com.ljwx.baseapp.vm.EmptyViewModel
 import com.ljwx.basefragment.BaseMVVMFragment
 import com.ljwx.basemodule.R
 import com.ljwx.basemodule.databinding.FragmentBaseFragmentBinding
@@ -14,7 +15,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class BaseFragmentTest :
-    BaseMVVMFragment<FragmentBaseFragmentBinding, BaseViewModel>(R.layout.fragment_base_fragment) {
+    BaseMVVMFragment<FragmentBaseFragmentBinding, EmptyViewModel>(R.layout.fragment_base_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
