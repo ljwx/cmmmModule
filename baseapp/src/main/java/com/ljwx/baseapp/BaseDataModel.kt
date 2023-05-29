@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-open class BaseDataRepository {
+open class BaseDataModel {
 
     val mGiteeTestRetrofit by lazy {
         val client: OkHttpClient = OkHttpClient.Builder()
