@@ -19,6 +19,10 @@ class ViewModelFragment :
         }
         mViewModel.requestTest()
 
+        mViewModel.getUsers().observe(viewLifecycleOwner){
+
+        }
+
     }
 
 }
