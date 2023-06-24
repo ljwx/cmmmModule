@@ -21,7 +21,6 @@ class MainActivity : FastMainActivity<ActivityMainBinding, EmptyViewModel>(R.lay
         addTabFragment("basefragment", BaseFragmentTest())
         addTabFragment("loadmore", LoadMoreFragment())
         addTabFragment("javaTest", TestJavaFragment(0))
-
     }
 
     override fun getScreenOrientation() = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
