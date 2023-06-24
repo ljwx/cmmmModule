@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -38,7 +39,11 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestedOrientation = getScreenOrientation()
+    }
 
+    open fun getScreenOrientation(): Int {
+        return ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
     override fun getStatusBarUtils(): ImmersionBar {
