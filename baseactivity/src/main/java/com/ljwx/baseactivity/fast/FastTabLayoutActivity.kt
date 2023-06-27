@@ -10,7 +10,6 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.ljwx.baseactivity.BaseMVVMActivity
 import com.ljwx.baseapp.vm.BaseViewModel
-import com.ljwx.baseapp.vm.EmptyViewModel
 
 open abstract class FastTabLayoutActivity<Binding : ViewDataBinding, ViewModel : BaseViewModel>(@LayoutRes layoutResID: Int) :
     BaseMVVMActivity<Binding, ViewModel>(layoutResID) {

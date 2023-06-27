@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.lifecycleScope
-import com.ljwx.baseapp.vm.BaseViewModel
-import com.ljwx.baseapp.vm.EmptyViewModel
-import com.ljwx.basefragment.BaseMVVMFragment
+import com.ljwx.basefragment.BaseBindingFragment
 import com.ljwx.basemodule.R
 import com.ljwx.basemodule.databinding.FragmentRecyclerViewBinding
 import com.ljwx.recyclerview.adapter.MultipleTypeAdapter
@@ -19,7 +17,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class RecyclerViewFragment :
-    BaseMVVMFragment<FragmentRecyclerViewBinding, EmptyViewModel>(R.layout.fragment_recycler_view) {
+    BaseBindingFragment<FragmentRecyclerViewBinding>(R.layout.fragment_recycler_view) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
