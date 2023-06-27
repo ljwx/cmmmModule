@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.lifecycleScope
-import com.ljwx.baseapp.vm.BaseViewModel
 import com.ljwx.baseapp.vm.EmptyViewModel
 import com.ljwx.basemodule.R
 import com.ljwx.basemodule.databinding.FragmentRecyclerViewBinding
