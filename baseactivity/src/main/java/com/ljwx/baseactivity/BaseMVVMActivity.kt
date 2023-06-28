@@ -18,6 +18,13 @@ open class BaseMVVMActivity<Binding : ViewDataBinding, ViewModel : BaseViewModel
         val modelClass = type.actualTypeArguments.getOrNull(1) as Class<ViewModel>
         mViewModel = ViewModelProvider(this)[modelClass]
         lifecycle.addObserver(mViewModel)
+        initPopLoadingObserver()
+    }
+
+    open fun initPopLoadingObserver() {
+        mViewModel.popLoading.observe(this) {
+            showPopLoading(it.first)
+        }
     }
 
 }

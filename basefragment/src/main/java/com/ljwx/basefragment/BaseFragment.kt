@@ -10,12 +10,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.ljwx.baseapp.page.IPageBroadcast
 
 open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), IPageBroadcast {
 
     open val TAG = this.javaClass.simpleName
+
+    protected lateinit var mActivity: FragmentActivity
 
     /**
      * 结束当前页的广播
@@ -31,6 +34,11 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
      * 注册广播的Intent
      */
     private var mBroadcastIntentFilter: IntentFilter? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mActivity = context as FragmentActivity
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
