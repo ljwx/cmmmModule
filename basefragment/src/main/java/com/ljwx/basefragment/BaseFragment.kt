@@ -9,8 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.ljwx.baseapp.page.IPageBroadcast
 
@@ -18,7 +18,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
 
     open val TAG = this.javaClass.simpleName
 
-    protected lateinit var mActivity: FragmentActivity
+    protected lateinit var mActivity: AppCompatActivity
 
     /**
      * 结束当前页的广播
@@ -37,7 +37,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        mActivity = context as FragmentActivity
+        mActivity = context as AppCompatActivity
     }
 
     override fun onCreateView(
