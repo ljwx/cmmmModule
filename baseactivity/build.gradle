@@ -45,4 +45,5 @@ dependencies {
 
     implementation project(path: ':baseapp')
 
+    api 'androidx.activity:activity-ktx:1.5.2'
 }
