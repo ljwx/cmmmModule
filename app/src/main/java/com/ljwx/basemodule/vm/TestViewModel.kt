@@ -6,12 +6,12 @@ import com.ljwx.baseapp.vm.BaseViewModel
 
 class TestViewModel : BaseViewModel() {
 
-    private var mTestRepository: TestRepositoryModel? = null
+    private var mTestRepository: TestRepository? = null
 
     val mResponse = MutableLiveData<String>()
 
     override fun initRepository() {
-        mTestRepository = TestRepositoryModel()
+        mTestRepository = TestRepository()
     }
 
     fun requestTest() {

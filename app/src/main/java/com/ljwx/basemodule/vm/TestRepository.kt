@@ -1,7 +1,7 @@
 package com.ljwx.basemodule.vm
 
 import androidx.lifecycle.MutableLiveData
-import com.ljwx.baseapp.BaseDataModel
+import com.ljwx.baseapp.vm.BaseDataRepository
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -10,7 +10,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TestRepositoryModel : BaseDataModel() {
+class TestRepository : BaseDataRepository() {
 
     fun requestTest(): MutableLiveData<String> {
         val liveData = MutableLiveData<String>()
