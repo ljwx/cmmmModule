@@ -43,16 +43,16 @@ dependencies {
     implementation project(path: ":baseapp")
 }
 
-publishing {
-    publications {
-    	// 这个mavenJava可以随便填，只是一个任务名字而已
-    	// MavenPublication必须有，这个是调用的任务类
-        release(MavenPublication) {
-            // from components.release
-        	// 这里头是artifacts的配置信息，不填会采用默认的
-            groupId = 'com.ljwx.basemodule'
-            artifactId = 'common'
-            version = '0.3.0'
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                // Applies the component for the release build variant.from components.release// You can then customize attributes of the publication as shown below.
+                groupId = 'com.ljwx.basemodule'
+                artifactId = 'common'
+                version = '0.3.0'
+            }
         }
     }
 }
