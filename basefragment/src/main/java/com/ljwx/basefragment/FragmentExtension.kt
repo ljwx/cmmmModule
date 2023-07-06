@@ -5,7 +5,7 @@ import androidx.annotation.ColorRes
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.gyf.immersionbar.ImmersionBar
-import com.ljwx.baseapp.showToast
+import com.ljwx.baseapp.extensions.showToast
 
 
 /**

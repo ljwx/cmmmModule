@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.gyf.immersionbar.ImmersionBar
-import com.ljwx.baseapp.showToast
 
 /**
  * 获取Activity根布局
