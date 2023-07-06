@@ -6,9 +6,9 @@ import androidx.annotation.LayoutRes
 import com.drake.statelayout.StateLayout
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.ljwx.baseapp.R
-import com.ljwx.baseapp.isMainThread
 import com.ljwx.baseapp.LayoutStatus
 import com.ljwx.baseapp.PopupLoading
+import com.ljwx.baseapp.extensions.isMainThread
 import com.ljwx.baseapp.page.IPagePopLoading
 import com.ljwx.baseapp.page.IPageRefreshLayout
 import com.ljwx.baseapp.page.IPageStateLayout
