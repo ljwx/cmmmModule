@@ -1,4 +1,4 @@
-package com.ljwx.baseapp
+package com.ljwx.baseapp.extensions
 
 import android.content.Context
 import android.os.Looper

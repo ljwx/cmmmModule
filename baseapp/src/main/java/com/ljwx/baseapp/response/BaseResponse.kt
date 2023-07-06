@@ -1,6 +1,4 @@
-package com.ljwx.baseapp
-
-import com.ljwx.baseapp.response.ResponseException
+package com.ljwx.baseapp.response
 
 sealed class BaseResponse<out T : Any> {
 
