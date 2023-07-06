@@ -72,7 +72,7 @@ afterEvaluate {
                 // Applies the component for the release build variant.from components.release// You can then customize attributes of the publication as shown below.
                 groupId = 'com.ljwx.basemodule'
                 artifactId = 'activity'
-                version = '0.3.0'
+//                version = '0.3.0'
             }
         }
     }
