@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--圆角图片-->
+    <declare-styleable name="RoundImageView">
+        <attr name="riv_radiu_all" />
+        <attr name="riv_radiu_top_left" format="dimension" />
+        <attr name="riv_radiu_top_right" format="dimension" />
+        <attr name="riv_radiu_bottom_left" format="dimension" />
+        <attr name="riv_radiu_bottom_right" format="dimension" />
+        <attr name="riv_border_color" format="color" />
+        <attr name="riv_border_width" format="dimension" />
+    </declare-styleable>
+    <attr name="riv_radiu_all" format="dimension">
+        <enum name="half" value="-1" />
+    </attr>
+
+    <!--DrawableTextView-->
+    <declare-styleable name="DrawableTextView">
+        <attr name="drawableShow" format="boolean" />
+        <attr name="drawableLeft" format="reference" />
+        <attr name="drawableBottom" format="reference" />
+        <attr name="drawableRight" format="reference" />
+        <attr name="drawableTop" format="reference" />
+        <attr name="drawableWidth" format="dimension" />
+        <attr name="drawableHeight" format="dimension" />
+    </declare-styleable>
+
+
+    <!--disable可点击-->
+    <declare-styleable name="DisableClickButton">
+        <attr name="allowClickWhenDisabled" format="boolean"></attr>
+    </declare-styleable>
+
+
+    <!--RoundTextView-->
+    <!-- 背景色 -->
+    <attr name="rndSolidColor" format="color" />
+    <!-- 背景渐变色（使用,分割） -->
+    <attr name="rndGradientColors" format="string" />
+    <!--背景渐变类型-->
+    <attr name="rndGradientType" format="dimension">
+        <enum name="linear" value="0" />
+        <enum name="radial" value="1" />
+        <enum name="sweep" value="2" />
+    </attr>
+    <!--渐变中心点X坐标（0-1）-->
+    <attr name="rndGradientCenterX" format="float" />
+    <!--渐变中心点Y坐标（0-1）-->
+    <attr name="rndGradientCenterY" format="float" />
+    <!--渐变半径-->
+    <attr name="rndGradientRadius" format="dimension" />
+    <!--渐变开始颜色-->
+    <attr name="rndGradientStartColor" format="color" />
+    <!--渐变中心颜色-->
+    <attr name="rndGradientCenterColor" format="color" />
+    <!--渐变结尾颜色-->
+    <attr name="rndGradientEndColor" format="color" />
+    <!--渐变方向-->
+    <attr name="rndGradientOrientation" format="integer">
+        <enum name="TOP_BOTTOM" value="0" />
+        <enum name="TR_BL" value="1" />
+        <enum name="RIGHT_LEFT" value="2" />
+        <enum name="BR_TL" value="3" />
+        <enum name="BOTTOM_TOP" value="4" />
+        <enum name="BL_TR" value="5" />
+        <enum name="LEFT_RIGHT" value="6" />
+        <enum name="TL_BR" value="7" />
+    </attr>
+
+    <!-- 边框色 -->
+    <attr name="rndStrokeColor" format="color" />
+    <!-- 边框厚度 -->
+    <attr name="rndStrokeWidth" format="dimension" />
+    <!-- 边框虚线长度 -->
+    <attr name="rndStrokeDashWidth" format="dimension" />
+    <!-- 边框虚线间隙 -->
+    <attr name="rndStrokeDashGap" format="dimension" />
+    <!-- 圆角半径，stadium 表示半径为 min(height,width) / 2-->
+    <attr name="rndCornerRadius" format="dimension">
+        <enum name="stadium" value="-1" />
+    </attr>
+    <!-- 自动计算按下(pressed)状态颜色的系数(0-1), 值为0时不自动计算 -->
+    <attr name="rndPressedRatio" format="float" />
+
+    <!-- 阴影颜色 -->
+    <attr name="rndShadowColor" format="color" />
+
+    <attr name="rndShadowLen" format="dimension" />
+    <!-- 左边阴影长度 -->
+    <attr name="rndLeftShadowLen" format="dimension" />
+    <!-- 顶部阴影长度 -->
+    <attr name="rndTopShadowLen" format="dimension" />
+    <!-- 右边阴影长度 -->
+    <attr name="rndRightShadowLen" format="dimension" />
+    <!-- 底部阴影长度 -->
+    <attr name="rndBottomShadowLen" format="dimension" />
+    <!-- 阴影X偏移 -->
+    <attr name="rndShadowOffsetX" format="dimension" />
+    <!-- 阴影Y偏移 -->
+    <attr name="rndShadowOffsetY" format="dimension" />
+    <declare-styleable name="RoundTextView">
+        <attr name="rndSolidColor" />
+        <attr name="rndGradientColors" />
+        <attr name="rndGradientType" />
+        <attr name="rndGradientCenterX" />
+        <attr name="rndGradientCenterY" />
+        <attr name="rndGradientRadius" />
+        <attr name="rndGradientStartColor" />
+        <attr name="rndGradientCenterColor" />
+        <attr name="rndGradientEndColor" />
+        <attr name="rndGradientOrientation" />
+        <attr name="rndStrokeColor" />
+        <attr name="rndStrokeWidth" />
+        <attr name="rndStrokeDashWidth" />
+        <attr name="rndStrokeDashGap" />
+        <attr name="rndCornerRadius" />
+        <attr name="rndPressedRatio" />
+        <attr name="rndShadowColor" />
+        <attr name="rndShadowLen" />
+        <attr name="rndLeftShadowLen" />
+        <attr name="rndTopShadowLen" />
+        <attr name="rndRightShadowLen" />
+        <attr name="rndBottomShadowLen" />
+        <attr name="rndShadowOffsetX" />
+        <attr name="rndShadowOffsetY" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundLayout">
+        <attr name="rndSolidColor" />
+        <attr name="rndGradientColors" />
+        <attr name="rndGradientType" />
+        <attr name="rndGradientCenterX" />
+        <attr name="rndGradientCenterY" />
+        <attr name="rndGradientRadius" />
+        <attr name="rndGradientStartColor" />
+        <attr name="rndGradientCenterColor" />
+        <attr name="rndGradientEndColor" />
+        <attr name="rndGradientOrientation" />
+        <attr name="rndStrokeColor" />
+        <attr name="rndStrokeWidth" />
+        <attr name="rndStrokeDashWidth" />
+        <attr name="rndStrokeDashGap" />
+        <attr name="rndCornerRadius" />
+        <attr name="rndPressedRatio" />
+        <attr name="rndShadowColor" />
+        <attr name="rndShadowLen" />
+        <attr name="rndLeftShadowLen" />
+        <attr name="rndTopShadowLen" />
+        <attr name="rndRightShadowLen" />
+        <attr name="rndBottomShadowLen" />
+        <attr name="rndShadowOffsetX" />
+        <attr name="rndShadowOffsetY" />
+    </declare-styleable>
+</resources>
