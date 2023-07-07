@@ -2,15 +2,16 @@ package com.ljwx.baseapp.extensions
 
 import android.view.View
 
-internal fun View.click(period: Long = 500, block: View.() -> Unit) {
+@Deprecated(message = "请使用singleClick", replaceWith = ReplaceWith(expression = "singleClick"))
+inline fun View.click(period: Long = 500, noinline block: View.() -> Unit) {
     setOnClickListener(SingleClickListener(period, block))
 }
 
-internal fun View.singleClick(period: Long = 500, block: View.() -> Unit) {
+inline fun View.singleClick(period: Long = 500, noinline block: View.() -> Unit) {
     setOnClickListener(SingleClickListener(period, block))
 }
 
-private class SingleClickListener(private val period: Long = 500, private var block: View.() -> Unit) :
+class SingleClickListener(private val period: Long = 500, private var block: View.() -> Unit) :
     View.OnClickListener {
 
     private var lastTime: Long = 0
