@@ -18,7 +18,6 @@ open class BaseBindingActivity<Binding : ViewDataBinding>(@LayoutRes private val
 
 
     protected fun quickLayout() {
-        initToolbar()
         useCommonStateLayout()
         useCommonRefreshLayout()
     }

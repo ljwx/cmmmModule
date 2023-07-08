@@ -7,17 +7,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.blankj.utilcode.util.StringUtils
 
-abstract class BaseViewModel : ViewModel(), DefaultLifecycleObserver {
+abstract class BaseViewModel<R : BaseDataRepository> : ViewModel(), DefaultLifecycleObserver {
+
+    protected var mRepository: R
 
     private val mShowPopLoading = MutableLiveData<Triple<Boolean, Int, String>>()
     val popLoading: MutableLiveData<Triple<Boolean, Int, String>>
         get() = mShowPopLoading
 
     init {
-        initRepository()
+        mRepository = createRepository()
     }
 
-    abstract fun initRepository()
+    abstract fun createRepository(): R
 
     override fun onStop(owner: LifecycleOwner) {
         super.onStop(owner)
@@ -31,7 +33,7 @@ abstract class BaseViewModel : ViewModel(), DefaultLifecycleObserver {
         mShowPopLoading.postValue(Triple(dismiss, code ?: 0, message ?: ""))
     }
 
-    open fun getString(@StringRes id: Int) :String{
+    open fun getString(@StringRes id: Int): String {
         return StringUtils.getString(id)
     }
 

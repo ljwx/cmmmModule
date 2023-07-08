@@ -11,7 +11,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.ljwx.baseactivity.BaseMVVMActivity
 import com.ljwx.baseapp.vm.BaseViewModel
 
-open abstract class FastTabLayoutActivity<Binding : ViewDataBinding, ViewModel : BaseViewModel>(@LayoutRes layoutResID: Int) :
+open abstract class QuickTabLayoutActivity<Binding : ViewDataBinding, ViewModel : BaseViewModel<*>>(@LayoutRes layoutResID: Int) :
     BaseMVVMActivity<Binding, ViewModel>(layoutResID) {
 
     override fun onCreate(savedInstanceState: Bundle?) {

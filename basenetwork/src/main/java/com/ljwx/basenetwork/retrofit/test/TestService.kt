@@ -10,17 +10,13 @@ interface TestService {
     /**
      * https://search.gitee.com/?skin=rec&type=repository&q=text
      */
-    @GET("/")
+    @GET("/api/api-mima/mima.php")
     open fun search1(
-        @Query("q") q: String?,
-        @Query("type") type: String? = "repository",
-        @Query("skin") skin: String? = "rec"
+        @Query("msg") msg: String = "10"
     ): Call<String>
 
-    @GET("/")
+    @GET("/api/api-mima/mima.php")
     open fun search2(
-        @Query("q") q: String?,
-        @Query("type") type: String? = "repository",
-        @Query("skin") skin: String? = "rec"
+        @Query("msg") msg: String = "10"
     ): Observable<String>
 }
