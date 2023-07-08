@@ -3,7 +3,9 @@ package com.ljwx.basemodule.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
+import com.blankj.utilcode.util.ToastUtils
 import com.ljwx.baseapp.LayoutStatus
+import com.ljwx.baseapp.extensions.showToast
 import com.ljwx.basefragment.BaseBindingFragment
 import com.ljwx.basemodule.R
 import com.ljwx.basemodule.databinding.FragmentBaseFragmentBinding
@@ -30,7 +32,9 @@ class BaseFragmentTest :
                 showStateLayout(LayoutStatus.CONTENT)
             }
         }
-
+        mBinding.button.setOnClickListener {
+            showToast("abc", repeat = false)
+        }
     }
 
     override fun onPullRefresh() {

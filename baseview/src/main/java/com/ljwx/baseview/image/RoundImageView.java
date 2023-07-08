@@ -1,4 +1,4 @@
-package com.ljwx.baseview;
+package com.ljwx.baseview.image;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -10,6 +10,8 @@ import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
+
+import com.ljwx.baseview.R;
 
 public class RoundImageView extends AppCompatImageView {
 

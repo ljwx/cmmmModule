@@ -1,16 +1,37 @@
-package com.ljwx.basemodule.vm
+package com.ljwx.basenetwork.retrofit.test
 
 import androidx.lifecycle.MutableLiveData
+import com.blankj.utilcode.util.ActivityUtils
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.ljwx.baseapp.vm.BaseDataRepository
-import io.reactivex.Observer
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.schedulers.Schedulers
+import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 class TestRepository : BaseDataRepository() {
+
+    val mGiteeTestRetrofit by lazy {
+        val client: OkHttpClient = OkHttpClient.Builder()
+            .connectTimeout(8, TimeUnit.SECONDS)
+            .readTimeout(8, TimeUnit.SECONDS)
+            .writeTimeout(8, TimeUnit.SECONDS)
+            .addInterceptor(ChuckerInterceptor(ActivityUtils.getTopActivity()))
+            .build()
+        Retrofit.Builder()
+            .baseUrl("https://gitee.com/")
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+//            .addCallAdapterFactory(RxJava2CallAdapter())
+            .build()
+    }
 
     fun requestTest(): MutableLiveData<String> {
         val liveData = MutableLiveData<String>()

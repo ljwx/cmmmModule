@@ -1,10 +1,7 @@
-package com.ljwx.basemodule.vm
+package com.ljwx.basenetwork.retrofit.test
 
-import io.reactivex.Observable
-import io.reactivex.Observer
+import io.reactivex.rxjava3.core.Observable
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Query
 

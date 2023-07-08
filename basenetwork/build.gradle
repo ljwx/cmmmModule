@@ -44,15 +44,31 @@ dependencies {
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.2"
     api 'androidx.fragment:fragment-ktx:1.5.2'
 
-    api "com.squareup.retrofit2:retrofit:2.9.0"
-    api "com.squareup.retrofit2:converter-moshi:2.9.0"
+    // retrofit
+    def retrofit = "2.9.0"
+    api "com.squareup.retrofit2:retrofit:$retrofit"
+    // 必要依赖,解析json字符
+    api "com.squareup.retrofit2:converter-gson:$retrofit"
+    api "com.squareup.retrofit2:converter-moshi:$retrofit"
+    // 必要依赖,和rxjava结合必须用到
+    api "com.squareup.retrofit2:adapter-rxjava3:$retrofit"
 
-    implementation "com.squareup.moshi:moshi-kotlin:1.13.0"
-    implementation "com.squareup.moshi:moshi-adapters:1.13.0"
+    //moshi
+    def moshi = "1.13.0"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshi"
+    implementation "com.squareup.moshi:moshi-adapters:$moshi"
 
-    api "com.squareup.okhttp3:okhttp:4.10.0"
-    api "com.squareup.okhttp3:okhttp-urlconnection:4.10.0"
-    api "com.squareup.okhttp3:logging-interceptor:4.10.0"
+    def okhttp = "4.10.0"
+    api "com.squareup.okhttp3:okhttp:$okhttp"
+    api "com.squareup.okhttp3:okhttp-urlconnection:$okhttp"
+    api "com.squareup.okhttp3:logging-interceptor:$okhttp"
+
+    //chucker
+    def chucker = "3.5.2"
+    debugImplementation "com.github.chuckerteam.chucker:library:$chucker"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:$chucker"
+
+    implementation project(path: ':baseapp')
 }
 
 afterEvaluate {

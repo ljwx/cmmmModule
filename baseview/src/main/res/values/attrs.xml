@@ -31,6 +31,18 @@
         <attr name="allowClickWhenDisabled" format="boolean"></attr>
     </declare-styleable>
 
+    <!--SubTextView-->
+    <declare-styleable name="SubTextView">
+        <attr name="stvSubText" format="string" />
+        <attr name="stvSubTextSize" format="dimension" />
+        <attr name="stvSubTextColor" format="color" />
+        <attr name="stvSubTextGap" format="dimension" />
+        <attr name="stvSubTextMode">
+            <enum name="subtitle" value="0" />
+            <enum name="value" value="1" />
+        </attr>
+    </declare-styleable>
+
 
     <!--RoundTextView-->
     <!-- 背景色 -->

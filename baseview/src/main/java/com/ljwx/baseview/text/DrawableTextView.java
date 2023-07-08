@@ -1,4 +1,4 @@
-package com.ljwx.baseview;
+package com.ljwx.baseview.text;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,6 +7,8 @@ import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
+
+import com.ljwx.baseview.R;
 
 public class DrawableTextView extends AppCompatTextView {
 
