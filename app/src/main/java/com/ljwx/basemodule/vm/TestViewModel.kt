@@ -3,6 +3,7 @@ package com.ljwx.basemodule.vm
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ljwx.baseapp.vm.BaseViewModel
+import com.ljwx.basenetwork.retrofit.test.TestRepository
 
 class TestViewModel : BaseViewModel() {
 

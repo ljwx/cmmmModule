@@ -71,6 +71,7 @@ dependencies {
     implementation project(path: ':basefragment')
     implementation project(path: ':baserecyclerview')
     implementation project(path: ':basetoolbar')
+    implementation project(path: ':baserefresh')
 
     implementation 'io.github.ljwx:SplitTextView:0.3.8'
 }

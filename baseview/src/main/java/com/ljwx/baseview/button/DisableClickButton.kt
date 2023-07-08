@@ -1,10 +1,11 @@
-package com.ljwx.baseview
+package com.ljwx.baseview.button
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.MotionEvent
 import androidx.appcompat.widget.AppCompatButton
+import com.ljwx.baseview.R
 
 class DisableClickButton @JvmOverloads constructor(
     context: Context,
