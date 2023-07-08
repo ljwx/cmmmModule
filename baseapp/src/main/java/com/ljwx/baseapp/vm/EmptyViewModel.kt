@@ -1,8 +1,9 @@
 package com.ljwx.baseapp.vm
 
-class EmptyViewModel : BaseViewModel() {
-
-    override fun initRepository() {
-
+class EmptyViewModel : BaseViewModel<EmptyDataRepository>() {
+    override fun createRepository(): EmptyDataRepository {
+        return EmptyDataRepository()
     }
+
+
 }

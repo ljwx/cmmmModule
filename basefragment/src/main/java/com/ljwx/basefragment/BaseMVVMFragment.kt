@@ -4,11 +4,12 @@ import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
+import com.ljwx.baseapp.page.IPageViewModel
 import com.ljwx.baseapp.vm.BaseViewModel
 import com.ljwx.basefragment.scope.ViewModelScope
 import java.lang.reflect.ParameterizedType
 
-open abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel>(@LayoutRes layoutRes: Int) :
+open abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel<*>>(@LayoutRes layoutRes: Int) :
     BaseBindingFragment<Binding>(layoutRes) {
 
     private val mViewModelScope by lazy {
@@ -22,9 +23,7 @@ open abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : Base
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        mViewModel = getViewModel()
-
+        mViewModel = createViewModel()
         lifecycle.addObserver(mViewModel)
         initPopLoadingObserver()
     }
@@ -35,11 +34,10 @@ open abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : Base
         }
     }
 
-    open fun getViewModel(activityScope: Boolean = false): ViewModel {
+    open fun createViewModel(): ViewModel {
         val type = javaClass.genericSuperclass as ParameterizedType
         val modelClass = type.actualTypeArguments.getOrNull(1) as Class<ViewModel>
-        return if (activityScope) mViewModelScope.getActivityScopeViewModel(mActivity, modelClass)
-        else ViewModelProvider(this)[modelClass]
+        return ViewModelProvider(this)[modelClass]
     }
 
 }

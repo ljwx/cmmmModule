@@ -8,7 +8,7 @@ import com.ljwx.baseapp.vm.BaseViewModel
 import com.ljwx.basefragment.BaseMVVMFragment
 import com.ljwx.recyclerview.quick.QuickLoadMoreAdapter
 
-abstract class BaseLoadMoreFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel, Item : Any>(
+abstract class BaseLoadMoreFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel<*>, Item : Any>(
     @LayoutRes private val fragmentLayout: Int, @LayoutRes private val itemLayout: Int
 ) : BaseMVVMFragment<Binding, ViewModel>(fragmentLayout) {
 

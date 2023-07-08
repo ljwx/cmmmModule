@@ -39,7 +39,6 @@ class LoadMoreFragment :
             delay(2000)
             val list = ArrayList<String>()
             val end = if (mTimes < 3) 21 else 10
-            Log.d("ljwx2", "加多少:" + end)
             for (i in 0 until end) {
                 list.add((mLoadMoreAdapter.itemCount + i).toString())
             }

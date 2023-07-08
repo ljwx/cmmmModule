@@ -40,6 +40,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = getScreenOrientation()
+        initToolbar(com.ljwx.baseapp.R.id.base_app_toolbar)
     }
 
     open fun getScreenOrientation(): Int {
@@ -60,17 +61,21 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         return mStatusBar
     }
 
-    override fun initToolbar(toolbarId: Int?): Toolbar? {
-        // 使用通用id或自定义id
-        return if (supportActionBar == null) {
-            //默认通用id
-            val toolbar = findViewById(toolbarId ?: R.id.base_activity_toolbar) as? Toolbar
+    override fun initToolbar(toolbarId: Int): Toolbar? {
+        val toolbar = findViewById(toolbarId) as? Toolbar
+        return setToolbar(toolbar)
+    }
+
+    override fun initToolbar(toolbar: Toolbar?): Toolbar? {
+        return setToolbar(toolbar)
+    }
+
+    private fun setToolbar(toolbar: Toolbar?): Toolbar? {
+        toolbar?.let {
             setSupportActionBar(toolbar)
             toolbar?.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
-            toolbar
-        } else {
-            null
         }
+        return toolbar
     }
 
     override fun setToolbarTitle(title: CharSequence) {

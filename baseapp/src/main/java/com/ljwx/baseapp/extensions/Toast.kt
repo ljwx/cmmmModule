@@ -34,7 +34,7 @@ inline fun Fragment.showToast(
     show(content, duration, gravity, repeat)
 }
 
-inline fun BaseViewModel.showToast(
+inline fun BaseViewModel<*>.showToast(
     content: String?,
     duration: Int = Toast.LENGTH_SHORT,
     gravity: Int = Gravity.CENTER,

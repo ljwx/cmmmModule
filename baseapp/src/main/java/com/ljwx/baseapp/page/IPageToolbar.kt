@@ -10,7 +10,9 @@ interface IPageToolbar {
      *
      * @param toolbarId toolbar控件的id
      */
-    fun initToolbar(@IdRes toolbarId: Int? = null): Toolbar?
+    fun initToolbar(@IdRes toolbarId: Int): Toolbar?
+
+    fun initToolbar(toolbar: Toolbar?): Toolbar?
 
     /**
      * 设置Toolbar标题

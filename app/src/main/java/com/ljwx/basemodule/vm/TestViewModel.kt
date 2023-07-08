@@ -5,18 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import com.ljwx.baseapp.vm.BaseViewModel
 import com.ljwx.basenetwork.retrofit.test.TestRepository
 
-class TestViewModel : BaseViewModel() {
-
-    private var mTestRepository: TestRepository? = null
+class TestViewModel : BaseViewModel<TestRepository>() {
 
     val mResponse = MutableLiveData<String>()
 
-    override fun initRepository() {
-        mTestRepository = TestRepository()
+    override fun createRepository(): TestRepository {
+        return TestRepository()
     }
 
     fun requestTest() {
-        mTestRepository?.requestTest()
+        mRepository.requestTest()
     }
 
     //https://developer.android.com/topic/libraries/architecture/viewmodel?hl=zh-cn
