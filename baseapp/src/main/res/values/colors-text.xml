@@ -4,4 +4,5 @@
     <color name="base_app_textColorPrimary">#333</color>
     <color name="base_app_textColorSecondary">#666</color>
     <color name="base_app_textColorTertiary">#999</color>
+    <color name="base_app_textDisable">#61000000</color>
 </resources>
