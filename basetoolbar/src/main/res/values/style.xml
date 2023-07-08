@@ -34,7 +34,7 @@
 
     <!--标题样式-->
     <style name="CommonToolbar.TitleTextAppearance" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/base_app_textColorPrimary</item>
+        <item name="android:textColor">@color/base_toolbar_textPrimary</item>
         <item name="android:textSize">30dp</item>
         <item name="android:textStyle">normal</item>
     </style>
