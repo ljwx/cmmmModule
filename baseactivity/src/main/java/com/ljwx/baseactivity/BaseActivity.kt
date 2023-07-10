@@ -39,8 +39,8 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setStatusBar()
         requestedOrientation = getScreenOrientation()
-        initToolbar(com.ljwx.baseapp.R.id.base_app_toolbar)
     }
 
     open fun getScreenOrientation(): Int {
