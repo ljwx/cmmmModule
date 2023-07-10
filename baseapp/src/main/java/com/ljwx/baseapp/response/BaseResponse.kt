@@ -1,26 +1,29 @@
 package com.ljwx.baseapp.response
 
-sealed class BaseResponse<out T : Any> {
+open class BaseResponse<Data> {
+
+    companion object {
+
+        private var RESPONSE_SUCCESS = 200
+
+        fun setSuccessCode(code: Int) {
+            RESPONSE_SUCCESS = code
+        }
+    }
 
     var code: Int? = null
 
-    @Deprecated(message="useless", replaceWith = ReplaceWith(expression = "msg"))
+    @Deprecated(message = "useless", replaceWith = ReplaceWith(expression = "msg"))
     var message: String? = null
 
     var msg: String? = null
 
-    data class Success<out T : Any>(val data: T) : BaseResponse<T>()
-    data class Error(val exception: ResponseException) : BaseResponse<Nothing>()
+    var data: Data? = null
+
+    var errorData: Any? = null
 
     open fun isSuccess(): Boolean {
-        return code == 200
-    }
-
-    override fun toString(): String {
-        return when (this) {
-            is Success<*> -> "Success[data=$data]"
-            is Error -> "Error[exception=$exception]"
-        }
+        return code == RESPONSE_SUCCESS
     }
 
 }
