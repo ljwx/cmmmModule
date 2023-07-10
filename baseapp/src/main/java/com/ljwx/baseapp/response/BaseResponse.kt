@@ -26,4 +26,8 @@ open class BaseResponse<Data> {
         return code == RESPONSE_SUCCESS
     }
 
+    open fun isSuccessAndDataNotNull(): Boolean{
+        return data != null
+    }
+
 }
