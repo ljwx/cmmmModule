@@ -19,7 +19,3 @@ val AppCompatActivity.rootLayout: View?
         val container = findViewById<ViewGroup>(android.R.id.content)
         return if (container.childCount > 0) container.getChildAt(0) else container
     }
-
-fun Activity.showToast(content: String?) {
-    showToast(content)
-}
