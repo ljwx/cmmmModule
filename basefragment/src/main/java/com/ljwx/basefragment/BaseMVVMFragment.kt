@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
-import com.ljwx.baseapp.page.IPageViewModel
 import com.ljwx.baseapp.vm.BaseViewModel
 import com.ljwx.basefragment.scope.ViewModelScope
 import java.lang.reflect.ParameterizedType
@@ -37,7 +36,12 @@ open abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : Base
     open fun createViewModel(): ViewModel {
         val type = javaClass.genericSuperclass as ParameterizedType
         val modelClass = type.actualTypeArguments.getOrNull(1) as Class<ViewModel>
-        return ViewModelProvider(this)[modelClass]
+        return if (useActivityScopeVM()) mViewModelScope.getActivityScopeViewModel(
+            mActivity,
+            modelClass
+        ) else ViewModelProvider(this)[modelClass]
     }
+
+    open fun useActivityScopeVM() = false
 
 }
