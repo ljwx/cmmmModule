@@ -23,5 +23,9 @@ open class BaseBindingActivity<Binding : ViewDataBinding>(@LayoutRes private val
         useCommonRefreshLayout()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding.unbind()
+    }
 
 }
