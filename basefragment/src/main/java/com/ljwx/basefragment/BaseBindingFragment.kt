@@ -31,4 +31,9 @@ open abstract class BaseBindingFragment<Binding : ViewDataBinding>(@LayoutRes pr
         useCommonRefreshLayout()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding.unbind()
+    }
+
 }
