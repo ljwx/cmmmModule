@@ -1,4 +1,4 @@
 package com.ljwx.baseapp.vm
 
-class EmptyDataRepository : BaseDataRepository() {
+open class EmptyDataRepository : BaseDataRepository() {
 }

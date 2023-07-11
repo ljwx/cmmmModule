@@ -1,9 +1,13 @@
 package com.ljwx.baseapp.response
 
-sealed class DataResult<out T : Any> {
+sealed class DataResult<out R : Any> {
 
     data class Success<out T : Any>(val data: T) : DataResult<T>()
-    data class Error(val exception: ResponseException) : DataResult<Nothing>()
+    data class Error(val exception: Exception) : DataResult<Nothing>()
+
+    interface Result<D : Any> {
+        fun call(result: DataResult<D>)
+    }
 
     override fun toString(): String {
         return when (this) {
@@ -13,3 +17,6 @@ sealed class DataResult<out T : Any> {
     }
 
 }
+
+val DataResult<*>.succeeded
+    get() = this is DataResult.Success && data != null

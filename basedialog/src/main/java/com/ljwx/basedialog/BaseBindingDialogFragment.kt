@@ -1,4 +1,4 @@
-package com.ljwx.baseapp
+package com.ljwx.basedialog
 
 import android.content.Context
 import android.os.Bundle
@@ -12,7 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 
-abstract class BaseDialogFragment<Binding : ViewDataBinding> : DialogFragment() {
+abstract class BaseBindingDialogFragment<Binding : ViewDataBinding> : DialogFragment() {
 
     protected lateinit var mBinding: Binding
     protected lateinit var mActivity: AppCompatActivity
@@ -36,7 +36,7 @@ abstract class BaseDialogFragment<Binding : ViewDataBinding> : DialogFragment() 
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mBinding = DataBindingUtil.inflate<Binding>(inflater, getLayoutId(), container, false)
+        mBinding = DataBindingUtil.inflate(inflater, caonima(), container, false)
         mBinding.lifecycleOwner = this
         // 隐藏标题栏, 不加弹窗上方会一个透明的标题栏占着空间
         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -46,7 +46,7 @@ abstract class BaseDialogFragment<Binding : ViewDataBinding> : DialogFragment() 
         return mBinding.root
     }
 
-    abstract fun getLayoutId(): Int
+    abstract fun caonima(): Int
 
     fun isShowing(): Boolean {
         return dialog?.isShowing == true
@@ -62,5 +62,11 @@ abstract class BaseDialogFragment<Binding : ViewDataBinding> : DialogFragment() 
         super.onDestroy()
         mBinding.unbind()
     }
+
+//    open fun show(manager: FragmentManager){
+//        val tag = this.javaClass.simpleName
+//        Log.d("ljwx2", tag)
+//        show(manager, tag)
+//    }
 
 }

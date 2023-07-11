@@ -1,4 +1,4 @@
-package com.ljwx.basefragment.scope
+package com.ljwx.baseapp.vm
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
