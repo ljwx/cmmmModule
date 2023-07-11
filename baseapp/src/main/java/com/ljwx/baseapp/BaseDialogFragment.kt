@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
-import com.sisensing.common.R
 
 abstract class BaseDialogFragment<Binding : ViewDataBinding> : DialogFragment() {
 
@@ -42,7 +41,7 @@ abstract class BaseDialogFragment<Binding : ViewDataBinding> : DialogFragment() 
         // 隐藏标题栏, 不加弹窗上方会一个透明的标题栏占着空间
         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
-        dialog?.window?.setBackgroundDrawableResource(R.color.transparent)
+        dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
         //        getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         return mBinding.root
     }
