@@ -22,11 +22,15 @@ open class BaseResponse<Data> {
 
     var errorData: Any? = null
 
+    var isRefresh: Boolean? = null
+
+    var extensionField: Any? = null
+
     open fun isSuccess(): Boolean {
         return code == RESPONSE_SUCCESS
     }
 
-    open fun isSuccessAndDataNotNull(): Boolean{
+    open fun isSuccessAndDataNotNull(): Boolean {
         return data != null
     }
 

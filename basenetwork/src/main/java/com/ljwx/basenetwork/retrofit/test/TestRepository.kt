@@ -1,10 +1,13 @@
 package com.ljwx.basenetwork.retrofit.test
 
+import android.content.res.Resources.NotFoundException
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.blankj.utilcode.util.ActivityUtils
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.gson.GsonBuilder
+import com.ljwx.baseapp.response.DataResult
+import com.ljwx.baseapp.response.ResponseException
 import com.ljwx.baseapp.vm.BaseDataRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observer
@@ -39,15 +42,17 @@ class TestRepository : BaseDataRepository() {
             .build()
     }
 
-    fun requestTest(): MutableLiveData<String> {
+    fun requestTest(callback: DataResult.Result<String>): MutableLiveData<String> {
         val liveData = MutableLiveData<String>()
         mGiteeTestRetrofit.create(TestService::class.java).search1("8")
             .enqueue(object : Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
                     Log.d("ljwx2", "请求结果成功")
                     if (response.isSuccessful) {
-                        Log.d("ljwx2", response.body().toString())
+                        val result = response.body().toString()
+                        callback.call(DataResult.Success(result))
                     }
+                    callback.call(DataResult.Error(ClassNotFoundException()))
                 }
 
                 override fun onFailure(call: Call<String>, t: Throwable) {
@@ -67,7 +72,7 @@ class TestRepository : BaseDataRepository() {
                 }
 
                 override fun onError(e: Throwable) {
-                    Log.d("ljwx2", "错误:"+e.message)
+                    Log.d("ljwx2", "错误:" + e.message)
                 }
 
                 override fun onComplete() {
