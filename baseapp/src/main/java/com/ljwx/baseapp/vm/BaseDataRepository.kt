@@ -1,5 +1,6 @@
 package com.ljwx.baseapp.vm
 
+import io.reactivex.disposables.Disposable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 
@@ -7,7 +8,13 @@ open class BaseDataRepository {
 
     private var mCompositeDisposable: CompositeDisposable? = null
 
-    open fun autoClear(disposable: Disposable) {
+    open fun autoClear2(disposable: io.reactivex.disposables.Disposable) {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = CompositeDisposable()
+        }
+    }
+
+    open fun autoClear3(disposable: Disposable) {
         if (mCompositeDisposable == null) {
             mCompositeDisposable = CompositeDisposable()
         }

@@ -25,6 +25,11 @@ abstract class BaseViewModel<R : BaseDataRepository> : ViewModel(), DefaultLifec
         super.onStop(owner)
     }
 
+    override fun onDestroy(owner: LifecycleOwner) {
+        super.onDestroy(owner)
+        mRepository.onCleared()
+    }
+
     open fun showPopLoading(show: Boolean = true, code: Int? = 0, message: String? = "") {
         mShowPopLoading.postValue(Triple(show, code ?: 0, message ?: ""))
     }
