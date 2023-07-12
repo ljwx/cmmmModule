@@ -1,6 +1,6 @@
 package com.ljwx.baseapp.response
 
-open class BaseResponse<Data : Any> {
+open class BaseResponse<Data> {
 
     companion object {
 
