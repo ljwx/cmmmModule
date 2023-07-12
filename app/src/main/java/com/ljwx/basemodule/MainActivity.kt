@@ -3,6 +3,7 @@ package com.ljwx.basemodule
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import com.ljwx.baseactivity.fast.QuickMainActivity
+import com.ljwx.baseapp.BasePopupLoading
 import com.ljwx.baseapp.vm.EmptyViewModel
 import com.ljwx.basemodule.databinding.ActivityMainBinding
 import com.ljwx.basemodule.fragments.*

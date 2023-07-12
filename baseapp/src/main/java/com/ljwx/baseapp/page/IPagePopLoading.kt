@@ -1,5 +1,7 @@
 package com.ljwx.baseapp.page
 
+import androidx.annotation.LayoutRes
+
 interface IPagePopLoading {
 
     /**
@@ -17,4 +19,5 @@ interface IPagePopLoading {
      */
     fun isPopupLoadingShowing(): Boolean
 
+    fun setPopupLoadingLayout(@LayoutRes layout: Int)
 }

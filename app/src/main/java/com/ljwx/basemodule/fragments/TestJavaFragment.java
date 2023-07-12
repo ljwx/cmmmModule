@@ -38,4 +38,9 @@ public class TestJavaFragment extends BaseBindingFragment<FragmentJavaTestBindin
         }).start();
 
     }
+
+    @Override
+    public void setPopupLoadingLayout(int layout) {
+
+    }
 }
