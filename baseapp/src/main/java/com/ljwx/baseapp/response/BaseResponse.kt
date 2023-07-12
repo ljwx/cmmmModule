@@ -31,7 +31,7 @@ open class BaseResponse<Data> {
     }
 
     open fun isSuccessAndDataNotNull(): Boolean {
-        return data != null
+        return isSuccess() && data != null
     }
 
 }
