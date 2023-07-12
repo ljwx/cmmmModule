@@ -41,7 +41,6 @@
 
     <!--toolbar直接使用的样式-->
     <style name="activity_tool_bar" parent="CommonToolbar">
-        <item name="android:id">@id/base_toolbar_id</item>
         <item name="navigationIcon">@mipmap/base_toolbar_black_icon</item>
         <!--标题颜色及大小-->
         <item name="titleTextAppearance">@style/CommonToolbar.TitleTextAppearance</item>
