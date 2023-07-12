@@ -7,7 +7,7 @@ import com.drake.statelayout.StateLayout
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.ljwx.baseapp.R
 import com.ljwx.baseapp.LayoutStatus
-import com.ljwx.baseapp.PopupLoading
+import com.ljwx.baseapp.BasePopupLoading
 import com.ljwx.baseapp.extensions.isMainThread
 import com.ljwx.baseapp.page.IPagePopLoading
 import com.ljwx.baseapp.page.IPageRefreshLayout
@@ -18,7 +18,7 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
 
 
     private val mPopupLoading by lazy {
-        PopupLoading(requireContext())
+        BasePopupLoading(mActivity)
     }
 
     private var mLoadingRunnable: Runnable? = null
@@ -71,6 +71,9 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
 
     override fun isPopupLoadingShowing(): Boolean = mPopupLoading.isShowing()
 
+    override fun setPopupLoadingLayout(@LayoutRes layout: Int) {
+        mPopupLoading.setLayout(layout)
+    }
 
     /*================================================================*/
 
@@ -229,11 +232,12 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
 
     override fun onDestroy() {
         super.onDestroy()
+        mPopupLoading.dismiss()
+        mLoadingRunnable = null
         mStateLayout = null
         mStateRunnable = null
         mRefreshLayout = null
         mRefreshRunnable = null
-        mPopupLoading.dismiss()
     }
 
 }

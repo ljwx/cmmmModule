@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import com.drake.statelayout.StateLayout
-import com.ljwx.baseapp.PopupLoading
+import com.ljwx.baseapp.BasePopupLoading
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.ljwx.baseapp.R
 import com.ljwx.baseapp.LayoutStatus
@@ -17,8 +17,10 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
     IPageRefreshLayout {
 
     private val mPopupLoading by lazy {
-        PopupLoading(this)
+        BasePopupLoading(this)
     }
+
+    private var mLoadingRunnable: Runnable? = null
 
     /**
      * 多状态控件
@@ -47,7 +49,12 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
     }
 
     override fun showPopLoading(show: Boolean, cancelable: Boolean, level: Int) {
-        mPopupLoading.showPopup(show)
+        mLoadingRunnable = mLoadingRunnable ?: Runnable {
+//            mPopupLoading.setCancelable(cancelable)
+//            dialog.setCanceledOnTouchOutside(canceledOnTouchOutside)
+            mPopupLoading.showPopup(show)
+        }
+        runOnUiThread(mLoadingRunnable)
     }
 
     override fun dismissPopLoading(dismiss: Boolean) {
@@ -56,6 +63,9 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
 
     override fun isPopupLoadingShowing(): Boolean = mPopupLoading.isShowing()
 
+    override fun setPopupLoadingLayout(@LayoutRes layout: Int) {
+        mPopupLoading.setLayout(layout)
+    }
 
     /*================================================================*/
 
@@ -214,11 +224,12 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
 
     override fun onDestroy() {
         super.onDestroy()
+        mPopupLoading.dismiss()
+        mLoadingRunnable = null
         mStateLayout = null
         mStateRunnable = null
         mRefreshLayout = null
         mRefreshRunnable = null
-        mPopupLoading.dismiss()
     }
 
 }

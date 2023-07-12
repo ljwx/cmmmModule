@@ -1,15 +1,28 @@
 package com.ljwx.baseapp
 
 import android.content.Context
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
-import com.ljwx.baseapp.R
 
-class PopupLoading(val context: Context) {
+class BasePopupLoading(val context: Context) {
 
-    private val dialog by lazy {
-        AlertDialog.Builder(context).setView(R.layout.baseapp_popup_loading_layout).create()
+    companion object {
+
+        private var loadingLayout = R.layout.baseapp_popup_loading_layout
+        fun setLayout(@LayoutRes layout: Int) {
+            loadingLayout = layout
+        }
     }
 
+    private var mLoadingLayout: Int? = null
+
+    private val dialog by lazy {
+        AlertDialog.Builder(context).setView(mLoadingLayout ?: loadingLayout).create()
+    }
+
+    fun setLayout(@LayoutRes layoutRes: Int) {
+        mLoadingLayout = layoutRes
+    }
 
     private var mLoadingRunnable: Runnable? = null
 
