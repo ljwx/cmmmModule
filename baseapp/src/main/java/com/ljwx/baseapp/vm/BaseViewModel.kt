@@ -1,11 +1,9 @@
 package com.ljwx.baseapp.vm
 
-import androidx.annotation.StringRes
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.blankj.utilcode.util.StringUtils
 
 abstract class BaseViewModel<R : BaseDataRepository> : ViewModel(), DefaultLifecycleObserver {
 
@@ -36,10 +34,6 @@ abstract class BaseViewModel<R : BaseDataRepository> : ViewModel(), DefaultLifec
 
     open fun dismissPopLoading(dismiss: Boolean = true, code: Int? = 0, message: String? = "") {
         mShowPopLoading.postValue(Triple(dismiss, code ?: 0, message ?: ""))
-    }
-
-    open fun getString(@StringRes id: Int): String {
-        return StringUtils.getString(id)
     }
 
 }
