@@ -1,8 +1,8 @@
 package com.ljwx.baseapp.extensions
 
 import android.os.Looper
-
-
+import androidx.annotation.StringRes
+import com.blankj.utilcode.util.StringUtils
 
 
 /**
@@ -13,3 +13,6 @@ val isMainThread: Boolean
         return Looper.getMainLooper() == Looper.myLooper()
     }
 
+fun Any.getString(@StringRes id: Int): String {
+    return StringUtils.getString(id)
+}

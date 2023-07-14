@@ -37,7 +37,7 @@ open abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : Base
         val type = javaClass.genericSuperclass as ParameterizedType
         val modelClass = type.actualTypeArguments.getOrNull(1) as Class<ViewModel>
         return if (useActivityScopeVM()) mViewModelScope.getActivityScopeViewModel(
-            mActivity,
+            requireActivity(),
             modelClass
         ) else ViewModelProvider(this)[modelClass]
     }
