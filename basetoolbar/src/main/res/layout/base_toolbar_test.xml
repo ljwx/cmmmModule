@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <com.ljwx.basetoolbar.CommonToolbar
-        style="@style/activity_tool_bar"
+        style="@style/style_base_tool_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_toolbar_height"
         app:layout_constraintTop_toTopOf="parent"

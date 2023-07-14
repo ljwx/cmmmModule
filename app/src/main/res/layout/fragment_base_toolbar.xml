@@ -7,7 +7,7 @@
         android:layout_height="match_parent">
 
         <com.ljwx.basetoolbar.CenterTitleBar
-            style="@style/activity_tool_bar"
+            style="@style/style_base_tool_bar"
             android:layout_width="match_parent"
             app:layout_constraintTop_toTopOf="parent"
             app:title="abc" />
