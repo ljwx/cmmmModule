@@ -8,6 +8,7 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.gyf.immersionbar.ImmersionBar
 import com.ljwx.baseapp.page.IPageBroadcast
@@ -23,7 +24,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     }
 
     /**
-     * 结束当前页的广播
+     * 结束广播
      */
     private var mFinishReceiver: BroadcastReceiver? = null
 
@@ -32,8 +33,10 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
      */
     private var mRefreshReceiver: BroadcastReceiver? = null
 
+    private var mOtherReceiver: BroadcastReceiver? = null
+
     /**
-     * 注册广播的Intent
+     * 注册广播
      */
     private var mBroadcastIntentFilter: IntentFilter? = null
 
@@ -114,6 +117,18 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
             .registerReceiver(mRefreshReceiver!!, mBroadcastIntentFilter!!)
     }
 
+    override fun registerOtherBroadcast(action: String) {
+        mBroadcastIntentFilter = mBroadcastIntentFilter ?: IntentFilter(action)
+        mOtherReceiver = mOtherReceiver ?: (object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                if (mBroadcastIntentFilter?.matchAction(intent.action) == true) {
+                    onBroadcastOther()
+                }
+            }
+        })
+        LocalBroadcastManager.getInstance(this)
+            .registerReceiver(mOtherReceiver!!, mBroadcastIntentFilter!!)
+    }
 
     override fun unregisterBroadcast(action: String?) {
         if (action != null) {
@@ -150,11 +165,19 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
     }
 
+    override fun sendOtherBroadcast(action: String) {
+        LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(action))
+    }
+
     override fun onBroadcastPageFinish() {
         finish()
     }
 
     override fun onBroadcastPageRefresh(type: String?) {
+
+    }
+
+    override fun onBroadcastOther() {
 
     }
 
@@ -168,6 +191,10 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
             LocalBroadcastManager.getInstance(this).unregisterReceiver(it)
         }
         mRefreshReceiver = null
+        mOtherReceiver?.let {
+            LocalBroadcastManager.getInstance(this).unregisterReceiver(it)
+        }
+        mOtherReceiver = null
         mBroadcastIntentFilter = null
     }
 

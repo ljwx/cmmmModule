@@ -40,7 +40,7 @@
     </style>
 
     <!--toolbar直接使用的样式-->
-    <style name="activity_tool_bar" parent="CommonToolbar">
+    <style name="style_base_tool_bar" parent="CommonToolbar">
         <item name="navigationIcon">@mipmap/base_toolbar_black_icon</item>
         <!--标题颜色及大小-->
         <item name="titleTextAppearance">@style/CommonToolbar.TitleTextAppearance</item>

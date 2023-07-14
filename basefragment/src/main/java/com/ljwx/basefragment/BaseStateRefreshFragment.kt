@@ -24,22 +24,22 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
     private var mLoadingRunnable: Runnable? = null
 
     /**
-     * 多状态控件
+     * 多状态
      */
     private var mStateLayout: StateLayout? = null
 
     /**
-     * 子线程切换多状态布局
+     * 安全线程切换
      */
     private var mStateRunnable: Runnable? = null
 
     /**
-     * 下拉刷新控件
+     * 下拉刷新
      */
     private var mRefreshLayout: SmartRefreshLayout? = null
 
     /**
-     * 子线程执行刷新
+     * 安全线程切换
      */
     private var mRefreshRunnable: Runnable? = null
 
@@ -78,7 +78,7 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
     /*================================================================*/
 
     /**
-     * 快速使用状态布局
+     * 快速状态布局
      */
     open fun useCommonStateLayout() {
         val stateLayout = view?.findViewById<View>(R.id.base_app_quick_state_layout)
@@ -88,7 +88,7 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
     }
 
     /**
-     * 快速使用刷新布局
+     * 快速刷新布局
      */
     open fun useCommonRefreshLayout() {
         val refreshLayout = view?.findViewById<View>(R.id.base_app_quick_refresh_layout)
@@ -100,7 +100,7 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
     /*================================================================*/
 
     /**
-     * 初始化多状态布局
+     * 初始化多状态
      *
      * @param stateLayout 多状态布局容器
      * @param retryId 重试id
@@ -117,7 +117,7 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
     }
 
     /**
-     * 重新设置布局样式
+     * 设置布局样式
      *
      * @param state 哪种状态
      * @param layout 对应的布局
@@ -145,7 +145,7 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
     }
 
     /**
-     * 显示多种状态
+     * 显示布局状态
      *
      * @param state 哪种状态
      * @param show 是否需要显示
@@ -202,14 +202,13 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
 
     override fun initRefreshLayout(refreshLayout: SmartRefreshLayout?) {
         this.mRefreshLayout = refreshLayout
-        // 下拉刷新触发
         refreshLayout?.setOnRefreshListener {
             onPullRefresh()
         }
     }
 
     /**
-     * 下拉刷新逻辑
+     * 下拉刷新
      */
     override fun onPullRefresh() {
 

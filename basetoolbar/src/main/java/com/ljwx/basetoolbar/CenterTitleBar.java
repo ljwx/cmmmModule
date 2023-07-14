@@ -13,12 +13,6 @@ import androidx.annotation.StyleRes;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
 
-import androidx.appcompat.R;
-
-/**
- * https://www.jianshu.com/p/952d50aab088
- * 基于原生Toolbar实现Title居中显示(代码量极少，易使用）
- */
 public class CenterTitleBar extends Toolbar {
 
     LinearLayout vCenteredBox;
@@ -49,9 +43,10 @@ public class CenterTitleBar extends Toolbar {
     }
 
     private void init(AttributeSet attrs, int defStyle) {
+
         final TypedArray a = getContext().obtainStyledAttributes(attrs, androidx.appcompat.R.styleable.Toolbar, defStyle, 0);
-        mCenteredTitleTextAppearance = a.getResourceId(R.styleable.Toolbar_titleTextAppearance, 0);
-        mCenteredSubtitleTextAppearance = a.getResourceId(R.styleable.Toolbar_subtitleTextAppearance, 0);
+        mCenteredTitleTextAppearance = a.getResourceId(androidx.appcompat.R.styleable.Toolbar_titleTextAppearance, 0);
+        mCenteredSubtitleTextAppearance = a.getResourceId(androidx.appcompat.R.styleable.Toolbar_subtitleTextAppearance, 0);
         a.recycle();
 
         setTitleTextAppearance(getContext(), mCenteredTitleTextAppearance);
@@ -74,28 +69,26 @@ public class CenterTitleBar extends Toolbar {
     @Override
     public void setTitle(CharSequence title) {
         if (!TextUtils.isEmpty(title)) {
-            setCenterTitle(title);
+            if (vCenteredTitle == null) {
+                ensureCenteredBox();
+                vCenteredTitle = new AppCompatTextView(getContext());
+                vCenteredTitle.setSingleLine();
+                vCenteredTitle.setEllipsize(TextUtils.TruncateAt.END);
+                vCenteredTitle.setGravity(Gravity.CENTER);
+                if (mCenteredTitleTextAppearance != 0) {
+                    vCenteredTitle.setTextAppearance(getContext(), mCenteredTitleTextAppearance);
+                }
+                if (mCenteredTitleTextColor != 0) {
+                    vCenteredTitle.setTextColor(mCenteredTitleTextColor);
+                }
+                vCenteredTitle.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+                vCenteredBox.addView(vCenteredTitle, 0);
+            }
+        }
+        if (vCenteredTitle != null) {
+            vCenteredTitle.setText(title);
         }
         mTitle = title;
-    }
-
-    private void setCenterTitle(CharSequence title) {
-        if (vCenteredTitle == null) {
-            vCenteredTitle = new AppCompatTextView(getContext());
-        }
-        ensureCenteredBox();
-        vCenteredTitle.setSingleLine();
-        vCenteredTitle.setEllipsize(TextUtils.TruncateAt.END);
-        vCenteredTitle.setGravity(Gravity.CENTER);
-        if (mCenteredTitleTextAppearance != 0) {
-            vCenteredTitle.setTextAppearance(getContext(), mCenteredTitleTextAppearance);
-        }
-        if (mCenteredTitleTextColor != 0) {
-            vCenteredTitle.setTextColor(mCenteredTitleTextColor);
-        }
-        vCenteredTitle.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        vCenteredBox.addView(vCenteredTitle, 0);
-        vCenteredTitle.setText(title);
     }
 
     @Override
