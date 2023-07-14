@@ -72,7 +72,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
         mRefreshReceiver = mRefreshReceiver ?: (object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
                 if (mBroadcastIntentFilter?.matchAction(intent.action) == true) {
-                    onBroadcastPageRefresh(intent.type)
+                    onBroadcastPageRefresh(intent.getStringExtra("params"))
                 }
             }
         })
@@ -105,13 +105,13 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
         LocalBroadcastManager.getInstance(requireContext()).sendBroadcast(intent)
     }
 
-    override fun sendRefreshBroadcast(action: String?, type: String?) {
+    override fun sendRefreshBroadcast(action: String?, params: String?) {
         if (action.isNullOrBlank()) {
             return
         }
         val intent = Intent(action)
-        type?.let {
-            intent.type = type
+        params?.let {
+            intent.putExtra("params", it)
         }
         LocalBroadcastManager.getInstance(requireContext()).sendBroadcast(intent)
     }

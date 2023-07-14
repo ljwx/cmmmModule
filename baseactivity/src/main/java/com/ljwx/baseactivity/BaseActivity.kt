@@ -106,7 +106,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         mRefreshReceiver = mRefreshReceiver ?: (object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
                 if (mBroadcastIntentFilter?.matchAction(intent.action) == true) {
-                    onBroadcastPageRefresh(intent.type)
+                    onBroadcastPageRefresh(intent.getStringExtra("params"))
                 }
             }
         })
@@ -139,13 +139,13 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
     }
 
-    override fun sendRefreshBroadcast(action: String?, type: String?) {
+    override fun sendRefreshBroadcast(action: String?, params: String?) {
         if (action.isNullOrBlank()) {
             return
         }
         val intent = Intent(action)
-        type?.let {
-            intent.type = type
+        params?.let {
+            intent.putExtra("params", it)
         }
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
     }
