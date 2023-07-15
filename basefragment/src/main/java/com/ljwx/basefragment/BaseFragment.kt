@@ -12,13 +12,16 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.blankj.utilcode.util.Utils
 import com.ljwx.baseapp.page.IPageBroadcast
 
 open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), IPageBroadcast {
 
     open val TAG = this.javaClass.simpleName
 
-    protected lateinit var mActivity: AppCompatActivity
+    protected var mActivity: AppCompatActivity? = null
+
+    private var isLoaded = false
 
     /**
      * 结束广播
@@ -48,6 +51,14 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
         savedInstanceState: Bundle?,
     ): View? {
         return LayoutInflater.from(requireContext()).inflate(layoutResID, container, false)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!isLoaded && !isHidden) {
+            lazyInit()
+            isLoaded = true
+        }
     }
 
     override fun registerFinishBroadcast(vararg actions: String?) {
@@ -152,18 +163,32 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
 
     }
 
+    open fun lazyInit() {
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        isLoaded = false
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        mActivity = null
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         mFinishReceiver?.let {
-            LocalBroadcastManager.getInstance(mActivity).unregisterReceiver(it)
+            LocalBroadcastManager.getInstance(Utils.getApp()).unregisterReceiver(it)
         }
         mFinishReceiver = null
         mRefreshReceiver?.let {
-            LocalBroadcastManager.getInstance(mActivity).unregisterReceiver(it)
+            LocalBroadcastManager.getInstance(Utils.getApp()).unregisterReceiver(it)
         }
         mRefreshReceiver = null
         mOtherReceiver?.let {
-            LocalBroadcastManager.getInstance(mActivity).unregisterReceiver(it)
+            LocalBroadcastManager.getInstance(Utils.getApp()).unregisterReceiver(it)
         }
         mOtherReceiver = null
         mBroadcastIntentFilter = null

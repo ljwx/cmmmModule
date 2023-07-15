@@ -40,6 +40,8 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
      */
     private var mBroadcastIntentFilter: IntentFilter? = null
 
+    private var onBackPressInterceptors: (ArrayList<() -> Boolean>)? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStatusBar()
@@ -179,6 +181,18 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
 
     override fun onBroadcastOther() {
 
+    }
+
+    fun addBackPressedInterceptor(block: () -> Boolean) {
+        onBackPressInterceptors = onBackPressInterceptors ?: ArrayList()
+        onBackPressInterceptors?.add(block)
+    }
+
+    override fun onBackPressed() {
+        onBackPressInterceptors?.forEach {
+            if (it.invoke()) return
+        }
+        super.onBackPressed()
     }
 
     override fun onDestroy() {
