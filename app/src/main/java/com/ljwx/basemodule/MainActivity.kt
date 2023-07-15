@@ -3,7 +3,7 @@ package com.ljwx.basemodule
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import com.ljwx.baseactivity.fast.QuickMainActivity
-import com.ljwx.baseapp.BasePopupLoading
+import com.ljwx.baseapp.extensions.showToast
 import com.ljwx.baseapp.vm.EmptyViewModel
 import com.ljwx.basemodule.databinding.ActivityMainBinding
 import com.ljwx.basemodule.fragments.*
@@ -22,6 +22,11 @@ class MainActivity : QuickMainActivity<ActivityMainBinding, EmptyViewModel>(R.la
         addTabFragment("loadmore", LoadMoreFragment())
         addTabFragment("vmFragment", ViewModelFragment())
 //        addTabFragment("javaTest", TestJavaFragment(0))
+
+        addBackPressedInterceptor {
+            showToast("拦截")
+            true
+        }
     }
 
     override fun getScreenOrientation() = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED

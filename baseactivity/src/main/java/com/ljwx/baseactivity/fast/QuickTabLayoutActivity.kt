@@ -93,4 +93,9 @@ open abstract class QuickTabLayoutActivity<Binding : ViewDataBinding, ViewModel 
 
     abstract fun getViewPager2(): ViewPager2
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mTabFragments.clear()
+    }
+
 }

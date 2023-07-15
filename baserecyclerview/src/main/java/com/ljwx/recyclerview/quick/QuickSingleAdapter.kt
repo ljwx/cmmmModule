@@ -12,7 +12,7 @@ import com.ljwx.recyclerview.itemtype.ItemBindClick
 import com.ljwx.recyclerview.itemtype.ItemTypeBinding
 import com.ljwx.recyclerview.itemtype.ItemTypeLayout
 
-class QuickSingleAdapter<Item : Any>(
+open class QuickSingleAdapter<Item : Any>(
     itemClass: Class<Item>,
     @LayoutRes
     private val layoutResId: Int,

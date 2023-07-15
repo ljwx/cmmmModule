@@ -18,7 +18,7 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
 
 
     private val mPopupLoading by lazy {
-        BasePopupLoading(mActivity)
+        BasePopupLoading(requireContext())
     }
 
     private var mLoadingRunnable: Runnable? = null
