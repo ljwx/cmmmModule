@@ -3,6 +3,7 @@ package com.ljwx.basedialog
 import android.content.Context
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 
-abstract class BaseBindingDialogFragment<Binding : ViewDataBinding> : DialogFragment() {
+abstract class BaseBindingDialogFragment<Binding : ViewDataBinding>() : DialogFragment() {
 
     protected lateinit var mBinding: Binding
     protected lateinit var mActivity: AppCompatActivity
@@ -36,7 +38,7 @@ abstract class BaseBindingDialogFragment<Binding : ViewDataBinding> : DialogFrag
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mBinding = DataBindingUtil.inflate(inflater, caonima(), container, false)
+        mBinding = DataBindingUtil.inflate(inflater, layoutId(), container, false)
         mBinding.lifecycleOwner = this
         // 隐藏标题栏, 不加弹窗上方会一个透明的标题栏占着空间
         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -46,7 +48,7 @@ abstract class BaseBindingDialogFragment<Binding : ViewDataBinding> : DialogFrag
         return mBinding.root
     }
 
-    abstract fun caonima(): Int
+    abstract fun layoutId(): Int
 
     fun isShowing(): Boolean {
         return dialog?.isShowing == true
@@ -63,10 +65,10 @@ abstract class BaseBindingDialogFragment<Binding : ViewDataBinding> : DialogFrag
         mBinding.unbind()
     }
 
-//    open fun show(manager: FragmentManager){
-//        val tag = this.javaClass.simpleName
-//        Log.d("ljwx2", tag)
-//        show(manager, tag)
-//    }
+    open fun show(manager: FragmentManager){
+        val tag = this.javaClass.simpleName
+        Log.d("ljwx2", tag)
+        show(manager, tag)
+    }
 
 }
