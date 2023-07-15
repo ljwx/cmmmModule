@@ -67,7 +67,6 @@ abstract class BaseBindingDialogFragment<Binding : ViewDataBinding>() : DialogFr
 
     open fun show(manager: FragmentManager){
         val tag = this.javaClass.simpleName
-        Log.d("ljwx2", tag)
         show(manager, tag)
     }
 
