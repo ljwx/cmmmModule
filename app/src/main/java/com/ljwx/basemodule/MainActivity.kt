@@ -23,10 +23,6 @@ class MainActivity : QuickMainActivity<ActivityMainBinding, EmptyViewModel>(R.la
         addTabFragment("vmFragment", ViewModelFragment())
 //        addTabFragment("javaTest", TestJavaFragment(0))
 
-        addBackPressedInterceptor {
-            showToast("拦截")
-            true
-        }
     }
 
     override fun getScreenOrientation() = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
