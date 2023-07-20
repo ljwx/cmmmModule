@@ -1,6 +1,12 @@
 package com.ljwx.baseapp
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.view.LayoutInflater
+import android.view.ViewGroup.LayoutParams
+import android.view.Window
+import android.view.WindowManager
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 
@@ -17,7 +23,16 @@ class BasePopupLoading(val context: Context) {
     private var mLoadingLayout: Int? = null
 
     private val dialog by lazy {
-        AlertDialog.Builder(context).setView(mLoadingLayout ?: loadingLayout).create()
+        val view = LayoutInflater.from(context).inflate(mLoadingLayout ?: loadingLayout, null)
+        val dialog = AlertDialog.Builder(context,R.style.dialogNoBg).setView(view).create()
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        val lp = dialog.window?.attributes;
+        lp?.width = LayoutParams.WRAP_CONTENT
+        lp?.height = LayoutParams.WRAP_CONTENT
+        lp?.dimAmount = 0f
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window?.attributes = lp
+        dialog
     }
 
     fun setLayout(@LayoutRes layoutRes: Int) {

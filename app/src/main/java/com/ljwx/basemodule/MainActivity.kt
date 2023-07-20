@@ -22,6 +22,7 @@ class MainActivity : QuickMainActivity<ActivityMainBinding, EmptyViewModel>(R.la
         addTabFragment("loadmore", LoadMoreFragment())
         addTabFragment("vmFragment", ViewModelFragment())
 //        addTabFragment("javaTest", TestJavaFragment(0))
+        showPopLoading()
 
     }
 

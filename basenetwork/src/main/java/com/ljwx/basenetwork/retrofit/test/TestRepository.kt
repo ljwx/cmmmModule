@@ -22,7 +22,7 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class TestRepository : BaseDataRepository() {
+class TestRepository : BaseDataRepository<TestService>() {
 
     val mGiteeTestRetrofit by lazy {
         val client: OkHttpClient = OkHttpClient.Builder()
@@ -84,6 +84,10 @@ class TestRepository : BaseDataRepository() {
                 }
 
             })
+    }
+
+    override fun createServer(): TestService {
+       return mGiteeTestRetrofit.create(TestService::class.java)
     }
 
 }

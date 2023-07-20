@@ -5,24 +5,24 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@drawable/shape_popup_loading_background">
+    android:background="@android:color/transparent">
+
+    <!--    <ProgressBar-->
+    <!--        android:id="@+id/progress"-->
+    <!--        android:layout_width="40dp"-->
+    <!--        android:layout_height="40dp"-->
+    <!--        android:layout_margin="12dp"-->
+    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--        app:layout_constraintRight_toRightOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_margin="12dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="100dp"
-            android:background="@drawable/data_loading_bg"
-            android:indeterminateDrawable="@anim/data_loading_anima"
-            android:padding="20dp" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/shape_base_app_loading_background"
+        android:indeterminateDrawable="@anim/base_app_loading"
+        android:padding="20dp" />
 
 </FrameLayout>

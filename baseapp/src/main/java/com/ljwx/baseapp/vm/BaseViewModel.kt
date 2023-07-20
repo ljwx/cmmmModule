@@ -5,7 +5,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-abstract class BaseViewModel<R : BaseDataRepository> : ViewModel(), DefaultLifecycleObserver {
+abstract class BaseViewModel<R : BaseDataRepository<*>> : ViewModel(), DefaultLifecycleObserver {
 
     protected var mRepository: R
 

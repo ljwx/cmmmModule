@@ -1,6 +1,7 @@
 package com.ljwx.basemodule.mvvm.data
 
 import com.ljwx.baseapp.vm.BaseDataRepository
+import com.ljwx.baseapp.vm.EmptyServer
 import com.ljwx.basemodule.mvvm.data.model.LoggedInUser
 
 /**
@@ -8,7 +9,7 @@ import com.ljwx.basemodule.mvvm.data.model.LoggedInUser
  * maintains an in-memory cache of login status and user credentials information.
  */
 
-class LoginRepository() : BaseDataRepository() {
+class LoginRepository() : BaseDataRepository<EmptyServer>() {
 
     val dataSource: LoginDataSource = LoginDataSource()
 
@@ -45,5 +46,9 @@ class LoginRepository() : BaseDataRepository() {
         this.user = loggedInUser
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
+    }
+
+    override fun createServer(): EmptyServer {
+        return object :EmptyServer{}
     }
 }
