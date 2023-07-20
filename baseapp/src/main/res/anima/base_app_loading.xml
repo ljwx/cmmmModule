@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@mipmap/common_loading_icon"
+    android:fromDegrees="0"
+    android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+    android:pivotX="50%"
+    android:duration="2400"
+    android:repeatCount="-1"
+    android:pivotY="50%"
+    android:toDegrees="1140" />
+
+<!-- 
+<?xml version="1.0" encoding="utf-8"?>
+ <rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromDegrees="0"            #初始角度
+    android:toDegrees="1440"           #结束时角度，值为正时顺时针旋转，值为负时逆时针旋转
+    android:pivotX="50%"               #旋转中心x轴坐标，取值可以是数值（50）、百分数（50%）、百
+                                        分数p（50%p），当取值为数值时，缩放起点为View左上角坐标
+                                        加具体数值像素，当取值为百分数时，表示在当前View左上角坐
+                                        加上View宽度的具体百分比，当取值为百分数p时，表示在View
+                                        左上角坐标加上父控件宽度的具体百分比
+    android:pivotY="50%"               #同上
+ 
+    android:duration="700"             #动画持续时间，毫秒为单位
+    android:fillAfter="true"           #动画结束后，保持结束时的状态
+    android:fillBefore="true"          #动画结束后，恢复为初始状态
+    android:fillEnabled="true"         #效果同上
+    android:repeatCount="5"            #重复次数,取值为-1时无限重复，默认动画执行一次
+    android:repeatMode ="reverse"      #重复模式，有reverse和restart两个值，前者为倒序回放，后者为重新开始
+    android:interpolator="@android:anim/accelerate_decelerate_interpolator" #插值器            
+    />
+
+ -->
