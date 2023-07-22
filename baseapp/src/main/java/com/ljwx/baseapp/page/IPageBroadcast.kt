@@ -20,5 +20,5 @@ interface IPageBroadcast {
 
     fun onBroadcastPageRefresh(type: String?)
 
-    fun onBroadcastOther()
+    fun onBroadcastOther(action: String?)
 }

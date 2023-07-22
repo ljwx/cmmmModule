@@ -26,12 +26,6 @@ class BasePopupLoading(val context: Context) {
         val view = LayoutInflater.from(context).inflate(mLoadingLayout ?: loadingLayout, null)
         val dialog = AlertDialog.Builder(context,R.style.dialogNoBg).setView(view).create()
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        val lp = dialog.window?.attributes;
-        lp?.width = LayoutParams.WRAP_CONTENT
-        lp?.height = LayoutParams.WRAP_CONTENT
-        lp?.dimAmount = 0f
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.window?.attributes = lp
         dialog
     }
 
@@ -56,6 +50,12 @@ class BasePopupLoading(val context: Context) {
         canceledOnTouchOutside: Boolean = false,
     ) {
         dialog.show()
+        val lp = dialog.window?.attributes;
+        lp?.width = 300
+        lp?.height = 300
+        lp?.dimAmount = 0f
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window?.attributes = lp
     }
 
 

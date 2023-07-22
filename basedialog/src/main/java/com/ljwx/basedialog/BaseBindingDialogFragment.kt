@@ -3,7 +3,6 @@ package com.ljwx.basedialog
 import android.content.Context
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,9 +64,16 @@ abstract class BaseBindingDialogFragment<Binding : ViewDataBinding>() : DialogFr
         mBinding.unbind()
     }
 
-    open fun show(manager: FragmentManager){
+    open fun show(manager: FragmentManager) {
         val tag = this.javaClass.simpleName
         show(manager, tag)
+    }
+
+    override fun show(manager: FragmentManager, tag: String?) {
+//        super.show(manager, tag)
+        val ft = manager.beginTransaction()
+        ft.add(this, tag)
+        ft.commitAllowingStateLoss()
     }
 
 }

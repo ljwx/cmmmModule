@@ -98,7 +98,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
         mOtherReceiver = mOtherReceiver ?: (object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
                 if (mBroadcastIntentFilter?.matchAction(intent.action) == true) {
-                    onBroadcastOther()
+                    onBroadcastOther(intent.action)
                 }
             }
         })
@@ -159,7 +159,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
 
     }
 
-    override fun onBroadcastOther() {
+    override fun onBroadcastOther(action: String?) {
 
     }
 

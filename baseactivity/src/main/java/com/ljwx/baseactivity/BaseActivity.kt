@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ActivityInfo
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -22,6 +23,8 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     private val mStatusBar by lazy {
         ImmersionBar.with(this)
     }
+
+    private var mStateSaved = false
 
     /**
      * 结束广播
@@ -87,6 +90,27 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         supportActionBar?.title = title
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB
+        mStateSaved = true;
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mStateSaved = false
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mStateSaved = true
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mStateSaved = false
+    }
+
     override fun registerFinishBroadcast(vararg actions: String?) {
         mBroadcastIntentFilter = mBroadcastIntentFilter ?: IntentFilter()
         actions.forEach {
@@ -120,11 +144,12 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     }
 
     override fun registerOtherBroadcast(action: String) {
-        mBroadcastIntentFilter = mBroadcastIntentFilter ?: IntentFilter(action)
+        mBroadcastIntentFilter = mBroadcastIntentFilter ?: IntentFilter()
+        mBroadcastIntentFilter?.addAction(action)
         mOtherReceiver = mOtherReceiver ?: (object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
                 if (mBroadcastIntentFilter?.matchAction(intent.action) == true) {
-                    onBroadcastOther()
+                    onBroadcastOther(intent.action)
                 }
             }
         })
@@ -179,7 +204,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
 
     }
 
-    override fun onBroadcastOther() {
+    override fun onBroadcastOther(action: String?) {
 
     }
 
