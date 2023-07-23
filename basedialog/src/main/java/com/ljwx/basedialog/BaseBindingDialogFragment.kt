@@ -15,6 +15,14 @@ import androidx.fragment.app.FragmentManager
 
 abstract class BaseBindingDialogFragment<Binding : ViewDataBinding>() : DialogFragment() {
 
+    companion object{
+        private fun setFieldValue(obj: Any, fieldName: String, fieldValue: Any) {
+            val field = DialogFragment::class.java.getDeclaredField(fieldName)
+            field.isAccessible = true
+            field[obj] = fieldValue
+        }
+    }
+
     protected lateinit var mBinding: Binding
     protected lateinit var mActivity: AppCompatActivity
 
@@ -70,10 +78,15 @@ abstract class BaseBindingDialogFragment<Binding : ViewDataBinding>() : DialogFr
     }
 
     override fun show(manager: FragmentManager, tag: String?) {
-//        super.show(manager, tag)
-        val ft = manager.beginTransaction()
-        ft.add(this, tag)
-        ft.commitAllowingStateLoss()
+        if (manager.isStateSaved) {
+            setFieldValue(this, "mDismissed", false)
+            setFieldValue(this, "mShownByMe", true)
+            val ft = manager.beginTransaction()
+            ft.add(this, tag)
+            ft.commitAllowingStateLoss()
+        } else {
+            super.show(manager, tag)
+        }
     }
 
 }
