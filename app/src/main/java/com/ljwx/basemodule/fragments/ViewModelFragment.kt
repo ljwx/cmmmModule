@@ -41,6 +41,10 @@ class ViewModelFragment :
             }
         }
 
+        mViewModel.test.observe(viewLifecycleOwner){
+            Log.d("ljwx2", it)
+        }
+
     }
 
 }

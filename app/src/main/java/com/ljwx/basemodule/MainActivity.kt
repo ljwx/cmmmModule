@@ -7,6 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import com.ljwx.baseactivity.fast.QuickMainActivity
 import com.ljwx.baseapp.extensions.showToast
 import com.ljwx.baseapp.vm.EmptyViewModel
+import com.ljwx.baseeventbus.SimpleFlowEventBus
 import com.ljwx.basemodule.databinding.ActivityMainBinding
 import com.ljwx.basemodule.fragments.*
 import kotlinx.coroutines.Dispatchers
@@ -35,17 +36,8 @@ class MainActivity :
 
         registerOtherBroadcast("test")
 
-        Thread{
-            Thread.sleep(7000)
-            Log.d("ljwx2", "显示dialog")
-            runOnUiThread {
-                dialog.show(supportFragmentManager)
-            }
-        }.start()
-
-        lifecycleScope.launch(Dispatchers.IO) {
-            delay(7000)
-
+        SimpleFlowEventBus.observe(this,"ljwx2"){
+            Log.d("ljwx2", it)
         }
 
     }
@@ -54,5 +46,7 @@ class MainActivity :
         super.onBroadcastOther(action)
         Log.d("ljwx2", "收到广播")
     }
+
+    override fun getScreenOrientation() = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
 
 }

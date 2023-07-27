@@ -3,6 +3,7 @@ package com.ljwx.basemodule.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import com.ljwx.baseeventbus.SimpleFlowEventBus
 import com.ljwx.basefragment.BaseBindingFragment
 import com.ljwx.basemodule.R
 import com.ljwx.basemodule.SecondActivity
@@ -16,7 +17,8 @@ class BaseFragmentTest :
 
         mBinding.button.setOnClickListener {
 //            dialog.show(childFragmentManager)
-            startActivity(Intent(requireContext(), SecondActivity::class.java))
+//            startActivity(Intent(requireContext(), SecondActivity::class.java))
+            SimpleFlowEventBus.post("ljwx2","caonima")
         }
 
     }
