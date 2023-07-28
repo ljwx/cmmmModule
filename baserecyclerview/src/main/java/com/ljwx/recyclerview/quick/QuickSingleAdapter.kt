@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.AsyncDifferConfig
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.ljwx.recyclerview.BR
 import com.ljwx.recyclerview.diff.ItemDiffCallback
@@ -17,8 +18,9 @@ open class QuickSingleAdapter<Item : Any>(
     @LayoutRes
     private val layoutResId: Int,
     brId: Int = BR.item,
+    diff: DiffUtil.ItemCallback<Item> = ItemDiffCallback(),
     itemClick: ((ItemHolder, Item) -> Unit)? = null,
-) : ListAdapter<Item, ItemHolder>(AsyncDifferConfig.Builder<Item>(ItemDiffCallback()).build()),
+) : ListAdapter<Item, ItemHolder>(AsyncDifferConfig.Builder(diff).build()),
     ItemBindClick<Item> {
 
     private val TAG = "rv-" + this.javaClass.simpleName

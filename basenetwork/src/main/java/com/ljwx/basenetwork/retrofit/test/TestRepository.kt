@@ -66,28 +66,15 @@ class TestRepository : BaseDataRepository<TestService>() {
     fun requestTest2() {
         mGiteeTestRetrofit.create(TestService::class.java).search2("7")
             .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<String> {
-                override fun onSubscribe(d: Disposable) {
+            .subscribe(object : QuickObserver3<String>() {
+                override fun onResponseSuccess(value: String) {
 
                 }
-
-                override fun onError(e: Throwable) {
-                    Log.d("ljwx2", "错误:" + e.message)
-                }
-
-                override fun onComplete() {
-                    Log.d("ljwx2", "完成")
-                }
-
-                override fun onNext(t: String) {
-                    Log.d("ljwx2", "请求成功:" + t)
-                }
-
             })
     }
 
     override fun createServer(): TestService {
-       return mGiteeTestRetrofit.create(TestService::class.java)
+        return mGiteeTestRetrofit.create(TestService::class.java)
     }
 
 }

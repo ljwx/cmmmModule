@@ -5,7 +5,9 @@ import com.kunminx.architecture.ui.callback.UnPeekLiveData
 class WrapEventBus {
 
     fun test(){
-//        UnPeekLiveData.
+        val a = UnPeekLiveData<String>()
+
+        FlowEventBus.post("")
     }
 
 }
