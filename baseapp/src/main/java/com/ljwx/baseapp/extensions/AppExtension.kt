@@ -13,6 +13,3 @@ val isMainThread: Boolean
         return Looper.getMainLooper() == Looper.myLooper()
     }
 
-fun Any.getString(@StringRes id: Int): String {
-    return StringUtils.getString(id)
-}

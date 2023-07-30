@@ -1,4 +1,4 @@
-package com.ljwx.baseapp;
+package com.ljwx.baseapp.util;
 
 import android.util.Log;
 
