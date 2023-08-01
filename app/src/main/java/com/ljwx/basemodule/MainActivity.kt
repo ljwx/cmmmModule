@@ -16,12 +16,17 @@ import com.ljwx.baseeventbus.SimpleFlowEventBus
 import com.ljwx.baseeventbus.flow.FlowEventBus
 import com.ljwx.basemodule.databinding.ActivityMainBinding
 import com.ljwx.basemodule.fragments.*
+import com.ljwx.basemodule.vm.TestViewModel
+import com.ljwx.baseswitchenv.AppConfigItem
+import com.ljwx.baseswitchenv.AppEnvConfig
+import com.ljwx.baseswitchenv.ShakeSelectAppEnv
+import com.ljwx.baseswitchenv.registerShakeEnv
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MainActivity :
-    QuickMainActivity<ActivityMainBinding, EmptyViewModel>(R.layout.activity_main) {
+    QuickMainActivity<ActivityMainBinding, TestViewModel>(R.layout.activity_main) {
 
     private val dialog by lazy {
         TestDialog()
@@ -50,6 +55,14 @@ class MainActivity :
             Log.d("ljwx2", it)
             mBinding.tabLayout.visibleGone(false)
         }
+
+        AppEnvConfig.addEnv(AppConfigItem("测试", "www.baidu.com"))
+
+        registerShakeEnv(BuildConfig.DEBUG, object :ShakeSelectAppEnv.EnvCallback{
+            override fun selected(item: AppConfigItem) {
+                Log.d("ljwx2", item.host)
+            }
+        })
 
     }
 

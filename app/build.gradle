@@ -75,6 +75,7 @@ dependencies {
     implementation project(path: ':baserefresh')
     implementation project(path: ':basedialog')
     implementation project(path: ':baseeventbus')
+    implementation project(path: ':baseswitchenv')
 
     implementation 'io.github.ljwx:SplitTextView:0.3.8'
 }
