@@ -3,7 +3,10 @@ package com.ljwx.baseeventbus.flow
 import android.util.Log
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
@@ -51,6 +54,14 @@ object FlowEventBus {
             }
         }
 
+        fun observeForever(action: (t: T) -> Unit){
+            GlobalScope.launch {
+                _events.collect{
+                    action(it)
+                }
+            }
+        }
+
         fun post(owner: LifecycleOwner, event: T) {
             owner.lifecycleScope.launch {
                 _events.emit(event)
@@ -73,5 +84,6 @@ object FlowEventBus {
             MutableSharedFlow(1, 1, BufferOverflow.DROP_OLDEST)
         }
     }
+
 
 }

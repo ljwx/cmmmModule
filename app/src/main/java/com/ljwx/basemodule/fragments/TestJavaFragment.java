@@ -7,8 +7,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.ljwx.basefragment.BaseBindingFragment;
+import com.ljwx.basemodule.BuildConfig;
 import com.ljwx.basemodule.R;
 import com.ljwx.basemodule.databinding.FragmentJavaTestBinding;
+import com.ljwx.baseswitchenv.ActivityEnvExtensionKt;
+import com.ljwx.baseswitchenv.AppConfigItem;
+import com.ljwx.baseswitchenv.ShakeSelectAppEnv;
 
 public class TestJavaFragment extends BaseBindingFragment<FragmentJavaTestBinding> {
 
@@ -36,6 +40,13 @@ public class TestJavaFragment extends BaseBindingFragment<FragmentJavaTestBindin
                 });
             }
         }).start();
+
+        ActivityEnvExtensionKt.registerShakeEnv(requireActivity(), BuildConfig.DEBUG, new ShakeSelectAppEnv.EnvCallback() {
+            @Override
+            public void selected(@NonNull AppConfigItem item) {
+
+            }
+        });
 
     }
 

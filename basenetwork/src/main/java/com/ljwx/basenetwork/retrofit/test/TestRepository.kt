@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.blankj.utilcode.util.ActivityUtils
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.gson.GsonBuilder
+import com.ljwx.baseapp.extensions.lifecycle
 import com.ljwx.baseapp.response.DataResult
 import com.ljwx.baseapp.response.ResponseException
 import com.ljwx.baseapp.vm.BaseDataRepository
@@ -66,6 +67,7 @@ class TestRepository : BaseDataRepository<TestService>() {
     fun requestTest2() {
         mGiteeTestRetrofit.create(TestService::class.java).search2("7")
             .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+            .lifecycle()
             .subscribe(object : QuickObserver3<String>() {
                 override fun onResponseSuccess(value: String) {
 
