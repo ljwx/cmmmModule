@@ -45,7 +45,7 @@ class MainActivity :
         addTabFragment("vmFragment", ViewModelFragment())
 //        addTabFragment("javaTest", TestJavaFragment(0))
 
-        registerOtherBroadcast("test")
+        registerFinishBroadcast("test")
 
         Log.d("ljwx2", TAG_CLASS + "onCreate")
         FlowEventBus.get<String>("flow").observe(this) {
@@ -64,6 +64,11 @@ class MainActivity :
             }
         })
 
+    }
+
+    override fun onBroadcastPageFinish() {
+        Log.d("ljwx2", "接收到结束广播")
+//        super.onBroadcastPageFinish()
     }
 
     override fun onBroadcastOther(action: String?) {

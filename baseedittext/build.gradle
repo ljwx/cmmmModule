@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace 'com.ljwx.baseswitchenv'
+    namespace 'com.ljwx.baseedittext'
     compileSdk 33
 
     defaultConfig {
@@ -44,7 +44,6 @@ dependencies {
 afterEvaluate {
     publishing {
         publications {
-            // Creates a Maven publication called "release".
             release(MavenPublication) {
                 from components.release
             }

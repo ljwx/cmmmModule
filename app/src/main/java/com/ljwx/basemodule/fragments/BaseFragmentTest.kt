@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.blankj.utilcode.util.TimeUtils
+import com.ljwx.baseedittext.filter.*
 import com.ljwx.baseeventbus.SimpleFlowEventBus
 import com.ljwx.basefragment.BaseBindingFragment
 import com.ljwx.basemodule.R
@@ -21,15 +22,16 @@ class BaseFragmentTest :
         val interval = IntervalHandle()
         mBinding.button.setOnClickListener {
 //            dialog.show(childFragmentManager)
-//            startActivity(Intent(requireContext(), SecondActivity::class.java))
-//            SimpleFlowEventBus.post("ljwx2","caonima")
-            interval.start()
+            startActivity(Intent(requireContext(), SecondActivity::class.java))
+            SimpleFlowEventBus.post("ljwx2","caonima")
+//            interval.start()
         }
         interval.setObserver(object : IntervalHandle.OnTickAble {
             override fun onTick(mills: Long) {
                 Log.d("ljwx2", TimeUtils.millis2String(mills))
             }
         })
+        mBinding.et.filters = arrayOf(NoSpecialInputFilter())
 
     }
 

@@ -3,13 +3,13 @@ package com.sisensing.common.utils
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.TimeUtils
+import com.ljwx.basemodule.BuildConfig
+import com.ljwx.basemodule.R
 import com.ljwx.recyclerview.quick.QuickSingleAdapter
-import com.sisensing.common.BuildConfig
-import com.sisensing.common.R
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.text.SimpleDateFormat
 import java.util.Vector
 import java.util.concurrent.TimeUnit
@@ -44,16 +44,16 @@ object LogCacheUtils {
             return
         }
         if (map.get(recyclerView) == null) {
-            val adapter = QuickSingleAdapter(String::class.java, R.layout.item_simple_log)
-            recyclerView.setAdapter(adapter)
-            map.put(recyclerView,
-                Observable.interval(500, 1500, TimeUnit.MILLISECONDS).subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe { aLong: Long? ->
-                        val list = Vector<String>()
-                        list.addAll(getList(tag))
-                        adapter.submitList(list)
-                    })
+//            val adapter = QuickSingleAdapter(String::class.java, R.layout.item_simple_log)
+//            recyclerView.setAdapter(adapter)
+//            map.put(recyclerView,
+//                Observable.interval(500, 1500, TimeUnit.MILLISECONDS).subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe { aLong: Long? ->
+//                        val list = Vector<String>()
+//                        list.addAll(getList(tag))
+//                        adapter.submitList(list)
+//                    })
         }
         controlView.setOnLongClickListener { v ->
             if (recyclerView.visibility === View.VISIBLE) {

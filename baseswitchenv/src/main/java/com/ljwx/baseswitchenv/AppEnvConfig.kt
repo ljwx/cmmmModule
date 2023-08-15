@@ -26,7 +26,7 @@ object AppEnvConfig {
 
 }
 
-open class AppConfigItem(
+open class AppConfigItem @JvmOverloads constructor(
     val title: String = "",
     val host: String = "",
     val key: String = "",

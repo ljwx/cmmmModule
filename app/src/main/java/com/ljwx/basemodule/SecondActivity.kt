@@ -23,6 +23,9 @@ class SecondActivity :
             LiveEventBus.get<String>("liveeventbus").post("liveEvent")
             MemoryUtils.requestMemory()
         }
+        mBinding.send.singleClick {
+            sendFinishBroadcast("test")
+        }
 
     }
 
