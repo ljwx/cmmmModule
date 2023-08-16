@@ -5,7 +5,6 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.ljwx.basemediaselect.R
 import com.luck.picture.lib.engine.ImageEngine
 import com.luck.picture.lib.utils.ActivityCompatHelper
 
@@ -61,7 +60,7 @@ class PictureSelectorEngine : ImageEngine {
             .override(180, 180)
             .sizeMultiplier(0.5f)
             .transform(CenterCrop(), RoundedCorners(8))
-            .placeholder(R.drawable.ps_image_placeholder)
+            .placeholder(com.luck.picture.lib.R.drawable.ps_image_placeholder)
             .into(imageView)
     }
 
@@ -80,7 +79,7 @@ class PictureSelectorEngine : ImageEngine {
             .load(url)
             .override(200, 200)
             .centerCrop()
-            .placeholder(R.drawable.ps_image_placeholder)
+            .placeholder(com.luck.picture.lib.R.drawable.ps_image_placeholder)
             .into(imageView);
     }
 

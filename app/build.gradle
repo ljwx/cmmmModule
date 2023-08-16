@@ -77,6 +77,10 @@ dependencies {
     implementation project(path: ':baseeventbus')
     implementation project(path: ':baseswitchenv')
     implementation project(path: ':baseedittext')
+    implementation project(path: ':basemediaselector')
+    implementation project(path: ':baseview')
+    implementation project(path: ':baseleakcanary')
+    implementation project(path: ':basestate')
 
     implementation 'io.github.ljwx:SplitTextView:0.3.8'
 }
