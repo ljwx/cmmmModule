@@ -1,11 +1,11 @@
 package com.ljwx.baseleakcanary
 
-import leakcanary.AppWatcher
+//import leakcanary.AppWatcher
 
 object LeakCanaryUtils {
 
-    fun watch(watchObject: Any) {
-        AppWatcher.objectWatcher.expectWeaklyReachable(watchObject, "ljwx2")
-    }
+//    fun watch(watchObject: Any) {
+//        AppWatcher.objectWatcher.expectWeaklyReachable(watchObject, "ljwx2")
+//    }
 
 }
