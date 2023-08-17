@@ -81,6 +81,7 @@ dependencies {
     implementation project(path: ':baseview')
     implementation project(path: ':baseleakcanary')
     implementation project(path: ':basestate')
+    implementation project(path: ':basenotification')
 
     implementation 'io.github.ljwx:SplitTextView:0.3.8'
 }

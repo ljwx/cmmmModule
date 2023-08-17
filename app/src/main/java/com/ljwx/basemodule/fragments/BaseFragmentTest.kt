@@ -11,6 +11,7 @@ import com.ljwx.basefragment.BaseBindingFragment
 import com.ljwx.basemodule.R
 import com.ljwx.basemodule.SecondActivity
 import com.ljwx.basemodule.databinding.FragmentBaseFragmentBinding
+import com.ljwx.basenotification.NotificationUtils
 import com.ljwx.basescaffold.IntervalHandle
 
 class BaseFragmentTest :
@@ -22,16 +23,12 @@ class BaseFragmentTest :
         val interval = IntervalHandle()
         mBinding.button.setOnClickListener {
 //            dialog.show(childFragmentManager)
-            startActivity(Intent(requireContext(), SecondActivity::class.java))
-            SimpleFlowEventBus.post("ljwx2","caonima")
+//            startActivity(Intent(requireContext(), SecondActivity::class.java))
+//            SimpleFlowEventBus.post("ljwx2","caonima")
 //            interval.start()
+              NotificationUtils.sendFcmNotification("12345678","ljwx", "test")
+
         }
-        interval.setObserver(object : IntervalHandle.OnTickAble {
-            override fun onTick(mills: Long) {
-                Log.d("ljwx2", TimeUtils.millis2String(mills))
-            }
-        })
-        mBinding.et.filters = arrayOf(NoSpecialInputFilter())
 
     }
 
