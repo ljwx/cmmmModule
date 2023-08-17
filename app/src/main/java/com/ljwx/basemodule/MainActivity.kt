@@ -3,27 +3,19 @@ package com.ljwx.basemodule
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.lifecycleScope
+import com.blankj.utilcode.util.AppUtils
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.ljwx.baseactivity.fast.QuickMainActivity
 import com.ljwx.baseapp.extensions.TAG_CLASS
-import com.ljwx.baseapp.extensions.getString
-import com.ljwx.baseapp.extensions.showToast
 import com.ljwx.baseapp.extensions.visibleGone
-import com.ljwx.baseapp.vm.EmptyViewModel
-import com.ljwx.baseeventbus.SimpleFlowEventBus
 import com.ljwx.baseeventbus.flow.FlowEventBus
 import com.ljwx.basemodule.databinding.ActivityMainBinding
 import com.ljwx.basemodule.fragments.*
 import com.ljwx.basemodule.vm.TestViewModel
-import com.ljwx.baseswitchenv.AppConfigItem
+import com.ljwx.baseswitchenv.AppEnvItem
 import com.ljwx.baseswitchenv.AppEnvConfig
 import com.ljwx.baseswitchenv.ShakeSelectAppEnv
 import com.ljwx.baseswitchenv.registerShakeEnv
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class MainActivity :
     QuickMainActivity<ActivityMainBinding, TestViewModel>(R.layout.activity_main) {
@@ -56,10 +48,12 @@ class MainActivity :
             mBinding.tabLayout.visibleGone(false)
         }
 
-        AppEnvConfig.addEnv(AppConfigItem("测试", "www.baidu.com"))
+        AppEnvConfig.addEnv(AppEnvItem("测试", "www.baidu.com"))
 
-        registerShakeEnv(BuildConfig.DEBUG, object :ShakeSelectAppEnv.EnvCallback{
-            override fun selected(item: AppConfigItem) {
+        AppUtils.isAppDebug()
+
+        registerShakeEnv(object :ShakeSelectAppEnv.EnvCallback{
+            override fun selected(item: AppEnvItem) {
                 Log.d("ljwx2", item.host)
             }
         })

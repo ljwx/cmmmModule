@@ -2,17 +2,17 @@ package com.ljwx.baseswitchenv
 
 object AppEnvConfig {
 
-    private var envList = mutableListOf<AppConfigItem>()
+    private var envList = mutableListOf<AppEnvItem>()
 
-    fun addEnv(item: AppConfigItem) {
+    fun addEnv(item: AppEnvItem) {
         envList.add(item)
     }
 
-    fun addAllEnv(items: List<AppConfigItem>) {
+    fun addAllEnv(items: List<AppEnvItem>) {
         envList.addAll(items)
     }
 
-    fun getEnvList(): List<AppConfigItem> {
+    fun getEnvList(): List<AppEnvItem> {
         return envList
     }
 
@@ -26,7 +26,7 @@ object AppEnvConfig {
 
 }
 
-open class AppConfigItem @JvmOverloads constructor(
+open class AppEnvItem @JvmOverloads constructor(
     val title: String = "",
     val host: String = "",
     val key: String = "",

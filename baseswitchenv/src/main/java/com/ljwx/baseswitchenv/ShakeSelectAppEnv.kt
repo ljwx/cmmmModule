@@ -14,7 +14,7 @@ import kotlin.math.abs
 
 class ShakeSelectAppEnv(
     private val activity: Activity,
-    private val selected: (item: AppConfigItem) -> Unit,
+    private val selected: (item: AppEnvItem) -> Unit,
 ) : SensorEventListener, DefaultLifecycleObserver {
 
     //传感器
@@ -89,7 +89,7 @@ class ShakeSelectAppEnv(
     }
 
     interface EnvCallback {
-        fun selected(item: AppConfigItem)
+        fun selected(item: AppEnvItem)
     }
 
 }
