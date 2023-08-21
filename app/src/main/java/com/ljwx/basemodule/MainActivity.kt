@@ -12,10 +12,7 @@ import com.ljwx.baseeventbus.flow.FlowEventBus
 import com.ljwx.basemodule.databinding.ActivityMainBinding
 import com.ljwx.basemodule.fragments.*
 import com.ljwx.basemodule.vm.TestViewModel
-import com.ljwx.baseswitchenv.AppEnvItem
-import com.ljwx.baseswitchenv.AppEnvConfig
-import com.ljwx.baseswitchenv.ShakeSelectAppEnv
-import com.ljwx.baseswitchenv.registerShakeEnv
+import com.ljwx.baseswitchenv.*
 
 class MainActivity :
     QuickMainActivity<ActivityMainBinding, TestViewModel>(R.layout.activity_main) {

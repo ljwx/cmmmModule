@@ -3,7 +3,7 @@ package com.ljwx.baseedittext.filter
 import android.text.InputFilter
 import android.text.Spanned
 
-class LimitDecimalInputFilter(private val digits: Int = 2) : InputFilter {
+open class LimitDecimalInputFilter(private val digits: Int = 2) : InputFilter {
 
     override fun filter(
         source: CharSequence,
@@ -18,6 +18,11 @@ class LimitDecimalInputFilter(private val digits: Int = 2) : InputFilter {
             if (dest.isEmpty() && source == ".") {
                 return "0."
             }
+            //直接输入0
+            if (dest.isEmpty() && source == "0") {
+                return "0."
+            }
+            //已经输入小数点
             if (dest.contains(".")) {
                 val pointIndex = dest.indexOf(".")
                 //在小数点之前输入数字
@@ -30,11 +35,11 @@ class LimitDecimalInputFilter(private val digits: Int = 2) : InputFilter {
                 }
             } else {
                 //在前面输入. 暂时不让输
-                if (source.contains(".")) {
-                    if (dest.length - digits > dend) {
-                        return ""
-                    }
-                }
+//                if (source.contains(".")) {
+//                    if (dest.length - digits > dend) {
+//                        return ""
+//                    }
+//                }
             }
         }
         return null

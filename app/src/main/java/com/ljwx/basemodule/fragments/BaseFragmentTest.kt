@@ -1,15 +1,11 @@
 package com.ljwx.basemodule.fragments
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import com.blankj.utilcode.util.TimeUtils
 import com.ljwx.baseedittext.filter.*
-import com.ljwx.baseeventbus.SimpleFlowEventBus
+import com.ljwx.baseedittext.watcher.LimitDecimalTextWatcher
 import com.ljwx.basefragment.BaseBindingFragment
 import com.ljwx.basemodule.R
-import com.ljwx.basemodule.SecondActivity
 import com.ljwx.basemodule.databinding.FragmentBaseFragmentBinding
 import com.ljwx.basenotification.NotificationUtils
 import com.ljwx.basescaffold.IntervalHandle
@@ -29,6 +25,9 @@ class BaseFragmentTest :
               NotificationUtils.sendFcmNotification("12345678","ljwx", "test")
 
         }
+
+        mBinding.et.filters = arrayOf(LimitDecimalInputFilter())
+        mBinding.et.addTextChangedListener(LimitDecimalTextWatcher())
 
     }
 
