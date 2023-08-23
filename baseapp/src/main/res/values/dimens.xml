@@ -9,4 +9,8 @@
     <dimen name="dp12">12dp</dimen>
     <dimen name="dp14">14dp</dimen>
     <dimen name="dp16">16dp</dimen>
+    <dimen name="dp18">16dp</dimen>
+    <dimen name="dp20">16dp</dimen>
+    <dimen name="dp24">16dp</dimen>
+    <dimen name="dp30">16dp</dimen>
 </resources>

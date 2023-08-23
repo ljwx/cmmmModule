@@ -6,6 +6,6 @@ import com.blankj.utilcode.util.StringUtils
 inline val Any.TAG_CLASS: String
     get() = this.javaClass.simpleName
 
-fun Any.getString(@StringRes id: Int): String {
+fun Any.getStringRes(@StringRes id: Int): String {
     return StringUtils.getString(id)
 }
