@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.ljwx.baseapp.extensions.getStringRes
+import com.ljwx.baseapp.extensions.singleClick
+import com.ljwx.baseapp.extensions.visibleGone
 import com.ljwx.basedialog.quick.IBaseDialogBuilder
 
 open class BaseDialogFragment() : DialogFragment() {
@@ -54,32 +56,7 @@ open class BaseDialogFragment() : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        builder?.apply {
-            title?.let {
-                view.findViewById<TextView>(R.id.base_dialog_title)?.text = it
-            }
-            content?.let {
-                view.findViewById<TextView>(R.id.base_dialog_content_string)?.text = it
-            }
-            positive?.let {
-                view.findViewById<TextView>(R.id.base_dialog_positive)?.apply {
-                    text = it
-                    positiveListener?.let {
-                        setOnClickListener(it)
-                    }
-                }
-            }
-            negative?.let {
-                view.findViewById<TextView>(R.id.base_dialog_negative)?.apply {
-                    text = it
-                    negativeListener?.let {
-                        setOnClickListener(it)
-                    }
-                }
-            }
-        }
-
+        setDataFromBuilder(view)
     }
 
     protected fun initWidth() {
@@ -88,6 +65,70 @@ open class BaseDialogFragment() : DialogFragment() {
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
         dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
         //getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+    }
+
+    private fun setDataFromBuilder(view: View) {
+        builder?.apply {
+            showClose?.let {
+                view.findViewById<View>(R.id.base_dialog_close)?.apply {
+                    singleClick {
+                        dismiss()
+                    }
+                    visibleGone(it)
+                }
+            }
+            title?.let {
+                view.findViewById<TextView>(R.id.base_dialog_title)?.text = it
+            }
+            content?.let {
+                view.findViewById<TextView>(R.id.base_dialog_content_string)?.text = it
+            }
+            val positiveView = view.findViewById<TextView>(R.id.base_dialog_positive)
+            if (showPositive) {
+                if (positive.isNullOrBlank()) {
+                    positiveView?.singleClick {
+                        dismiss()
+                    }
+                } else {
+                    positiveView?.apply {
+                        text = positive
+                        if (positiveListener == null) {
+                            singleClick {
+                                dismiss()
+                            }
+                        } else {
+                            setOnClickListener(positiveListener)
+                        }
+                    }
+                }
+                positiveView?.visibleGone(true)
+            } else {
+                positiveView?.visibleGone(false)
+            }
+
+            val negativeView = view.findViewById<TextView>(R.id.base_dialog_negative)
+            if (showNegative) {
+                if (negative.isNullOrBlank()) {
+                    negativeView?.singleClick {
+                        dismiss()
+                    }
+                } else {
+                    negativeView?.apply {
+                        text = positive
+                        if (negativeListener == null) {
+                            singleClick {
+                                dismiss()
+                            }
+                        } else {
+                            setOnClickListener(negativeListener)
+                        }
+                    }
+                }
+                negativeView?.visibleGone(true)
+            } else {
+                negativeView?.visibleGone(false)
+            }
+        }
     }
 
     private fun setBuilder(builder: Builder): BaseDialogFragment {
@@ -125,22 +166,33 @@ open class BaseDialogFragment() : DialogFragment() {
 
     class Builder : IBaseDialogBuilder {
 
+        var showClose: Boolean? = null
+            private set
         var title: String? = null
-            get() = title
+            private set
         var content: String? = null
-            get() = content
+            private set
         var contentId: Int? = null
-            get() = contentId
+            private set
         var positive: String? = null
-            get() = positive
+            private set
         var positiveListener: View.OnClickListener? = null
-            get() = positiveListener
+            private set
+        var showPositive = true
+            private set
         var negative: String? = null
-            get() = negative
+            private set
         var negativeListener: View.OnClickListener? = null
-            get() = negativeListener
+            private set
+        var showNegative = true
+            private set
         var tag: String? = null
         var dialog: BaseDialogFragment? = null
+        override fun setClose(show: Boolean): IBaseDialogBuilder {
+            showClose = show
+            return this
+        }
+
 
         override fun setTitle(title: CharSequence): IBaseDialogBuilder {
             this.title = title.toString()
@@ -164,7 +216,7 @@ open class BaseDialogFragment() : DialogFragment() {
 
         override fun setPositiveButton(
             text: CharSequence,
-            onClickListener: View.OnClickListener
+            onClickListener: View.OnClickListener?
         ): IBaseDialogBuilder {
             this.positive = text.toString()
             positiveListener = onClickListener
@@ -173,16 +225,21 @@ open class BaseDialogFragment() : DialogFragment() {
 
         override fun setPositiveButton(
             stringRes: Int,
-            onClickListener: View.OnClickListener
+            onClickListener: View.OnClickListener?
         ): IBaseDialogBuilder {
             this.positive = getStringRes(stringRes)
             positiveListener = onClickListener
             return this
         }
 
+        override fun deletePositiveButton(): IBaseDialogBuilder {
+            showPositive = false
+            return this
+        }
+
         override fun setNegativeButton(
             text: CharSequence,
-            onClickListener: View.OnClickListener
+            onClickListener: View.OnClickListener?
         ): IBaseDialogBuilder {
             this.negative = text.toString()
             negativeListener = onClickListener
@@ -191,15 +248,21 @@ open class BaseDialogFragment() : DialogFragment() {
 
         override fun setNegativeButton(
             stringRes: Int,
-            onClickListener: View.OnClickListener
+            onClickListener: View.OnClickListener?
         ): IBaseDialogBuilder {
             this.negative = getStringRes(stringRes)
             negativeListener = onClickListener
             return this
         }
 
+        override fun deleteNegativeButton(): IBaseDialogBuilder {
+            showNegative = false
+            return this
+        }
+
         override fun create(): BaseDialogFragment {
-            return BaseDialogFragment().setBuilder(this)
+            val dialog = this.dialog ?: BaseDialogFragment().setBuilder(this)
+            return dialog
         }
 
         override fun show(manager: FragmentManager, tag: String): BaseDialogFragment {

@@ -8,6 +8,8 @@ import com.ljwx.basedialog.BaseDialogFragment
 
 interface IBaseDialogBuilder {
 
+    fun setClose(show: Boolean): IBaseDialogBuilder
+
     fun setTitle(title: CharSequence): IBaseDialogBuilder
 
     fun setTitle(@StringRes title: Int): IBaseDialogBuilder
@@ -16,19 +18,23 @@ interface IBaseDialogBuilder {
 
     fun setContent(@LayoutRes layout: Int): IBaseDialogBuilder
 
-    fun setPositiveButton(text: CharSequence, onClickListener: OnClickListener): IBaseDialogBuilder
+    fun setPositiveButton(text: CharSequence, onClickListener: OnClickListener?): IBaseDialogBuilder
 
     fun setPositiveButton(
         @StringRes stringRes: Int,
-        onClickListener: OnClickListener
+        onClickListener: OnClickListener?
     ): IBaseDialogBuilder
 
-    fun setNegativeButton(text: CharSequence, onClickListener: OnClickListener): IBaseDialogBuilder
+    fun deletePositiveButton(): IBaseDialogBuilder
+
+    fun setNegativeButton(text: CharSequence, onClickListener: OnClickListener?): IBaseDialogBuilder
 
     fun setNegativeButton(
         @StringRes stringRes: Int,
-        onClickListener: OnClickListener
+        onClickListener: OnClickListener?
     ): IBaseDialogBuilder
+
+    fun deleteNegativeButton(): IBaseDialogBuilder
 
     fun create(): BaseDialogFragment
 
