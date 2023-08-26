@@ -45,6 +45,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation project(path: ':baseapp')
+    implementation project(path: ':basedialog')
 
 }
 

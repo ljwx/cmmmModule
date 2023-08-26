@@ -25,7 +25,8 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:inputType="numberDecimal"
+                android:inputType="number"
+                android:digits="123456789 "
                 android:id="@+id/et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

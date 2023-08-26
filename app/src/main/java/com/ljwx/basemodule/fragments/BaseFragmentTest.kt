@@ -2,6 +2,8 @@ package com.ljwx.basemodule.fragments
 
 import android.os.Bundle
 import android.view.View
+import com.ljwx.basedialog.BaseBindingDialogFragment
+import com.ljwx.basedialog.BaseDialogFragment
 import com.ljwx.baseedittext.filter.*
 import com.ljwx.baseedittext.watcher.LimitDecimalTextWatcher
 import com.ljwx.basefragment.BaseBindingFragment
@@ -22,12 +24,16 @@ class BaseFragmentTest :
 //            startActivity(Intent(requireContext(), SecondActivity::class.java))
 //            SimpleFlowEventBus.post("ljwx2","caonima")
 //            interval.start()
-              NotificationUtils.sendFcmNotification("12345678","ljwx", "test")
+//              NotificationUtils.sendFcmNotification("12345678","ljwx", "test")
 
+//            BaseDialogFragment.Builder().setContent("fuck")
+//                .showNormalPositiveButton()
+//                .showCloseIcon(true).show(childFragmentManager)
+            showDialogTips("标题测试", "内容测试", "test", "是的")
         }
 
-        mBinding.et.filters = arrayOf(LimitDecimalInputFilter())
-        mBinding.et.addTextChangedListener(LimitDecimalTextWatcher())
+        mBinding.et.filters = arrayOf(DividerInputFilter())
+//        mBinding.et.addTextChangedListener(LimitDecimalTextWatcher())
 
     }
 

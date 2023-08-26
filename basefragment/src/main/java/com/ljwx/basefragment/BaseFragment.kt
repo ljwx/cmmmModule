@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +13,15 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.blankj.utilcode.util.ToastUtils
 import com.blankj.utilcode.util.Utils
+import com.ljwx.baseapp.extensions.notNullOrBlank
 import com.ljwx.baseapp.page.IPageBroadcast
+import com.ljwx.baseapp.page.IPageDialogTips
+import com.ljwx.basedialog.BaseDialogFragment
 
-open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), IPageBroadcast {
+open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), IPageBroadcast,
+    IPageDialogTips {
 
     open val TAG = this.javaClass.simpleName
 
@@ -192,6 +198,34 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
         }
         mOtherReceiver = null
         mBroadcastIntentFilter = null
+    }
+
+    override fun showDialogTips(
+        title: String?,
+        content: String?,
+        tag: String?,
+        positiveText: String?,
+        positiveListener: View.OnClickListener?,
+        negativeText: String?,
+        showClose: Boolean?
+    ) {
+        if (tag.notNullOrBlank()) {
+            val cache = childFragmentManager.findFragmentByTag(tag)
+            if (cache != null && cache is BaseDialogFragment) {
+                cache.show(childFragmentManager, tag)
+                ToastUtils.showLong("缓存dialog")
+                return
+            }
+        }
+        val builder = BaseDialogFragment.Builder()
+        builder
+            .showCloseIcon(showClose)
+            .setTitle(title)
+            .setContent(content)
+            .setPositiveButton(positiveText, positiveListener)
+            .setNegativeButton(negativeText, null)
+            .show(childFragmentManager, tag)
+        ToastUtils.showLong("全新dialog")
     }
 
 }

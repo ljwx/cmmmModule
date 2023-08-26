@@ -7,16 +7,22 @@ import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.gyf.immersionbar.ImmersionBar
+import com.ljwx.baseapp.dialog.IBaseDialogBuilder
+import com.ljwx.baseapp.extensions.notNullOrBlank
 import com.ljwx.baseapp.page.IPageBroadcast
+import com.ljwx.baseapp.page.IPageDialogTips
 import com.ljwx.baseapp.page.IPageStatusBar
 import com.ljwx.baseapp.page.IPageToolbar
+import com.ljwx.basedialog.BaseDialogFragment
 
-open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPageBroadcast {
+open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPageBroadcast,
+    IPageDialogTips {
 
     open val TAG = this.javaClass.simpleName
 
@@ -44,6 +50,10 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     private var mBroadcastIntentFilter: IntentFilter? = null
 
     private var onBackPressInterceptors: (ArrayList<() -> Boolean>)? = null
+
+    private val mTipsDialogBuilder by lazy {
+        BaseDialogFragment.Builder()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -235,6 +245,33 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         }
         mOtherReceiver = null
         mBroadcastIntentFilter = null
+
+    }
+
+    override fun showDialogTips(
+        title: String?,
+        content: String?,
+        tag: String?,
+        positiveText: String?,
+        positiveListener: View.OnClickListener?,
+        negativeText: String?,
+        showClose: Boolean?
+    ) {
+        if (tag.notNullOrBlank()) {
+            val cache = supportFragmentManager.findFragmentByTag(tag)
+            if (cache != null && cache is BaseDialogFragment) {
+                cache.show(supportFragmentManager, tag)
+                return
+            }
+        }
+        val builder = BaseDialogFragment.Builder()
+        builder
+            .showCloseIcon(showClose)
+            .setTitle(title)
+            .setContent(content)
+            .setPositiveButton(positiveText, positiveListener)
+            .setNegativeButton(negativeText, null)
+            .show(supportFragmentManager, tag)
     }
 
 
