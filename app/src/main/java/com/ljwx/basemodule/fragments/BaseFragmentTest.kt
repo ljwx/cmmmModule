@@ -2,20 +2,11 @@ package com.ljwx.basemodule.fragments
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.lifecycleScope
-import com.ljwx.basedialog.BaseBindingDialogFragment
-import com.ljwx.basedialog.BaseDialogFragment
 import com.ljwx.baseedittext.filter.*
-import com.ljwx.baseedittext.watcher.LimitDecimalTextWatcher
 import com.ljwx.basefragment.BaseBindingFragment
 import com.ljwx.basemodule.R
 import com.ljwx.basemodule.databinding.FragmentBaseFragmentBinding
-import com.ljwx.basenotification.NotificationUtils
 import com.ljwx.basescaffold.IntervalHandle
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class BaseFragmentTest :
     BaseBindingFragment<FragmentBaseFragmentBinding>(R.layout.fragment_base_fragment) {

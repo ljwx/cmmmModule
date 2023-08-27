@@ -265,8 +265,8 @@ open class BaseDialogFragment : DialogFragment() {
 
         override fun show(manager: FragmentManager, tag: String?): BaseDialogFragment {
             val dialog = this.dialog ?: BaseDialogFragment().setBuilder(this)
-            this.tag = tag ?: content ?: ""
-            dialog.show(manager, tag)
+            this.tag = tag ?: content
+            dialog.show(manager, this.tag)
             return dialog
         }
 
@@ -279,9 +279,8 @@ open class BaseDialogFragment : DialogFragment() {
 
         override fun show(manager: FragmentManager): BaseDialogFragment {
             val dialog = this.dialog ?: BaseDialogFragment().setBuilder(this)
-            this.tag = (content ?: title ?: positiveText ?: System.currentTimeMillis()
-                .toString()) as String?
-            dialog.show(manager)
+            this.tag = this.tag ?: content
+            dialog.show(manager, this.tag)
             return dialog
         }
 

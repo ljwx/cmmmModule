@@ -18,7 +18,7 @@ object BaseNotificationSend {
 
     private val TAG = "BaseNotification-" + this.javaClass.simpleName
 
-    fun getNotificationManager(): NotificationManager {
+    private fun getNotificationManager(): NotificationManager {
         return Utils.getApp().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     }
 
@@ -96,8 +96,10 @@ object BaseNotificationSend {
         intent: Intent
     ): Notification {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Log.d(TAG, "创建android O以上通知,id:${channelId},标题:" + title + ",内容:" + content)
             createNotificationBuilderMore26(context, channelId, title, content, intent).build()
         } else {
+            Log.d(TAG, "发送android O以下通知,id:${channelId},标题:" + title + ",内容:" + content)
             createNotificationBuilderLess26(context, channelId, title, content, intent).build()
         }
     }

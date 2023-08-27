@@ -17,7 +17,7 @@ class BaseNotificationChannel {
 
     private val TAG = "BaseNotification-" + this.javaClass.simpleName
 
-    fun getNotificationManager(): NotificationManager {
+    private fun getNotificationManager(): NotificationManager {
         return Utils.getApp().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     }
 

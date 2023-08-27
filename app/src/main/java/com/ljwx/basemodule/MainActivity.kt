@@ -1,5 +1,6 @@
 package com.ljwx.basemodule
 
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import com.ljwx.baseeventbus.flow.FlowEventBus
 import com.ljwx.basemodule.databinding.ActivityMainBinding
 import com.ljwx.basemodule.fragments.*
 import com.ljwx.basemodule.vm.TestViewModel
+import com.ljwx.basenotification.BaseNotificationUtils
 import com.ljwx.baseswitchenv.*
 
 class MainActivity :
@@ -26,6 +28,8 @@ class MainActivity :
     override fun getViewPager2() = mBinding.viewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
         super.onCreate(savedInstanceState)
         addTabFragment("basefragment", BaseFragmentTest())
 //        addTabFragment("mvvmFragment", LoginFragment())
@@ -49,12 +53,16 @@ class MainActivity :
 
         AppUtils.isAppDebug()
 
-        registerShakeEnv(object :ShakeSelectAppEnv.EnvCallback{
+        registerShakeEnv(object : ShakeSelectAppEnv.EnvCallback {
             override fun selected(item: AppEnvItem) {
                 Log.d("ljwx2", item.host)
             }
         })
 
+        val launcher = BaseNotificationUtils.registerForActivityResult(this) {
+            Log.d("ljwx2", "有无权限:$it")
+        }
+        BaseNotificationUtils.requestByPassDnd(launcher)
     }
 
     override fun onBroadcastPageFinish() {
@@ -83,6 +91,10 @@ class MainActivity :
     override fun onDestroy() {
         super.onDestroy()
         Log.d("ljwx2", "$TAG_CLASS:onDestroy")
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
 }
