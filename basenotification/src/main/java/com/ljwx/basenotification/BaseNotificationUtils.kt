@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
+import androidx.core.app.NotificationManagerCompat
 import com.blankj.utilcode.util.Utils
 
 object BaseNotificationUtils {
@@ -16,6 +17,19 @@ object BaseNotificationUtils {
 
     fun getNotificationManager(): NotificationManager {
         return Utils.getApp().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    }
+
+    fun isDndEnable(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val notificationManager = getNotificationManager()
+            Log.d(TAG, "通过NotificationManager判断是否勿扰")
+            notificationManager.currentInterruptionFilter ==
+                    NotificationManager.INTERRUPTION_FILTER_PRIORITY
+        } else {
+            // 对于 Android 6.0 之前的版本，您可以检查是否启用了“静音模式”
+            Log.d(TAG, "6.0之前只能判断是否静音")
+            !NotificationManagerCompat.from(Utils.getApp()).areNotificationsEnabled()
+        }
     }
 
     fun hasByPassDnd(): Boolean {

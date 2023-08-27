@@ -63,6 +63,7 @@ class MainActivity :
             Log.d("ljwx2", "有无权限:$it")
         }
         BaseNotificationUtils.requestByPassDnd(launcher)
+        Log.d("ljwx2", "是否勿扰:"+BaseNotificationUtils.isDndEnable())
     }
 
     override fun onBroadcastPageFinish() {
