@@ -26,12 +26,13 @@ class BaseNotificationChannel {
         return getNotificationManager().getNotificationChannel(channelId) != null
     }
 
-    fun createNotificationChannel(channel: NotificationChannel, existDelete: Boolean = true) {
+    fun createNotificationChannel(channel: NotificationChannel, existDelete: Boolean = false) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val manager = getNotificationManager()
             val channelId = channel.id
             if (existDelete && isExist(channelId)) {
                 manager.deleteNotificationChannel(channelId)
+                Log.d(TAG, "删除通知渠道成功:${channelId}")
             }
             if (!isExist(channelId)) {
                 manager.createNotificationChannel(channel)
