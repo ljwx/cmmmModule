@@ -70,66 +70,53 @@ open class BaseDialogFragment : DialogFragment() {
 
     private fun setDataFromBuilder(view: View) {
         builder?.apply {
-            showClose?.let {
-                view.findViewById<View>(R.id.base_dialog_close)?.apply {
-                    singleClick {
-                        dismiss()
-                    }
-                    visibleGone(it)
+            view.findViewById<View>(R.id.base_dialog_close)?.apply {
+                if (showClose != null) {
+                    visibleGone(showClose!!)
+                }
+                singleClick {
+                    dismiss()
                 }
             }
             view.findViewById<TextView>(R.id.base_dialog_title)?.apply {
-                visibleGone(title != null)
-                text = title ?: ""
+                visibleGone(showTitle)
+                if (title != null) {
+                    text = title
+                }
             }
             view.findViewById<TextView>(R.id.base_dialog_content_string)?.apply {
                 visibleGone(content != null)
                 text = content ?: ""
             }
-            val positiveView = view.findViewById<TextView>(R.id.base_dialog_positive)
-            if (showPositive) {
-                if (positive.isNullOrBlank()) {
-                    positiveView?.singleClick {
-                        dismiss()
+            view.findViewById<TextView>(R.id.base_dialog_positive)?.apply {
+                visibleGone(showPositiveButton)
+                if (showPositiveButton) {
+                    if (positiveText.notNullOrBlank()) {
+                        text = positiveText
                     }
-                } else {
-                    positiveView?.apply {
-                        text = positive
-                        if (positiveListener == null) {
-                            singleClick {
-                                dismiss()
-                            }
-                        } else {
-                            setOnClickListener(positiveListener)
+                    if (positiveListener != null) {
+                        setOnClickListener(positiveListener)
+                    } else {
+                        singleClick {
+                            dismiss()
                         }
                     }
                 }
-                positiveView?.visibleGone(true)
-            } else {
-                positiveView?.visibleGone(false)
             }
-
-            val negativeView = view.findViewById<TextView>(R.id.base_dialog_negative)
-            if (showNegative) {
-                if (negative.isNullOrBlank()) {
-                    negativeView?.singleClick {
-                        dismiss()
+            view.findViewById<TextView>(R.id.base_dialog_negative)?.apply {
+                visibleGone(showNegativeButton)
+                if (showNegativeButton) {
+                    if (negativeText.notNullOrBlank()) {
+                        text = negativeText
                     }
-                } else {
-                    negativeView?.apply {
-                        text = positive
-                        if (negativeListener == null) {
-                            singleClick {
-                                dismiss()
-                            }
-                        } else {
-                            setOnClickListener(negativeListener)
+                    if (negativeListener != null) {
+                        setOnClickListener(negativeListener)
+                    } else {
+                        singleClick {
+                            dismiss()
                         }
                     }
                 }
-                negativeView?.visibleGone(true)
-            } else {
-                negativeView?.visibleGone(false)
             }
         }
     }
@@ -173,21 +160,23 @@ open class BaseDialogFragment : DialogFragment() {
             private set
         var title: String? = null
             private set
+        var showTitle: Boolean = false
+            private set
         var content: String? = null
             private set
         var contentId: Int? = null
             private set
-        var positive: String? = null
+        var positiveText: CharSequence? = null
             private set
         var positiveListener: View.OnClickListener? = null
             private set
-        var showPositive = false
+        var showPositiveButton = false
             private set
-        var negative: String? = null
+        var negativeText: CharSequence? = null
             private set
         var negativeListener: View.OnClickListener? = null
             private set
-        var showNegative = false
+        var showNegativeButton = false
             private set
         var tag: String? = null
         var dialog: BaseDialogFragment? = null
@@ -199,11 +188,13 @@ open class BaseDialogFragment : DialogFragment() {
 
         override fun setTitle(title: CharSequence?): IBaseDialogBuilder {
             this.title = title.toString()
+            showTitle = true
             return this
         }
 
         override fun setTitle(title: Int): IBaseDialogBuilder {
             this.title = getStringRes(title)
+            showTitle = true
             return this
         }
 
@@ -221,9 +212,9 @@ open class BaseDialogFragment : DialogFragment() {
             text: CharSequence?,
             onClickListener: View.OnClickListener?
         ): IBaseDialogBuilder {
-            this.positive = (text ?: "") as String
+            this.positiveText = text
             positiveListener = onClickListener
-            showPositive = true
+            showPositiveButton = true
             return this
         }
 
@@ -231,14 +222,14 @@ open class BaseDialogFragment : DialogFragment() {
             stringRes: Int,
             onClickListener: View.OnClickListener?
         ): IBaseDialogBuilder {
-            this.positive = getStringRes(stringRes)
+            this.positiveText = getStringRes(stringRes)
             positiveListener = onClickListener
-            showPositive = true
+            showPositiveButton = true
             return this
         }
 
         override fun showNormalPositiveButton(show: Boolean): IBaseDialogBuilder {
-            showPositive = show
+            showPositiveButton = show
             return this
         }
 
@@ -246,9 +237,9 @@ open class BaseDialogFragment : DialogFragment() {
             text: CharSequence?,
             onClickListener: View.OnClickListener?
         ): IBaseDialogBuilder {
-            this.negative = (text ?: "") as String
+            this.negativeText = text
             negativeListener = onClickListener
-            showNegative = true
+            showNegativeButton = true
             return this
         }
 
@@ -256,14 +247,14 @@ open class BaseDialogFragment : DialogFragment() {
             stringRes: Int,
             onClickListener: View.OnClickListener?
         ): IBaseDialogBuilder {
-            this.negative = getStringRes(stringRes)
+            this.negativeText = getStringRes(stringRes)
             negativeListener = onClickListener
-            showNegative = true
+            showNegativeButton = true
             return this
         }
 
         override fun showNormalNegativeButton(show: Boolean): IBaseDialogBuilder {
-            showNegative = show
+            showNegativeButton = show
             return this
         }
 
@@ -274,7 +265,7 @@ open class BaseDialogFragment : DialogFragment() {
 
         override fun show(manager: FragmentManager, tag: String?): BaseDialogFragment {
             val dialog = this.dialog ?: BaseDialogFragment().setBuilder(this)
-            this.tag = tag?:content?:""
+            this.tag = tag ?: content ?: ""
             dialog.show(manager, tag)
             return dialog
         }
@@ -288,7 +279,8 @@ open class BaseDialogFragment : DialogFragment() {
 
         override fun show(manager: FragmentManager): BaseDialogFragment {
             val dialog = this.dialog ?: BaseDialogFragment().setBuilder(this)
-            this.tag = content ?: title ?: positive ?: System.currentTimeMillis().toString()
+            this.tag = (content ?: title ?: positiveText ?: System.currentTimeMillis()
+                .toString()) as String?
             dialog.show(manager)
             return dialog
         }

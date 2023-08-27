@@ -2,6 +2,7 @@ package com.ljwx.basemodule.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.lifecycleScope
 import com.ljwx.basedialog.BaseBindingDialogFragment
 import com.ljwx.basedialog.BaseDialogFragment
 import com.ljwx.baseedittext.filter.*
@@ -11,6 +12,10 @@ import com.ljwx.basemodule.R
 import com.ljwx.basemodule.databinding.FragmentBaseFragmentBinding
 import com.ljwx.basenotification.NotificationUtils
 import com.ljwx.basescaffold.IntervalHandle
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class BaseFragmentTest :
     BaseBindingFragment<FragmentBaseFragmentBinding>(R.layout.fragment_base_fragment) {
@@ -29,7 +34,13 @@ class BaseFragmentTest :
 //            BaseDialogFragment.Builder().setContent("fuck")
 //                .showNormalPositiveButton()
 //                .showCloseIcon(true).show(childFragmentManager)
-            showDialogTips("标题测试", "内容测试", "test", "是的")
+            showDialogTips(null, "内容测试", "test", "是的")
+            lifecycleScope.launch(Dispatchers.IO){
+                delay(1000)
+                withContext(Dispatchers.Main) {
+                    showDialogTips(null, "内容测试", "test", "是的")
+                }
+            }
         }
 
         mBinding.et.filters = arrayOf(DividerInputFilter())

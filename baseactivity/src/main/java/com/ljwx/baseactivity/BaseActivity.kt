@@ -7,6 +7,7 @@ import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -119,6 +120,51 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     override fun onStart() {
         super.onStart()
         mStateSaved = false
+    }
+
+    /**
+     * 快速显示dialog提示
+     *
+     * @param title 标题,为空不显示标题控件
+     * @param content 内容
+     * @param positiveText 积极的文案
+     * @param positiveListener 积极的点击, 当文案和点击都为空,则不显示积极控件
+     * @param negativeText 消极的文案,为空,则不显示消极控件
+     */
+    override fun showDialogTips(
+        title: String?,
+        content: String?,
+        tag: String?,
+        positiveText: String?,
+        positiveListener: View.OnClickListener?,
+        negativeText: String?,
+        showClose: Boolean?
+    ) {
+        if (tag.notNullOrBlank()) {
+            val cache = supportFragmentManager.findFragmentByTag(tag)
+            if (cache != null && cache is BaseDialogFragment) {
+                //报java.lang.IllegalStateException: Fragment already added
+//                cache.show(supportFragmentManager, tag)
+                Log.d(TAG, "$tag,dialog有缓存")
+                return
+            }
+        }
+        val builder = BaseDialogFragment.Builder()
+        builder.apply {
+            showCloseIcon(showClose)
+            if (title != null) {
+                setTitle(title)
+            }
+            setContent(content)
+            if (positiveText != null || positiveListener != null) {
+                setPositiveButton(positiveText, positiveListener)
+            }
+            if (negativeText != null) {
+                setNegativeButton(negativeText, null)
+            }
+            show(supportFragmentManager, tag)
+        }
+        Log.d(TAG, "${(tag ?: content) ?: "tag为空"},dialog新创建")
     }
 
     override fun registerFinishBroadcast(vararg actions: String?) {
@@ -247,32 +293,5 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         mBroadcastIntentFilter = null
 
     }
-
-    override fun showDialogTips(
-        title: String?,
-        content: String?,
-        tag: String?,
-        positiveText: String?,
-        positiveListener: View.OnClickListener?,
-        negativeText: String?,
-        showClose: Boolean?
-    ) {
-        if (tag.notNullOrBlank()) {
-            val cache = supportFragmentManager.findFragmentByTag(tag)
-            if (cache != null && cache is BaseDialogFragment) {
-                cache.show(supportFragmentManager, tag)
-                return
-            }
-        }
-        val builder = BaseDialogFragment.Builder()
-        builder
-            .showCloseIcon(showClose)
-            .setTitle(title)
-            .setContent(content)
-            .setPositiveButton(positiveText, positiveListener)
-            .setNegativeButton(negativeText, null)
-            .show(supportFragmentManager, tag)
-    }
-
 
 }
