@@ -35,12 +35,6 @@ class BaseFragmentTest :
 //                .showNormalPositiveButton()
 //                .showCloseIcon(true).show(childFragmentManager)
             showDialogTips(null, "内容测试", "test", "是的")
-            lifecycleScope.launch(Dispatchers.IO){
-                delay(1000)
-                withContext(Dispatchers.Main) {
-                    showDialogTips(null, "内容测试", "test", "是的")
-                }
-            }
         }
 
         mBinding.et.filters = arrayOf(DividerInputFilter())
