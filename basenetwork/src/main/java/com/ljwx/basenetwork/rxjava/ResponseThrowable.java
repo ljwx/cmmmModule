@@ -1,6 +1,4 @@
-package com.sisensing.http;
-
-
+package com.ljwx.basenetwork.rxjava;
 
 public class ResponseThrowable extends Exception {
     public int code;

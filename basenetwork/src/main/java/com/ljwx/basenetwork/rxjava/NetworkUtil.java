@@ -1,4 +1,4 @@
-package com.sisensing.http;
+package com.ljwx.basenetwork.rxjava;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
