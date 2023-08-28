@@ -1,7 +1,7 @@
 package com.ljwx.baseapp.page
 
 import com.drake.statelayout.StateLayout
-import com.ljwx.baseapp.LayoutStatus
+import com.ljwx.baseapp.constant.ConstLayoutStatus
 
 interface IPageStateLayout {
     /**
@@ -12,7 +12,11 @@ interface IPageStateLayout {
     /**
      * 显示多状态
      */
-    fun showStateLayout(state: LayoutStatus, show: Boolean = true, tag: Any? = null)
+    fun showStateLayout(
+        @ConstLayoutStatus.LayoutStatus state: Int,
+        show: Boolean = true,
+        tag: Any? = null
+    )
 
     /**
      * 多状态布局里的错误重试

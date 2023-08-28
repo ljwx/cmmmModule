@@ -7,7 +7,7 @@ import com.drake.statelayout.StateLayout
 import com.ljwx.baseapp.BasePopupLoading
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.ljwx.baseapp.R
-import com.ljwx.baseapp.LayoutStatus
+import com.ljwx.baseapp.constant.ConstLayoutStatus
 import com.ljwx.baseapp.extensions.isMainThread
 import com.ljwx.baseapp.page.IPagePopLoading
 import com.ljwx.baseapp.page.IPageRefreshLayout
@@ -114,21 +114,21 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
      * @param state 哪种状态
      * @param layout 对应的布局
      */
-    fun setStateLayoutRes(state: LayoutStatus, @LayoutRes layout: Int) {
+    fun setStateLayoutRes(@ConstLayoutStatus.LayoutStatus state: Int, @LayoutRes layout: Int) {
         when (state) {
-            LayoutStatus.LOADING -> {
+            ConstLayoutStatus.LOADING -> {
                 mStateLayout?.emptyLayout = layout
             }
 
-            LayoutStatus.EMPTY -> {
+            ConstLayoutStatus.EMPTY -> {
                 mStateLayout?.emptyLayout = layout
             }
 
-            LayoutStatus.ERROR -> {
+            ConstLayoutStatus.ERROR -> {
                 mStateLayout?.errorLayout = layout
             }
 
-            LayoutStatus.OFFLINE -> {
+            ConstLayoutStatus.OFFLINE -> {
 
             }
 
@@ -143,7 +143,7 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
      * @param show 是否需要显示
      * @param tag 携带数据
      */
-    override fun showStateLayout(state: LayoutStatus, show: Boolean, tag: Any?) {
+    override fun showStateLayout(state: Int, show: Boolean, tag: Any?) {
         if (!show || isFinishing) {
             return
         }
@@ -157,25 +157,25 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
         }
     }
 
-    private fun showState(state: LayoutStatus, tag: Any?) {
+    private fun showState(@ConstLayoutStatus.LayoutStatus state: Int, tag: Any?) {
         when (state) {
-            LayoutStatus.LOADING -> {
+            ConstLayoutStatus.LOADING -> {
                 mStateLayout?.showLoading(tag)
             }
 
-            LayoutStatus.CONTENT -> {
+            ConstLayoutStatus.CONTENT -> {
                 mStateLayout?.showContent()
             }
 
-            LayoutStatus.EMPTY -> {
+            ConstLayoutStatus.EMPTY -> {
                 mStateLayout?.showEmpty()
             }
 
-            LayoutStatus.ERROR -> {
+            ConstLayoutStatus.ERROR -> {
                 mStateLayout?.showError(tag)
             }
 
-            LayoutStatus.OFFLINE -> {
+            ConstLayoutStatus.OFFLINE -> {
 
             }
         }
