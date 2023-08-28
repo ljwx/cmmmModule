@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application>
+        <activity android:name=".ScreenRecordActivity" />
+
+        <service
+            android:name=".ScreenRecordService"
+            android:enabled="true"
+            android:exported="true"
+            android:foregroundServiceType="mediaProjection" />
+    </application>
+
+</manifest>
