@@ -47,6 +47,7 @@ object BaseNotificationUtils {
         val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);//类型通知  默认
         val rt = RingtoneManager.getRingtone(Utils.getApp(), uri);
         rt.play()
+
     }
 
 
