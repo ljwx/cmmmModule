@@ -84,6 +84,7 @@ dependencies {
     implementation project(path: ':basenotification')
     implementation project(path: ':baselanguage')
     implementation project(path: ':basescreenrecord')
+    implementation project(path: ':baseresource')
 
     implementation 'io.github.ljwx:SplitTextView:0.3.8'
 }

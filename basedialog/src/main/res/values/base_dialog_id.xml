@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <item name="base_dialog_close" type="id"></item>
-    <item name="base_dialog_title" type="id"></item>
-    <item name="base_dialog_content_string" type="id"></item>
-    <item name="base_dialog_content_container" type="id"></item>
-    <item name="base_dialog_positive" type="id"></item>
-    <item name="base_dialog_negative" type="id"></item>
+    <item name="base_dialog_close" type="id"/>
+    <item name="base_dialog_title" type="id"/>
+    <item name="base_dialog_content_string" type="id"/>
+    <item name="base_dialog_content_container" type="id"/>
+    <item name="base_dialog_positive" type="id"/>
+    <item name="base_dialog_negative" type="id"/>
 
+    <item name="btn_cancel" type="id"/>
+    <item name="btn_close" type="id"/>
 </resources>

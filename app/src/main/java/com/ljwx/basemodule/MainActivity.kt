@@ -13,6 +13,7 @@ import com.ljwx.baseeventbus.flow.FlowEventBus
 import com.ljwx.basemodule.databinding.ActivityMainBinding
 import com.ljwx.basemodule.fragments.*
 import com.ljwx.basemodule.vm.TestViewModel
+import com.ljwx.basenotification.BaseNotificationDndUtils
 import com.ljwx.basenotification.BaseNotificationUtils
 import com.ljwx.baseswitchenv.*
 
@@ -59,11 +60,11 @@ class MainActivity :
             }
         })
 
-        val launcher = BaseNotificationUtils.registerForActivityResult(this) {
+        val launcher = BaseNotificationDndUtils.registerForActivityResult(this) {
             Log.d("ljwx2", "有无权限:$it")
         }
-        BaseNotificationUtils.requestByPassDnd(launcher)
-        Log.d("ljwx2", "是否勿扰:"+BaseNotificationUtils.isDndEnable())
+        BaseNotificationDndUtils.checkAndRequestByPassDnd(launcher)
+        Log.d("ljwx2", "是否勿扰:"+BaseNotificationDndUtils.isDndEnable())
     }
 
     override fun onBroadcastPageFinish() {
