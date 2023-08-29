@@ -140,4 +140,15 @@ object BaseNotificationSend {
         }
     }
 
+    fun send(notification: Notification, notificationId: Int) {
+        getNotificationManager().notify(notificationId, notification)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Log.d(TAG, "发送创建好的通知,id:" + notification.channelId)
+        }
+    }
+
+    fun getNotificationId(): Int {
+        return Random.nextInt(1, 10000)
+    }
+
 }
