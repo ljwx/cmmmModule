@@ -3,7 +3,6 @@ package com.ljwx.basenotification
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.Context
 import android.net.Uri
 import android.os.Build
 import android.util.Log
@@ -11,14 +10,13 @@ import androidx.annotation.IntDef
 import androidx.annotation.RawRes
 import androidx.annotation.RequiresApi
 import com.blankj.utilcode.util.AppUtils
-import com.blankj.utilcode.util.Utils
 
 class BaseNotificationChannel {
 
     private val TAG = "BaseNotification-" + this.javaClass.simpleName
 
     private fun getNotificationManager(): NotificationManager {
-        return Utils.getApp().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        return BaseNotificationUtils.getNotificationManager()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -118,13 +116,8 @@ class BaseNotificationChannel {
             channelEnableLights?.let {
                 channel.enableLights(it)
             }
-            channelEnableSound?.let {
-                if (!it) {
-                    channel.setSound(null, null)
-                }
-                if (it && channelCustomSound != null) {
-                    channel.setSound(channelCustomSound, Notification.AUDIO_ATTRIBUTES_DEFAULT)
-                }
+            if (channelEnableSound != false && channelCustomSound != null) {
+                channel.setSound(channelCustomSound, Notification.AUDIO_ATTRIBUTES_DEFAULT)
             }
             if (channelEnableSound == false) {
                 channel.setSound(null, null)

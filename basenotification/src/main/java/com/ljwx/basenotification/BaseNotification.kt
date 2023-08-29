@@ -5,18 +5,23 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
+import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.blankj.utilcode.util.Utils
-import kotlin.random.Random
 
-object BaseNotificationSend {
-
-    var smallIcon = android.R.drawable.ic_dialog_map
+object BaseNotification {
 
     private val TAG = "BaseNotification-" + this.javaClass.simpleName
+
+    private var smallIcon = android.R.drawable.ic_dialog_map
+
+    fun setCommonNotificationIcon(@DrawableRes icon: Int) {
+        smallIcon = icon
+    }
 
     private fun getNotificationManager(): NotificationManager {
         return Utils.getApp().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -76,19 +81,21 @@ object BaseNotificationSend {
         intent: Intent
     ): Notification.Builder {
         val pendingIntent = createPendingIntent(context, intent)
-//            val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+        val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         return Notification.Builder(context, channelId)
             .setContentTitle(title)
             .setContentText(content)
             .setSmallIcon(smallIcon)
-//                .setAutoCancel(true)
-//                .setSound(RingtoneManager
-//                    .getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
-//                .setSound(uri)
+            .setAutoCancel(true)
+            .setSound(
+                RingtoneManager
+                    .getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+            )
+            .setSound(uri)
             .setContentIntent(pendingIntent)
     }
 
-    private fun createNotification(
+    fun createNotification(
         context: Context,
         channelId: String,
         title: String,
@@ -125,30 +132,5 @@ object BaseNotificationSend {
         return createNotificationBuilderLess26(context, channelId, title, content, intent)
     }
 
-    fun send(context: Context, channelId: String, title: String, content: String, intent: Intent) {
-        val notificationId = Random.nextInt(1, 10000)
-        val notification = createNotification(context, channelId, title, content, intent)
-        getNotificationManager().notify(notificationId, notification)
-        Log.d(TAG, "发送通知,id:${channelId},标题:" + title + ",内容:" + content)
-    }
-
-    fun send(notification: Notification) {
-        val notificationId = Random.nextInt(1, 10000)
-        getNotificationManager().notify(notificationId, notification)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            Log.d(TAG, "发送创建好的通知,id:" + notification.channelId)
-        }
-    }
-
-    fun send(notification: Notification, notificationId: Int) {
-        getNotificationManager().notify(notificationId, notification)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            Log.d(TAG, "发送创建好的通知,id:" + notification.channelId)
-        }
-    }
-
-    fun getNotificationId(): Int {
-        return Random.nextInt(1, 10000)
-    }
 
 }

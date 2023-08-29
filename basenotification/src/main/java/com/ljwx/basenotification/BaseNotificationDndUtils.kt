@@ -1,4 +1,17 @@
+package com.ljwx.basenotification
+
+import android.app.NotificationManager
+import android.os.Build
+import android.util.Log
+import androidx.activity.ComponentActivity
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.core.app.NotificationManagerCompat
+import com.blankj.utilcode.util.Utils
+
 object BaseNotificationDndUtils {
+
+    private val TAG = "BaseNotification-" + this.javaClass.simpleName
 
     fun isDndEnable(): Boolean {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -13,13 +26,22 @@ object BaseNotificationDndUtils {
         }
     }
 
-    fun hasByPassDnd(): Boolean {
+    fun hasPermissionByPassDnd(): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Log.d(TAG, "通过notificationManager判断是否有勿扰权限")
             return BaseNotificationUtils.getNotificationManager().isNotificationPolicyAccessGranted
         }
         Log.d(TAG, "android版本低于 M 直接返回ture")
         return true
+    }
+
+    fun checkAndRequestByPassDnd(launcher: ActivityResultLauncher<String>) {
+        if (!hasPermissionByPassDnd()) {
+            launcher.launch("")
+            Log.d(TAG, "没有权限发起请求")
+        } else {
+            Log.d(TAG, "已有权限,无操作")
+        }
     }
 
     fun registerForActivityResult(
@@ -29,12 +51,4 @@ object BaseNotificationDndUtils {
         return activity.registerForActivityResult(PolicyAccessSettingsResultContract(), callback)
     }
 
-    fun requestByPassDnd(launcher: ActivityResultLauncher<String>) {
-        if (!hasByPassDnd()) {
-            launcher.launch("")
-            Log.d(TAG, "没有权限发起请求")
-        } else {
-            Log.d(TAG, "已有权限,无操作")
-        }
-    }
 }

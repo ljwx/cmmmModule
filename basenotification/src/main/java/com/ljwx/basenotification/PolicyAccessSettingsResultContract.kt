@@ -19,6 +19,6 @@ class PolicyAccessSettingsResultContract : ActivityResultContract<String, Boolea
 //                }
 //            }
 //        }
-        return BaseNotificationUtils.hasByPassDnd()
+        return BaseNotificationDndUtils.hasPermissionByPassDnd()
     }
 }
