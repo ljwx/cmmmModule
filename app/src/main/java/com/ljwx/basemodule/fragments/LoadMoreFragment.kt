@@ -1,10 +1,9 @@
 package com.ljwx.basemodule.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.lifecycleScope
-import com.ljwx.baseapp.vm.EmptyViewModel
+import com.ljwx.baseapp.vm.empty.EmptyViewModel
 import com.ljwx.basemodule.R
 import com.ljwx.basemodule.databinding.FragmentRecyclerViewBinding
 import com.ljwx.basescaffold.BaseLoadMoreFragment

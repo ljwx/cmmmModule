@@ -1,6 +1,5 @@
 package com.ljwx.basenetwork.retrofit.test
 
-import android.content.res.Resources.NotFoundException
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.blankj.utilcode.util.ActivityUtils
@@ -8,11 +7,9 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.gson.GsonBuilder
 import com.ljwx.baseapp.extensions.lifecycle
 import com.ljwx.baseapp.response.DataResult
-import com.ljwx.baseapp.response.ResponseException
-import com.ljwx.baseapp.vm.BaseDataRepository
+import com.ljwx.baseapp.vm.model.BaseDataRepository
+import com.ljwx.baseapp.vm.model.BaseSecondRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observer
-import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -23,7 +20,7 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class TestRepository : BaseDataRepository<TestService>() {
+class TestRepository : BaseSecondRepository<TestService, TestService>() {
 
     val mGiteeTestRetrofit by lazy {
         val client: OkHttpClient = OkHttpClient.Builder()
@@ -73,6 +70,10 @@ class TestRepository : BaseDataRepository<TestService>() {
 
                 }
             })
+    }
+
+    override fun createServerSecond(): TestService {
+        return mGiteeTestRetrofit.create(TestService::class.java)
     }
 
     override fun createServer(): TestService {

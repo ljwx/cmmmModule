@@ -1,7 +1,6 @@
 package com.ljwx.basemodule.mvvm.data
 
-import com.ljwx.baseapp.vm.BaseDataRepository
-import com.ljwx.baseapp.vm.EmptyServer
+import com.ljwx.baseapp.vm.empty.EmptyViewModel
 import com.ljwx.basemodule.mvvm.data.model.LoggedInUser
 
 /**
@@ -9,7 +8,7 @@ import com.ljwx.basemodule.mvvm.data.model.LoggedInUser
  * maintains an in-memory cache of login status and user credentials information.
  */
 
-class LoginRepository() : BaseDataRepository<EmptyServer>() {
+class LoginRepository : EmptyViewModel() {
 
     val dataSource: LoginDataSource = LoginDataSource()
 
@@ -48,7 +47,4 @@ class LoginRepository() : BaseDataRepository<EmptyServer>() {
         // @see https://developer.android.com/training/articles/keystore
     }
 
-    override fun createServer(): EmptyServer {
-        return object :EmptyServer{}
-    }
 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ljwx.baseapp.vm.model.BaseDataRepository
 
 abstract class BaseViewModel<R : BaseDataRepository<*>> : ViewModel(), DefaultLifecycleObserver {
 
