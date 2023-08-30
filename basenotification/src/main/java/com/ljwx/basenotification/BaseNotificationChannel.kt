@@ -3,6 +3,8 @@ package com.ljwx.basenotification
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.Context
+import android.media.AudioAttributes
 import android.net.Uri
 import android.os.Build
 import android.util.Log
@@ -56,13 +58,29 @@ class BaseNotificationChannel {
         @Retention(AnnotationRetention.SOURCE)
         annotation class NotifyImportance
 
-        private var channelName: CharSequence? = null
+        //渠道名
+        private var channelName: CharSequence = channelId
+
+        //重要程度
         private var channelImportance = NotificationManager.IMPORTANCE_DEFAULT
+
+        //是否震动
         private var channelEnableVibration: Boolean? = null
+
+        //是否亮屏
         private var channelEnableLights: Boolean? = null
+
+        //是否提示音
         private var channelEnableSound: Boolean? = null
+
+        //自定义提示音
         private var channelCustomSound: Uri? = null
+
+        //绕过勿扰
         private var channelByPassDnd: Boolean? = null
+
+        //提示音属性
+        private var channelAudioAttributes: AudioAttributes? = null
 
         fun channelName(name: CharSequence): Builder {
             channelName = name
@@ -95,8 +113,13 @@ class BaseNotificationChannel {
         }
 
         fun setSound(@RawRes rawId: Int): Builder {
-            val packageName = AppUtils.getAppPackageName()
-            val uri = Uri.parse("android.resource://$packageName/$rawId")
+            val uri = Uri.parse("android.resource://${AppUtils.getAppPackageName()}/$rawId")
+            channelCustomSound = uri
+            return this
+        }
+
+        fun setSound(context: Context, @RawRes rawId: Int): Builder {
+            val uri = Uri.parse("android.resource://${context.packageName}/$rawId")
             channelCustomSound = uri
             return this
         }
@@ -117,6 +140,10 @@ class BaseNotificationChannel {
                 channel.enableLights(it)
             }
             if (channelEnableSound != false && channelCustomSound != null) {
+//                val audioAttributes: AudioAttributes = AudioAttributes.Builder()
+//                    .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+//                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+//                    .build()
                 channel.setSound(channelCustomSound, Notification.AUDIO_ATTRIBUTES_DEFAULT)
             }
             if (channelEnableSound == false) {

@@ -60,11 +60,6 @@ class MainActivity :
             }
         })
 
-        val launcher = BaseNotificationDndUtils.registerForActivityResult(this) {
-            Log.d("ljwx2", "有无权限:$it")
-        }
-        BaseNotificationDndUtils.checkAndRequestByPassDnd(launcher)
-        Log.d("ljwx2", "是否勿扰:"+BaseNotificationDndUtils.isDndEnable())
     }
 
     override fun onBroadcastPageFinish() {

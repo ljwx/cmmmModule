@@ -72,6 +72,10 @@ dependencies {
     api "com.uber.autodispose2:autodispose-android:$autoDispose"
     api "com.uber.autodispose2:autodispose-androidx-lifecycle:$autoDispose"
 
+    //Kotlin 的反射需要集成 org.jetbrains.kotlin:kotlin-reflect 仓库,版本保持与 kotlin 一致。
+    //KClass.createInstance
+    //implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
 }
 
 afterEvaluate {
