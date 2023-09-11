@@ -54,7 +54,7 @@ dependencies {
     api "com.geyifeng.immersionbar:immersionbar:$immersionBar"
 
     //多状态
-    def stateLayout = "1.4.1"
+    def stateLayout = "1.4.2"
     api "com.github.liangjingkanji:StateLayout:$stateLayout"
     // 刷新
     def refreshLayout = '2.0.6'
