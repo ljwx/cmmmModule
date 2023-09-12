@@ -2,7 +2,7 @@ package com.ljwx.baseapp.constant
 
 import androidx.annotation.IntDef
 
-object ConstLayoutStatus {
+object LayoutStatus {
 
     const val CONTENT = 0
     const val LOADING = 1
