@@ -1,25 +1,25 @@
 package com.ljwx.baseapp.business
 
+import android.view.View.OnClickListener
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import com.ljwx.baseapp.constant.LayoutStatus
-import com.ljwx.baseapp.extensions.SingleClickListener
 
-interface StateLayout {
+interface BaseStateLayout {
 
     fun showStateLayout(@LayoutStatus.LayoutStatus state: Int, @LayoutRes layout: Int)
 
     fun setStateLayout(@LayoutStatus.LayoutStatus state: Int, @LayoutRes layout: Int)
 
-    fun showContent()
+    fun showContent(tag: Any? = null)
 
-    fun showLoading()
+    fun showLoading(tag: Any? = null)
 
-    fun showEmpty()
+    fun showEmpty(tag: Any? = null)
 
-    fun showError()
+    fun showError(tag: Any? = null)
 
-    fun showOffline()
+    fun showOffline(tag: Any? = null)
 
     fun setLayoutContent(@LayoutRes layout: Int)
 
@@ -31,7 +31,8 @@ interface StateLayout {
 
     fun setLayoutOffline(@LayoutRes layout: Int)
 
-    fun setRetryListener(@IdRes id: Int, listener: SingleClickListener)
+    fun setRetryListener(@IdRes id: Int, listener: OnClickListener)
 
-    fun setOtherListener(@IdRes id: Int, listener: SingleClickListener)
+    fun setOtherListener(@IdRes id: Int, listener: OnClickListener)
+
 }

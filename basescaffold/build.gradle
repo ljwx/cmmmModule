@@ -45,6 +45,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation project(path: ':baseapp')
+    implementation project(path: ':basestate')
+    implementation project(path: ':baserefresh')
     implementation project(path: ':basefragment')
     implementation project(path: ':baserecyclerview')
 }

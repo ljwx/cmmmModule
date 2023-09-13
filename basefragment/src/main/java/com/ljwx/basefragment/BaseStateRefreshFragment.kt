@@ -3,10 +3,10 @@ package com.ljwx.basefragment
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
-import com.drake.statelayout.StateLayout
-import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.ljwx.baseapp.R
 import com.ljwx.baseapp.BasePopupLoading
+import com.ljwx.baseapp.business.BaseRefreshLayout
+import com.ljwx.baseapp.business.BaseStateLayout
 import com.ljwx.baseapp.constant.LayoutStatus
 import com.ljwx.baseapp.extensions.isMainThread
 import com.ljwx.baseapp.page.IPagePopLoading
@@ -26,7 +26,7 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
     /**
      * 多状态
      */
-    private var mStateLayout: StateLayout? = null
+    private var mStateLayout: BaseStateLayout? = null
 
     /**
      * 安全线程切换
@@ -36,7 +36,7 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
     /**
      * 下拉刷新
      */
-    private var mRefreshLayout: SmartRefreshLayout? = null
+    private var mRefreshLayout: BaseRefreshLayout? = null
 
     /**
      * 安全线程切换
@@ -82,7 +82,7 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
      */
     open fun useCommonStateLayout() {
         val stateLayout = view?.findViewById<View>(R.id.base_app_quick_state_layout)
-        if (stateLayout != null && stateLayout is StateLayout) {
+        if (stateLayout != null && stateLayout is BaseStateLayout) {
             initStateLayout(stateLayout)
         }
     }
@@ -92,7 +92,7 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
      */
     open fun useCommonRefreshLayout() {
         val refreshLayout = view?.findViewById<View>(R.id.base_app_quick_refresh_layout)
-        if (refreshLayout != null && refreshLayout is SmartRefreshLayout) {
+        if (refreshLayout != null && refreshLayout is BaseRefreshLayout) {
             initRefreshLayout(refreshLayout)
         }
     }
@@ -103,17 +103,24 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
      * 初始化多状态
      *
      * @param stateLayout 多状态布局容器
-     * @param retryId 重试id
      */
-    override fun initStateLayout(stateLayout: StateLayout?, retryId: Int?) {
+    override fun initStateLayout(stateLayout: BaseStateLayout?) {
         this.mStateLayout = stateLayout
-        if (retryId != null) {
-            stateLayout?.setRetryIds(retryId)
-        }
-        // 重试按钮触发
-        stateLayout?.onRefresh {
-            onStateLayoutRetry(this.tag)
-        }
+    }
+
+    override fun setStateLayoutClick(
+        id: Int,
+        listener: View.OnClickListener,
+        @LayoutStatus.LayoutStatus vararg stateLayout: Int
+    ) {
+        this.mStateLayout?.setRetryListener(id, listener)
+//        if (retryId != null) {
+//            stateLayout?.setRetryIds(retryId)
+//        }
+//        // 重试按钮触发
+//        stateLayout?.onRefresh {
+//            onStateLayoutRetry(this.tag)
+//        }
     }
 
     /**
@@ -125,15 +132,18 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
     fun setStateLayoutRes(@LayoutStatus.LayoutStatus state: Int, @LayoutRes layout: Int) {
         when (state) {
             LayoutStatus.LOADING -> {
-                mStateLayout?.emptyLayout = layout
+                mStateLayout?.setLayoutLoading(layout)
+//                mStateLayout?.emptyLayout = layout
             }
 
             LayoutStatus.EMPTY -> {
-                mStateLayout?.emptyLayout = layout
+                mStateLayout?.setLayoutEmpty(layout)
+//                mStateLayout?.emptyLayout = layout
             }
 
             LayoutStatus.ERROR -> {
-                mStateLayout?.errorLayout = layout
+                mStateLayout?.setLayoutError(layout)
+//                mStateLayout?.errorLayout = layout
             }
 
             LayoutStatus.OFFLINE -> {
@@ -200,11 +210,16 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
 
     /*================================================================*/
 
-    override fun initRefreshLayout(refreshLayout: SmartRefreshLayout?) {
+    override fun initRefreshLayout(refreshLayout: BaseRefreshLayout?) {
         this.mRefreshLayout = refreshLayout
-        refreshLayout?.setOnRefreshListener {
-            onPullRefresh()
-        }
+        refreshLayout?.setOnRefreshListener(object :BaseRefreshLayout.RefreshListener{
+            override fun onRefresh(refreshLayout: BaseRefreshLayout) {
+
+            }
+        })
+//        refreshLayout?.setOnRefreshListener {
+//            onPullRefresh()
+//        }
     }
 
     /**
@@ -219,10 +234,10 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
      */
     override fun pullRefreshFinish() {
         if (isMainThread) {
-            mRefreshLayout?.finishRefresh()
+            mRefreshLayout?.refreshFinish()
         } else {
             mRefreshRunnable = mRefreshRunnable ?: Runnable {
-                mRefreshLayout?.finishRefresh()
+                mRefreshLayout?.refreshFinish()
             }
             requireActivity().runOnUiThread(mRefreshRunnable)
         }

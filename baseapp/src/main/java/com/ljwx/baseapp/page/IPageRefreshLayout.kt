@@ -1,13 +1,13 @@
 package com.ljwx.baseapp.page
 
-import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import com.ljwx.baseapp.business.BaseRefreshLayout
 
 interface IPageRefreshLayout {
 
     /**
      * 初始化下拉刷新布局
      */
-    fun initRefreshLayout(refreshLayout: SmartRefreshLayout?)
+    fun initRefreshLayout(refreshLayout: BaseRefreshLayout?)
 
     /**
      * 触发下拉刷新
