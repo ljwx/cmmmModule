@@ -43,7 +43,7 @@ dependencies {
 
     // 下拉刷新
     def refreshLayout = '2.0.5'
-    api "io.github.scwang90:refresh-layout-kernel:$refreshLayout"
+    implementation "io.github.scwang90:refresh-layout-kernel:$refreshLayout"
     // 刷新
 //    def refreshLayout = '2.0.6'
 //    api "io.github.scwang90:refresh-layout-kernel:$refreshLayout"

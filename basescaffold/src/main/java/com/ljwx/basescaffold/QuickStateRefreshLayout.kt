@@ -8,7 +8,7 @@ import android.widget.FrameLayout
 import androidx.annotation.IdRes
 import androidx.appcompat.widget.Toolbar
 import com.drake.statelayout.StateLayout
-import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import com.ljwx.baserefresh.BaseRefreshLayout
 
 /**
  * 多状态及刷新控件快捷使用
@@ -297,7 +297,7 @@ open class QuickStateRefreshLayout @JvmOverloads constructor(
 
     }
 
-    private inner class SpecialRefreshLayout : SmartRefreshLayout {
+    private inner class SpecialRefreshLayout : BaseRefreshLayout {
 
         constructor(context: Context) : this(context, null)
 

@@ -4,6 +4,7 @@ buildscript {
     repositories {
         mavenCentral()
         maven { url "https://jitpack.io" }
+        maven { url "https://gitee.com/ezy/repo/raw/cosmo/"}
     }
     dependencies {
         // vanniktech 发布插件
