@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ProgressBar
 import androidx.appcompat.view.ContextThemeWrapper
+import com.ljwx.baseapp.business.IBaseRefreshHeader
 import com.scwang.smart.refresh.layout.api.RefreshHeader
 import com.scwang.smart.refresh.layout.api.RefreshKernel
 import com.scwang.smart.refresh.layout.api.RefreshLayout
@@ -21,7 +22,7 @@ class SmartRefreshHeader @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : FrameLayout(context, attrs, defStyleAttr), RefreshHeader {
+) : FrameLayout(context, attrs, defStyleAttr), RefreshHeader ,IBaseRefreshHeader{
 
     val progress = ProgressBar(ContextThemeWrapper(context, R.style.refresh_header_progressbar))
 

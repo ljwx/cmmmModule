@@ -2,14 +2,14 @@ package com.ljwx.baseapp.page
 
 import android.view.View
 import androidx.annotation.IdRes
-import com.ljwx.baseapp.business.BaseStateLayout
+import com.ljwx.baseapp.business.IBaseStateLayout
 import com.ljwx.baseapp.constant.LayoutStatus
 
 interface IPageStateLayout {
     /**
      * 初始化多状态布局
      */
-    fun initStateLayout(stateLayout: BaseStateLayout?)
+    fun initStateLayout(stateLayout: IBaseStateLayout?)
 
     /**
      * 显示多状态

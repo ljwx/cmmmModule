@@ -1,15 +1,15 @@
 package com.ljwx.baseapp.business
 
-interface BaseRefreshLayout {
+interface IBaseRefreshLayout {
 
-    fun setRefreshHeader()
+    fun setRefreshHeader(header: IBaseRefreshHeader)
 
     fun setOnRefreshListener(refreshListener: RefreshListener)
 
     fun refreshFinish()
 
     interface RefreshListener {
-        fun onRefresh(refreshLayout: BaseRefreshLayout)
+        fun onRefresh(refreshLayout: IBaseRefreshLayout)
     }
 
 }

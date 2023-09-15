@@ -47,6 +47,7 @@ dependencies {
     // 刷新
 //    def refreshLayout = '2.0.6'
 //    api "io.github.scwang90:refresh-layout-kernel:$refreshLayout"
+    implementation project(path: ':baseapp')
 }
 
 afterEvaluate {

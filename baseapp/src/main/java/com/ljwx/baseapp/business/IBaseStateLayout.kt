@@ -5,7 +5,7 @@ import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import com.ljwx.baseapp.constant.LayoutStatus
 
-interface BaseStateLayout {
+interface IBaseStateLayout {
 
     fun showStateLayout(@LayoutStatus.LayoutStatus state: Int, @LayoutRes layout: Int)
 

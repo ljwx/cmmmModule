@@ -1,13 +1,13 @@
 package com.ljwx.baseapp.page
 
-import com.ljwx.baseapp.business.BaseRefreshLayout
+import com.ljwx.baseapp.business.IBaseRefreshLayout
 
 interface IPageRefreshLayout {
 
     /**
      * 初始化下拉刷新布局
      */
-    fun initRefreshLayout(refreshLayout: BaseRefreshLayout?)
+    fun initRefreshLayout(refreshLayout: IBaseRefreshLayout?)
 
     /**
      * 触发下拉刷新
