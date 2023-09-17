@@ -7,8 +7,8 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.annotation.IdRes
 import androidx.appcompat.widget.Toolbar
-import com.drake.statelayout.StateLayout
 import com.ljwx.baserefresh.BaseRefreshLayout
+import com.ljwx.basestate.BaseStateLayout
 
 /**
  * 多状态及刷新控件快捷使用
@@ -27,7 +27,7 @@ open class QuickStateRefreshLayout @JvmOverloads constructor(
     /**
      * 多状态布局
      */
-    private var mStateLayout: StateLayout? = null
+    private var mStateLayout: BaseStateLayout? = null
 
     /**
      * 刷新布局
@@ -200,17 +200,17 @@ open class QuickStateRefreshLayout @JvmOverloads constructor(
      */
     private fun createStateLayout() {
         // 创建多状态布局
-        mStateLayout = mStateLayout ?: StateLayout(context)
+        mStateLayout = mStateLayout ?: BaseStateLayout(context)
         mStateLayout?.id = com.ljwx.baseapp.R.id.base_app_quick_state_layout
-        mStateLayout?.setRetryIds(R.id.base_scaffold_state_retry_id)
+//        mStateLayout?.setRetryIds(R.id.base_scaffold_state_retry_id)
         if (mLayoutLoading != null && mLayoutLoading != NO_ID) {
-            mStateLayout?.loadingLayout = mLayoutLoading!!
+            mStateLayout?.setLayoutLoading(mLayoutLoading!!)
         }
         if (mLayoutEmpty != null && mLayoutEmpty != NO_ID) {
-            mStateLayout?.emptyLayout = mLayoutEmpty!!
+            mStateLayout?.setLayoutEmpty(mLayoutEmpty!!)
         }
         if (mLayoutError != null && mLayoutError != NO_ID) {
-            mStateLayout?.errorLayout = mLayoutError!!
+            mStateLayout?.setLayoutError(mLayoutError!!)
         }
     }
 
@@ -236,7 +236,7 @@ open class QuickStateRefreshLayout @JvmOverloads constructor(
     /**
      * 获取多状态布局类
      */
-    fun getStateLayout(): StateLayout? {
+    fun getStateLayout(): BaseStateLayout? {
         return mStateLayout
     }
 
@@ -272,7 +272,7 @@ open class QuickStateRefreshLayout @JvmOverloads constructor(
      * 设置重试的控件id
      */
     fun setStateRetryId(@IdRes id: Int) {
-        mStateLayout?.setRetryIds(id)
+//        mStateLayout?.setRetryIds(id)
     }
 
     /**
@@ -281,7 +281,7 @@ open class QuickStateRefreshLayout @JvmOverloads constructor(
      * @param block 回调执行的逻辑
      */
     private fun onStateLoading(block: View.(tag: Any?) -> Unit) {
-        mStateLayout?.onLoading(block)
+//        mStateLayout?.onLoading(block)
     }
 
     /**
@@ -290,7 +290,7 @@ open class QuickStateRefreshLayout @JvmOverloads constructor(
      * @param block 回调执行的逻辑
      */
     fun onStateRefresh(block: View.(tag: Any?) -> Unit) {
-        mStateLayout?.onRefresh(block)
+//        mStateLayout?.onRefresh(block)
     }
 
     fun onPullRefresh() {

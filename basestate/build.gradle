@@ -42,10 +42,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     //多状态
-    def stateLayout = "1.4.2"
-    implementation "com.github.liangjingkanji:StateLayout:$stateLayout"
-
-    implementation "me.reezy.cosmo:statelayout:0.7.0"
+//    def stateLayout = "1.4.2"
+//    implementation "com.github.liangjingkanji:StateLayout:$stateLayout"
+//
+//    implementation "me.reezy.cosmo:statelayout:0.7.0"
 
     implementation project(path: ':baseapp')
 }

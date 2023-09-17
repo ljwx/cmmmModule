@@ -1,5 +1,6 @@
 package com.ljwx.baseapp.business
 
+import android.view.View
 import android.view.View.OnClickListener
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
@@ -10,6 +11,8 @@ interface IBaseStateLayout {
     fun showStateLayout(@LayoutStatus.LayoutStatus state: Int, @LayoutRes layout: Int)
 
     fun setStateLayout(@LayoutStatus.LayoutStatus state: Int, @LayoutRes layout: Int)
+
+    fun setContent(view: View)
 
     fun showContent(tag: Any? = null)
 
@@ -31,8 +34,9 @@ interface IBaseStateLayout {
 
     fun setLayoutOffline(@LayoutRes layout: Int)
 
-    fun setRetryListener(@IdRes id: Int, listener: OnClickListener)
+    fun setClickListener(@IdRes id: Int, listener: OnClickListener)
 
-    fun setOtherListener(@IdRes id: Int, listener: OnClickListener)
-
+//    fun onLoading()
+//
+//    fun onRefresh()
 }

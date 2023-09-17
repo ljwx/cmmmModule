@@ -49,6 +49,10 @@ dependencies {
     implementation project(path: ':baserefresh')
     implementation project(path: ':basefragment')
     implementation project(path: ':baserecyclerview')
+
+    // 下拉刷新
+    def refreshLayout = '2.0.5'
+    implementation "io.github.scwang90:refresh-layout-kernel:$refreshLayout"
 }
 
 afterEvaluate {

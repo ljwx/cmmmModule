@@ -32,11 +32,12 @@ class MainActivity :
 
 
         super.onCreate(savedInstanceState)
+        addTabFragment("staterefresh", StateRefreshFragment())
         addTabFragment("basefragment", BaseFragmentTest())
 //        addTabFragment("mvvmFragment", LoginFragment())
-        addTabFragment("toolbar", BaseToolbarFragment())
+//        addTabFragment("toolbar", BaseToolbarFragment())
         addTabFragment("loadmore", LoadMoreFragment())
-        addTabFragment("vmFragment", ViewModelFragment())
+//        addTabFragment("vmFragment", ViewModelFragment())
 //        addTabFragment("javaTest", TestJavaFragment(0))
 
         registerFinishBroadcast("test")

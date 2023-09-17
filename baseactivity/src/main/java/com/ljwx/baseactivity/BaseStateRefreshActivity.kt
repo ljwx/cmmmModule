@@ -105,7 +105,7 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
         listener: View.OnClickListener,
         @LayoutStatus.LayoutStatus vararg stateLayout: Int
     ) {
-        this.mStateLayout?.setRetryListener(id, listener)
+        this.mStateLayout?.setClickListener(id, listener)
 //        if (retryId != null) {
 //            stateLayout?.setRetryIds(retryId)
 //        }

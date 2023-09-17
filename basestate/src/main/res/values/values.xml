@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="state_default_loading" tools:ignore="TypographyEllipsis">Loading...</string>
+    <string name="state_default_empty">No Records</string>
+    <string name="state_default_error">Network failure, please check network connection</string>
+    <string name="state_default_btn_retry">Retry</string>
+</resources>
