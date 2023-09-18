@@ -49,17 +49,6 @@ dependencies {
     //工具类
     api 'com.blankj:utilcodex:1.31.1'
 
-    //状态栏
-    def immersionBar = "3.2.2"
-    api "com.geyifeng.immersionbar:immersionbar:$immersionBar"
-
-//    //多状态
-//    def stateLayout = "1.4.2"
-//    api "com.github.liangjingkanji:StateLayout:$stateLayout"
-    // 刷新
-//    def refreshLayout = '2.0.6'
-//    api "io.github.scwang90:refresh-layout-kernel:$refreshLayout"
-
     //rxjava
     def rxjava = '3.0.0'
     api "io.reactivex.rxjava3:rxjava:$rxjava"

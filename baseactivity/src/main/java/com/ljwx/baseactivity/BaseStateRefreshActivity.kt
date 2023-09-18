@@ -5,8 +5,8 @@ import android.view.View
 import androidx.annotation.LayoutRes
 import com.ljwx.baseapp.BasePopupLoading
 import com.ljwx.baseapp.R
-import com.ljwx.baseapp.business.IBaseRefreshLayout
-import com.ljwx.baseapp.business.IBaseStateLayout
+import com.ljwx.baseapp.view.IViewRefreshLayout
+import com.ljwx.baseapp.view.IViewStateLayout
 import com.ljwx.baseapp.constant.LayoutStatus
 import com.ljwx.baseapp.extensions.isMainThread
 import com.ljwx.baseapp.page.IPagePopLoading
@@ -25,7 +25,7 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
     /**
      * 多状态控件
      */
-    private var mStateLayout: IBaseStateLayout? = null
+    private var mStateLayout: IViewStateLayout? = null
 
     /**
      * 子线程切换多状态布局
@@ -35,7 +35,7 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
     /**
      * 下拉刷新控件
      */
-    private var mRefreshLayout: IBaseRefreshLayout? = null
+    private var mRefreshLayout: IViewRefreshLayout? = null
 
     /**
      * 子线程执行刷新
@@ -74,7 +74,7 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
      */
     open fun useCommonStateLayout() {
         val stateLayout = findViewById<View>(R.id.base_app_quick_state_layout)
-        if (stateLayout != null && stateLayout is IBaseStateLayout) {
+        if (stateLayout != null && stateLayout is IViewStateLayout) {
             initStateLayout(stateLayout)
         }
     }
@@ -84,7 +84,7 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
      */
     open fun useCommonRefreshLayout() {
         val refreshLayout = findViewById<View>(R.id.base_app_quick_refresh_layout)
-        if (refreshLayout != null && refreshLayout is IBaseRefreshLayout) {
+        if (refreshLayout != null && refreshLayout is IViewRefreshLayout) {
             initRefreshLayout(refreshLayout)
         }
     }
@@ -96,7 +96,7 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
      *
      * @param stateLayout 多状态布局容器
      */
-    override fun initStateLayout(stateLayout: IBaseStateLayout?) {
+    override fun initStateLayout(stateLayout: IViewStateLayout?) {
         this.mStateLayout = stateLayout
     }
 
@@ -202,11 +202,11 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
 
     /*================================================================*/
 
-    override fun initRefreshLayout(refreshLayout: IBaseRefreshLayout?) {
+    override fun initRefreshLayout(refreshLayout: IViewRefreshLayout?) {
         this.mRefreshLayout = refreshLayout
         // 下拉刷新触发
-        refreshLayout?.setOnRefreshListener(object :IBaseRefreshLayout.RefreshListener{
-            override fun onRefresh(refreshLayout: IBaseRefreshLayout) {
+        refreshLayout?.setOnRefreshListener(object :IViewRefreshLayout.RefreshListener{
+            override fun onRefresh(refreshLayout: IViewRefreshLayout) {
 
             }
         })

@@ -3,10 +3,10 @@ package com.ljwx.basestate
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
-import com.ljwx.baseapp.business.IBaseStateLayout
+import com.ljwx.baseapp.view.IViewStateLayout
 import com.ljwx.basestate.czy.StateLayout
 
-open class BaseStateLayout(context: Context) : StateLayout(context), IBaseStateLayout {
+open class BaseStateLayout(context: Context) : StateLayout(context), IViewStateLayout {
     override fun showStateLayout(state: Int, layout: Int) {
 
     }

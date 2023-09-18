@@ -11,15 +11,14 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.gyf.immersionbar.ImmersionBar
-import com.ljwx.baseapp.dialog.IBaseDialogBuilder
+import com.ljwx.baseactivity.statusbar.BaseStatusBar
 import com.ljwx.baseapp.extensions.notNullOrBlank
 import com.ljwx.baseapp.page.IPageBroadcast
 import com.ljwx.baseapp.page.IPageDialogTips
 import com.ljwx.baseapp.page.IPageStatusBar
 import com.ljwx.baseapp.page.IPageToolbar
+import com.ljwx.baseapp.view.IViewStatusBar
 import com.ljwx.basedialog.BaseDialogFragment
 
 open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPageBroadcast,
@@ -28,7 +27,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     open val TAG = this.javaClass.simpleName
 
     private val mStatusBar by lazy {
-        ImmersionBar.with(this)
+        BaseStatusBar(this)
     }
 
     private var mStateSaved = false
@@ -66,18 +65,12 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         return ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
-    override fun getStatusBarUtils(): ImmersionBar {
+    override fun getStatusBar(): IViewStatusBar {
         return mStatusBar;
     }
 
-    override fun setStatusBar(backgroundColor: Int, fontDark: Boolean): ImmersionBar {
-        mStatusBar
-            .reset()//解决状态栏和布局重叠问题
-            .fitsSystemWindows(true)//默认为false，当为true时一定要指定statusBarColor()
-            .statusBarColor(backgroundColor)
-            .statusBarDarkFont(fontDark)//状态栏字体是深色，不写默认为亮色
-            .init()
-        return mStatusBar
+    override fun setStatusBar(backgroundColor: Int, fontDark: Boolean): IViewStatusBar {
+        return mStatusBar.setCustomStatusBar(backgroundColor,fontDark)
     }
 
     override fun initToolbar(toolbarId: Int): Toolbar? {
@@ -104,7 +97,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB
-        mStateSaved = true;
+        mStateSaved = true
     }
 
     override fun onResume() {

@@ -1,4 +1,4 @@
-package com.ljwx.baseapp.business
+package com.ljwx.baseapp.view
 
 import android.view.View
 import android.view.View.OnClickListener
@@ -6,7 +6,7 @@ import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import com.ljwx.baseapp.constant.LayoutStatus
 
-interface IBaseStateLayout {
+interface IViewStateLayout {
 
     fun showStateLayout(@LayoutStatus.LayoutStatus state: Int, @LayoutRes layout: Int)
 

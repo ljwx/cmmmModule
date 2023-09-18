@@ -47,6 +47,9 @@ dependencies {
     implementation project(path: ':baseapp')
     implementation project(path: ':basedialog')
 
+    def immersionBar = "3.2.2"
+    implementation "com.geyifeng.immersionbar:immersionbar:$immersionBar"
+
 }
 
 //publishing {

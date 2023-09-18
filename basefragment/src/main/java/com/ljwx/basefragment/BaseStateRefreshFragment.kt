@@ -5,8 +5,8 @@ import android.view.View
 import androidx.annotation.LayoutRes
 import com.ljwx.baseapp.R
 import com.ljwx.baseapp.BasePopupLoading
-import com.ljwx.baseapp.business.IBaseRefreshLayout
-import com.ljwx.baseapp.business.IBaseStateLayout
+import com.ljwx.baseapp.view.IViewRefreshLayout
+import com.ljwx.baseapp.view.IViewStateLayout
 import com.ljwx.baseapp.constant.LayoutStatus
 import com.ljwx.baseapp.extensions.isMainThread
 import com.ljwx.baseapp.page.IPagePopLoading
@@ -26,7 +26,7 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
     /**
      * 多状态
      */
-    private var mStateLayout: IBaseStateLayout? = null
+    private var mStateLayout: IViewStateLayout? = null
 
     /**
      * 安全线程切换
@@ -36,7 +36,7 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
     /**
      * 下拉刷新
      */
-    private var mRefreshLayout: IBaseRefreshLayout? = null
+    private var mRefreshLayout: IViewRefreshLayout? = null
 
     /**
      * 安全线程切换
@@ -82,7 +82,7 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
      */
     open fun useCommonStateLayout() {
         val stateLayout = view?.findViewById<View>(R.id.base_app_quick_state_layout)
-        if (stateLayout != null && stateLayout is IBaseStateLayout) {
+        if (stateLayout != null && stateLayout is IViewStateLayout) {
             initStateLayout(stateLayout)
         }
     }
@@ -92,7 +92,7 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
      */
     open fun useCommonRefreshLayout() {
         val refreshLayout = view?.findViewById<View>(R.id.base_app_quick_refresh_layout)
-        if (refreshLayout != null && refreshLayout is IBaseRefreshLayout) {
+        if (refreshLayout != null && refreshLayout is IViewRefreshLayout) {
             initRefreshLayout(refreshLayout)
         }
     }
@@ -104,7 +104,7 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
      *
      * @param stateLayout 多状态布局容器
      */
-    override fun initStateLayout(stateLayout: IBaseStateLayout?) {
+    override fun initStateLayout(stateLayout: IViewStateLayout?) {
         this.mStateLayout = stateLayout
     }
 
@@ -210,10 +210,10 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
 
     /*================================================================*/
 
-    override fun initRefreshLayout(refreshLayout: IBaseRefreshLayout?) {
+    override fun initRefreshLayout(refreshLayout: IViewRefreshLayout?) {
         this.mRefreshLayout = refreshLayout
-        refreshLayout?.setOnRefreshListener(object :IBaseRefreshLayout.RefreshListener{
-            override fun onRefresh(refreshLayout: IBaseRefreshLayout) {
+        refreshLayout?.setOnRefreshListener(object :IViewRefreshLayout.RefreshListener{
+            override fun onRefresh(refreshLayout: IViewRefreshLayout) {
 
             }
         })
