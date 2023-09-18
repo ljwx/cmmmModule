@@ -32,7 +32,7 @@ open class QuickStateRefreshLayout @JvmOverloads constructor(
     /**
      * 刷新布局
      */
-    private var mRefreshLayout: SpecialRefreshLayout? = null
+    private var mRefreshLayout: BaseRefreshLayout? = null
 
     /**
      * 是否需要刷新或多状态
@@ -123,8 +123,8 @@ open class QuickStateRefreshLayout @JvmOverloads constructor(
     /**
      * 添加最外层布局
      *
-     * @param rootRefresh 最外层是否是刷新布局
-     * @param contentParams 内容布局的大小
+     * @param refreshLayout 最外层是否是刷新布局
+     * @param contentView 内容布局
      */
     private fun addRootContainer(refreshLayout: Boolean, contentView: View) {
 
@@ -133,7 +133,7 @@ open class QuickStateRefreshLayout @JvmOverloads constructor(
 
         if (refreshLayout) {
             createRefreshLayout()
-            addView(mRefreshLayout, contentView.layoutParams)
+            addView(mRefreshLayout?.getView(), contentView.layoutParams)
         } else {
             createStateLayout()
             addView(mStateLayout, contentView.layoutParams)
@@ -151,7 +151,7 @@ open class QuickStateRefreshLayout @JvmOverloads constructor(
             refreshLayoutSetContent(mStateLayout)
         } else {
             createRefreshLayout()
-            stateLayoutSetContent(mRefreshLayout)
+            stateLayoutSetContent(mRefreshLayout?.getView())
         }
     }
 
@@ -190,7 +190,7 @@ open class QuickStateRefreshLayout @JvmOverloads constructor(
      */
     private fun refreshLayoutSetContent(content: View?) {
         content?.let {
-            mRefreshLayout?.addView(content, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+            mRefreshLayout?.getView()?.addView(content, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
             mRefreshLayout?.onFinishInflate()
         }
     }
@@ -219,8 +219,8 @@ open class QuickStateRefreshLayout @JvmOverloads constructor(
      */
     private fun createRefreshLayout() {
         // 创建刷新布局
-        mRefreshLayout = mRefreshLayout ?: SpecialRefreshLayout(context)
-        mRefreshLayout?.id = com.ljwx.baseapp.R.id.base_app_quick_refresh_layout
+        mRefreshLayout = mRefreshLayout ?: BaseRefreshLayout(context)
+        mRefreshLayout?.getView()?.id = com.ljwx.baseapp.R.id.base_app_quick_refresh_layout
     }
 
     override fun onFinishInflate() {
@@ -297,15 +297,15 @@ open class QuickStateRefreshLayout @JvmOverloads constructor(
 
     }
 
-    private inner class SpecialRefreshLayout : BaseRefreshLayout {
-
-        constructor(context: Context) : this(context, null)
-
-        constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
-
-        public override fun onFinishInflate() {
-            super.onFinishInflate()
-        }
-    }
+//    private inner class SpecialRefreshLayout : BaseRefreshLayout {
+//
+//        constructor(context: Context) : this(context, null)
+//
+//        constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
+//
+//        public override fun onFinishInflate() {
+//            super.onFinishInflate()
+//        }
+//    }
 
 }

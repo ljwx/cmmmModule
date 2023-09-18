@@ -1,5 +1,7 @@
 package com.ljwx.baseapp.view
 
+import android.view.ViewGroup
+
 interface IViewRefreshLayout {
 
     fun setRefreshHeader(header: IViewRefreshHeader)
@@ -8,6 +10,7 @@ interface IViewRefreshLayout {
 
     fun refreshFinish()
 
+    fun getView(): ViewGroup
     interface RefreshListener {
         fun onRefresh(refreshLayout: IViewRefreshLayout)
     }

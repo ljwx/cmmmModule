@@ -207,12 +207,9 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
         // 下拉刷新触发
         refreshLayout?.setOnRefreshListener(object :IViewRefreshLayout.RefreshListener{
             override fun onRefresh(refreshLayout: IViewRefreshLayout) {
-
+                onPullRefresh()
             }
         })
-//        refreshLayout?.setOnRefreshListener {
-//            onPullRefresh()
-//        }
     }
 
     /**
