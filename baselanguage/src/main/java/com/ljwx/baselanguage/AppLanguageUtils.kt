@@ -1,5 +1,7 @@
 package com.ljwx.baselanguage
 
+import android.content.Context
+import android.content.res.Configuration
 import com.blankj.utilcode.util.LanguageUtils
 import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.StringUtils
@@ -102,7 +104,7 @@ object AppLanguageUtils {
 //     *
 //     * @return APP支持的语言
 //     */
-//    fun getSelectLanguageLocal(): Locale {
+//    fun getSelectLanguageLocale(): Locale {
 //        val type = getLanguageCache()
 //        //已手动选择
 //        if (type != -1) {
@@ -130,6 +132,28 @@ object AppLanguageUtils {
 //            return ArrayList(LANGUAGE_SYMBOL_HEADER.values)[typeOrPosition - 1]
 //        }
 //        return DEFAULT_HEADER
+//    }
+//
+//    /**
+//     * 更新单个页面语言
+//     */
+//    @JvmStatic
+//    fun updatePageConfiguration(context: Context) {
+//        val configuration: Configuration = context.resources.configuration
+//        configuration.setLocale(getSelectLanguageLocale())
+//        context.createConfigurationContext(configuration)
+//    }
+//
+//    /**
+//     * 当前页语言是否跟app设置的一样
+//     */
+//    @JvmStatic
+//    fun currentIsMatch(context: Context) :Boolean{
+//        val current = context.resources.configuration.locale?.language
+//        if (!current.isNullOrEmpty()) {
+//            return getSelectLanguageLocale().language.equals(current)
+//        }
+//        return true
 //    }
 
 }
