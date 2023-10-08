@@ -1,4 +1,4 @@
-package com.ljwx.basedialog
+package com.ljwx.basedialog.dialogfragment
 
 import android.os.Bundle
 import androidx.databinding.ViewDataBinding

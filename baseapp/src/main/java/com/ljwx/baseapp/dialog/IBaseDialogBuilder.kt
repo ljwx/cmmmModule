@@ -1,5 +1,7 @@
 package com.ljwx.baseapp.dialog
 
+import android.app.Dialog
+import android.content.Context
 import android.view.View.OnClickListener
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
@@ -18,7 +20,10 @@ interface IBaseDialogBuilder {
 
     fun setContent(@LayoutRes layout: Int): IBaseDialogBuilder
 
-    fun setPositiveButton(text: CharSequence?, onClickListener: OnClickListener?): IBaseDialogBuilder
+    fun setPositiveButton(
+        text: CharSequence?,
+        onClickListener: OnClickListener?
+    ): IBaseDialogBuilder
 
     fun setPositiveButton(
         @StringRes stringRes: Int,
@@ -27,7 +32,10 @@ interface IBaseDialogBuilder {
 
     fun showNormalPositiveButton(show: Boolean = true): IBaseDialogBuilder
 
-    fun setNegativeButton(text: CharSequence?, onClickListener: OnClickListener?): IBaseDialogBuilder
+    fun setNegativeButton(
+        text: CharSequence?,
+        onClickListener: OnClickListener?
+    ): IBaseDialogBuilder
 
     fun setNegativeButton(
         @StringRes stringRes: Int,
@@ -36,12 +44,17 @@ interface IBaseDialogBuilder {
 
     fun showNormalNegativeButton(show: Boolean): IBaseDialogBuilder
 
-    fun create(): DialogFragment
+    fun createDialogFragment(): DialogFragment
 
-    fun show(manager: FragmentManager, tag: String?): DialogFragment
+    fun createDialog(context: Context): Dialog
 
-    fun show(manager: FragmentManager, @StringRes tag: Int): DialogFragment
+    fun showDialog(context: Context): Dialog
 
-    fun show(manager: FragmentManager): DialogFragment
+    fun showDialogFragment(manager: FragmentManager, tag: String?): DialogFragment
 
+    fun showDialogFragment(manager: FragmentManager, @StringRes tag: Int): DialogFragment
+
+    fun showDialogFragment(manager: FragmentManager): DialogFragment
+
+    fun isShowing(dialogFragment: Boolean = false): Boolean
 }

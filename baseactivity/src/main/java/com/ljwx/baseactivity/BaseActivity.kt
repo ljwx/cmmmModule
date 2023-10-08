@@ -19,7 +19,8 @@ import com.ljwx.baseapp.page.IPageDialogTips
 import com.ljwx.baseapp.page.IPageStatusBar
 import com.ljwx.baseapp.page.IPageToolbar
 import com.ljwx.baseapp.view.IViewStatusBar
-import com.ljwx.basedialog.BaseDialogFragment
+import com.ljwx.basedialog.common.BaseDialogBuilder
+import com.ljwx.basedialog.dialogfragment.BaseDialogFragment
 
 open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPageBroadcast,
     IPageDialogTips {
@@ -50,10 +51,6 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     private var mBroadcastIntentFilter: IntentFilter? = null
 
     private var onBackPressInterceptors: (ArrayList<() -> Boolean>)? = null
-
-    private val mTipsDialogBuilder by lazy {
-        BaseDialogFragment.Builder()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -129,9 +126,9 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         content: String?,
         tag: String?,
         positiveText: String?,
-        positiveListener: View.OnClickListener?,
         negativeText: String?,
-        showClose: Boolean?
+        showClose: Boolean?,
+        positiveListener: View.OnClickListener?
     ) {
         if (tag.notNullOrBlank()) {
             val cache = supportFragmentManager.findFragmentByTag(tag)
@@ -142,7 +139,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
                 return
             }
         }
-        val builder = BaseDialogFragment.Builder()
+        val builder = BaseDialogBuilder()
         builder.apply {
             showCloseIcon(showClose)
             if (title != null) {
@@ -155,7 +152,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
             if (negativeText != null) {
                 setNegativeButton(negativeText, null)
             }
-            show(supportFragmentManager, tag)
+            this.showDialog(this@BaseActivity)
         }
         Log.d(TAG, "${(tag ?: content) ?: "tag为空"},dialog新创建")
     }

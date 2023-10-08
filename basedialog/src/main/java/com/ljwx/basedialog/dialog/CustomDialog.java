@@ -1,4 +1,4 @@
-package com.ljwx.basedialog;
+package com.ljwx.basedialog.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -18,6 +18,8 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StyleRes;
 import androidx.appcompat.widget.LinearLayoutCompat;
+
+import com.ljwx.basedialog.R;
 
 public class CustomDialog extends Dialog {
 

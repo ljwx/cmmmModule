@@ -1,4 +1,4 @@
-package com.ljwx.basedialog
+package com.ljwx.basedialog.dialogfragment
 
 import android.content.Context
 import android.os.Bundle
@@ -17,6 +17,8 @@ import com.ljwx.baseapp.extensions.singleClick
 import com.ljwx.baseapp.extensions.visibleGone
 import com.ljwx.baseapp.dialog.IBaseDialogBuilder
 import com.ljwx.baseapp.extensions.notNullOrBlank
+import com.ljwx.basedialog.R
+import com.ljwx.basedialog.common.BaseDialogBuilder
 
 open class BaseDialogFragment : DialogFragment() {
 
@@ -27,7 +29,7 @@ open class BaseDialogFragment : DialogFragment() {
         }
     }
 
-    private var builder: Builder? = null
+    private var builder: BaseDialogBuilder? = null
 
     protected lateinit var mActivity: AppCompatActivity
 
@@ -121,7 +123,7 @@ open class BaseDialogFragment : DialogFragment() {
         }
     }
 
-    private fun setBuilder(builder: Builder): BaseDialogFragment {
+     internal fun setBuilder(builder: BaseDialogBuilder): BaseDialogFragment {
         this.builder = builder
         return this
     }
@@ -152,138 +154,6 @@ open class BaseDialogFragment : DialogFragment() {
         val field = DialogFragment::class.java.getDeclaredField(fieldName)
         field.isAccessible = true
         field[obj] = fieldValue
-    }
-
-    class Builder : IBaseDialogBuilder {
-
-        var showClose: Boolean? = null
-            private set
-        var title: String? = null
-            private set
-        var showTitle: Boolean = false
-            private set
-        var content: String? = null
-            private set
-        var contentId: Int? = null
-            private set
-        var positiveText: CharSequence? = null
-            private set
-        var positiveListener: View.OnClickListener? = null
-            private set
-        var showPositiveButton = false
-            private set
-        var negativeText: CharSequence? = null
-            private set
-        var negativeListener: View.OnClickListener? = null
-            private set
-        var showNegativeButton = false
-            private set
-        var tag: String? = null
-        var dialog: BaseDialogFragment? = null
-        override fun showCloseIcon(show: Boolean?): IBaseDialogBuilder {
-            showClose = show
-            return this
-        }
-
-
-        override fun setTitle(title: CharSequence?): IBaseDialogBuilder {
-            this.title = title.toString()
-            showTitle = true
-            return this
-        }
-
-        override fun setTitle(title: Int): IBaseDialogBuilder {
-            this.title = getStringRes(title)
-            showTitle = true
-            return this
-        }
-
-        override fun setContent(content: CharSequence?): IBaseDialogBuilder {
-            this.content = content.toString()
-            return this
-        }
-
-        override fun setContent(layout: Int): IBaseDialogBuilder {
-            this.contentId = layout
-            return this
-        }
-
-        override fun setPositiveButton(
-            text: CharSequence?,
-            onClickListener: View.OnClickListener?
-        ): IBaseDialogBuilder {
-            this.positiveText = text
-            positiveListener = onClickListener
-            showPositiveButton = true
-            return this
-        }
-
-        override fun setPositiveButton(
-            stringRes: Int,
-            onClickListener: View.OnClickListener?
-        ): IBaseDialogBuilder {
-            this.positiveText = getStringRes(stringRes)
-            positiveListener = onClickListener
-            showPositiveButton = true
-            return this
-        }
-
-        override fun showNormalPositiveButton(show: Boolean): IBaseDialogBuilder {
-            showPositiveButton = show
-            return this
-        }
-
-        override fun setNegativeButton(
-            text: CharSequence?,
-            onClickListener: View.OnClickListener?
-        ): IBaseDialogBuilder {
-            this.negativeText = text
-            negativeListener = onClickListener
-            showNegativeButton = true
-            return this
-        }
-
-        override fun setNegativeButton(
-            stringRes: Int,
-            onClickListener: View.OnClickListener?
-        ): IBaseDialogBuilder {
-            this.negativeText = getStringRes(stringRes)
-            negativeListener = onClickListener
-            showNegativeButton = true
-            return this
-        }
-
-        override fun showNormalNegativeButton(show: Boolean): IBaseDialogBuilder {
-            showNegativeButton = show
-            return this
-        }
-
-        override fun create(): BaseDialogFragment {
-            val dialog = this.dialog ?: BaseDialogFragment().setBuilder(this)
-            return dialog
-        }
-
-        override fun show(manager: FragmentManager, tag: String?): BaseDialogFragment {
-            val dialog = this.dialog ?: BaseDialogFragment().setBuilder(this)
-            this.tag = tag ?: content
-            dialog.show(manager, this.tag)
-            return dialog
-        }
-
-        override fun show(manager: FragmentManager, tag: Int): BaseDialogFragment {
-            val dialog = this.dialog ?: BaseDialogFragment().setBuilder(this)
-            this.tag = getStringRes(tag)
-            dialog.show(manager, this.tag)
-            return dialog
-        }
-
-        override fun show(manager: FragmentManager): BaseDialogFragment {
-            val dialog = this.dialog ?: BaseDialogFragment().setBuilder(this)
-            this.tag = this.tag ?: content
-            dialog.show(manager, this.tag)
-            return dialog
-        }
-
     }
 
 }

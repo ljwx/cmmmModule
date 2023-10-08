@@ -13,12 +13,12 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.blankj.utilcode.util.ToastUtils
 import com.blankj.utilcode.util.Utils
 import com.ljwx.baseapp.extensions.notNullOrBlank
 import com.ljwx.baseapp.page.IPageBroadcast
 import com.ljwx.baseapp.page.IPageDialogTips
-import com.ljwx.basedialog.BaseDialogFragment
+import com.ljwx.basedialog.common.BaseDialogBuilder
+import com.ljwx.basedialog.dialogfragment.BaseDialogFragment
 
 open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), IPageBroadcast,
     IPageDialogTips {
@@ -81,10 +81,13 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
         content: String?,
         tag: String?,
         positiveText: String?,
-        positiveListener: View.OnClickListener?,
         negativeText: String?,
-        showClose: Boolean?
+        showClose: Boolean?,
+        positiveListener: View.OnClickListener?
     ) {
+        if (!isAdded) {
+            return
+        }
         if (tag.notNullOrBlank()) {
             val cache = childFragmentManager.findFragmentByTag(tag)
             if (cache != null && cache is BaseDialogFragment) {
@@ -95,7 +98,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
                 return
             }
         }
-        val builder = BaseDialogFragment.Builder()
+        val builder = BaseDialogBuilder()
         builder.apply {
             showCloseIcon(showClose)
             if (title != null) {
@@ -108,7 +111,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
             if (negativeText != null) {
                 setNegativeButton(negativeText, null)
             }
-            show(childFragmentManager, tag)
+            showDialog(requireContext())
         }
         Log.d(TAG, "${(tag ?: content) ?: "tag为空"},dialog新创建")
     }

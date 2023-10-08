@@ -1,11 +1,11 @@
-package com.ljwx.basedialog
+package com.ljwx.basedialog.dialog
 
 import android.content.Context
 import android.view.Gravity
 import android.view.ViewGroup
 import android.view.WindowManager
 
-open class BottomDialog : CustomDialog {
+open class CustomBottomDialog : CustomDialog {
 
     constructor(context: Context) : this(context, 0, true)
 
@@ -13,12 +13,12 @@ open class BottomDialog : CustomDialog {
             : super(context, themeResId) {
 
         setAnimation(translate(1f, 0f), translate(0f, 1f))
-        getWindow()?.setGravity(Gravity.BOTTOM or if (isFillHorizontal) Gravity.FILL_HORIZONTAL else Gravity.CENTER_HORIZONTAL)
-        getWindow()?.getDecorView()
-            ?.setLayoutParams(WindowManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT))
-        getWindow()?.setLayout(WindowManager.LayoutParams.MATCH_PARENT,
+        window?.setGravity(Gravity.BOTTOM or if (isFillHorizontal) Gravity.FILL_HORIZONTAL else Gravity.CENTER_HORIZONTAL)
+        window?.decorView?.layoutParams = WindowManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT)
+        window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.WRAP_CONTENT)
         setCanceledOnTouchOutside(true)
+
     }
 }
