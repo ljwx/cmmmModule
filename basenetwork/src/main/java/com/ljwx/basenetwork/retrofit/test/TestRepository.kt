@@ -7,7 +7,6 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.gson.GsonBuilder
 import com.ljwx.baseapp.extensions.lifecycle
 import com.ljwx.baseapp.response.DataResult
-import com.ljwx.baseapp.vm.model.BaseDataRepository
 import com.ljwx.baseapp.vm.model.BaseSecondRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -48,9 +47,9 @@ class TestRepository : BaseSecondRepository<TestService, TestService>() {
                     Log.d("ljwx2", "请求结果成功")
                     if (response.isSuccessful) {
                         val result = response.body().toString()
-                        callback.call(DataResult.Success(result))
+                        callback.onResult(DataResult.Success(result))
                     }
-                    callback.call(DataResult.Error(ClassNotFoundException()))
+                    callback.onResult(DataResult.Error(ClassNotFoundException()))
                 }
 
                 override fun onFailure(call: Call<String>, t: Throwable) {
