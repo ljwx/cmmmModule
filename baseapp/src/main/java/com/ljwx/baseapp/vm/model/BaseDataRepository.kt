@@ -85,7 +85,7 @@ abstract class BaseDataRepository<Server> {
 
         override fun onNext(value: T) {
             if (value is BaseResponse<*>) {
-                if (value.isSuccessAndDataNotNull()) {
+                if (value.isSuccess()) {
                     onResponseSuccess(value)
                 } else {
                     onResponseFail(value)
@@ -105,7 +105,7 @@ abstract class BaseDataRepository<Server> {
          *
          * @param value 接口返回结果
          */
-        open fun <T : Any?> onResponseFail(value: T?) {
+        open fun onResponseFail(value: T?) {
             responseFail?.invoke(value)
         }
     }
@@ -128,7 +128,7 @@ abstract class BaseDataRepository<Server> {
 
         override fun onNext(value: T) {
             if (value is BaseResponse<*>) {
-                if (value.isSuccessAndDataNotNull()) {
+                if (value.isSuccess()) {
                     onResponseSuccess(value)
                 } else {
                     onResponseFail(value)
@@ -141,14 +141,14 @@ abstract class BaseDataRepository<Server> {
          *
          * @param value 接口返回结果
          */
-        abstract fun <T : Any> onResponseSuccess(value: T)
+        abstract fun onResponseSuccess(value: T)
 
         /**
          * 接口数据失败
          *
          * @param value 接口返回结果
          */
-        open fun <T : Any?> onResponseFail(value: T?) {
+        open fun onResponseFail(value: T?) {
             responseFail?.invoke(value)
         }
 
