@@ -6,7 +6,7 @@ sealed class DataResult<out R : Any> {
     data class Error(val exception: Exception) : DataResult<Nothing>()
 
     interface Result<D : Any> {
-        fun call(result: DataResult<D>)
+        fun onResult(result: DataResult<D>)
     }
 
     override fun toString(): String {

@@ -32,7 +32,7 @@ class TestViewModel : BaseViewModel<TestRepository>() {
 
     fun requestTest() {
         mRepository.requestTest(object :DataResult.Result<String>{
-            override fun call(result: DataResult<String>) {
+            override fun onResult(result: DataResult<String>) {
                 if (result is DataResult.Success) {
                     mResponse.postValue(result.data)
                     Log.d("ljwx2,sadfasdf", result.data)
