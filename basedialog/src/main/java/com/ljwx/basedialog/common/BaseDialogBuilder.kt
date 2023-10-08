@@ -117,6 +117,7 @@ class BaseDialogBuilder : IBaseDialogBuilder {
     override fun createDialog(context: Context): Dialog {
         val dialog = this.dialog ?: BaseDialog(context).setBuilder(this)
         dialog.setDataFromBuilder()
+        dialog.setCanceledOnTouchOutside(false)
         return dialog
     }
 
@@ -128,6 +129,7 @@ class BaseDialogBuilder : IBaseDialogBuilder {
     override fun showDialog(context: Context): Dialog {
         val dialog = this.dialog ?: BaseDialog(context).setBuilder(this)
         dialog.setDataFromBuilder()
+        dialog.setCanceledOnTouchOutside(false)
         dialog.show()
         return dialog
     }
