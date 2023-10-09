@@ -1,6 +1,7 @@
 package com.ljwx.baseapp.vm.model
 
 import com.ljwx.baseapp.response.BaseResponse
+import com.ljwx.baseapp.response.DataResult
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 
@@ -70,14 +71,14 @@ abstract class BaseDataRepository<Server> {
     /**
      * RxJava3版本的结果监听
      */
-    abstract inner class QuickObserver3<T> : io.reactivex.rxjava3.core.Observer<T> {
+    abstract inner class QuickObserver3<T : Any> : io.reactivex.rxjava3.core.Observer<T>,
+        IQuickObserver<T> {
         override fun onSubscribe(d: Disposable) {
             autoClear3(d)
         }
 
         override fun onError(e: Throwable) {
             observerOnError?.invoke(e)
-            onError()
         }
 
         override fun onComplete() {
@@ -85,45 +86,38 @@ abstract class BaseDataRepository<Server> {
         }
 
         override fun onNext(value: T) {
-            if (value is BaseResponse<*>) {
-                if (value.isSuccess()) {
-                    onResponseSuccess(value)
+            onResponse(value)
+        }
+
+        /**
+         * 接口结果响应
+         *
+         * @param response 结果
+         */
+        override fun onResponse(response: T) {
+            if (response is BaseResponse<*>) {
+                if (response.isSuccess()) {
+                    onResponseSuccess(DataResult.Success(response))
                 } else {
-                    onResponseFail(value)
+                    onResponseFail(DataResult.Fail(response))
                 }
-            } else {
-                onResult(value)
             }
         }
 
         /**
          * 接口数据成功
          *
-         * @param response 接口返回结果
+         * @param result 成功的结果
          */
-        abstract fun onResponseSuccess(response: T)
+        abstract override fun onResponseSuccess(result: DataResult.Success<T>)
 
         /**
          * 接口数据失败
          *
-         * @param response 接口返回结果
+         * @param result 失败的结果
          */
-        open fun onResponseFail(response: T) {
-            responseFail?.invoke(response)
-        }
-
-        /**
-         * 非框架内的响应结构回调
-         */
-        open fun onResult(response: T?) {
-
-        }
-
-        /**
-         * 异常错误回调
-         */
-        open fun onError() {
-
+        override fun onResponseFail(result: DataResult.Fail<T>) {
+            responseFail?.invoke(result.data)
         }
 
     }
@@ -131,14 +125,13 @@ abstract class BaseDataRepository<Server> {
     /**
      * RxJava2版本的结果监听
      */
-    abstract inner class QuickObserver<T> : io.reactivex.Observer<T> {
+    abstract inner class QuickObserver<T : Any> : io.reactivex.Observer<T> ,IQuickObserver<T>{
         override fun onSubscribe(d: io.reactivex.disposables.Disposable) {
             autoClear2(d)
         }
 
         override fun onError(e: Throwable) {
             observerOnError?.invoke(e)
-            onError()
         }
 
         override fun onComplete() {
@@ -146,45 +139,38 @@ abstract class BaseDataRepository<Server> {
         }
 
         override fun onNext(value: T) {
-            if (value is BaseResponse<*>) {
-                if (value.isSuccess()) {
-                    onResponseSuccess(value)
+            onResponse(value)
+        }
+
+        /**
+         * 接口结果响应
+         *
+         * @param response 结果
+         */
+        override fun onResponse(response: T) {
+            if (response is BaseResponse<*>) {
+                if (response.isSuccess()) {
+                    onResponseSuccess(DataResult.Success(response))
                 } else {
-                    onResponseFail(value)
+                    onResponseFail(DataResult.Fail(response))
                 }
-            } else {
-                onResult(value)
             }
         }
 
         /**
          * 接口数据成功
          *
-         * @param response 接口返回结果
+         * @param result 成功的结果
          */
-        abstract fun onResponseSuccess(response: T)
+        abstract override fun onResponseSuccess(result: DataResult.Success<T>)
 
         /**
          * 接口数据失败
          *
-         * @param response 接口返回结果
+         * @param result 失败的结果
          */
-        open fun onResponseFail(response: T) {
-            responseFail?.invoke(response)
-        }
-
-        /**
-         * 非框架内的响应结构回调
-         */
-        open fun onResult(response: T?) {
-
-        }
-
-        /**
-         * 异常错误回调
-         */
-        open fun onError() {
-
+        override fun onResponseFail(result: DataResult.Fail<T>) {
+            responseFail?.invoke(result.data)
         }
 
     }

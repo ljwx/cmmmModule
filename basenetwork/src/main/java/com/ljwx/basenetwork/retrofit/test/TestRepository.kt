@@ -65,7 +65,8 @@ class TestRepository : BaseSecondRepository<TestService, TestService>() {
             .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
             .lifecycle()
             .subscribe(object : QuickObserver3<String>() {
-                override fun onResponseSuccess(value: String) {
+
+                override fun onResponseSuccess(result: DataResult.Success<String>) {
 
                 }
             })
