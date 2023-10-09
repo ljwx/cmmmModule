@@ -108,7 +108,7 @@ abstract class BaseDataRepository<Server> {
          *
          * @param value 接口返回结果
          */
-        open fun onResponseFail(value: T?) {
+        open fun onResponseFail(value: T) {
             responseFail?.invoke(value)
         }
 
@@ -169,7 +169,7 @@ abstract class BaseDataRepository<Server> {
          *
          * @param value 接口返回结果
          */
-        open fun onResponseFail(value: T?) {
+        open fun onResponseFail(value: T) {
             responseFail?.invoke(value)
         }
 
