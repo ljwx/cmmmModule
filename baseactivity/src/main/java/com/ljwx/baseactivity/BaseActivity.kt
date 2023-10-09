@@ -1,5 +1,6 @@
 package com.ljwx.baseactivity
 
+import android.app.Dialog
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -7,20 +8,17 @@ import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.ljwx.baseactivity.statusbar.BaseStatusBar
-import com.ljwx.baseapp.extensions.notNullOrBlank
 import com.ljwx.baseapp.page.IPageBroadcast
 import com.ljwx.baseapp.page.IPageDialogTips
 import com.ljwx.baseapp.page.IPageStatusBar
 import com.ljwx.baseapp.page.IPageToolbar
 import com.ljwx.baseapp.view.IViewStatusBar
 import com.ljwx.basedialog.common.BaseDialogBuilder
-import com.ljwx.basedialog.dialogfragment.BaseDialogFragment
 
 open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPageBroadcast,
     IPageDialogTips {
@@ -112,8 +110,12 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         mStateSaved = false
     }
 
-    override fun showDialogTips(title: String?, content: String?, positiveText: String?) {
-        showDialogTips(title, content, positiveText, null, null, null, null, null)
+    override fun showDialogTips(
+        title: String?,
+        content: String?,
+        positiveText: String?
+    ): Dialog? {
+        return showDialogTips(title, content, positiveText, null, null, null, null, null)
     }
 
     /**
@@ -134,16 +136,16 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         tag: String?,
         negativeListener: View.OnClickListener?,
         positiveListener: View.OnClickListener?
-    ) {
-        if (tag.notNullOrBlank()) {
-            val cache = supportFragmentManager.findFragmentByTag(tag)
-            if (cache != null && cache is BaseDialogFragment) {
-                //报java.lang.IllegalStateException: Fragment already added
-//                cache.show(supportFragmentManager, tag)
-                Log.d(TAG, "$tag,dialog有缓存")
-                return
-            }
-        }
+    ): Dialog? {
+//        if (tag.notNullOrBlank()) {
+//            val cache = supportFragmentManager.findFragmentByTag(tag)
+//            if (cache != null && cache is BaseDialogFragment) {
+//                //报java.lang.IllegalStateException: Fragment already added
+////                cache.show(supportFragmentManager, tag)
+//                Log.d(TAG, "$tag,dialog有缓存")
+//                return cache.getBuilder()
+//            }
+//        }
         val builder = BaseDialogBuilder()
         builder.apply {
             showCloseIcon(showClose)
@@ -159,9 +161,8 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
             if (negativeText != null || negativeListener != null) {
                 setNegativeButton(negativeText, negativeListener)
             }
-            this.showDialog(this@BaseActivity)
+            return this.showDialog(this@BaseActivity)
         }
-        Log.d(TAG, "${(tag ?: content) ?: "tag为空"},dialog新创建")
     }
 
     override fun registerFinishBroadcast(vararg actions: String?) {

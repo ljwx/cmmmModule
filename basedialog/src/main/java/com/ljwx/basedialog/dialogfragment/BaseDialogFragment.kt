@@ -12,10 +12,8 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
-import com.ljwx.baseapp.extensions.getStringRes
 import com.ljwx.baseapp.extensions.singleClick
 import com.ljwx.baseapp.extensions.visibleGone
-import com.ljwx.baseapp.dialog.IBaseDialogBuilder
 import com.ljwx.baseapp.extensions.notNullOrBlank
 import com.ljwx.basedialog.R
 import com.ljwx.basedialog.common.BaseDialogBuilder
@@ -68,6 +66,10 @@ open class BaseDialogFragment : DialogFragment() {
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
         dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
         //getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+    }
+
+    fun getBuilder(): BaseDialogBuilder? {
+        return builder
     }
 
     private fun setDataFromBuilder(view: View) {
@@ -123,7 +125,7 @@ open class BaseDialogFragment : DialogFragment() {
         }
     }
 
-     internal fun setBuilder(builder: BaseDialogBuilder): BaseDialogFragment {
+    internal fun setBuilder(builder: BaseDialogBuilder): BaseDialogFragment {
         this.builder = builder
         return this
     }

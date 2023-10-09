@@ -1,5 +1,6 @@
 package com.ljwx.basefragment
 
+import android.app.Dialog
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -14,11 +15,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.blankj.utilcode.util.Utils
-import com.ljwx.baseapp.extensions.notNullOrBlank
 import com.ljwx.baseapp.page.IPageBroadcast
 import com.ljwx.baseapp.page.IPageDialogTips
 import com.ljwx.basedialog.common.BaseDialogBuilder
-import com.ljwx.basedialog.dialogfragment.BaseDialogFragment
 
 open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), IPageBroadcast,
     IPageDialogTips {
@@ -67,8 +66,12 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
         }
     }
 
-    override fun showDialogTips(title: String?, content: String?, positiveText: String?) {
-        showDialogTips(title, content, positiveText, null, null, null, null, null)
+    override fun showDialogTips(
+        title: String?,
+        content: String?,
+        positiveText: String?
+    ): Dialog? {
+        return showDialogTips(title, content, positiveText, null, null, null, null, null)
     }
 
     /**
@@ -89,20 +92,20 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
         tag: String?,
         negativeListener: View.OnClickListener?,
         positiveListener: View.OnClickListener?
-    ) {
+    ): Dialog? {
         if (!isAdded) {
-            return
+            return null
         }
-        if (tag.notNullOrBlank()) {
-            val cache = childFragmentManager.findFragmentByTag(tag)
-            if (cache != null && cache is BaseDialogFragment) {
-                //报java.lang.IllegalStateException: Fragment already added
-                //有时间再看 TODO
-//                cache.show(childFragmentManager, tag)
-                Log.d(TAG, "$tag,dialog有缓存")
-                return
-            }
-        }
+//        if (tag.notNullOrBlank()) {
+//            val cache = childFragmentManager.findFragmentByTag(tag)
+//            if (cache != null && cache is BaseDialogFragment) {
+//                //报java.lang.IllegalStateException: Fragment already added
+//                //有时间再看 TODO
+////                cache.show(childFragmentManager, tag)
+//                Log.d(TAG, "$tag,dialog有缓存")
+//                return cache.getBuilder()
+//            }
+//        }
         val builder = BaseDialogBuilder()
         builder.apply {
             showCloseIcon(showClose)
@@ -118,9 +121,9 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
             if (negativeText != null || negativeListener != null) {
                 setNegativeButton(negativeText, negativeListener)
             }
-            showDialog(requireContext())
+            Log.d(TAG, "${(tag ?: content) ?: "tag为空"},dialog新创建")
+            return showDialog(requireContext())
         }
-        Log.d(TAG, "${(tag ?: content) ?: "tag为空"},dialog新创建")
     }
 
     override fun registerFinishBroadcast(vararg actions: String?) {

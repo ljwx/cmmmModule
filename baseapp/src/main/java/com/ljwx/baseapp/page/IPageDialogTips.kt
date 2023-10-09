@@ -1,5 +1,6 @@
 package com.ljwx.baseapp.page
 
+import android.app.Dialog
 import android.view.View
 
 interface IPageDialogTips {
@@ -8,7 +9,7 @@ interface IPageDialogTips {
         title: String? = null,
         content: String? = null,
         positiveText: String? = null,
-    )
+    ): Dialog?
 
     fun showDialogTips(
         title: String? = null,
@@ -19,6 +20,6 @@ interface IPageDialogTips {
         tag: String? = null,
         negativeListener: View.OnClickListener? = null,
         positiveListener: View.OnClickListener? = null
-    )
+    ): Dialog?
 
 }
