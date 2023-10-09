@@ -67,6 +67,10 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
         }
     }
 
+    override fun showDialogTips(title: String?, content: String?, positiveText: String?) {
+        showDialogTips(title, content, positiveText, null, null, null, null, null)
+    }
+
     /**
      * 快速显示dialog提示
      *
@@ -79,10 +83,11 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
     override fun showDialogTips(
         title: String?,
         content: String?,
-        tag: String?,
         positiveText: String?,
         negativeText: String?,
         showClose: Boolean?,
+        tag: String?,
+        negativeListener: View.OnClickListener?,
         positiveListener: View.OnClickListener?
     ) {
         if (!isAdded) {
@@ -105,11 +110,13 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
                 setTitle(title)
             }
             setContent(content)
+            //是否显示确定等
             if (positiveText != null || positiveListener != null) {
                 setPositiveButton(positiveText, positiveListener)
             }
-            if (negativeText != null) {
-                setNegativeButton(negativeText, null)
+            //是否显示取消等
+            if (negativeText != null || negativeListener != null) {
+                setNegativeButton(negativeText, negativeListener)
             }
             showDialog(requireContext())
         }

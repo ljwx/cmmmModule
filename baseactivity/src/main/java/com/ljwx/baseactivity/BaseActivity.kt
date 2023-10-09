@@ -67,7 +67,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     }
 
     override fun setStatusBar(backgroundColor: Int, fontDark: Boolean): IViewStatusBar {
-        return mStatusBar.setCustomStatusBar(backgroundColor,fontDark)
+        return mStatusBar.setCustomStatusBar(backgroundColor, fontDark)
     }
 
     override fun initToolbar(toolbarId: Int): Toolbar? {
@@ -112,6 +112,10 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         mStateSaved = false
     }
 
+    override fun showDialogTips(title: String?, content: String?, positiveText: String?) {
+        showDialogTips(title, content, positiveText, null, null, null, null, null)
+    }
+
     /**
      * 快速显示dialog提示
      *
@@ -124,10 +128,11 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     override fun showDialogTips(
         title: String?,
         content: String?,
-        tag: String?,
         positiveText: String?,
         negativeText: String?,
         showClose: Boolean?,
+        tag: String?,
+        negativeListener: View.OnClickListener?,
         positiveListener: View.OnClickListener?
     ) {
         if (tag.notNullOrBlank()) {
@@ -146,11 +151,13 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
                 setTitle(title)
             }
             setContent(content)
+            //是否显示确定等
             if (positiveText != null || positiveListener != null) {
                 setPositiveButton(positiveText, positiveListener)
             }
-            if (negativeText != null) {
-                setNegativeButton(negativeText, null)
+            //是否显示取消等
+            if (negativeText != null || negativeListener != null) {
+                setNegativeButton(negativeText, negativeListener)
             }
             this.showDialog(this@BaseActivity)
         }
