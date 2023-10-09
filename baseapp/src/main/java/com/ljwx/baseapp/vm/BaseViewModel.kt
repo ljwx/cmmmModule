@@ -13,8 +13,11 @@ abstract class BaseViewModel<R : BaseDataRepository<*>> : ViewModel(), DefaultLi
     protected var mRepository: R
 
     private val mShowPopLoading = MutableLiveData<Triple<Boolean, Int, String>>()
-    val popLoading: MutableLiveData<Triple<Boolean, Int, String>>
+    private val mDismissPopLoading = MutableLiveData<Triple<Boolean, Int, String>>()
+    val popLoadingShow: MutableLiveData<Triple<Boolean, Int, String>>
         get() = mShowPopLoading
+    val popLoadingDismiss: MutableLiveData<Triple<Boolean, Int, String>>
+        get() = mDismissPopLoading
 
     init {
         mRepository = createRepository()
@@ -36,7 +39,7 @@ abstract class BaseViewModel<R : BaseDataRepository<*>> : ViewModel(), DefaultLi
     }
 
     open fun dismissPopLoading(dismiss: Boolean = true, code: Int? = 0, message: String? = "") {
-        mShowPopLoading.postValue(Triple(dismiss, code ?: 0, message ?: ""))
+        mDismissPopLoading.postValue(Triple(dismiss, code ?: 0, message ?: ""))
     }
 
 }

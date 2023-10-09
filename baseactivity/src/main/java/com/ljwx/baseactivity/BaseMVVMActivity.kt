@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
-import com.ljwx.baseapp.page.IPageViewModel
 import com.ljwx.baseapp.vm.BaseViewModel
 import java.lang.reflect.ParameterizedType
 
@@ -21,12 +20,11 @@ open class BaseMVVMActivity<Binding : ViewDataBinding, ViewModel : BaseViewModel
     }
 
     open fun initPopLoadingObserver() {
-        mViewModel.popLoading.observe(this) {
-            if (it.first) {
-                showPopLoading()
-            } else {
-                dismissPopLoading()
-            }
+        mViewModel.popLoadingShow.observe(this) {
+            showPopLoading(it.first)
+        }
+        mViewModel.popLoadingDismiss.observe(this){
+            dismissPopLoading(it.first)
         }
     }
 

@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.Window
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
+import com.blankj.utilcode.util.ThreadUtils
 
-class BasePopupLoading(val context: Context) {
+class BasePopupLoading(private val context: Context) {
 
     companion object {
 
@@ -56,7 +57,6 @@ class BasePopupLoading(val context: Context) {
         val lp = dialog.window?.attributes
         lp?.width = 300
         lp?.height = 300
-        Log.d("ljwx2", "是否透明:"+backgroundTransparent)
         lp?.dimAmount = if (backgroundTransparent) 0f else 0.6f
 //        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.window?.attributes = lp
@@ -68,7 +68,10 @@ class BasePopupLoading(val context: Context) {
     }
 
     fun dismiss() {
-        dialog.ownerActivity?.runOnUiThread {
+        if (!dialog.isShowing) {
+            return
+        }
+        ThreadUtils.runOnUiThread {
             dialog.dismiss()
         }
     }
