@@ -29,7 +29,11 @@ open abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : Base
 
     open fun initPopLoadingObserver() {
         mViewModel.popLoading.observe(this) {
-            showPopLoading(it.first)
+            if (it.first) {
+                showPopLoading()
+            } else {
+                dismissPopLoading()
+            }
         }
     }
 

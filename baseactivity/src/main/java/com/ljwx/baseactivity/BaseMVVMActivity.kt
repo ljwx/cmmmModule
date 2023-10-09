@@ -22,7 +22,11 @@ open class BaseMVVMActivity<Binding : ViewDataBinding, ViewModel : BaseViewModel
 
     open fun initPopLoadingObserver() {
         mViewModel.popLoading.observe(this) {
-            showPopLoading(it.first)
+            if (it.first) {
+                showPopLoading()
+            } else {
+                dismissPopLoading()
+            }
         }
     }
 
