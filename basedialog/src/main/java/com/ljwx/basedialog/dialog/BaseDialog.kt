@@ -86,7 +86,7 @@ class BaseDialog @JvmOverloads constructor(context: Context, theme: Int = 0) :
     }
 
     open fun setNegativeButton(negativeText: CharSequence?, negativeListener: OnClickListener?) {
-        vRoot.rootView.findViewById<TextView>(R.id.base_dialog_positive)?.apply {
+        vRoot.rootView.findViewById<TextView>(R.id.base_dialog_negative)?.apply {
             builder?.setNegativeButton(negativeText, negativeListener)
             visibleGone(true)
             if (negativeText.notNullOrBlank()) {
