@@ -8,6 +8,8 @@ import com.ljwx.baseapp.vm.model.BaseDataRepository
 
 abstract class BaseViewModel<R : BaseDataRepository<*>> : ViewModel(), DefaultLifecycleObserver {
 
+    open val TAG = this.javaClass.simpleName
+
     protected var mRepository: R
 
     private val mShowPopLoading = MutableLiveData<Triple<Boolean, Int, String>>()
