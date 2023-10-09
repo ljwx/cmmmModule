@@ -51,14 +51,14 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
 
     }
 
-    override fun showPopLoading(show: Boolean, cancelable: Boolean, level: Int) {
+    override fun showPopLoading(show: Boolean, cancelable: Boolean, transparent:Boolean, level: Int) {
         if (!show || (isPopupLoadingShowing())) {
             return
         }
         mLoadingRunnable = mLoadingRunnable ?: Runnable {
 //            mPopupLoading.setCancelable(cancelable)
 //            dialog.setCanceledOnTouchOutside(canceledOnTouchOutside)
-            mPopupLoading.showPopup(show)
+            mPopupLoading.showPopup(show, cancelable, backgroundTransparent = transparent)
         }
         activity?.runOnUiThread(mLoadingRunnable)
     }

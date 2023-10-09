@@ -7,7 +7,12 @@ interface IPagePopLoading {
     /**
      * 显示加载悬浮弹窗
      */
-    fun showPopLoading(show: Boolean = true, cancelable: Boolean = true, level: Int = 3)
+    fun showPopLoading(
+        show: Boolean = true,
+        cancelable: Boolean = true,
+        transparent: Boolean = false,
+        level: Int = 3
+    )
 
     /**
      * 取消加载悬浮窗

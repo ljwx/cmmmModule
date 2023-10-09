@@ -42,25 +42,6 @@ class MainActivity :
 
         registerFinishBroadcast("test")
 
-        Log.d("ljwx2", TAG_CLASS + "onCreate")
-        FlowEventBus.get<String>("flow").observe(this) {
-            Log.d("ljwx2", it)
-        }
-        LiveEventBus.get<String>("liveeventbus").observe(this) {
-            Log.d("ljwx2", it)
-            mBinding.tabLayout.visibleGone(false)
-        }
-
-        AppEnvConfig.addEnv(AppEnvItem("测试", "www.baidu.com"))
-
-        AppUtils.isAppDebug()
-
-        registerShakeEnv(object : ShakeSelectAppEnv.EnvCallback {
-            override fun selected(item: AppEnvItem) {
-                Log.d("ljwx2", item.host)
-            }
-        })
-
     }
 
     override fun onBroadcastPageFinish() {
