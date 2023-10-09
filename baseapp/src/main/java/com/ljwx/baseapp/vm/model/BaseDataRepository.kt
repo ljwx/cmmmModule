@@ -90,6 +90,8 @@ abstract class BaseDataRepository<Server> {
                 } else {
                     onResponseFail(value)
                 }
+            } else {
+                onResult(value)
             }
         }
 
@@ -108,6 +110,14 @@ abstract class BaseDataRepository<Server> {
         open fun onResponseFail(value: T?) {
             responseFail?.invoke(value)
         }
+
+        /**
+         * 非框架内的响应结构回调
+         */
+        open fun onResult(value: T?) {
+
+        }
+
     }
 
     /**
@@ -133,6 +143,8 @@ abstract class BaseDataRepository<Server> {
                 } else {
                     onResponseFail(value)
                 }
+            } else {
+                onResult(value)
             }
         }
 
@@ -150,6 +162,13 @@ abstract class BaseDataRepository<Server> {
          */
         open fun onResponseFail(value: T?) {
             responseFail?.invoke(value)
+        }
+
+        /**
+         * 非框架内的响应结构回调
+         */
+        open fun onResult(value: T?) {
+
         }
 
     }
