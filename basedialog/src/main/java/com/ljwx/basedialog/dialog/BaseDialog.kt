@@ -2,6 +2,7 @@ package com.ljwx.basedialog.dialog
 
 import android.content.Context
 import android.view.View
+import android.view.View.OnClickListener
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import com.ljwx.baseapp.extensions.notNullOrBlank
@@ -54,34 +55,48 @@ class BaseDialog @JvmOverloads constructor(context: Context, theme: Int = 0) :
                 visibleGone(content != null)
                 text = content ?: ""
             }
-            view.findViewById<TextView>(R.id.base_dialog_positive)?.apply {
-                visibleGone(showPositiveButton)
-                if (showPositiveButton) {
-                    if (positiveText.notNullOrBlank()) {
-                        text = positiveText
-                    }
-                    if (positiveListener != null) {
-                        setOnClickListener(positiveListener)
-                    } else {
-                        singleClick {
-                            dismiss()
-                        }
-                    }
+            if (showPositiveButton) {
+                setPositiveButton(positiveText, positiveListener)
+            } else {
+                view.findViewById<TextView>(R.id.base_dialog_positive)?.visibleGone(false)
+            }
+            if (showNegativeButton) {
+                setNegativeButton(negativeText, negativeListener)
+            } else {
+                view.findViewById<TextView>(R.id.base_dialog_negative)?.visibleGone(false)
+            }
+        }
+    }
+
+    open fun setPositiveButton(positiveText: String?, positiveListener: OnClickListener?) {
+        vRoot.rootView.findViewById<TextView>(R.id.base_dialog_positive)?.apply {
+            builder?.setPositiveButton(positiveText, positiveListener)
+            visibleGone(true)
+            if (positiveText.notNullOrBlank()) {
+                text = positiveText
+            }
+            if (positiveListener != null) {
+                setOnClickListener(positiveListener)
+            } else {
+                singleClick {
+                    dismiss()
                 }
             }
-            view.findViewById<TextView>(R.id.base_dialog_negative)?.apply {
-                visibleGone(showNegativeButton)
-                if (showNegativeButton) {
-                    if (negativeText.notNullOrBlank()) {
-                        text = negativeText
-                    }
-                    if (negativeListener != null) {
-                        setOnClickListener(negativeListener)
-                    } else {
-                        singleClick {
-                            dismiss()
-                        }
-                    }
+        }
+    }
+
+    open fun setNegativeButton(negativeText: String?, negativeListener: OnClickListener?) {
+        vRoot.rootView.findViewById<TextView>(R.id.base_dialog_positive)?.apply {
+            builder?.setNegativeButton(negativeText, negativeListener)
+            visibleGone(true)
+            if (negativeText.notNullOrBlank()) {
+                text = negativeText
+            }
+            if (negativeListener != null) {
+                setOnClickListener(negativeListener)
+            } else {
+                singleClick {
+                    dismiss()
                 }
             }
         }
