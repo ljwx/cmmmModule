@@ -99,23 +99,23 @@ abstract class BaseDataRepository<Server> {
         /**
          * 接口数据成功
          *
-         * @param value 接口返回结果
+         * @param response 接口返回结果
          */
-        abstract fun onResponseSuccess(value: T)
+        abstract fun onResponseSuccess(response: T)
 
         /**
          * 接口数据失败
          *
-         * @param value 接口返回结果
+         * @param response 接口返回结果
          */
-        open fun onResponseFail(value: T) {
-            responseFail?.invoke(value)
+        open fun onResponseFail(response: T) {
+            responseFail?.invoke(response)
         }
 
         /**
          * 非框架内的响应结构回调
          */
-        open fun onResult(value: T?) {
+        open fun onResult(response: T?) {
 
         }
 
@@ -160,23 +160,23 @@ abstract class BaseDataRepository<Server> {
         /**
          * 接口数据成功
          *
-         * @param value 接口返回结果
+         * @param response 接口返回结果
          */
-        abstract fun onResponseSuccess(value: T)
+        abstract fun onResponseSuccess(response: T)
 
         /**
          * 接口数据失败
          *
-         * @param value 接口返回结果
+         * @param response 接口返回结果
          */
-        open fun onResponseFail(value: T) {
-            responseFail?.invoke(value)
+        open fun onResponseFail(response: T) {
+            responseFail?.invoke(response)
         }
 
         /**
          * 非框架内的响应结构回调
          */
-        open fun onResult(value: T?) {
+        open fun onResult(response: T?) {
 
         }
 
