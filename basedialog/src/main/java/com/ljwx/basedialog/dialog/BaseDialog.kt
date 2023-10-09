@@ -56,19 +56,19 @@ class BaseDialog @JvmOverloads constructor(context: Context, theme: Int = 0) :
                 text = content ?: ""
             }
             if (showPositiveButton) {
-                setPositiveButton(positiveText, positiveListener)
+                this@BaseDialog.setPositiveButton(positiveText, positiveListener)
             } else {
                 view.findViewById<TextView>(R.id.base_dialog_positive)?.visibleGone(false)
             }
             if (showNegativeButton) {
-                setNegativeButton(negativeText, negativeListener)
+                this@BaseDialog.setNegativeButton(negativeText, negativeListener)
             } else {
                 view.findViewById<TextView>(R.id.base_dialog_negative)?.visibleGone(false)
             }
         }
     }
 
-    open fun setPositiveButton(positiveText: String?, positiveListener: OnClickListener?) {
+    open fun setPositiveButton(positiveText: CharSequence?, positiveListener: OnClickListener?) {
         vRoot.rootView.findViewById<TextView>(R.id.base_dialog_positive)?.apply {
             builder?.setPositiveButton(positiveText, positiveListener)
             visibleGone(true)
@@ -85,7 +85,7 @@ class BaseDialog @JvmOverloads constructor(context: Context, theme: Int = 0) :
         }
     }
 
-    open fun setNegativeButton(negativeText: String?, negativeListener: OnClickListener?) {
+    open fun setNegativeButton(negativeText: CharSequence?, negativeListener: OnClickListener?) {
         vRoot.rootView.findViewById<TextView>(R.id.base_dialog_positive)?.apply {
             builder?.setNegativeButton(negativeText, negativeListener)
             visibleGone(true)
