@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.ljwx.baseactivity.statusbar.BaseStatusBar
 import com.ljwx.baseapp.page.IPageBroadcast
+import com.ljwx.baseapp.page.IPageBusinessStep
 import com.ljwx.baseapp.page.IPageDialogTips
 import com.ljwx.baseapp.page.IPageStatusBar
 import com.ljwx.baseapp.page.IPageToolbar
@@ -21,7 +22,7 @@ import com.ljwx.baseapp.view.IViewStatusBar
 import com.ljwx.basedialog.common.BaseDialogBuilder
 
 open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPageBroadcast,
-    IPageDialogTips {
+    IPageDialogTips, IPageBusinessStep {
 
     open val TAG = this.javaClass.simpleName
 
@@ -272,6 +273,35 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
             if (it.invoke()) return
         }
         super.onBackPressed()
+    }
+
+
+    open fun commonLogicStep() {
+        getInitData()
+        initView()
+        observeData()
+        setClickListener()
+        getAsyncData()
+    }
+
+    override fun getInitData() {
+
+    }
+
+    override fun initView() {
+
+    }
+
+    override fun observeData() {
+
+    }
+
+    override fun setClickListener() {
+
+    }
+
+    override fun getAsyncData() {
+
     }
 
     override fun onDestroy() {
