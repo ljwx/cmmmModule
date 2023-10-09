@@ -77,6 +77,7 @@ abstract class BaseDataRepository<Server> {
 
         override fun onError(e: Throwable) {
             observerOnError?.invoke(e)
+            onError()
         }
 
         override fun onComplete() {
@@ -115,6 +116,13 @@ abstract class BaseDataRepository<Server> {
          * 非框架内的响应结构回调
          */
         open fun onResult(value: T?) {
+
+        }
+
+        /**
+         * 异常错误回调
+         */
+        open fun onError() {
 
         }
 
@@ -130,6 +138,7 @@ abstract class BaseDataRepository<Server> {
 
         override fun onError(e: Throwable) {
             observerOnError?.invoke(e)
+            onError()
         }
 
         override fun onComplete() {
@@ -168,6 +177,13 @@ abstract class BaseDataRepository<Server> {
          * 非框架内的响应结构回调
          */
         open fun onResult(value: T?) {
+
+        }
+
+        /**
+         * 异常错误回调
+         */
+        open fun onError() {
 
         }
 
