@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="CommonToolbar" >
+    <!--1.设置导航按钮style-->
+    <style name="CommonToolbar.NavigationButtonStyle" parent="Widget.AppCompat.Toolbar.Button.Navigation">
+        <!--按钮宽度-->
+        <item name="android:minWidth">22dp</item>
+        <!--按钮显示-->
+        <item name="android:scaleType">centerInside</item>
+        <!--按钮左边间距-->
+        <item name="android:paddingLeft">20dp</item>
+        <!--按钮又边距-->
+        <item name="android:paddingRight">5dp</item>
+        <!--去掉水波纹-->
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <!--2.按钮样式-->
+    <style name="CommonToolbar.NavigationStyle">
+        <item name="toolbarNavigationButtonStyle">@style/CommonToolbar.NavigationButtonStyle</item>
+    </style>
+
+    <!--3.综合样式-->
+    <style name="CommonToolbar">
         <!--宽度-->
         <item name="android:layout_width">match_parent</item>
         <!--高度-->
@@ -13,34 +33,15 @@
         <item name="android:translationZ">0dp</item>
     </style>
 
-    <style name="CommonToolbar.NavigationStyle">
-        <!--按钮样式-->
-        <item name="toolbarNavigationButtonStyle">@style/CommonToolbar.NavigationButtonStyle</item>
-    </style>
-
-    <!--设置导航按钮style-->
-    <style name="CommonToolbar.NavigationButtonStyle" parent="Widget.AppCompat.Toolbar.Button.Navigation">
-        <!--按钮宽度-->
-        <item name="android:minWidth">16dp</item>
-        <!--按钮显示-->
-        <item name="android:scaleType">centerInside</item>
-        <!--按钮左边间距-->
-        <item name="android:paddingLeft">16dp</item>
-        <!--按钮又边距-->
-        <item name="android:paddingRight">5dp</item>
-        <!--去掉水波纹-->
-        <item name="android:background">@android:color/transparent</item>
-    </style>
-
-    <!--标题样式-->
+    <!--标题文字样式-->
     <style name="CommonToolbar.TitleTextAppearance" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/base_toolbar_textPrimary</item>
-        <item name="android:textSize">30dp</item>
+        <item name="android:textSize">20dp</item>
         <item name="android:textStyle">normal</item>
     </style>
 
     <!--toolbar直接使用的样式-->
-    <style name="style_base_tool_bar" parent="CommonToolbar">
+    <style name="base_toolbar_common" parent="CommonToolbar">
         <item name="navigationIcon">@mipmap/base_toolbar_black_icon</item>
         <!--标题颜色及大小-->
         <item name="titleTextAppearance">@style/CommonToolbar.TitleTextAppearance</item>
