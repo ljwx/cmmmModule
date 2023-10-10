@@ -44,6 +44,8 @@ interface IBaseDialogBuilder {
 
     fun showNormalNegativeButton(show: Boolean): IBaseDialogBuilder
 
+    fun buttonsReversal(reversal: Boolean)
+
     fun createDialogFragment(): DialogFragment
 
     fun createDialog(context: Context): Dialog

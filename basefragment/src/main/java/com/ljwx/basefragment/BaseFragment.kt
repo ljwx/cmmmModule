@@ -72,7 +72,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
         content: String?,
         positiveText: String?
     ): Dialog? {
-        return showDialogTips(title, content, positiveText, null, null, null, null, null)
+        return showDialogTips(title, content, positiveText, null, null, null, false, null, null)
     }
 
     /**
@@ -91,6 +91,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
         negativeText: String?,
         showClose: Boolean?,
         tag: String?,
+        reversalButtons: Boolean,
         negativeListener: View.OnClickListener?,
         positiveListener: View.OnClickListener?
     ): Dialog? {
@@ -122,6 +123,8 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
             if (negativeText != null || negativeListener != null) {
                 setNegativeButton(negativeText, negativeListener)
             }
+            //是否反转按钮
+            buttonsReversal(reversalButtons)
             Log.d(TAG, "${(tag ?: content) ?: "tag为空"},dialog新创建")
             return showDialog(requireContext())
         }

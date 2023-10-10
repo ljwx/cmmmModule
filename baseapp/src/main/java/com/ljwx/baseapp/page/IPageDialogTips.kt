@@ -18,6 +18,7 @@ interface IPageDialogTips {
         negativeText: String? = null,
         showClose: Boolean? = null,
         tag: String? = null,
+        reversalButtons: Boolean = false,
         negativeListener: View.OnClickListener? = null,
         positiveListener: View.OnClickListener? = null
     ): Dialog?

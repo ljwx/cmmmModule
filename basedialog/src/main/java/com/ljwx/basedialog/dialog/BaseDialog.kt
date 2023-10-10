@@ -1,10 +1,13 @@
 package com.ljwx.basedialog.dialog
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.LayoutRes
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.ljwx.baseapp.extensions.notNullOrBlank
 import com.ljwx.baseapp.extensions.singleClick
 import com.ljwx.baseapp.extensions.visibleGone
@@ -65,6 +68,34 @@ class BaseDialog @JvmOverloads constructor(context: Context, theme: Int = 0) :
             } else {
                 view.findViewById<TextView>(R.id.base_dialog_negative)?.visibleGone(false)
             }
+            if (buttonsReversal && showNegativeButton && showPositiveButton) {
+                view.findViewById<TextView>(R.id.base_dialog_negative)?.apply {
+                    val params = layoutParams
+                    if (params is ConstraintLayout.LayoutParams) {
+                        params.leftToLeft = View.NO_ID
+                        params.rightToRight = getParentId(this)
+                        params.rightToLeft = View.NO_ID
+                        params.leftToRight = R.id.base_dialog_positive
+                        params.verticalChainStyle = params.verticalChainStyle
+                        params.leftMargin = params.rightMargin
+                        params.marginStart = params.marginEnd
+                        layoutParams = params
+                    }
+                }
+                view.findViewById<TextView>(R.id.base_dialog_positive)?.apply {
+                    val params = layoutParams
+                    if (params is ConstraintLayout.LayoutParams) {
+                        params.rightToRight = View.NO_ID
+                        params.leftToLeft = getParentId(this)
+                        params.leftToRight = View.NO_ID
+                        params.rightToLeft = R.id.base_dialog_negative
+                        params.verticalChainStyle = params.verticalChainStyle
+                        params.rightMargin = params.leftMargin
+                        params.marginEnd = params.marginStart
+                        layoutParams = params
+                    }
+                }
+            }
         }
     }
 
@@ -100,6 +131,18 @@ class BaseDialog @JvmOverloads constructor(context: Context, theme: Int = 0) :
                 }
             }
         }
+    }
+
+    private fun getParentId(view: View): Int {
+        (view.parent as? ViewGroup)?.let {
+            if (it.id == View.NO_ID) {
+                it.id = R.id.base_dialog_parent
+                return it.id
+            } else {
+                return it.id
+            }
+        }
+        return View.NO_ID
     }
 
 }

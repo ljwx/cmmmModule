@@ -8,6 +8,7 @@ import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -116,8 +117,9 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         content: String?,
         positiveText: String?
     ): Dialog? {
-        return showDialogTips(title, content, positiveText, null, null, null, null, null)
+        return showDialogTips(title, content, positiveText, null, null, null,false, null, null)
     }
+
 
     /**
      * 快速显示dialog提示
@@ -135,6 +137,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         negativeText: String?,
         showClose: Boolean?,
         tag: String?,
+        reversalButtons:Boolean,
         negativeListener: View.OnClickListener?,
         positiveListener: View.OnClickListener?
     ): Dialog? {
@@ -162,6 +165,8 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
             if (negativeText != null || negativeListener != null) {
                 setNegativeButton(negativeText, negativeListener)
             }
+            //是否反转按钮
+            buttonsReversal(reversalButtons)
             return this.showDialog(this@BaseActivity)
         }
     }

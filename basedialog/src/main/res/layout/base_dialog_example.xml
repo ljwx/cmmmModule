@@ -5,10 +5,11 @@
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@android:color/white"
+        android:id="@+id/base_dialog_parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dp16">
+        android:layout_marginHorizontal="@dimen/dp16"
+        android:background="@android:color/white">
 
         <ImageView
             android:id="@+id/base_dialog_close"
@@ -57,17 +58,22 @@
             android:text="取消"
             android:textColor="@color/base_app_textColorPrimary"
             android:textSize="@dimen/sp14"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/base_dialog_positive"
             app:layout_constraintTop_toBottomOf="@id/base_dialog_content_container" />
 
         <Button
             android:id="@+id/base_dialog_positive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp20"
             android:layout_marginTop="@dimen/dp20"
             android:text="确定"
             android:textColor="@color/base_app_textColorPrimary"
             android:textSize="@dimen/sp14"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toRightOf="@id/base_dialog_negative"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/base_dialog_content_container" />
 

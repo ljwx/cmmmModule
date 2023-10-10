@@ -2,6 +2,7 @@ package com.ljwx.basedialog.common
 
 import android.app.Dialog
 import android.content.Context
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.FragmentManager
 import com.ljwx.baseapp.dialog.IBaseDialogBuilder
@@ -34,6 +35,8 @@ class BaseDialogBuilder : IBaseDialogBuilder {
     var showNegativeButton = false
         private set
     var tag: String? = null
+    var buttonsReversal = false
+        private set
     private var dialogFragment: BaseDialogFragment? = null
     private var dialog: BaseDialog? = null
     override fun showCloseIcon(show: Boolean?): IBaseDialogBuilder {
@@ -112,6 +115,10 @@ class BaseDialogBuilder : IBaseDialogBuilder {
     override fun showNormalNegativeButton(show: Boolean): IBaseDialogBuilder {
         showNegativeButton = show
         return this
+    }
+
+    override fun buttonsReversal(reversal: Boolean) {
+        buttonsReversal = reversal
     }
 
     override fun createDialog(context: Context): Dialog {
