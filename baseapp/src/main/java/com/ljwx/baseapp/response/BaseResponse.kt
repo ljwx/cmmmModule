@@ -20,8 +20,6 @@ open class BaseResponse<Data> {
 
     var data: Data? = null
 
-    var errorData: Any? = null
-
     var isRefresh: Boolean? = null
 
     var extensionField: Any? = null
