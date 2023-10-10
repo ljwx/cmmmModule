@@ -107,17 +107,17 @@ abstract class BaseDataRepository<Server> {
         /**
          * 接口数据成功
          *
-         * @param result 成功的结果
+         * @param dataResult 成功的结果
          */
-        abstract override fun onResponseSuccess(result: DataResult.Success<T>)
+        abstract override fun onResponseSuccess(dataResult: DataResult.Success<T>)
 
         /**
          * 接口数据失败
          *
-         * @param result 失败的结果
+         * @param dataResult 失败的结果
          */
-        override fun onResponseFail(result: DataResult.Fail<T>) {
-            responseFail?.invoke(result.data)
+        override fun onResponseFail(dataResult: DataResult.Fail<T>) {
+            responseFail?.invoke(dataResult.data)
         }
 
     }
@@ -160,17 +160,17 @@ abstract class BaseDataRepository<Server> {
         /**
          * 接口数据成功
          *
-         * @param result 成功的结果
+         * @param dataResult 成功的结果
          */
-        abstract override fun onResponseSuccess(result: DataResult.Success<T>)
+        abstract override fun onResponseSuccess(dataResult: DataResult.Success<T>)
 
         /**
          * 接口数据失败
          *
-         * @param result 失败的结果
+         * @param dataResult 失败的结果
          */
-        override fun onResponseFail(result: DataResult.Fail<T>) {
-            responseFail?.invoke(result.data)
+        override fun onResponseFail(dataResult: DataResult.Fail<T>) {
+            responseFail?.invoke(dataResult.data)
         }
 
     }
