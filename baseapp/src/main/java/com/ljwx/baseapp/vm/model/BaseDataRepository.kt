@@ -125,7 +125,7 @@ abstract class BaseDataRepository<Server> {
     /**
      * RxJava2版本的结果监听
      */
-    abstract inner class QuickObserver<T : Any> : io.reactivex.Observer<T> ,IQuickObserver<T>{
+    abstract inner class QuickObserver<T : Any> : io.reactivex.Observer<T>, IQuickObserver<T> {
         override fun onSubscribe(d: io.reactivex.disposables.Disposable) {
             autoClear2(d)
         }

@@ -6,8 +6,8 @@ interface IQuickObserver<T : Any> {
 
     fun onResponse(response: T)
 
-    fun onResponseSuccess(response: DataResult.Success<T>)
+    fun onResponseSuccess(result: DataResult.Success<T>)
 
-    fun onResponseFail(response: DataResult.Fail<T>)
+    fun onResponseFail(result: DataResult.Fail<T>)
 
 }
