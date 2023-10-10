@@ -214,7 +214,7 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
         this.mRefreshLayout = refreshLayout
         refreshLayout?.setOnRefreshListener(object :IViewRefreshLayout.RefreshListener{
             override fun onRefresh(refreshLayout: IViewRefreshLayout) {
-                onPullRefresh()
+                onRefreshData()
             }
         })
     }
@@ -222,7 +222,7 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
     /**
      * 下拉刷新
      */
-    override fun onPullRefresh() {
+    override fun onRefreshData() {
 
     }
 

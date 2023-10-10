@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.lifecycleScope
-import com.ljwx.baseapp.constant.LayoutStatus
 import com.ljwx.basefragment.BaseBindingFragment
 import com.ljwx.basemodule.R
 import com.ljwx.basemodule.databinding.FragmentStateRefreshBinding
@@ -24,8 +23,8 @@ class StateRefreshFragment :
 
     }
 
-    override fun onPullRefresh() {
-        super.onPullRefresh()
+    override fun onRefreshData() {
+        super.onRefreshData()
         Log.d("ljwx2", "执行刷新")
         lifecycleScope.launch(Dispatchers.IO) {
             delay(2000)

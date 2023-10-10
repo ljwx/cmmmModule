@@ -10,9 +10,9 @@ interface IPageRefreshLayout {
     fun initRefreshLayout(refreshLayout: IViewRefreshLayout?)
 
     /**
-     * 触发下拉刷新
+     * 触发刷新
      */
-    fun onPullRefresh()
+    fun onRefreshData()
 
     /**
      * 刷新结束
