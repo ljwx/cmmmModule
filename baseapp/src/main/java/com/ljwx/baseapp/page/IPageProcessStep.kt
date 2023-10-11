@@ -1,10 +1,12 @@
 package com.ljwx.baseapp.page
 
-interface IPageBusinessStep {
+interface IPageProcessStep {
 
-    fun getInitData()
+    fun commonProcessSteps()
 
-    fun initView()
+    fun getFirstInitData()
+
+    fun initUIView()
 
     fun observeData()
 

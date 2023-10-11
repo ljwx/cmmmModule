@@ -16,12 +16,12 @@ import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.blankj.utilcode.util.Utils
 import com.ljwx.baseapp.page.IPageBroadcast
-import com.ljwx.baseapp.page.IPageBusinessStep
+import com.ljwx.baseapp.page.IPageProcessStep
 import com.ljwx.baseapp.page.IPageDialogTips
 import com.ljwx.basedialog.common.BaseDialogBuilder
 
 open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), IPageBroadcast,
-    IPageDialogTips, IPageBusinessStep {
+    IPageDialogTips, IPageProcessStep {
 
     open val TAG = this.javaClass.simpleName
 
@@ -237,19 +237,19 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
     }
 
 
-    open fun commonLogicStep() {
-        getInitData()
-        initView()
+    override fun commonProcessSteps() {
+        getFirstInitData()
+        initUIView()
         observeData()
         setClickListener()
         getAsyncData()
     }
 
-    override fun getInitData() {
+    override fun getFirstInitData() {
 
     }
 
-    override fun initView() {
+    override fun initUIView() {
 
     }
 

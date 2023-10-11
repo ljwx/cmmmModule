@@ -8,14 +8,14 @@ import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.ljwx.baseactivity.statusbar.BaseStatusBar
+import com.ljwx.baseapp.page.IPageActivity
 import com.ljwx.baseapp.page.IPageBroadcast
-import com.ljwx.baseapp.page.IPageBusinessStep
+import com.ljwx.baseapp.page.IPageProcessStep
 import com.ljwx.baseapp.page.IPageDialogTips
 import com.ljwx.baseapp.page.IPageStatusBar
 import com.ljwx.baseapp.page.IPageToolbar
@@ -23,7 +23,7 @@ import com.ljwx.baseapp.view.IViewStatusBar
 import com.ljwx.basedialog.common.BaseDialogBuilder
 
 open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPageBroadcast,
-    IPageDialogTips, IPageBusinessStep {
+    IPageDialogTips, IPageProcessStep, IPageActivity {
 
     open val TAG = this.javaClass.simpleName
 
@@ -58,7 +58,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         requestedOrientation = getScreenOrientation()
     }
 
-    open fun getScreenOrientation(): Int {
+    override fun getScreenOrientation(): Int {
         return ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
@@ -117,7 +117,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         content: String?,
         positiveText: String?
     ): Dialog? {
-        return showDialogTips(title, content, positiveText, null, null, null,false, null, null)
+        return showDialogTips(title, content, positiveText, null, null, null, false, null, null)
     }
 
 
@@ -137,7 +137,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         negativeText: String?,
         showClose: Boolean?,
         tag: String?,
-        reversalButtons:Boolean,
+        reversalButtons: Boolean,
         negativeListener: View.OnClickListener?,
         positiveListener: View.OnClickListener?
     ): Dialog? {
@@ -281,19 +281,19 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     }
 
 
-    open fun commonLogicStep() {
-        getInitData()
-        initView()
+    override fun commonProcessSteps() {
+        getFirstInitData()
+        initUIView()
         observeData()
         setClickListener()
         getAsyncData()
     }
 
-    override fun getInitData() {
+    override fun getFirstInitData() {
 
     }
 
-    override fun initView() {
+    override fun initUIView() {
 
     }
 
