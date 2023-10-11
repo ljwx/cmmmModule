@@ -4,9 +4,10 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ljwx.baseapp.response.DataResult
 import com.ljwx.baseapp.vm.model.BaseDataRepository
 
-abstract class BaseViewModel<R : BaseDataRepository<*>> : ViewModel(), DefaultLifecycleObserver {
+abstract class BaseViewModel<R : BaseDataRepository<*>> :IBaseViewModel<R>, ViewModel(), DefaultLifecycleObserver {
 
     open val TAG = this.javaClass.simpleName
 
@@ -40,6 +41,14 @@ abstract class BaseViewModel<R : BaseDataRepository<*>> : ViewModel(), DefaultLi
 
     open fun dismissPopLoading(dismiss: Boolean = true, code: Int? = 0, message: String? = "") {
         mDismissPopLoading.postValue(Triple(dismiss, code ?: 0, message ?: ""))
+    }
+
+    open fun responseFail(result: DataResult<*>) {
+
+    }
+
+    open fun responseError(e: Throwable) {
+
     }
 
 }

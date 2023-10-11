@@ -5,7 +5,7 @@ import com.ljwx.baseapp.response.DataResult
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 
-abstract class BaseDataRepository<Server> {
+abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
 
     companion object {
 
@@ -37,14 +37,12 @@ abstract class BaseDataRepository<Server> {
         get() = createServer()
 
 
-    abstract fun createServer(): Server
-
     /**
      * 页面销毁时,自动取消网络请求
      *
      * @param disposable Rxjava2版本的dispose
      */
-    open fun autoClear2(disposable: io.reactivex.disposables.Disposable) {
+    override fun autoClear(disposable: io.reactivex.disposables.Disposable) {
         if (mCompositeDisposable == null) {
             mCompositeDisposable = CompositeDisposable()
         }
@@ -55,7 +53,7 @@ abstract class BaseDataRepository<Server> {
      *
      * @param disposable Rxjava3版本的dispose
      */
-    open fun autoClear3(disposable: Disposable) {
+    override fun autoClear(disposable: Disposable) {
         if (mCompositeDisposable == null) {
             mCompositeDisposable = CompositeDisposable()
         }
@@ -65,7 +63,7 @@ abstract class BaseDataRepository<Server> {
     /**
      * 自动取消
      */
-    open fun onCleared() {
+    override fun onCleared() {
         mCompositeDisposable?.clear()
     }
 
@@ -75,7 +73,7 @@ abstract class BaseDataRepository<Server> {
     abstract inner class QuickObserver3<T : Any> : io.reactivex.rxjava3.core.Observer<T>,
         IQuickObserver<T> {
         override fun onSubscribe(d: Disposable) {
-            autoClear3(d)
+            autoClear(d)
         }
 
         override fun onError(e: Throwable) {
@@ -128,7 +126,7 @@ abstract class BaseDataRepository<Server> {
      */
     abstract inner class QuickObserver<T : Any> : io.reactivex.Observer<T>, IQuickObserver<T> {
         override fun onSubscribe(d: io.reactivex.disposables.Disposable) {
-            autoClear2(d)
+            autoClear(d)
         }
 
         override fun onError(e: Throwable) {
