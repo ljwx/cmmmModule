@@ -5,4 +5,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00000000</color>
 
+    <color name="green_1abb92">#1ABB92</color>
+    <color name="grey_f6f8fa">#F6F8FA</color>
+
 </resources>

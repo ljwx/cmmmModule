@@ -58,6 +58,7 @@ class BaseDialog @JvmOverloads constructor(context: Context, theme: Int = 0) :
                 visibleGone(content != null)
                 text = content ?: ""
             }
+            //按钮
             if (showPositiveButton) {
                 this@BaseDialog.setPositiveButton(positiveText, positiveListener)
             } else {
@@ -68,33 +69,36 @@ class BaseDialog @JvmOverloads constructor(context: Context, theme: Int = 0) :
             } else {
                 view.findViewById<TextView>(R.id.base_dialog_negative)?.visibleGone(false)
             }
+            //反转按钮位置
             if (buttonsReversal && showNegativeButton && showPositiveButton) {
-                view.findViewById<TextView>(R.id.base_dialog_negative)?.apply {
-                    val params = layoutParams
-                    if (params is ConstraintLayout.LayoutParams) {
-                        params.leftToLeft = View.NO_ID
-                        params.rightToRight = getParentId(this)
-                        params.rightToLeft = View.NO_ID
-                        params.leftToRight = R.id.base_dialog_positive
-                        params.verticalChainStyle = params.verticalChainStyle
-                        params.rightMargin = params.leftMargin
-                        params.marginEnd = params.marginStart
-                        layoutParams = params
-                    }
-                }
                 view.findViewById<TextView>(R.id.base_dialog_positive)?.apply {
-                    val params = layoutParams
-                    if (params is ConstraintLayout.LayoutParams) {
-                        params.rightToRight = View.NO_ID
-                        params.leftToLeft = getParentId(this)
-                        params.leftToRight = View.NO_ID
-                        params.rightToLeft = R.id.base_dialog_negative
-                        params.verticalChainStyle = params.verticalChainStyle
-                        params.leftMargin = params.rightMargin
-                        params.marginStart = params.marginEnd
-                        layoutParams = params
-                    }
+                    setReversalParams(this, true)
                 }
+                view.findViewById<TextView>(R.id.base_dialog_negative)?.apply {
+                    setReversalParams(this, false)
+                }
+            }
+        }
+    }
+
+    open fun setReversalParams(view: View, isPositive: Boolean) {
+        view.apply {
+            val params = layoutParams
+            if (params is ConstraintLayout.LayoutParams) {
+                params.rightToRight = if (isPositive) View.NO_ID else getParentId(this)
+                params.leftToLeft = if (isPositive) getParentId(this) else View.NO_ID
+                params.leftToRight = if (isPositive) View.NO_ID else R.id.base_dialog_positive
+                params.rightToLeft = if (isPositive) R.id.base_dialog_negative else View.NO_ID
+                params.verticalChainStyle = params.verticalChainStyle
+                val left = params.leftMargin
+                val right = params.rightMargin
+                val start = params.marginStart
+                val end = params.marginEnd
+                params.leftMargin = right
+                params.rightMargin = left
+                params.marginStart = end
+                params.marginEnd = start
+                layoutParams = params
             }
         }
     }

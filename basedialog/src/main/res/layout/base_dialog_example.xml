@@ -1,82 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/base_dialog_parent"
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="data"
+            type="String" />
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dp16"
-        android:background="@android:color/white">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/base_dialog_close"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@android:drawable/ic_notification_clear_all"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/base_dialog_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="标题"
-            android:textColor="@color/base_app_textColorPrimary"
-            android:textSize="@dimen/sp14"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/base_dialog_close" />
-
-        <FrameLayout
-            android:id="@+id/base_dialog_content_container"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/base_dialog_title">
+            android:layout_marginLeft="@dimen/dp20"
+            android:layout_marginRight="@dimen/dp20"
+            android:background="@color/white"
+            android:paddingHorizontal="@dimen/dp15">
+
+            <TextView
+                android:id="@+id/base_dialog_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp20"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/dp15"
+                android:textColor="@color/base_app_textColorPrimary"
+                android:textSize="@dimen/sp18"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="sdfasdfasdf" />
 
             <TextView
                 android:id="@+id/base_dialog_content_string"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp20"
-                android:layout_marginTop="@dimen/dp20"
-                android:text="标题asdfadsf发送大附件哦偶尔金佛啊撒旦解放哦啊手动阀骄傲上的飞机"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/dp15"
                 android:textColor="@color/base_app_textColorPrimary"
-                android:textSize="@dimen/sp14" />
+                android:textSize="@dimen/sp14"
+                app:layout_constraintHeight_min="@dimen/dp60"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/base_dialog_title"
+                android:text="sdfsdojfoasdijfoasdjfoasdfjoj" />
 
-        </FrameLayout>
+            <Button
+                android:id="@+id/base_dialog_negative"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp50"
+                android:layout_marginRight="@dimen/dp7"
+                android:background="@color/grey_f6f8fa"
+                android:elevation="0dp"
+                android:text="取消"
+                android:textAllCaps="false"
+                android:textColor="@color/base_app_textColorTertiary"
+                android:textSize="@dimen/sp16"
+                app:layout_constraintBaseline_toBaselineOf="@id/base_dialog_positive"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/base_dialog_positive"
+                tools:visibility="visible" />
 
-        <Button
-            android:id="@+id/base_dialog_negative"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp20"
-            android:text="取消"
-            android:textColor="@color/base_app_textColorPrimary"
-            android:textSize="@dimen/sp14"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/base_dialog_positive"
-            app:layout_constraintTop_toBottomOf="@id/base_dialog_content_container" />
+            <Button
+                android:id="@+id/base_dialog_positive"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp50"
+                android:layout_marginLeft="@dimen/dp8"
+                android:layout_marginTop="@dimen/dp20"
+                android:layout_marginBottom="@dimen/dp15"
+                android:background="@color/green_1abb92"
+                android:text="ok"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/base_dialog_negative"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/base_dialog_content_string"
+                app:layout_goneMarginLeft="@dimen/dp15" />
 
-        <Button
-            android:id="@+id/base_dialog_positive"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp20"
-            android:layout_marginTop="@dimen/dp20"
-            android:text="确定"
-            android:textColor="@color/base_app_textColorPrimary"
-            android:textSize="@dimen/sp14"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintLeft_toRightOf="@id/base_dialog_negative"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/base_dialog_content_container" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+</layout>
