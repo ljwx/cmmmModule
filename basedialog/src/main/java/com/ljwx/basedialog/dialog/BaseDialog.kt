@@ -78,7 +78,7 @@ class BaseDialog @JvmOverloads constructor(context: Context, theme: Int = 0) :
                         params.leftToRight = R.id.base_dialog_positive
                         params.verticalChainStyle = params.verticalChainStyle
                         params.leftMargin = params.rightMargin
-                        params.marginStart = params.marginEnd
+                        params.marginEnd = params.marginStart
                         layoutParams = params
                     }
                 }
@@ -90,8 +90,8 @@ class BaseDialog @JvmOverloads constructor(context: Context, theme: Int = 0) :
                         params.leftToRight = View.NO_ID
                         params.rightToLeft = R.id.base_dialog_negative
                         params.verticalChainStyle = params.verticalChainStyle
-                        params.rightMargin = params.leftMargin
-                        params.marginEnd = params.marginStart
+                        params.leftMargin = params.rightMargin
+                        params.marginStart = params.marginEnd
                         layoutParams = params
                     }
                 }
