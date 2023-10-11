@@ -7,7 +7,8 @@ import androidx.lifecycle.ViewModel
 import com.ljwx.baseapp.response.DataResult
 import com.ljwx.baseapp.vm.model.BaseDataRepository
 
-abstract class BaseViewModel<R : BaseDataRepository<*>> :IBaseViewModel<R>, ViewModel(), DefaultLifecycleObserver {
+abstract class BaseViewModel<R : BaseDataRepository<*>> : IBaseViewModel<R>, ViewModel(),
+    DefaultLifecycleObserver {
 
     open val TAG = this.javaClass.simpleName
 
@@ -43,11 +44,7 @@ abstract class BaseViewModel<R : BaseDataRepository<*>> :IBaseViewModel<R>, View
         mDismissPopLoading.postValue(Triple(dismiss, code ?: 0, message ?: ""))
     }
 
-    open fun commonResponseFail(result: DataResult<*>) {
-
-    }
-
-    open fun commonResponseError(e: Throwable) {
+    open fun commonResponseNotSuccess(result: DataResult<*>) {
 
     }
 
