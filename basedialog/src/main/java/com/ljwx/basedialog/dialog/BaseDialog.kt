@@ -77,7 +77,7 @@ class BaseDialog @JvmOverloads constructor(context: Context, theme: Int = 0) :
                         params.rightToLeft = View.NO_ID
                         params.leftToRight = R.id.base_dialog_positive
                         params.verticalChainStyle = params.verticalChainStyle
-                        params.leftMargin = params.rightMargin
+                        params.rightMargin = params.leftMargin
                         params.marginEnd = params.marginStart
                         layoutParams = params
                     }
