@@ -34,11 +34,11 @@ open class BaseResponse<Data> : IBaseResponse<Data> {
         return isSuccess() && data != null
     }
 
-    fun getErrorData(): Any? {
+    fun getErrorDataEx(): Any? {
         return errorData
     }
 
-    open fun setErrorData(errorData: Any?) {
+    open fun setErrorDataEx(errorData: Any?) {
         this.errorData = errorData
     }
 
