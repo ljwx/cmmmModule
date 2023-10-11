@@ -20,8 +20,6 @@ open class BaseResponse<Data> : IBaseResponse<Data> {
 
     open var data: Data? = null
 
-    open var errorData: Any? = null
-
     open var isRefresh: Boolean? = null
 
     open var extensionField: Any? = null
@@ -32,14 +30,6 @@ open class BaseResponse<Data> : IBaseResponse<Data> {
 
     open fun isSuccessAndDataNotNull(): Boolean {
         return isSuccess() && data != null
-    }
-
-    open fun getErrorData(): Any? {
-        return errorData
-    }
-
-    open fun setErrorData(errorData: Any?) {
-        this.errorData = errorData
     }
 
 }
