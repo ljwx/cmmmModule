@@ -43,11 +43,11 @@ abstract class BaseViewModel<R : BaseDataRepository<*>> :IBaseViewModel<R>, View
         mDismissPopLoading.postValue(Triple(dismiss, code ?: 0, message ?: ""))
     }
 
-    open fun responseFail(result: DataResult<*>) {
+    open fun commonResponseFail(result: DataResult<*>) {
 
     }
 
-    open fun responseError(e: Throwable) {
+    open fun commonResponseError(e: Throwable) {
 
     }
 
