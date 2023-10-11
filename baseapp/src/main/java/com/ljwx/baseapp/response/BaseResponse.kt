@@ -11,20 +11,20 @@ open class BaseResponse<Data> : IBaseResponse<Data> {
         }
     }
 
-    var code: Int? = null
+    open var code: Int? = null
 
     @Deprecated(message = "useless", replaceWith = ReplaceWith(expression = "msg"))
-    var message: String? = null
+    open var message: String? = null
 
-    var msg: String? = null
+    open var msg: String? = null
 
-    var data: Data? = null
+    open var data: Data? = null
 
-    private var errorData: Any? = null
+    open var errorData: Any? = null
 
-    var isRefresh: Boolean? = null
+    open var isRefresh: Boolean? = null
 
-    var extensionField: Any? = null
+    open var extensionField: Any? = null
 
     override fun isSuccess(): Boolean {
         return code == RESPONSE_SUCCESS
@@ -34,11 +34,11 @@ open class BaseResponse<Data> : IBaseResponse<Data> {
         return isSuccess() && data != null
     }
 
-    fun getErrorDataEx(): Any? {
+    open fun getErrorData(): Any? {
         return errorData
     }
 
-    open fun setErrorDataEx(errorData: Any?) {
+    open fun setErrorData(errorData: Any?) {
         this.errorData = errorData
     }
 
