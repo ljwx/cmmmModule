@@ -17,6 +17,7 @@ abstract class BaseDataRepository<Server> {
          * 通用的请求错误逻辑(代码执行错误)
          */
         fun setCommonOnError(onError: (e: Throwable) -> Unit) {
+            //包含了接口响应404
             observerOnError = onError
         }
 

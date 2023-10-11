@@ -1,6 +1,6 @@
 package com.ljwx.baseapp.response
 
-open class BaseResponse<Data> {
+open class BaseResponse<Data> : IBaseResponse<Data> {
 
     companion object {
 
@@ -20,16 +20,26 @@ open class BaseResponse<Data> {
 
     var data: Data? = null
 
+    private var errorData: Any? = null
+
     var isRefresh: Boolean? = null
 
     var extensionField: Any? = null
 
-    open fun isSuccess(): Boolean {
+    override fun isSuccess(): Boolean {
         return code == RESPONSE_SUCCESS
     }
 
     open fun isSuccessAndDataNotNull(): Boolean {
         return isSuccess() && data != null
+    }
+
+    fun getErrorData(): Any? {
+        return errorData
+    }
+
+    open fun setErrorData(errorData: Any?) {
+        this.errorData = errorData
     }
 
 }
