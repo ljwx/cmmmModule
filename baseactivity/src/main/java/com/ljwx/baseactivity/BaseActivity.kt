@@ -13,17 +13,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.ljwx.baseactivity.statusbar.BaseStatusBar
+import com.ljwx.baseapp.constant.BaseConstBundleKey
 import com.ljwx.baseapp.page.IPageActivity
 import com.ljwx.baseapp.page.IPageBroadcast
 import com.ljwx.baseapp.page.IPageProcessStep
 import com.ljwx.baseapp.page.IPageDialogTips
+import com.ljwx.baseapp.page.IPageStartPage
 import com.ljwx.baseapp.page.IPageStatusBar
 import com.ljwx.baseapp.page.IPageToolbar
 import com.ljwx.baseapp.view.IViewStatusBar
 import com.ljwx.basedialog.common.BaseDialogBuilder
 
 open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPageBroadcast,
-    IPageDialogTips, IPageProcessStep, IPageActivity {
+    IPageDialogTips, IPageProcessStep, IPageActivity, IPageStartPage {
 
     open val TAG = this.javaClass.simpleName
 
@@ -52,10 +54,48 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
 
     private var onBackPressInterceptors: (ArrayList<() -> Boolean>)? = null
 
+    /**
+     * 路由参数
+     */
+    protected var bundleType: Int? = null
+    protected var bundleTypeString: String? = null
+    protected var bundleId: String? = null
+    protected var bundleParams: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStatusBar()
         requestedOrientation = getScreenOrientation()
+    }
+
+    /**
+     * 路由快速跳转
+     */
+    override fun startActivityRouter(path: String, bundle: Bundle) {
+        val intent = Intent(this, BaseStateRefreshActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun startActivity(clazz: Class<*>, bundle: Bundle) {
+        val intent = Intent(this, clazz)
+        startActivity(intent)
+    }
+
+    override fun startActivityRouter(path: String, tyep: String?, id: String?, params: String?) {
+        val intent = Intent(this, BaseStateRefreshActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun startActivityRouter(path: String, tyep: Int?, id: String?, params: String?) {
+        val intent = Intent(this, BaseStateRefreshActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun getCommonBundleParams() {
+        bundleType = intent.getIntExtra(BaseConstBundleKey.BUNDLE_TYPE, -1)
+        bundleTypeString = intent.getStringExtra(BaseConstBundleKey.BUNDLE_TYPE_STRING)
+        bundleId = intent.getStringExtra(BaseConstBundleKey.BUNDLE_ID)
+        bundleParams = intent.getStringExtra(BaseConstBundleKey.BUNDLE_PARAMS)
     }
 
     override fun getScreenOrientation(): Int {
