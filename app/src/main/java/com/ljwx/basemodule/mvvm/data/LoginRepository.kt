@@ -1,5 +1,6 @@
 package com.ljwx.basemodule.mvvm.data
 
+import com.ljwx.baseapp.vm.empty.EmptyDataRepository
 import com.ljwx.baseapp.vm.empty.EmptyViewModel
 import com.ljwx.basemodule.mvvm.data.model.LoggedInUser
 
@@ -8,7 +9,7 @@ import com.ljwx.basemodule.mvvm.data.model.LoggedInUser
  * maintains an in-memory cache of login status and user credentials information.
  */
 
-class LoginRepository : EmptyViewModel() {
+class LoginRepository : EmptyDataRepository() {
 
     val dataSource: LoginDataSource = LoginDataSource()
 

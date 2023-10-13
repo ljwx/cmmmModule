@@ -1,14 +1,16 @@
 package com.ljwx.baseapp.vm
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.ljwx.baseapp.response.DataResult
 import com.ljwx.baseapp.vm.model.BaseDataRepository
 
-abstract class BaseViewModel<M : BaseDataRepository<*>> : ViewModel(),
-    IBaseViewModel<M>, DefaultLifecycleObserver {
+abstract class BaseAndroidViewModel<M : BaseDataRepository<*>>(application: Application) :
+    IBaseViewModel<M>, AndroidViewModel(application),
+    DefaultLifecycleObserver {
 
     open val TAG = this.javaClass.simpleName
 
