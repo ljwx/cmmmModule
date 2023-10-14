@@ -55,7 +55,3 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         return password.length > 5
     }
 }
-
-class a(application: Application) : AndroidViewModel(application) {
-
-}

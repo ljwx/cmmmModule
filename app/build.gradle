@@ -25,6 +25,13 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        //arouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     buildTypes {
@@ -87,4 +94,8 @@ dependencies {
     implementation project(path: ':baseresource')
 
     implementation 'io.github.ljwx:SplitTextView:0.3.8'
+
+    def arouter = "1.5.2"
+    implementation "com.alibaba:arouter-api:$arouter"
+    annotationProcessor "com.alibaba:arouter-compiler:$arouter"
 }
