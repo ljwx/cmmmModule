@@ -1,27 +1,11 @@
 package com.ljwx.baseapp.page
 
-import android.os.Bundle
+import com.ljwx.baseapp.router.IPostcard
 
 interface IPageStartPage {
 
-    fun startActivityRouter(path: String, bundle: Bundle)
+    fun startActivity(clazz: Class<*>)
 
-    fun startActivity(clazz: Class<*>, bundle: Bundle)
-
-    fun startActivityRouter(
-        path: String,
-        type: String? = null,
-        id: String? = null,
-        params: String? = null
-    )
-
-    fun startActivityRouter(
-        path: String,
-        type: Int? = null,
-        id: String? = null,
-        params: String? = null
-    )
-
-    fun getCommonBundleParams()
+    fun routerTo(path: String): IPostcard
 
 }

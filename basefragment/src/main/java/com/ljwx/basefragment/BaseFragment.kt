@@ -18,10 +18,13 @@ import com.blankj.utilcode.util.Utils
 import com.ljwx.baseapp.page.IPageBroadcast
 import com.ljwx.baseapp.page.IPageProcessStep
 import com.ljwx.baseapp.page.IPageDialogTips
+import com.ljwx.baseapp.page.IPageStartPage
+import com.ljwx.baseapp.router.IPostcard
 import com.ljwx.basedialog.common.BaseDialogBuilder
+import com.ljwx.router.Postcard
 
 open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), IPageBroadcast,
-    IPageDialogTips, IPageProcessStep {
+    IPageDialogTips, IPageProcessStep, IPageStartPage {
 
     open val TAG = this.javaClass.simpleName
 
@@ -65,6 +68,17 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
             lazyInit()
             isLoaded = true
         }
+    }
+
+    /**
+     * 路由快速跳转
+     */
+    override fun startActivity(clazz: Class<*>) {
+        context?.startActivity(Intent(context, clazz))
+    }
+
+    override fun routerTo(path: String): IPostcard {
+        return Postcard(path)
     }
 
     override fun showDialogTips(
