@@ -11,10 +11,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.ljwx.baseactivity.statusbar.BaseStatusBar
-import com.ljwx.baseapp.coroutine.ICoroutineQuick
 import com.ljwx.baseapp.page.IPageActivity
 import com.ljwx.baseapp.page.IPageBroadcast
 import com.ljwx.baseapp.page.IPageProcessStep
@@ -26,14 +24,9 @@ import com.ljwx.baseapp.router.IPostcard
 import com.ljwx.baseapp.view.IViewStatusBar
 import com.ljwx.basedialog.common.BaseDialogBuilder
 import com.ljwx.router.Postcard
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPageBroadcast,
-    IPageDialogTips, IPageProcessStep, IPageActivity, IPageStartPage, ICoroutineQuick {
+    IPageDialogTips, IPageProcessStep, IPageActivity, IPageStartPage {
 
     open val TAG = this.javaClass.simpleName
 
@@ -66,26 +59,6 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         super.onCreate(savedInstanceState)
         setStatusBar()
         requestedOrientation = getScreenOrientation()
-    }
-
-    override fun threadRun(
-        child: suspend CoroutineScope.() -> Unit,
-        main: suspend CoroutineScope.() -> Unit
-    ) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            child.invoke(this)
-            withContext(Dispatchers.Main, block = main)
-        }
-    }
-
-    override fun threadRun(
-        delay: Long,
-        main: suspend CoroutineScope.() -> Unit
-    ) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            delay(delay)
-            withContext(Dispatchers.Main, block = main)
-        }
     }
 
     /**

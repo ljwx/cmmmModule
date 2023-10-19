@@ -21,8 +21,6 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
         BasePopupLoading(requireContext())
     }
 
-    private var mLoadingRunnable: Runnable? = null
-
     /**
      * 多状态
      */
@@ -38,11 +36,6 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
      */
     private var mRefreshLayout: IViewRefreshLayout? = null
 
-    /**
-     * 安全线程切换
-     */
-    private var mRefreshRunnable: Runnable? = null
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -51,16 +44,20 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
 
     }
 
-    override fun showPopLoading(show: Boolean, cancelable: Boolean, transparent:Boolean, level: Int) {
+    override fun showPopLoading(
+        show: Boolean,
+        cancelable: Boolean,
+        transparent: Boolean,
+        level: Int
+    ) {
         if (!show || (isPopupLoadingShowing())) {
             return
         }
-        mLoadingRunnable = mLoadingRunnable ?: Runnable {
+        activity?.runOnUiThread {
 //            mPopupLoading.setCancelable(cancelable)
 //            dialog.setCanceledOnTouchOutside(canceledOnTouchOutside)
             mPopupLoading.showPopup(show, cancelable, backgroundTransparent = transparent)
         }
-        activity?.runOnUiThread(mLoadingRunnable)
     }
 
     override fun dismissPopLoading(dismiss: Boolean) {
@@ -212,7 +209,7 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
 
     override fun initRefreshLayout(refreshLayout: IViewRefreshLayout?) {
         this.mRefreshLayout = refreshLayout
-        refreshLayout?.setOnRefreshListener(object :IViewRefreshLayout.RefreshListener{
+        refreshLayout?.setOnRefreshListener(object : IViewRefreshLayout.RefreshListener {
             override fun onRefresh(refreshLayout: IViewRefreshLayout) {
                 onRefreshData()
             }
@@ -230,13 +227,8 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
      * 刷新结束
      */
     override fun pullRefreshFinish() {
-        if (isMainThread) {
+        requireActivity().runOnUiThread {
             mRefreshLayout?.refreshFinish()
-        } else {
-            mRefreshRunnable = mRefreshRunnable ?: Runnable {
-                mRefreshLayout?.refreshFinish()
-            }
-            requireActivity().runOnUiThread(mRefreshRunnable)
         }
     }
 
@@ -244,11 +236,9 @@ open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
     override fun onDestroy() {
         super.onDestroy()
         mPopupLoading.dismiss()
-        mLoadingRunnable = null
         mStateLayout = null
         mStateRunnable = null
         mRefreshLayout = null
-        mRefreshRunnable = null
     }
 
 }

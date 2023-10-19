@@ -20,8 +20,6 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
         BasePopupLoading(this)
     }
 
-    private var mLoadingRunnable: Runnable? = null
-
     /**
      * 多状态控件
      */
@@ -37,10 +35,6 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
      */
     private var mRefreshLayout: IViewRefreshLayout? = null
 
-    /**
-     * 子线程执行刷新
-     */
-    private var mRefreshRunnable: Runnable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,13 +42,17 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
 
     }
 
-    override fun showPopLoading(show: Boolean, cancelable: Boolean, transparent:Boolean, level: Int) {
-        mLoadingRunnable = mLoadingRunnable ?: Runnable {
+    override fun showPopLoading(
+        show: Boolean,
+        cancelable: Boolean,
+        transparent: Boolean,
+        level: Int
+    ) {
+        runOnUiThread {
 //            mPopupLoading.setCancelable(cancelable)
 //            dialog.setCanceledOnTouchOutside(canceledOnTouchOutside)
             mPopupLoading.showPopup(show, cancelable, backgroundTransparent = transparent)
         }
-        runOnUiThread(mLoadingRunnable)
     }
 
     override fun dismissPopLoading(dismiss: Boolean) {
@@ -205,7 +203,7 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
     override fun initRefreshLayout(refreshLayout: IViewRefreshLayout?) {
         this.mRefreshLayout = refreshLayout
         // 下拉刷新触发
-        refreshLayout?.setOnRefreshListener(object :IViewRefreshLayout.RefreshListener{
+        refreshLayout?.setOnRefreshListener(object : IViewRefreshLayout.RefreshListener {
             override fun onRefresh(refreshLayout: IViewRefreshLayout) {
                 onRefreshData()
             }
@@ -223,13 +221,8 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
      * 刷新结束
      */
     override fun pullRefreshFinish() {
-        if (isMainThread) {
+        runOnUiThread {
             mRefreshLayout?.refreshFinish()
-        } else {
-            mRefreshRunnable = mRefreshRunnable ?: Runnable {
-                mRefreshLayout?.refreshFinish()
-            }
-            runOnUiThread(mRefreshRunnable)
         }
     }
 
@@ -237,11 +230,9 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
     override fun onDestroy() {
         super.onDestroy()
         mPopupLoading.dismiss()
-        mLoadingRunnable = null
         mStateLayout = null
         mStateRunnable = null
         mRefreshLayout = null
-        mRefreshRunnable = null
     }
 
 }
