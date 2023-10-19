@@ -1,4 +1,9 @@
 package com.ljwx.basemodule.vm
 
-class TestData {
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+class TestData(val code: Int) : Parcelable {
+    var type: Int = 0
 }

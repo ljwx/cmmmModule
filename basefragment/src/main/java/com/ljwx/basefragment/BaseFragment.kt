@@ -13,8 +13,10 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.blankj.utilcode.util.Utils
+import com.ljwx.baseapp.coroutine.ICoroutineQuick
 import com.ljwx.baseapp.page.IPageBroadcast
 import com.ljwx.baseapp.page.IPageProcessStep
 import com.ljwx.baseapp.page.IPageDialogTips
@@ -22,9 +24,14 @@ import com.ljwx.baseapp.page.IPageStartPage
 import com.ljwx.baseapp.router.IPostcard
 import com.ljwx.basedialog.common.BaseDialogBuilder
 import com.ljwx.router.Postcard
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), IPageBroadcast,
-    IPageDialogTips, IPageProcessStep, IPageStartPage {
+    IPageDialogTips, IPageProcessStep, IPageStartPage ,ICoroutineQuick{
 
     open val TAG = this.javaClass.simpleName
 
@@ -79,6 +86,26 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
 
     override fun routerTo(path: String): IPostcard {
         return Postcard(path)
+    }
+
+    override fun threadRun(
+        child: suspend CoroutineScope.() -> Unit,
+        main: suspend CoroutineScope.() -> Unit
+    ) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            child.invoke(this)
+            withContext(Dispatchers.Main, block = main)
+        }
+    }
+
+    override fun threadRun(
+        delay: Long,
+        main: suspend CoroutineScope.() -> Unit
+    ) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            delay(delay)
+            withContext(Dispatchers.Main, block = main)
+        }
     }
 
     override fun showDialogTips(

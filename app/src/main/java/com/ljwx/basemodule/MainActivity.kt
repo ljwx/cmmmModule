@@ -4,24 +4,15 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
-import androidx.lifecycle.lifecycleScope
-import com.alibaba.android.arouter.launcher.ARouter
-import com.blankj.utilcode.util.AppUtils
-import com.jeremyliao.liveeventbus.LiveEventBus
 import com.ljwx.baseactivity.fast.QuickMainActivity
 import com.ljwx.baseapp.extensions.TAG_CLASS
-import com.ljwx.baseapp.extensions.visibleGone
-import com.ljwx.baseeventbus.flow.FlowEventBus
+import com.ljwx.baseapp.extensions.showToast
 import com.ljwx.basemodule.databinding.ActivityMainBinding
 import com.ljwx.basemodule.fragments.*
+import com.ljwx.basemodule.vm.TestData
 import com.ljwx.basemodule.vm.TestViewModel
-import com.ljwx.basenotification.BaseNotificationDndUtils
-import com.ljwx.basenotification.BaseNotificationUtils
-import com.ljwx.baseswitchenv.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlin.coroutines.CoroutineContext
 
 class MainActivity :
     QuickMainActivity<ActivityMainBinding, TestViewModel>(R.layout.activity_main) {
@@ -48,14 +39,18 @@ class MainActivity :
 
         registerFinishBroadcast("test")
 
-        lifecycleScope.launch(Dispatchers.IO) {
-            delay(2000)
-//            routerTo("/path/router_test").withInt("abc", 1).start()
-            withContext(Dispatchers.Main) {
-                ARouter.getInstance().build("/app/router_test").navigation()
-            }
-        }
+        threadRun(2000) { showToast("fasdf") }
 
+        threadRun({
+            delay(10000)
+            runOnUiThread {
+                showToast("延迟结束")
+            }
+        }) {
+            routerTo("/app/router_test").withInt("abc", 1)
+                .with("test", TestData(222))
+                .start()
+        }
 
     }
 
