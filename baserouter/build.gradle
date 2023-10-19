@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'maven-publish'
 }
 
 android {
@@ -47,5 +49,15 @@ dependencies {
 
     implementation project(path: ':baseapp')
     implementation "com.alibaba:arouter-api:1.4.1"
-    implementation "com.alibaba:arouter-compiler:1.2.2"
+    annotationProcessor "com.alibaba:arouter-compiler:1.2.2"
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+            }
+        }
+    }
 }

@@ -95,7 +95,7 @@ dependencies {
 
     implementation 'io.github.ljwx:SplitTextView:0.3.8'
 
-    def arouter = "1.5.2"
+    def arouter = "1.4.1"
     implementation "com.alibaba:arouter-api:$arouter"
-    annotationProcessor "com.alibaba:arouter-compiler:$arouter"
+    annotationProcessor "com.alibaba:arouter-compiler:1.2.2"
 }
