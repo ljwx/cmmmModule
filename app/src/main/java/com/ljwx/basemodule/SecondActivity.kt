@@ -2,6 +2,7 @@ package com.ljwx.basemodule
 
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.tabs.TabLayout
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.ljwx.baseactivity.fast.QuickTabLayoutActivity
@@ -12,6 +13,7 @@ import com.ljwx.baseeventbus.flow.FlowEventBus
 import com.ljwx.basemodule.databinding.ActivitySecondBinding
 import com.ljwx.basemodule.vm.TestViewModel
 
+@Route(path = "/app/router_test")
 class SecondActivity :
     QuickTabLayoutActivity<ActivitySecondBinding, TestViewModel>(R.layout.activity_second) {
     override fun onCreate(savedInstanceState: Bundle?) {

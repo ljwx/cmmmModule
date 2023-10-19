@@ -14,7 +14,7 @@ class Postcard(private val path: String) : IPostcard {
         mBundle = Bundle()
     }
 
-    private fun with(key: String, value: Any?): IPostcard {
+    private fun withAny(key: String, value: Any?): IPostcard {
         if (value == null) {
             return this
         }
@@ -37,62 +37,62 @@ class Postcard(private val path: String) : IPostcard {
     }
 
     override fun with(key: String, bundle: Bundle?): IPostcard {
-        with(key, bundle)
+        withAny(key, bundle)
         return this
     }
 
     override fun with(key: String, value: Parcelable?): IPostcard {
-        with(key, value)
+        withAny(key, value)
         return this
     }
 
     override fun with(key: String, value: Serializable?): IPostcard {
-        with(key, value)
+        withAny(key, value)
         return this
     }
 
     override fun withInt(key: String, value: Int?): IPostcard {
-        with(key, value)
+        withAny(key, value)
         return this
     }
 
     override fun withLong(key: String, value: Long?): IPostcard {
-        with(key, value)
+        withAny(key, value)
         return this
     }
 
     override fun withString(key: String, value: String?): IPostcard {
-        with(key, value)
+        withAny(key, value)
         return this
     }
 
     override fun withBoolean(key: String, value: Boolean?): IPostcard {
-        with(key, value)
+        withAny(key, value)
         return this
     }
 
     override fun withFloat(key: String, value: Float?): IPostcard {
-        with(key, value)
+        withAny(key, value)
         return this
     }
 
     override fun withDouble(key: String, value: Double?): IPostcard {
-        with(key, value)
+        withAny(key, value)
         return this
     }
 
     override fun withLongArray(key: String, value: LongArray?): IPostcard {
-        with(key, value)
+        withAny(key, value)
         return this
     }
 
     override fun withIntArray(key: String, value: IntArray?): IPostcard {
-        with(key, value)
+        withAny(key, value)
         return this
     }
 
     override fun withFloatArray(key: String, value: FloatArray?): IPostcard {
-        with(key, value)
+        withAny(key, value)
         return this
     }
 

@@ -4,6 +4,8 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.lifecycleScope
+import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.AppUtils
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.ljwx.baseactivity.fast.QuickMainActivity
@@ -16,6 +18,10 @@ import com.ljwx.basemodule.vm.TestViewModel
 import com.ljwx.basenotification.BaseNotificationDndUtils
 import com.ljwx.basenotification.BaseNotificationUtils
 import com.ljwx.baseswitchenv.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity :
     QuickMainActivity<ActivityMainBinding, TestViewModel>(R.layout.activity_main) {
@@ -41,6 +47,15 @@ class MainActivity :
 //        addTabFragment("javaTest", TestJavaFragment(0))
 
         registerFinishBroadcast("test")
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            delay(2000)
+//            routerTo("/path/router_test").withInt("abc", 1).start()
+            withContext(Dispatchers.Main) {
+                ARouter.getInstance().build("/app/router_test").navigation()
+            }
+        }
+
 
     }
 
