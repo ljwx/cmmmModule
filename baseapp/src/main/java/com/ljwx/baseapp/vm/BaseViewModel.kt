@@ -46,4 +46,8 @@ abstract class BaseViewModel<M : BaseDataRepository<*>> : ViewModel(),
 
     }
 
+    fun block(block: () -> Unit) {
+
+    }
+
 }

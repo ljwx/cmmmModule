@@ -8,8 +8,6 @@ interface IPageProcessStep {
 
     fun initUIView()
 
-    fun observeData()
-
     fun setClickListener()
 
     fun getAsyncData()

@@ -27,6 +27,14 @@ open abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : Base
         initPopLoadingObserver()
     }
 
+    override fun commonProcessSteps() {
+        getFirstInitData()
+        initUIView()
+        observeData()
+        setClickListener()
+        getAsyncData()
+    }
+
     open fun initPopLoadingObserver() {
         mViewModel.popLoadingShow.observe(this) {
             showPopLoading(it.first)
@@ -46,5 +54,9 @@ open abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : Base
     }
 
     open fun useActivityScopeVM() = false
+
+    private fun observeData() {
+
+    }
 
 }

@@ -24,8 +24,8 @@ open class BaseBindingActivity<Binding : ViewDataBinding>(@LayoutRes private val
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         mBinding.unbind()
+        super.onDestroy()
     }
 
 }

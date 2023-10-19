@@ -228,11 +228,11 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
 
 
     override fun onDestroy() {
-        super.onDestroy()
         mPopupLoading.dismiss()
         mStateLayout = null
         mStateRunnable = null
         mRefreshLayout = null
+        super.onDestroy()
     }
 
 }

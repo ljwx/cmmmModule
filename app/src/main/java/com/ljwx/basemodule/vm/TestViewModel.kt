@@ -31,15 +31,15 @@ class TestViewModel : BaseViewModel<TestRepository>() {
     }
 
     fun requestTest() {
+        showPopLoading()
         mRepository.requestTest(object :DataResult.Result<String>{
             override fun onResult(result: DataResult<String>) {
                 if (result is DataResult.Success) {
                     mResponse.postValue(result.data)
-                    Log.d("ljwx2,sadfasdf", result.data)
+                    dismissPopLoading()
                 }
                 if (result is DataResult.Error) {
                     val match = result.exception is NotFoundException
-                    Log.d("ljwx2,类型", match.toString())
                 }
             }
         })

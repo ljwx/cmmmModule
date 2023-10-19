@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.ljwx.baseapp.vm.BaseViewModel
 import java.lang.reflect.ParameterizedType
 
-open class BaseMVVMActivity<Binding : ViewDataBinding, ViewModel : BaseViewModel<*>>(@LayoutRes private val layoutResID: Int) :
+abstract class BaseMVVMActivity<Binding : ViewDataBinding, ViewModel : BaseViewModel<*>>(@LayoutRes private val layoutResID: Int) :
     BaseBindingActivity<Binding>(layoutResID) {
 
     protected lateinit var mViewModel: ViewModel
@@ -19,11 +19,19 @@ open class BaseMVVMActivity<Binding : ViewDataBinding, ViewModel : BaseViewModel
         initPopLoadingObserver()
     }
 
+    override fun commonProcessSteps() {
+        getFirstInitData()
+        initUIView()
+        observe()
+        setClickListener()
+        getAsyncData()
+    }
+
     open fun initPopLoadingObserver() {
         mViewModel.popLoadingShow.observe(this) {
             showPopLoading(it.first)
         }
-        mViewModel.popLoadingDismiss.observe(this){
+        mViewModel.popLoadingDismiss.observe(this) {
             dismissPopLoading(it.first)
         }
     }
@@ -33,5 +41,11 @@ open class BaseMVVMActivity<Binding : ViewDataBinding, ViewModel : BaseViewModel
         val modelClass = type.actualTypeArguments.getOrNull(1) as Class<ViewModel>
         return ViewModelProvider(this)[modelClass]
     }
+
+    private fun observe(){
+        mViewModel.observeData()
+    }
+
+    abstract fun ViewModel.observeData()
 
 }

@@ -1,6 +1,7 @@
 package com.ljwx.baseapp.extensions
 
 import android.content.Context
+import android.util.Log
 import android.view.Gravity
 import android.widget.Toast
 import androidx.annotation.RestrictTo
@@ -57,14 +58,17 @@ internal fun show(
     if (repeat) {
         mToast = Toast.makeText(Utils.getApp(), content, duration)
     } else {
-        mToast = mToast ?: Toast.makeText(Utils.getApp(), null, duration)
+        Log.d("ljwx2", "old:" + oldContent + "--new:" + content)
         if (oldContent == content) {
             val d = if (duration == Toast.LENGTH_SHORT) 2000 else 3500
             if (System.currentTimeMillis() - oldTime < d) {
+                Log.d("ljwx2", "相同,不弹")
                 return
             }
         }
     }
+    mToast = Toast.makeText(Utils.getApp(), null, duration)
+    Log.d("ljwx2", "不相同,弹")
     mToast?.setText(content)
     oldContent = content
     oldTime = System.currentTimeMillis()

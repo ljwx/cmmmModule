@@ -10,6 +10,7 @@ import com.ljwx.baseactivity.fast.QuickTabLayoutActivity
 import com.ljwx.baseapp.extensions.showToast
 import com.ljwx.baseapp.extensions.singleClick
 import com.ljwx.baseapp.util.MemoryUtils
+import com.ljwx.baseapp.vm.BaseViewModel
 import com.ljwx.baseapp.vm.empty.EmptyViewModel
 import com.ljwx.baseeventbus.flow.FlowEventBus
 import com.ljwx.basemodule.databinding.ActivitySecondBinding
@@ -22,9 +23,27 @@ import kotlinx.coroutines.launch
 @Route(path = "/app/router_test")
 class SecondActivity :
     QuickTabLayoutActivity<ActivitySecondBinding, TestViewModel>(R.layout.activity_second) {
+
+    override fun getTabLayout(): TabLayout = mBinding.tabLayout
+
+    override fun getViewPager2(): ViewPager2 = mBinding.viewPager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        commonProcessSteps()
+
+    }
+
+    override fun getFirstInitData() {
+        super.getFirstInitData()
+        intent.getParcelableExtra<TestData>("test")?.let {
+//            showToast(it.code.toString())
+        }
+    }
+
+    override fun setClickListener() {
+        super.setClickListener()
         mBinding.button.singleClick {
             FlowEventBus.get<String>("flow").post(this@SecondActivity, "flowevent")
             LiveEventBus.get<String>("liveeventbus").post("liveEvent")
@@ -33,14 +52,17 @@ class SecondActivity :
         mBinding.send.singleClick {
             sendFinishBroadcast("test")
         }
-
-        intent.getParcelableExtra<TestData>("test")?.let {
-            showToast(it.code.toString())
-        }
-
     }
 
-    override fun getTabLayout(): TabLayout = mBinding.tabLayout
+    override fun TestViewModel.observeData() {
+        mResponse.observe {
+            showToast("结果回来了")
+        }
+    }
 
-    override fun getViewPager2(): ViewPager2 = mBinding.viewPager
+    override fun getAsyncData() {
+        super.getAsyncData()
+        mViewModel.requestTest()
+    }
+
 }

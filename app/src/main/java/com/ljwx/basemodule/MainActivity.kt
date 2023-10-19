@@ -71,6 +71,10 @@ class MainActivity :
         Log.d("ljwx2", "$TAG_CLASS:onDestroy")
     }
 
+    override fun TestViewModel.observeData() {
+
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
     }

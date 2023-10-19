@@ -11,12 +11,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.ljwx.baseactivity.statusbar.BaseStatusBar
 import com.ljwx.baseapp.page.IPageActivity
 import com.ljwx.baseapp.page.IPageBroadcast
-import com.ljwx.baseapp.page.IPageProcessStep
 import com.ljwx.baseapp.page.IPageDialogTips
+import com.ljwx.baseapp.page.IPageProcessStep
 import com.ljwx.baseapp.page.IPageStartPage
 import com.ljwx.baseapp.page.IPageStatusBar
 import com.ljwx.baseapp.page.IPageToolbar
@@ -298,7 +300,6 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     override fun commonProcessSteps() {
         getFirstInitData()
         initUIView()
-        observeData()
         setClickListener()
         getAsyncData()
     }
@@ -311,10 +312,6 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
 
     }
 
-    override fun observeData() {
-
-    }
-
     override fun setClickListener() {
 
     }
@@ -323,8 +320,12 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
 
     }
 
+    fun <T> LiveData<T>.observe(observer: Observer<in T?>) {
+        observe(this@BaseActivity, observer)
+    }
+
+
     override fun onDestroy() {
-        super.onDestroy()
         mFinishReceiver?.let {
             LocalBroadcastManager.getInstance(this).unregisterReceiver(it)
         }
@@ -338,7 +339,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         }
         mOtherReceiver = null
         mBroadcastIntentFilter = null
-
+        super.onDestroy()
     }
 
 }
