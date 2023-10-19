@@ -9,6 +9,19 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="MainActivityButton"
+            android:textAllCaps="false" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base_divider_high"
+            android:background="@drawable/base_shape_divider_line" />
+
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"
             android:layout_width="match_parent"

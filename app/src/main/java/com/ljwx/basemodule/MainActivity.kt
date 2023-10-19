@@ -4,19 +4,13 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
-import androidx.lifecycle.lifecycleScope
 import com.ljwx.baseactivity.fast.QuickMainActivity
 import com.ljwx.baseapp.extensions.TAG_CLASS
-import com.ljwx.baseapp.extensions.showToast
+import com.ljwx.baseapp.extensions.singleClick
 import com.ljwx.basemodule.databinding.ActivityMainBinding
 import com.ljwx.basemodule.fragments.*
 import com.ljwx.basemodule.vm.TestData
 import com.ljwx.basemodule.vm.TestViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import kotlin.coroutines.CoroutineContext
 
 class MainActivity :
     QuickMainActivity<ActivityMainBinding, TestViewModel>(R.layout.activity_main) {
@@ -42,6 +36,10 @@ class MainActivity :
 //        addTabFragment("javaTest", TestJavaFragment(0))
 
         registerFinishBroadcast("test")
+
+        mBinding.button.singleClick {
+            routerTo("/app/router_test").with("test", TestData(999)).start()
+        }
 
     }
 

@@ -21,4 +21,5 @@
     <dimen name="dp60">60dp</dimen>
     <dimen name="dp70">70dp</dimen>
     <dimen name="dp80">80dp</dimen>
+    <dimen name="base_divider_high">0.8dp</dimen>
 </resources>
