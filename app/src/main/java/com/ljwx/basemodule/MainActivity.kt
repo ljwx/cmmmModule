@@ -37,9 +37,9 @@ class MainActivity :
 //        addTabFragment("vmFragment", ViewModelFragment())
 //        addTabFragment("javaTest", TestJavaFragment(0))
 
-        registerCommonBroadcast("test")
+        registerCommonBroadcast("test1")
         registerCommonBroadcast("test2")
-        registerCommonBroadcast("test2")
+        registerCommonBroadcast("test3")
 
         mBinding.button.singleClick {
             routerTo(ConstRouter.SECOND_ACTIVITY).with("test", TestData(999)).start()
