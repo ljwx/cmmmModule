@@ -3,6 +3,8 @@ package com.ljwx.baseactivity
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ljwx.baseapp.vm.BaseViewModel
 import java.lang.reflect.ParameterizedType
@@ -17,14 +19,6 @@ abstract class BaseMVVMActivity<Binding : ViewDataBinding, ViewModel : BaseViewM
         mViewModel = createViewModel()
         lifecycle.addObserver(mViewModel)
         initPopLoadingObserver()
-    }
-
-    override fun commonProcessSteps() {
-        getFirstInitData()
-        initUIView()
-        observe()
-        setClickListener()
-        getAsyncData()
     }
 
     open fun initPopLoadingObserver() {
@@ -42,10 +36,16 @@ abstract class BaseMVVMActivity<Binding : ViewDataBinding, ViewModel : BaseViewM
         return ViewModelProvider(this)[modelClass]
     }
 
-    private fun observe(){
-        mViewModel.observeData()
+    protected fun <L : LiveData<T>, T> L.observe(observer: Observer<T>) {
+        observe(this@BaseMVVMActivity, observer)
     }
 
-    abstract fun ViewModel.observeData()
+    override fun observeData() {
+        mViewModel.scope()
+    }
+
+    open fun ViewModel.scope() {
+
+    }
 
 }

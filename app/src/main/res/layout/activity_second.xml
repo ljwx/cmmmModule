@@ -23,6 +23,10 @@
         android:visibility="visible"
         app:qsrl_layout_model="none">
 
+        <com.ljwx.basetoolbar.CenterTitleBar
+            style="@style/base_toolbar_common"
+            app:title="二级页面" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -42,18 +46,27 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/memory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="申请内存" />
 
         <Button
-            android:id="@+id/send"
+            android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="发送广播" />
+            android:layout_marginTop="@dimen/dp50"
+            android:text="跳转三级页面" />
+
+        <Button
+            android:id="@+id/task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp100"
+            android:text="启动任务" />
 
     </com.ljwx.basescaffold.QuickStateRefreshLayout>
 </layout>

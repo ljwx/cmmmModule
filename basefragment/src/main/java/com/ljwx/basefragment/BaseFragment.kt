@@ -254,6 +254,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
     override fun commonProcessSteps() {
         getFirstInitData()
         initUIView()
+        observeData()
         setClickListener()
         getAsyncData()
     }
@@ -263,6 +264,10 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
     }
 
     override fun initUIView() {
+
+    }
+
+    override fun observeData() {
 
     }
 

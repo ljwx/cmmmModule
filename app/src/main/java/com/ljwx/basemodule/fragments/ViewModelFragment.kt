@@ -41,7 +41,7 @@ class ViewModelFragment :
             }
         }
 
-        mViewModel.test.observe(viewLifecycleOwner){
+        mViewModel.mIntervelTest.observe(viewLifecycleOwner){
             Log.d("ljwx2", it)
         }
 

@@ -1,9 +1,9 @@
 package com.ljwx.baseapp.vm.model
 
+import com.ljwx.baseapp.constant.ConstTag
 import com.ljwx.baseapp.response.BaseResponse
 import com.ljwx.baseapp.response.DataResult
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.disposables.Disposable
+import com.ljwx.baseapp.util.Log2
 
 abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
 
@@ -29,9 +29,10 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
         }
     }
 
-    open val TAG = this.javaClass.simpleName
+    open val TAG = this.javaClass.simpleName + ConstTag.MVVM
 
-    private var mCompositeDisposable: CompositeDisposable? = null
+    private var mCompositeDisposable2: io.reactivex.disposables.CompositeDisposable? = null
+    private var mCompositeDisposable3: io.reactivex.rxjava3.disposables.CompositeDisposable? = null
 
     protected val mApiServer
         get() = createServer()
@@ -43,9 +44,11 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
      * @param disposable Rxjava2版本的dispose
      */
     override fun autoClear(disposable: io.reactivex.disposables.Disposable) {
-        if (mCompositeDisposable == null) {
-            mCompositeDisposable = CompositeDisposable()
+        Log2.d(TAG, "添加Rx自动取消")
+        if (mCompositeDisposable2 == null) {
+            mCompositeDisposable2 = io.reactivex.disposables.CompositeDisposable()
         }
+        mCompositeDisposable2?.add(disposable)
     }
 
     /**
@@ -53,18 +56,21 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
      *
      * @param disposable Rxjava3版本的dispose
      */
-    override fun autoClear(disposable: Disposable) {
-        if (mCompositeDisposable == null) {
-            mCompositeDisposable = CompositeDisposable()
+    override fun autoClear(disposable: io.reactivex.rxjava3.disposables.Disposable) {
+        Log2.d(TAG, "添加Rx自动取消")
+        if (mCompositeDisposable3 == null) {
+            mCompositeDisposable3 = io.reactivex.rxjava3.disposables.CompositeDisposable()
         }
-        mCompositeDisposable?.add(disposable)
+        mCompositeDisposable3?.add(disposable)
     }
 
     /**
      * 自动取消
      */
-    override fun onCleared() {
-        mCompositeDisposable?.clear()
+    override fun onRxCleared() {
+        Log2.d(TAG, "执行Rx自动取消")
+        mCompositeDisposable2?.clear()
+        mCompositeDisposable3?.clear()
     }
 
     /**
@@ -72,16 +78,17 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
      */
     abstract inner class QuickObserver3<T : Any> : io.reactivex.rxjava3.core.Observer<T>,
         IQuickObserver<T> {
-        override fun onSubscribe(d: Disposable) {
+        override fun onSubscribe(d: io.reactivex.rxjava3.disposables.Disposable) {
             autoClear(d)
         }
 
         override fun onError(e: Throwable) {
+            Log2.d(TAG, "本次请求异常报错:" + e.message)
             observerOnError?.invoke(e)
         }
 
         override fun onComplete() {
-
+            Log2.d(TAG, "本次请求完成")
         }
 
         override fun onNext(value: T) {
@@ -94,10 +101,13 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
          * @param response 结果
          */
         override fun onResponse(response: T) {
+            Log2.d(TAG, "接口返回response")
             if (response is BaseResponse<*>) {
                 if (response.isSuccess()) {
+                    Log2.d(TAG, "接口返回response,结果为成功")
                     onResponseSuccess(DataResult.Success(response))
                 } else {
+                    Log2.d(TAG, "接口返回response,结果为失败")
                     onResponseFail(DataResult.Fail(response))
                 }
             }
@@ -130,11 +140,12 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
         }
 
         override fun onError(e: Throwable) {
+            Log2.d(TAG, "本次请求异常报错:" + e.message)
             observerOnError?.invoke(e)
         }
 
         override fun onComplete() {
-
+            Log2.d(TAG, "本次请求完成")
         }
 
         override fun onNext(value: T) {
@@ -147,10 +158,13 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
          * @param response 结果
          */
         override fun onResponse(response: T) {
+            Log2.d(TAG, "接口返回response")
             if (response is BaseResponse<*>) {
                 if (response.isSuccess()) {
+                    Log2.d(TAG, "接口返回response,结果为成功")
                     onResponseSuccess(DataResult.Success(response))
                 } else {
+                    Log2.d(TAG, "接口返回response,结果为失败")
                     onResponseFail(DataResult.Fail(response))
                 }
             }

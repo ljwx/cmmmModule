@@ -43,6 +43,9 @@ public class CenterTitleBar extends Toolbar {
     }
 
     private void init(AttributeSet attrs, int defStyle) {
+        if (getId() == NO_ID) {
+            setId(R.id.base_app_toolbar);
+        }
 
         final TypedArray a = getContext().obtainStyledAttributes(attrs, androidx.appcompat.R.styleable.Toolbar, defStyle, 0);
         mCenteredTitleTextAppearance = a.getResourceId(androidx.appcompat.R.styleable.Toolbar_titleTextAppearance, 0);

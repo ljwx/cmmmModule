@@ -300,6 +300,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     override fun commonProcessSteps() {
         getFirstInitData()
         initUIView()
+        observeData()
         setClickListener()
         getAsyncData()
     }
@@ -312,6 +313,10 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
 
     }
 
+    override fun observeData() {
+
+    }
+
     override fun setClickListener() {
 
     }
@@ -319,11 +324,6 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     override fun getAsyncData() {
 
     }
-
-    fun <T> LiveData<T>.observe(observer: Observer<in T?>) {
-        observe(this@BaseActivity, observer)
-    }
-
 
     override fun onDestroy() {
         mFinishReceiver?.let {

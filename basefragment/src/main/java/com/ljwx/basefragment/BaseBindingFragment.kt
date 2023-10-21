@@ -8,7 +8,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 
-open abstract class BaseBindingFragment<Binding : ViewDataBinding>(@LayoutRes private val layoutRes: Int) :
+abstract class BaseBindingFragment<Binding : ViewDataBinding>(@LayoutRes private val layoutRes: Int) :
     BaseStateRefreshFragment(layoutRes) {
 
     /**

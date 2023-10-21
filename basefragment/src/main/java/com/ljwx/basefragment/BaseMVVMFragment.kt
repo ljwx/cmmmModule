@@ -3,12 +3,14 @@ package com.ljwx.basefragment
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ljwx.baseapp.vm.BaseViewModel
 import com.ljwx.baseapp.vm.ViewModelScope
 import java.lang.reflect.ParameterizedType
 
-open abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel<*>>(@LayoutRes layoutRes: Int) :
+abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel<*>>(@LayoutRes layoutRes: Int) :
     BaseBindingFragment<Binding>(layoutRes) {
 
     private val mViewModelScope by lazy {
@@ -27,19 +29,11 @@ open abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : Base
         initPopLoadingObserver()
     }
 
-    override fun commonProcessSteps() {
-        getFirstInitData()
-        initUIView()
-        observeData()
-        setClickListener()
-        getAsyncData()
-    }
-
     open fun initPopLoadingObserver() {
         mViewModel.popLoadingShow.observe(this) {
             showPopLoading(it.first)
         }
-        mViewModel.popLoadingDismiss.observe(this){
+        mViewModel.popLoadingDismiss.observe(this) {
             dismissPopLoading(it.first)
         }
     }
@@ -55,7 +49,15 @@ open abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : Base
 
     open fun useActivityScopeVM() = false
 
-    private fun observeData() {
+    protected fun <L : LiveData<T>, T> L.observe(observer: Observer<T>) {
+        observe(viewLifecycleOwner, observer)
+    }
+
+    override fun observeData() {
+        mViewModel.scope()
+    }
+
+    open fun ViewModel.scope() {
 
     }
 

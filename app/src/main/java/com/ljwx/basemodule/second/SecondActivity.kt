@@ -1,32 +1,30 @@
-package com.ljwx.basemodule
+package com.ljwx.basemodule.second
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
-import androidx.lifecycle.lifecycleScope
+import android.util.Log
 import androidx.viewpager2.widget.ViewPager2
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.tabs.TabLayout
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.ljwx.baseactivity.fast.QuickTabLayoutActivity
-import com.ljwx.baseapp.extensions.showToast
 import com.ljwx.baseapp.extensions.singleClick
 import com.ljwx.baseapp.util.MemoryUtils
-import com.ljwx.baseapp.vm.BaseViewModel
-import com.ljwx.baseapp.vm.empty.EmptyViewModel
 import com.ljwx.baseeventbus.flow.FlowEventBus
+import com.ljwx.basemodule.R
+import com.ljwx.basemodule.constance.ConstRouter
 import com.ljwx.basemodule.databinding.ActivitySecondBinding
 import com.ljwx.basemodule.vm.TestData
-import com.ljwx.basemodule.vm.TestViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
-@Route(path = "/app/router_test")
+@Route(path = ConstRouter.SECOND_ACTIVITY)
 class SecondActivity :
-    QuickTabLayoutActivity<ActivitySecondBinding, TestViewModel>(R.layout.activity_second) {
+    QuickTabLayoutActivity<ActivitySecondBinding, SecondViewModel>(R.layout.activity_second) {
 
     override fun getTabLayout(): TabLayout = mBinding.tabLayout
 
     override fun getViewPager2(): ViewPager2 = mBinding.viewPager
+
+    override fun getScreenOrientation() = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,25 +42,34 @@ class SecondActivity :
 
     override fun setClickListener() {
         super.setClickListener()
-        mBinding.button.singleClick {
+        mBinding.memory.singleClick {
             FlowEventBus.get<String>("flow").post(this@SecondActivity, "flowevent")
             LiveEventBus.get<String>("liveeventbus").post("liveEvent")
             MemoryUtils.requestMemory()
         }
-        mBinding.send.singleClick {
-            sendFinishBroadcast("test")
+        mBinding.button.singleClick {
+            routerTo(ConstRouter.THIRD_ACTIVITY).start()
+        }
+        mBinding.task.singleClick {
+            mViewModel.intervalPost()
         }
     }
 
-    override fun TestViewModel.observeData() {
-        mResponse.observe {
-            showToast("结果回来了")
+//    override fun observeData() {
+//        mViewModel.mIntervelTest.observe{
+//            Log.d("ljwx2", "轮询结果:"+it)
+//        }
+//    }
+
+    override fun SecondViewModel.scope() {
+        mIntervelTest.observe{
+            Log.d("ljwx2", "轮询结果:"+it)
         }
     }
 
     override fun getAsyncData() {
         super.getAsyncData()
-        mViewModel.requestTest()
+//        mViewModel.requestTest()
     }
 
 }

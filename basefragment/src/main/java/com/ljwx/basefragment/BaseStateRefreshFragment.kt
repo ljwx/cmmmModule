@@ -13,7 +13,7 @@ import com.ljwx.baseapp.page.IPagePopLoading
 import com.ljwx.baseapp.page.IPageRefreshLayout
 import com.ljwx.baseapp.page.IPageStateLayout
 
-open abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
+abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int) :
     BaseFragment(layoutResID), IPagePopLoading, IPageStateLayout, IPageRefreshLayout {
 
 

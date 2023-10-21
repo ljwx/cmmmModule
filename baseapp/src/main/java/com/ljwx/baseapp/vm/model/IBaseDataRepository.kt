@@ -1,15 +1,9 @@
 package com.ljwx.baseapp.vm.model
 
-import io.reactivex.rxjava3.disposables.Disposable
+import com.ljwx.baseapp.vm.IRxAutoCleared
 
-interface IBaseDataRepository<Server> {
+interface IBaseDataRepository<Server> : IRxAutoCleared {
 
     fun createServer(): Server
-
-    fun autoClear(disposable: io.reactivex.disposables.Disposable)
-
-    fun autoClear(disposable: Disposable)
-
-    fun onCleared()
 
 }

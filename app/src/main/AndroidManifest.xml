@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
     <application
@@ -17,7 +16,10 @@
         android:theme="@style/Theme.NewBaseModule"
         tools:targetApi="31">
         <activity
-            android:name=".SecondActivity"
+            android:name=".ThirdActivity"
+            android:exported="false" />
+        <activity
+            android:name=".second.SecondActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
