@@ -137,7 +137,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
     /**
      * 事件广播使用
      */
-    override fun registerEvent(action: String?) {
+    override fun registerLocalEvent(action: String?) {
         if (action == null) {
             return
         }
@@ -147,7 +147,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
                 intent.action?.let {
                     Log2.d(TAG, "接收到事件广播:$it")
                     if (intentFilter.matchAction(it)) {
-                        onReceiveEvent(it)
+                        onReceiveLocalEvent(it)
                     }
                 }
             }
@@ -159,7 +159,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
         }
     }
 
-    override fun sendEvent(action: String?) {
+    override fun sendLocalEvent(action: String?) {
         if (action == null) {
             return
         }
@@ -169,7 +169,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
         }
     }
 
-    override fun unregisterEvent(action: String?) {
+    override fun unregisterLocalEvent(action: String?) {
         action?.let {
             broadcastReceivers[it]?.let {
                 context?.let { c ->
@@ -182,7 +182,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
     }
 
 
-    override fun onReceiveEvent(action: String) {
+    override fun onReceiveLocalEvent(action: String) {
 
     }
 
@@ -235,7 +235,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
         super.onDestroy()
         Log2.d(TAG, "执行onDestroy")
         broadcastReceivers.keys.toList().forEach {
-            unregisterEvent(it)
+            unregisterLocalEvent(it)
         }
     }
 

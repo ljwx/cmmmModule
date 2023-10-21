@@ -179,7 +179,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     /**
      * 事件广播使用
      */
-    override fun registerEvent(action: String?) {
+    override fun registerLocalEvent(action: String?) {
         if (action == null) {
             return
         }
@@ -189,7 +189,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
                 intent.action?.let {
                     Log2.d(TAG, "接收到事件广播:$it")
                     if (intentFilter.matchAction(it)) {
-                        onReceiveEvent(it)
+                        onReceiveLocalEvent(it)
                     }
                 }
             }
@@ -199,7 +199,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, intentFilter)
     }
 
-    override fun sendEvent(action: String?) {
+    override fun sendLocalEvent(action: String?) {
         if (action == null) {
             return
         }
@@ -207,7 +207,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(action))
     }
 
-    override fun unregisterEvent(action: String?) {
+    override fun unregisterLocalEvent(action: String?) {
         action?.let {
             broadcastReceivers[it]?.let {
                 Log2.d(TAG, "注销事件广播:$action")
@@ -218,7 +218,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     }
 
 
-    override fun onReceiveEvent(action: String) {
+    override fun onReceiveLocalEvent(action: String) {
 
     }
 
@@ -271,7 +271,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         super.onDestroy()
         Log2.d(TAG, "执行onDestroy")
         broadcastReceivers.keys.toList().forEach {
-            unregisterEvent(it)
+            unregisterLocalEvent(it)
         }
     }
 

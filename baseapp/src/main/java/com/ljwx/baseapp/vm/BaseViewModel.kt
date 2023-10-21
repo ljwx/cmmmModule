@@ -1,16 +1,20 @@
 package com.ljwx.baseapp.vm
 
+import android.content.Intent
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.ljwx.baseapp.constant.ConstTag
+import com.ljwx.baseapp.event.ISendEvent
 import com.ljwx.baseapp.response.DataResult
+import com.ljwx.baseapp.util.BaseAppUtils
 import com.ljwx.baseapp.util.Log2
 import com.ljwx.baseapp.vm.model.BaseDataRepository
 
 abstract class BaseViewModel<M : BaseDataRepository<*>> : ViewModel(), IBaseViewModel<M>,
-    DefaultLifecycleObserver, IRxAutoCleared {
+    DefaultLifecycleObserver, IRxAutoCleared, ISendEvent {
 
     open val TAG = this.javaClass.simpleName + ConstTag.MVVM
 
@@ -83,6 +87,15 @@ abstract class BaseViewModel<M : BaseDataRepository<*>> : ViewModel(), IBaseView
 
     override fun commonResponseNotSuccess(result: DataResult<*>) {
 
+    }
+
+    override fun sendLocalEvent(action: String?) {
+        if (action == null) {
+            return
+        }
+        Log2.d(TAG, "发送事件广播:$action")
+        LocalBroadcastManager.getInstance(BaseAppUtils.getApplication())
+            .sendBroadcast(Intent(action))
     }
 
     fun block(block: () -> Unit) {

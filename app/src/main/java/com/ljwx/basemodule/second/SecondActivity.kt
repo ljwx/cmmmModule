@@ -42,11 +42,11 @@ class SecondActivity :
 
     override fun observeData() {
         super.observeData()
-        registerEvent("test1")
-        registerEvent(null)
-        registerEvent("test2")
-        registerEvent("test3")
-        registerEvent("test4")
+        registerLocalEvent("test1")
+        registerLocalEvent(null)
+        registerLocalEvent("test2")
+        registerLocalEvent("test3")
+        registerLocalEvent("test4")
     }
 
     override fun setClickListener() {
@@ -57,10 +57,10 @@ class SecondActivity :
             MemoryUtils.requestMemory()
         }
         mBinding.button.singleClick {
-            sendEvent("test1")
-            sendEvent("test2")
-            sendEvent("test3")
-            sendEvent("test4")
+            sendLocalEvent("test1")
+            sendLocalEvent("test2")
+            sendLocalEvent("test3")
+            sendLocalEvent("test4")
         }
         mBinding.task.singleClick {
             mViewModel.intervalPost()
@@ -73,8 +73,8 @@ class SecondActivity :
 //        }
 //    }
 
-    override fun onReceiveEvent(action: String) {
-        super.onReceiveEvent(action)
+    override fun onReceiveLocalEvent(action: String) {
+        super.onReceiveLocalEvent(action)
         Log.d("ljwx2", "接收到广播:$action")
     }
 

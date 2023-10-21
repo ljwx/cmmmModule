@@ -1,12 +1,10 @@
 package com.ljwx.basemodule
 
-import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
 import com.blankj.utilcode.util.Utils
 import com.ljwx.baseactivity.fast.QuickMainActivity
-import com.ljwx.baseapp.extensions.TAG_CLASS
 import com.ljwx.baseapp.extensions.singleClick
 import com.ljwx.basemodule.constance.ConstRouter
 import com.ljwx.basemodule.databinding.ActivityMainBinding
@@ -39,7 +37,7 @@ class MainActivity :
 //        addTabFragment("vmFragment", ViewModelFragment())
 //        addTabFragment("javaTest", TestJavaFragment(0))
 
-        unregisterEvent("test4")
+        unregisterLocalEvent("test4")
 
         mBinding.button.singleClick {
             routerTo(ConstRouter.SECOND_ACTIVITY).with("test", TestData(999)).start()
@@ -47,8 +45,8 @@ class MainActivity :
 
     }
 
-    override fun onReceiveEvent(action: String) {
-        super.onReceiveEvent(action)
+    override fun onReceiveLocalEvent(action: String) {
+        super.onReceiveLocalEvent(action)
         Log.d("ljwx2", "接收到广播:$action")
     }
 

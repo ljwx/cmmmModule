@@ -1,13 +1,13 @@
 package com.ljwx.baseapp.page
 
-interface IPageReceiveEvent {
+import com.ljwx.baseapp.event.ISendEvent
 
-    fun registerEvent(action: String?)
+interface IPageReceiveEvent :ISendEvent{
 
-    fun unregisterEvent(action: String?)
+    fun registerLocalEvent(action: String?)
 
-    fun sendEvent(action: String?)
+    fun unregisterLocalEvent(action: String?)
 
-    fun onReceiveEvent(action: String)
+    fun onReceiveLocalEvent(action: String)
 
 }
