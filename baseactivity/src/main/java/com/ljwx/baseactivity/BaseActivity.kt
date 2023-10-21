@@ -27,7 +27,7 @@ import com.ljwx.router.Postcard
 open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPageReceiveEvent,
     IPageDialogTips, IPageProcessStep, IPageActivity, IPageStartPage {
 
-    open val TAG = this.javaClass.simpleName + ConstTag.BASE_ACTIVITY
+    open val TAG = this.javaClass.simpleName + "[Activity]"
 
     private val mStatusBar by lazy {
         BaseStatusBar(this)

@@ -25,7 +25,7 @@ import com.ljwx.router.Postcard
 open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), IPageReceiveEvent,
     IPageDialogTips, IPageProcessStep, IPageStartPage {
 
-    open val TAG = this.javaClass.simpleName
+    open val TAG = this.javaClass.simpleName + "[Fragment]"
 
     protected var mActivity: AppCompatActivity? = null
 
