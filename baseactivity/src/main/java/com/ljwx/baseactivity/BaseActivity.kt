@@ -6,17 +6,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ActivityInfo
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.ljwx.baseactivity.statusbar.BaseStatusBar
 import com.ljwx.baseapp.page.IPageActivity
-import com.ljwx.baseapp.page.IPageBroadcast
+import com.ljwx.baseapp.page.IPageReceiveEvent
 import com.ljwx.baseapp.page.IPageDialogTips
 import com.ljwx.baseapp.page.IPageProcessStep
 import com.ljwx.baseapp.page.IPageStartPage
@@ -27,10 +24,10 @@ import com.ljwx.baseapp.view.IViewStatusBar
 import com.ljwx.basedialog.common.BaseDialogBuilder
 import com.ljwx.router.Postcard
 
-open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPageBroadcast,
+open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPageReceiveEvent,
     IPageDialogTips, IPageProcessStep, IPageActivity, IPageStartPage {
 
-    open val TAG = this.javaClass.simpleName
+    open val TAG = this.javaClass.simpleName + ConstTag.BASE_ACTIVITY
 
     private val mStatusBar by lazy {
         BaseStatusBar(this)
@@ -38,15 +35,9 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
 
     private var mStateSaved = false
 
-    /**
-     * 广播
-     */
-    private var mBroadcastReceiver: BroadcastReceiver? = null
-
-    /**
-     * 注册广播
-     */
-    private var mBroadcastIntentFilter: IntentFilter? = null
+    private val broadcastReceivers by lazy {
+        HashMap<String, BroadcastReceiver>()
+    }
 
     private var onBackPressInterceptors: (ArrayList<() -> Boolean>)? = null
 
@@ -64,6 +55,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     }
 
     override fun routerTo(path: String): IPostcard {
+        Log2.d(TAG, "路由跳转到:$path")
         return Postcard(path)
     }
 
@@ -80,16 +72,19 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     }
 
     override fun initToolbar(toolbarId: Int): Toolbar? {
+        Log2.d(TAG, "通过id初始化toolbar")
         val toolbar = findViewById(toolbarId) as? Toolbar
         return setToolbar(toolbar)
     }
 
     override fun initToolbar(toolbar: Toolbar?): Toolbar? {
+        Log2.d(TAG, "通过Toolbar控件初始化toolbar")
         return setToolbar(toolbar)
     }
 
     private fun setToolbar(toolbar: Toolbar?): Toolbar? {
         toolbar?.let {
+            Log2.d(TAG, "设置Toolbar返回")
             setSupportActionBar(toolbar)
             toolbar?.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
         }
@@ -102,7 +97,6 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB
         mStateSaved = true
     }
 
@@ -126,6 +120,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         content: String?,
         positiveText: String?
     ): Dialog? {
+        Log2.d(TAG, "快速显示Dialog提示弹窗,精简")
         return showDialogTips(title, content, positiveText, null, null, null, false, null, null)
     }
 
@@ -150,12 +145,13 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         negativeListener: View.OnClickListener?,
         positiveListener: View.OnClickListener?
     ): Dialog? {
+        Log2.d(TAG, "快速显示Dialog提示弹窗,详细")
 //        if (tag.notNullOrBlank()) {
 //            val cache = supportFragmentManager.findFragmentByTag(tag)
 //            if (cache != null && cache is BaseDialogFragment) {
 //                //报java.lang.IllegalStateException: Fragment already added
 ////                cache.show(supportFragmentManager, tag)
-//                Log.d(TAG, "$tag,dialog有缓存")
+//                Log2.d(TAG, "$tag,dialog有缓存")
 //                return cache.getBuilder()
 //            }
 //        }
@@ -180,49 +176,49 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         }
     }
 
-    override fun registerCommonBroadcast(action: String?) {
+    /**
+     * 事件广播使用
+     */
+    override fun registerEvent(action: String?) {
         if (action == null) {
             return
         }
-        mBroadcastIntentFilter = mBroadcastIntentFilter ?: IntentFilter()
-        mBroadcastIntentFilter?.addAction(action)
-        mBroadcastReceiver = mBroadcastReceiver ?: (object : BroadcastReceiver() {
+        val intentFilter = IntentFilter(action)
+        val receiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
                 intent.action?.let {
-                    if (mBroadcastIntentFilter?.matchAction(it) == true) {
-                        onCommonBroadcast(it)
+                    Log2.d(TAG, "接收到事件广播:$it")
+                    if (intentFilter.matchAction(it)) {
+                        onReceiveEvent(it)
                     }
                 }
             }
-        })
-        LocalBroadcastManager.getInstance(this)
-            .registerReceiver(mBroadcastReceiver!!, mBroadcastIntentFilter!!)
-    }
-
-    override fun unregisterBroadcast(action: String?) {
-        if (action != null) {
-            val iterator = mBroadcastIntentFilter?.actionsIterator()
-            while (iterator?.hasNext() == true) {
-                if (iterator.next() == action) {
-                    iterator.remove()
-                }
-            }
-        } else {
-            mBroadcastReceiver?.let {
-                LocalBroadcastManager.getInstance(this).unregisterReceiver(it)
-            }
-            mBroadcastReceiver = null
         }
+        broadcastReceivers.put(action, receiver)
+        Log2.d(TAG, "注册事件广播:$action")
+        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, intentFilter)
     }
 
-    override fun sendLocalBroadcast(action: String?) {
+    override fun sendEvent(action: String?) {
         if (action == null) {
             return
         }
+        Log2.d(TAG, "发送事件广播:$action")
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(action))
     }
 
-    override fun onCommonBroadcast(action: String) {
+    override fun unregisterEvent(action: String?) {
+        action?.let {
+            broadcastReceivers[it]?.let {
+                Log2.d(TAG, "注销事件广播:$action")
+                LocalBroadcastManager.getInstance(this).unregisterReceiver(it)
+            }
+            broadcastReceivers.remove(it)
+        }
+    }
+
+
+    override fun onReceiveEvent(action: String) {
 
     }
 
@@ -232,8 +228,12 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     }
 
     override fun onBackPressed() {
+        Log2.d(TAG, "返回是否需要拦截")
         onBackPressInterceptors?.forEach {
-            if (it.invoke()) return
+            if (it.invoke()) {
+                Log2.d(TAG, "返回被拦截")
+                return
+            }
         }
         super.onBackPressed()
     }
@@ -268,11 +268,11 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     }
 
     override fun onDestroy() {
-        mBroadcastReceiver?.let {
-            LocalBroadcastManager.getInstance(this).unregisterReceiver(it)
-        }
-        mBroadcastIntentFilter = null
         super.onDestroy()
+        Log2.d(TAG, "执行onDestroy")
+        broadcastReceivers.keys.toList().forEach {
+            unregisterEvent(it)
+        }
     }
 
 }

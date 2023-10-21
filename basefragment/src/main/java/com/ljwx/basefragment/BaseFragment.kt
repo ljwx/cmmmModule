@@ -14,8 +14,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.blankj.utilcode.util.Utils
-import com.ljwx.baseapp.page.IPageBroadcast
+import com.ljwx.baseapp.page.IPageReceiveEvent
 import com.ljwx.baseapp.page.IPageProcessStep
 import com.ljwx.baseapp.page.IPageDialogTips
 import com.ljwx.baseapp.page.IPageStartPage
@@ -23,7 +22,7 @@ import com.ljwx.baseapp.router.IPostcard
 import com.ljwx.basedialog.common.BaseDialogBuilder
 import com.ljwx.router.Postcard
 
-open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), IPageBroadcast,
+open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), IPageReceiveEvent,
     IPageDialogTips, IPageProcessStep, IPageStartPage {
 
     open val TAG = this.javaClass.simpleName
@@ -33,14 +32,11 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
     private var isLoaded = false
 
     /**
-     * 广播
+     * 广播事件
      */
-    private var mBroadcastReceiver: BroadcastReceiver? = null
-
-    /**
-     * 注册广播
-     */
-    private var mBroadcastIntentFilter: IntentFilter? = null
+    private val broadcastReceivers by lazy {
+        HashMap<String, BroadcastReceiver>()
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -71,6 +67,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
     }
 
     override fun routerTo(path: String): IPostcard {
+        Log2.d(TAG, "路由跳转到:$path")
         return Postcard(path)
     }
 
@@ -137,52 +134,55 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
         }
     }
 
-    override fun registerCommonBroadcast(action: String?) {
+    /**
+     * 事件广播使用
+     */
+    override fun registerEvent(action: String?) {
         if (action == null) {
             return
         }
-        mBroadcastIntentFilter = mBroadcastIntentFilter ?: IntentFilter()
-        mBroadcastIntentFilter?.addAction(action)
-        mBroadcastReceiver = mBroadcastReceiver ?: (object : BroadcastReceiver() {
+        val intentFilter = IntentFilter(action)
+        val receiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
                 intent.action?.let {
-                    onCommonBroadcast(it)
+                    Log2.d(TAG, "接收到事件广播:$it")
+                    if (intentFilter.matchAction(it)) {
+                        onReceiveEvent(it)
+                    }
                 }
             }
-        })
+        }
+        broadcastReceivers.put(action, receiver)
+        Log2.d(TAG, "注册事件广播:$action")
         context?.let {
-            LocalBroadcastManager.getInstance(it)
-                .registerReceiver(mBroadcastReceiver!!, mBroadcastIntentFilter!!)
-
+            LocalBroadcastManager.getInstance(it).registerReceiver(receiver, intentFilter)
         }
     }
 
-    override fun unregisterBroadcast(action: String?) {
-        if (action != null) {
-            val iterator = mBroadcastIntentFilter?.actionsIterator()
-            while (iterator?.hasNext() == true) {
-                if (iterator.next() == action) {
-                    iterator.remove()
-                }
-            }
-        } else {
-            mBroadcastReceiver?.let {
-                LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(it)
-            }
-            mBroadcastReceiver = null
-        }
-    }
-
-    override fun sendLocalBroadcast(action: String?) {
+    override fun sendEvent(action: String?) {
         if (action == null) {
             return
         }
+        Log2.d(TAG, "发送事件广播:$action")
         context?.let {
             LocalBroadcastManager.getInstance(it).sendBroadcast(Intent(action))
         }
     }
 
-    override fun onCommonBroadcast(action: String) {
+    override fun unregisterEvent(action: String?) {
+        action?.let {
+            broadcastReceivers[it]?.let {
+                context?.let { c ->
+                    Log2.d(TAG, "注销事件广播:$action")
+                    LocalBroadcastManager.getInstance(c).unregisterReceiver(it)
+                }
+            }
+            broadcastReceivers.remove(it)
+        }
+    }
+
+
+    override fun onReceiveEvent(action: String) {
 
     }
 
@@ -221,21 +221,22 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Log2.d(TAG, "执行onDestroyView")
         isLoaded = false
     }
 
     override fun onDetach() {
         super.onDetach()
+        Log2.d(TAG, "执行onDetach")
         mActivity = null
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        mBroadcastReceiver?.let {
-            LocalBroadcastManager.getInstance(Utils.getApp()).unregisterReceiver(it)
+        Log2.d(TAG, "执行onDestroy")
+        broadcastReceivers.keys.toList().forEach {
+            unregisterEvent(it)
         }
-        mBroadcastReceiver = null
-        mBroadcastIntentFilter = null
     }
 
 }

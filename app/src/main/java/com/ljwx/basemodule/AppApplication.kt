@@ -3,6 +3,7 @@ package com.ljwx.basemodule
 import android.app.Application
 import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.Utils
+import com.ljwx.baseapp.util.BaseAppUtils
 import com.ljwx.baserefresh.BaseRefreshHeader
 import com.ljwx.baserefresh.BaseRefreshLayout
 
@@ -16,6 +17,7 @@ class AppApplication : Application() {
         }
 
         Utils.init(this)
+        BaseAppUtils.init(this)
         //初始化阿里路由框架
         if (BuildConfig.DEBUG) {
             ARouter.openLog() //

@@ -4,8 +4,8 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
+import com.blankj.utilcode.util.Utils
 import com.ljwx.baseactivity.fast.QuickMainActivity
-import com.ljwx.baseapp.debug.debugRun
 import com.ljwx.baseapp.extensions.TAG_CLASS
 import com.ljwx.baseapp.extensions.singleClick
 import com.ljwx.basemodule.constance.ConstRouter
@@ -27,6 +27,8 @@ class MainActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+        Log.d("ljwx2", Utils.getApp().toString())
+        Log.d("ljwx2", applicationContext.toString())
 
         super.onCreate(savedInstanceState)
         addTabFragment("staterefresh", StateRefreshFragment())
@@ -37,9 +39,7 @@ class MainActivity :
 //        addTabFragment("vmFragment", ViewModelFragment())
 //        addTabFragment("javaTest", TestJavaFragment(0))
 
-        registerCommonBroadcast("test1")
-        registerCommonBroadcast("test2")
-        registerCommonBroadcast("test3")
+        unregisterEvent("test4")
 
         mBinding.button.singleClick {
             routerTo(ConstRouter.SECOND_ACTIVITY).with("test", TestData(999)).start()
@@ -47,38 +47,17 @@ class MainActivity :
 
     }
 
-
-    override fun onCommonBroadcast(action: String) {
-        super.onCommonBroadcast(action)
+    override fun onReceiveEvent(action: String) {
+        super.onReceiveEvent(action)
         Log.d("ljwx2", "接收到广播:$action")
     }
 
     override fun getScreenOrientation() = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        Log.d("ljwx2", "保存数据")
-        outState.putString("save", "saveCache")
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        Log.d("ljwx2", "恢复数据:" + savedInstanceState.getString("save", "空的"))
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("ljwx2", "$TAG_CLASS:onDestroy")
-    }
-
     override fun TestViewModel.scope() {
         mResponse.observe {
 
         }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
     }
 
 }
