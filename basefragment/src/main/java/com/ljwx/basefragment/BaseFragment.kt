@@ -24,7 +24,7 @@ import com.ljwx.basedialog.common.BaseDialogBuilder
 import com.ljwx.router.Postcard
 
 open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), IPageBroadcast,
-    IPageDialogTips, IPageProcessStep, IPageStartPage{
+    IPageDialogTips, IPageProcessStep, IPageStartPage {
 
     open val TAG = this.javaClass.simpleName
 
@@ -33,16 +33,9 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
     private var isLoaded = false
 
     /**
-     * 结束广播
+     * 广播
      */
-    private var mFinishReceiver: BroadcastReceiver? = null
-
-    /**
-     * 刷新广播
-     */
-    private var mRefreshReceiver: BroadcastReceiver? = null
-
-    private var mOtherReceiver: BroadcastReceiver? = null
+    private var mBroadcastReceiver: BroadcastReceiver? = null
 
     /**
      * 注册广播
@@ -144,49 +137,24 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
         }
     }
 
-    override fun registerFinishBroadcast(vararg actions: String?) {
-        mBroadcastIntentFilter = mBroadcastIntentFilter ?: IntentFilter()
-        actions.forEach {
-            mBroadcastIntentFilter?.addAction(it)
+    override fun registerCommonBroadcast(action: String?) {
+        if (action == null) {
+            return
         }
-        mFinishReceiver = mFinishReceiver ?: (object : BroadcastReceiver() {
-            override fun onReceive(context: Context, intent: Intent) {
-                if (mBroadcastIntentFilter?.matchAction(intent.action) == true) {
-                    onBroadcastPageFinish()
-                }
-            }
-        })
-        LocalBroadcastManager.getInstance(requireContext())
-            .registerReceiver(mFinishReceiver!!, mBroadcastIntentFilter!!)
-    }
-
-    override fun registerRefreshBroadcast(vararg actions: String?) {
         mBroadcastIntentFilter = mBroadcastIntentFilter ?: IntentFilter()
-        actions.forEach {
-            mBroadcastIntentFilter?.addAction(it)
-        }
-        mRefreshReceiver = mRefreshReceiver ?: (object : BroadcastReceiver() {
+        mBroadcastIntentFilter?.addAction(action)
+        mBroadcastReceiver = mBroadcastReceiver ?: (object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
-                if (mBroadcastIntentFilter?.matchAction(intent.action) == true) {
-                    onBroadcastPageRefresh(intent.getStringExtra("params"))
+                intent.action?.let {
+                    onCommonBroadcast(it)
                 }
             }
         })
-        LocalBroadcastManager.getInstance(requireContext())
-            .registerReceiver(mRefreshReceiver!!, mBroadcastIntentFilter!!)
-    }
+        context?.let {
+            LocalBroadcastManager.getInstance(it)
+                .registerReceiver(mBroadcastReceiver!!, mBroadcastIntentFilter!!)
 
-    override fun registerOtherBroadcast(action: String) {
-        mBroadcastIntentFilter = mBroadcastIntentFilter ?: IntentFilter(action)
-        mOtherReceiver = mOtherReceiver ?: (object : BroadcastReceiver() {
-            override fun onReceive(context: Context, intent: Intent) {
-                if (mBroadcastIntentFilter?.matchAction(intent.action) == true) {
-                    onBroadcastOther(intent.action)
-                }
-            }
-        })
-        LocalBroadcastManager.getInstance(requireContext())
-            .registerReceiver(mOtherReceiver!!, mBroadcastIntentFilter!!)
+        }
     }
 
     override fun unregisterBroadcast(action: String?) {
@@ -198,51 +166,23 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
                 }
             }
         } else {
-            mFinishReceiver?.let {
+            mBroadcastReceiver?.let {
                 LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(it)
             }
-            mFinishReceiver = null
+            mBroadcastReceiver = null
         }
     }
 
-    override fun sendFinishBroadcast(action: String?) {
-        if (action.isNullOrBlank()) {
+    override fun sendLocalBroadcast(action: String?) {
+        if (action == null) {
             return
         }
-        val intent = Intent(action)
-        context?.let {
-            LocalBroadcastManager.getInstance(it).sendBroadcast(intent)
-        }
-    }
-
-    override fun sendRefreshBroadcast(action: String?, params: String?) {
-        if (action.isNullOrBlank()) {
-            return
-        }
-        val intent = Intent(action)
-        params?.let {
-            intent.putExtra("params", it)
-        }
-        context?.let {
-            LocalBroadcastManager.getInstance(it).sendBroadcast(intent)
-        }
-    }
-
-    override fun sendOtherBroadcast(action: String) {
         context?.let {
             LocalBroadcastManager.getInstance(it).sendBroadcast(Intent(action))
         }
     }
 
-    override fun onBroadcastPageFinish() {
-        activity?.finish()
-    }
-
-    override fun onBroadcastPageRefresh(type: String?) {
-
-    }
-
-    override fun onBroadcastOther(action: String?) {
+    override fun onCommonBroadcast(action: String) {
 
     }
 
@@ -291,18 +231,10 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
 
     override fun onDestroy() {
         super.onDestroy()
-        mFinishReceiver?.let {
+        mBroadcastReceiver?.let {
             LocalBroadcastManager.getInstance(Utils.getApp()).unregisterReceiver(it)
         }
-        mFinishReceiver = null
-        mRefreshReceiver?.let {
-            LocalBroadcastManager.getInstance(Utils.getApp()).unregisterReceiver(it)
-        }
-        mRefreshReceiver = null
-        mOtherReceiver?.let {
-            LocalBroadcastManager.getInstance(Utils.getApp()).unregisterReceiver(it)
-        }
-        mOtherReceiver = null
+        mBroadcastReceiver = null
         mBroadcastIntentFilter = null
     }
 

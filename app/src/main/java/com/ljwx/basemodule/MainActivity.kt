@@ -37,7 +37,9 @@ class MainActivity :
 //        addTabFragment("vmFragment", ViewModelFragment())
 //        addTabFragment("javaTest", TestJavaFragment(0))
 
-        registerFinishBroadcast("test")
+        registerCommonBroadcast("test")
+        registerCommonBroadcast("test2")
+        registerCommonBroadcast("test2")
 
         mBinding.button.singleClick {
             routerTo(ConstRouter.SECOND_ACTIVITY).with("test", TestData(999)).start()
@@ -45,14 +47,10 @@ class MainActivity :
 
     }
 
-    override fun onBroadcastPageFinish() {
-        Log.d("ljwx2", "接收到结束广播")
-//        super.onBroadcastPageFinish()
-    }
 
-    override fun onBroadcastOther(action: String?) {
-        super.onBroadcastOther(action)
-        Log.d("ljwx2", "收到广播")
+    override fun onCommonBroadcast(action: String) {
+        super.onCommonBroadcast(action)
+        Log.d("ljwx2", "接收到广播:$action")
     }
 
     override fun getScreenOrientation() = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
@@ -74,7 +72,7 @@ class MainActivity :
     }
 
     override fun TestViewModel.scope() {
-        mResponse.observe{
+        mResponse.observe {
 
         }
     }

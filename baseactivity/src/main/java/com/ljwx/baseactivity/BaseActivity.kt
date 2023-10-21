@@ -39,16 +39,9 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     private var mStateSaved = false
 
     /**
-     * 结束广播
+     * 广播
      */
-    private var mFinishReceiver: BroadcastReceiver? = null
-
-    /**
-     * 刷新广播
-     */
-    private var mRefreshReceiver: BroadcastReceiver? = null
-
-    private var mOtherReceiver: BroadcastReceiver? = null
+    private var mBroadcastReceiver: BroadcastReceiver? = null
 
     /**
      * 注册广播
@@ -187,50 +180,23 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         }
     }
 
-    override fun registerFinishBroadcast(vararg actions: String?) {
-        mBroadcastIntentFilter = mBroadcastIntentFilter ?: IntentFilter()
-        actions.forEach {
-            mBroadcastIntentFilter?.addAction(it)
+    override fun registerCommonBroadcast(action: String?) {
+        if (action == null) {
+            return
         }
-        mFinishReceiver = mFinishReceiver ?: (object : BroadcastReceiver() {
-            override fun onReceive(context: Context, intent: Intent) {
-                if (mBroadcastIntentFilter?.matchAction(intent.action) == true) {
-                    onBroadcastPageFinish()
-                }
-            }
-        })
-        LocalBroadcastManager.getInstance(this)
-            .registerReceiver(mFinishReceiver!!, mBroadcastIntentFilter!!)
-    }
-
-    override fun registerRefreshBroadcast(vararg actions: String?) {
-        mBroadcastIntentFilter = mBroadcastIntentFilter ?: IntentFilter()
-        actions.forEach {
-            mBroadcastIntentFilter?.addAction(it)
-        }
-        mRefreshReceiver = mRefreshReceiver ?: (object : BroadcastReceiver() {
-            override fun onReceive(context: Context, intent: Intent) {
-                if (mBroadcastIntentFilter?.matchAction(intent.action) == true) {
-                    onBroadcastPageRefresh(intent.getStringExtra("params"))
-                }
-            }
-        })
-        LocalBroadcastManager.getInstance(this)
-            .registerReceiver(mRefreshReceiver!!, mBroadcastIntentFilter!!)
-    }
-
-    override fun registerOtherBroadcast(action: String) {
         mBroadcastIntentFilter = mBroadcastIntentFilter ?: IntentFilter()
         mBroadcastIntentFilter?.addAction(action)
-        mOtherReceiver = mOtherReceiver ?: (object : BroadcastReceiver() {
+        mBroadcastReceiver = mBroadcastReceiver ?: (object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
-                if (mBroadcastIntentFilter?.matchAction(intent.action) == true) {
-                    onBroadcastOther(intent.action)
+                intent.action?.let {
+                    if (mBroadcastIntentFilter?.matchAction(it) == true) {
+                        onCommonBroadcast(it)
+                    }
                 }
             }
         })
         LocalBroadcastManager.getInstance(this)
-            .registerReceiver(mOtherReceiver!!, mBroadcastIntentFilter!!)
+            .registerReceiver(mBroadcastReceiver!!, mBroadcastIntentFilter!!)
     }
 
     override fun unregisterBroadcast(action: String?) {
@@ -242,45 +208,21 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
                 }
             }
         } else {
-            mFinishReceiver?.let {
+            mBroadcastReceiver?.let {
                 LocalBroadcastManager.getInstance(this).unregisterReceiver(it)
             }
-            mFinishReceiver = null
+            mBroadcastReceiver = null
         }
     }
 
-    override fun sendFinishBroadcast(action: String?) {
-        if (action.isNullOrBlank()) {
+    override fun sendLocalBroadcast(action: String?) {
+        if (action == null) {
             return
         }
-        val intent = Intent(action)
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
-    }
-
-    override fun sendRefreshBroadcast(action: String?, params: String?) {
-        if (action.isNullOrBlank()) {
-            return
-        }
-        val intent = Intent(action)
-        params?.let {
-            intent.putExtra("params", it)
-        }
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
-    }
-
-    override fun sendOtherBroadcast(action: String) {
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(action))
     }
 
-    override fun onBroadcastPageFinish() {
-        finish()
-    }
-
-    override fun onBroadcastPageRefresh(type: String?) {
-
-    }
-
-    override fun onBroadcastOther(action: String?) {
+    override fun onCommonBroadcast(action: String) {
 
     }
 
@@ -326,18 +268,9 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     }
 
     override fun onDestroy() {
-        mFinishReceiver?.let {
+        mBroadcastReceiver?.let {
             LocalBroadcastManager.getInstance(this).unregisterReceiver(it)
         }
-        mFinishReceiver = null
-        mRefreshReceiver?.let {
-            LocalBroadcastManager.getInstance(this).unregisterReceiver(it)
-        }
-        mRefreshReceiver = null
-        mOtherReceiver?.let {
-            LocalBroadcastManager.getInstance(this).unregisterReceiver(it)
-        }
-        mOtherReceiver = null
         mBroadcastIntentFilter = null
         super.onDestroy()
     }

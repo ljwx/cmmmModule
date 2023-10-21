@@ -48,7 +48,7 @@ class SecondActivity :
             MemoryUtils.requestMemory()
         }
         mBinding.button.singleClick {
-            routerTo(ConstRouter.THIRD_ACTIVITY).start()
+            sendLocalBroadcast("test2")
         }
         mBinding.task.singleClick {
             mViewModel.intervalPost()
