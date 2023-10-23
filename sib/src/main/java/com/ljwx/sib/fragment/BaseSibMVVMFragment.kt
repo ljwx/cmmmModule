@@ -6,11 +6,11 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.ljwx.baseapp.vm.BaseViewModel
+import com.ljwx.baseapp.vm.BaseAndroidViewModel
 import com.ljwx.baseapp.vm.ViewModelScope
 import java.lang.reflect.ParameterizedType
 
-abstract class BaseSibMVVMFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel<*>>(@LayoutRes layoutRes: Int) :
+abstract class BaseSibMVVMFragment<Binding : ViewDataBinding, ViewModel : BaseAndroidViewModel<*>>(@LayoutRes layoutRes: Int) :
     BaseSibBindingFragment<Binding>(layoutRes) {
 
     private val mViewModelScope by lazy {

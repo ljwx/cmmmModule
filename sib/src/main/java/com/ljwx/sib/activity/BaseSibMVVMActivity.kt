@@ -6,10 +6,10 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.ljwx.baseapp.vm.BaseViewModel
+import com.ljwx.baseapp.vm.BaseAndroidViewModel
 import java.lang.reflect.ParameterizedType
 
-abstract class BaseSibMVVMActivity<Binding : ViewDataBinding, ViewModel : BaseViewModel<*>>(@LayoutRes private val layoutResID: Int) :
+abstract class BaseSibMVVMActivity<Binding : ViewDataBinding, ViewModel : BaseAndroidViewModel<*>>(@LayoutRes private val layoutResID: Int) :
     BaseSibBindingActivity<Binding>(layoutResID) {
 
     protected lateinit var mViewModel: ViewModel
