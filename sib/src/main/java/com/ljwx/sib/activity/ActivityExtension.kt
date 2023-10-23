@@ -1,4 +1,4 @@
-package com.ljwx.baseactivity
+package com.ljwx.sib.activity
 
 import android.view.View
 import android.view.ViewGroup
