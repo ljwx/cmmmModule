@@ -30,6 +30,8 @@ open class BaseSibActivity : RxAppCompatActivity(), IPageStatusBar, IPageToolbar
 
     open val TAG = this.javaClass.simpleName + "[Activity]"
 
+    open val userNewBaseActivityLogic = false
+
     private val mStatusBar by lazy {
         BaseStatusBar(this)
     }

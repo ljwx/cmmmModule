@@ -4,20 +4,28 @@ import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.ljwx.sib.BR
 
-open class BaseSibBindingActivity<Binding : ViewDataBinding>(@LayoutRes private val layoutResID: Int) :
+abstract class BaseSibBindingActivity<Binding : ViewDataBinding>() :
     BaseSibStateRefreshActivity() {
 
     protected lateinit var mBinding: Binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, layoutResID)
-        //等待binding过后
-        initToolbar(com.ljwx.baseapp.R.id.base_app_toolbar)
+        if (userNewBaseActivityLogic) {
+            newBaseActivityCreate()
+        }
         quickLayout()
     }
 
+    abstract fun getLayoutId(): Int
+
+    open fun newBaseActivityCreate() {
+        mBinding = DataBindingUtil.setContentView(this, getLayoutId())
+        //等待binding过后
+        initToolbar(com.ljwx.baseapp.R.id.base_app_toolbar)
+    }
 
     protected fun quickLayout() {
         useCommonStateLayout()
@@ -25,8 +33,8 @@ open class BaseSibBindingActivity<Binding : ViewDataBinding>(@LayoutRes private 
     }
 
     override fun onDestroy() {
-        mBinding.unbind()
         super.onDestroy()
+        mBinding.unbind()
     }
 
 }

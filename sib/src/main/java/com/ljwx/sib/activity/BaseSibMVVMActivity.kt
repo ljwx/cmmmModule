@@ -8,17 +8,24 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ljwx.baseapp.vm.BaseAndroidViewModel
 import java.lang.reflect.ParameterizedType
+import com.ljwx.sib.BR
 
 abstract class BaseSibMVVMActivity<Binding : ViewDataBinding, ViewModel : BaseAndroidViewModel<*>>(@LayoutRes private val layoutResID: Int) :
-    BaseSibBindingActivity<Binding>(layoutResID) {
+    BaseSibBindingActivity<Binding>() {
 
     protected lateinit var mViewModel: ViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initPopLoadingObserver()
+    }
+
+    override fun newBaseActivityCreate() {
+        super.newBaseActivityCreate()
         mViewModel = createViewModel()
         lifecycle.addObserver(mViewModel)
-        initPopLoadingObserver()
+        //关联ViewModel
+        mBinding.setVariable(BR.pageMainViewModel, mViewModel)
     }
 
     open fun initPopLoadingObserver() {

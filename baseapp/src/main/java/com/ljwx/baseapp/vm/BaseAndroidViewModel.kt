@@ -14,7 +14,7 @@ import com.ljwx.baseapp.util.BaseAppUtils
 import com.ljwx.baseapp.util.Log2
 import com.ljwx.baseapp.vm.model.BaseDataRepository
 
-abstract class BaseAndroidViewModel<M : BaseDataRepository<*>>(protected val application: Application) :
+abstract class BaseAndroidViewModel<M : BaseDataRepository<*>>(application: Application) :
     IBaseViewModel<M>, AndroidViewModel(application), DefaultLifecycleObserver, IRxAutoCleared,
     ISendLocalEvent {
 
@@ -98,10 +98,6 @@ abstract class BaseAndroidViewModel<M : BaseDataRepository<*>>(protected val app
         Log2.d(TAG, "发送事件广播:$action")
         LocalBroadcastManager.getInstance(BaseAppUtils.getApplication())
             .sendBroadcast(Intent(action))
-    }
-
-    override fun <T : Application> getApplication(): T {
-        return super.getApplication()
     }
 
 }

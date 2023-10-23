@@ -8,6 +8,10 @@
         <import type="android.view.View" />
 
         <variable
+            name="pageMainViewModel"
+            type="String" />
+
+        <variable
             name="data"
             type="String" />
     </data>
@@ -26,7 +30,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
