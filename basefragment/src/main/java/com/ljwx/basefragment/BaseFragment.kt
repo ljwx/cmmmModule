@@ -14,7 +14,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.ljwx.baseapp.page.IPageReceiveEvent
+import com.ljwx.baseapp.page.IPageLocalEvent
 import com.ljwx.baseapp.page.IPageProcessStep
 import com.ljwx.baseapp.page.IPageDialogTips
 import com.ljwx.baseapp.page.IPageStartPage
@@ -22,7 +22,7 @@ import com.ljwx.baseapp.router.IPostcard
 import com.ljwx.basedialog.common.BaseDialogBuilder
 import com.ljwx.router.Postcard
 
-open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), IPageReceiveEvent,
+open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), IPageLocalEvent,
     IPageDialogTips, IPageProcessStep, IPageStartPage {
 
     open val TAG = this.javaClass.simpleName + "[Fragment]"
@@ -137,7 +137,10 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
     /**
      * 事件广播使用
      */
-    override fun registerLocalEvent(action: String?) {
+    override fun registerLocalEvent(
+        action: String?,
+        observer: (action: String, intent: Intent) -> Unit
+    ) {
         if (action == null) {
             return
         }
@@ -147,12 +150,12 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
                 intent.action?.let {
                     Log2.d(TAG, "接收到事件广播:$it")
                     if (intentFilter.matchAction(it)) {
-                        onReceiveLocalEvent(it)
+                        observer(action, intent)
                     }
                 }
             }
         }
-        broadcastReceivers.put(action, receiver)
+        broadcastReceivers[action] = receiver
         Log2.d(TAG, "注册事件广播:$action")
         context?.let {
             LocalBroadcastManager.getInstance(it).registerReceiver(receiver, intentFilter)
@@ -179,11 +182,6 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
             }
             broadcastReceivers.remove(it)
         }
-    }
-
-
-    override fun onReceiveLocalEvent(action: String) {
-
     }
 
     open fun lazyInit() {

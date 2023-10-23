@@ -42,11 +42,21 @@ class SecondActivity :
 
     override fun observeData() {
         super.observeData()
-        registerLocalEvent("test1")
-        registerLocalEvent(null)
-        registerLocalEvent("test2")
-        registerLocalEvent("test3")
-        registerLocalEvent("test4")
+        registerLocalEvent("test1") { action, intent ->
+
+        }
+        registerLocalEvent(null) { action, intent ->
+
+        }
+        registerLocalEvent("test2") { action, intent ->
+
+        }
+        registerLocalEvent("test3") { action, intent ->
+
+        }
+        registerLocalEvent("test4") { action, intent ->
+
+        }
     }
 
     override fun setClickListener() {
@@ -67,20 +77,9 @@ class SecondActivity :
         }
     }
 
-//    override fun observeData() {
-//        mViewModel.mIntervelTest.observe{
-//            Log.d("ljwx2", "轮询结果:"+it)
-//        }
-//    }
-
-    override fun onReceiveLocalEvent(action: String) {
-        super.onReceiveLocalEvent(action)
-        Log.d("ljwx2", "接收到广播:$action")
-    }
-
     override fun SecondViewModel.scope() {
-        mIntervelTest.observe{
-            Log.d("ljwx2", "轮询结果:"+it)
+        mIntervelTest.observe {
+            Log.d("ljwx2", "轮询结果:" + it)
         }
     }
 

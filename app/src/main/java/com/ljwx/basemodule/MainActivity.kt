@@ -45,11 +45,6 @@ class MainActivity :
 
     }
 
-    override fun onReceiveLocalEvent(action: String) {
-        super.onReceiveLocalEvent(action)
-        Log.d("ljwx2", "接收到广播:$action")
-    }
-
     override fun getScreenOrientation() = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
 
     override fun TestViewModel.scope() {

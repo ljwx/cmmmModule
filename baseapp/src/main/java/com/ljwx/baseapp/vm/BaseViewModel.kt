@@ -7,14 +7,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.ljwx.baseapp.constant.ConstTag
-import com.ljwx.baseapp.event.ISendEvent
+import com.ljwx.baseapp.event.ISendLocalEvent
 import com.ljwx.baseapp.response.DataResult
 import com.ljwx.baseapp.util.BaseAppUtils
 import com.ljwx.baseapp.util.Log2
 import com.ljwx.baseapp.vm.model.BaseDataRepository
 
 abstract class BaseViewModel<M : BaseDataRepository<*>> : ViewModel(), IBaseViewModel<M>,
-    DefaultLifecycleObserver, IRxAutoCleared, ISendEvent {
+    DefaultLifecycleObserver, IRxAutoCleared, ISendLocalEvent {
 
     open val TAG = this.javaClass.simpleName + ConstTag.MVVM
 

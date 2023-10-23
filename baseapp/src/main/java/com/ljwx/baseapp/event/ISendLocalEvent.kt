@@ -1,6 +1,6 @@
 package com.ljwx.baseapp.event
 
-interface ISendEvent {
+interface ISendLocalEvent {
 
     fun sendLocalEvent(action: String?)
 

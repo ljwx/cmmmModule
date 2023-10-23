@@ -6,23 +6,17 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.ljwx.baseapp.constant.ConstTag
-import com.ljwx.baseapp.event.ISendEvent
+import com.ljwx.baseapp.event.ISendLocalEvent
 import com.ljwx.baseapp.response.DataResult
 import com.ljwx.baseapp.util.BaseAppUtils
 import com.ljwx.baseapp.util.Log2
 import com.ljwx.baseapp.vm.model.BaseDataRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 abstract class BaseAndroidViewModel<M : BaseDataRepository<*>>(application: Application) :
     IBaseViewModel<M>, AndroidViewModel(application), DefaultLifecycleObserver, IRxAutoCleared,
-    ISendEvent {
+    ISendLocalEvent {
 
     open val TAG = this.javaClass.simpleName + ConstTag.MVVM
 

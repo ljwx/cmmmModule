@@ -13,7 +13,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.ljwx.baseactivity.statusbar.BaseStatusBar
 import com.ljwx.baseapp.page.IPageActivity
-import com.ljwx.baseapp.page.IPageReceiveEvent
+import com.ljwx.baseapp.page.IPageLocalEvent
 import com.ljwx.baseapp.page.IPageDialogTips
 import com.ljwx.baseapp.page.IPageProcessStep
 import com.ljwx.baseapp.page.IPageStartPage
@@ -24,7 +24,7 @@ import com.ljwx.baseapp.view.IViewStatusBar
 import com.ljwx.basedialog.common.BaseDialogBuilder
 import com.ljwx.router.Postcard
 
-open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPageReceiveEvent,
+open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPageLocalEvent,
     IPageDialogTips, IPageProcessStep, IPageActivity, IPageStartPage {
 
     open val TAG = this.javaClass.simpleName + "[Activity]"
@@ -179,7 +179,10 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     /**
      * 事件广播使用
      */
-    override fun registerLocalEvent(action: String?) {
+    override fun registerLocalEvent(
+        action: String?,
+        observer: (action: String, intent: Intent) -> Unit
+    ) {
         if (action == null) {
             return
         }
@@ -189,12 +192,12 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
                 intent.action?.let {
                     Log2.d(TAG, "接收到事件广播:$it")
                     if (intentFilter.matchAction(it)) {
-                        onReceiveLocalEvent(it)
+                        observer(action, intent)
                     }
                 }
             }
         }
-        broadcastReceivers.put(action, receiver)
+        broadcastReceivers[action] = receiver
         Log2.d(TAG, "注册事件广播:$action")
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, intentFilter)
     }
@@ -215,11 +218,6 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
             }
             broadcastReceivers.remove(it)
         }
-    }
-
-
-    override fun onReceiveLocalEvent(action: String) {
-
     }
 
     fun addBackPressedInterceptor(block: () -> Boolean) {
