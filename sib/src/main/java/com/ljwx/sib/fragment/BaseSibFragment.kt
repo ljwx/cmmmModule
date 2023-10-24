@@ -23,10 +23,12 @@ import com.ljwx.basedialog.common.BaseDialogBuilder
 import com.ljwx.router.Postcard
 import com.ljwx.sib.Log2
 
-open class BaseSibFragment(@LayoutRes private val layoutResID: Int) : RxFragment(), IPageLocalEvent,
+abstract class BaseSibFragment() : RxFragment(), IPageLocalEvent,
     IPageDialogTips, IPageProcessStep, IPageStartPage {
 
     open val TAG = this.javaClass.simpleName + "[Fragment]"
+
+    open val userNewBaseFragmentLogic = false
 
     protected var mActivity: AppCompatActivity? = null
 
@@ -49,8 +51,10 @@ open class BaseSibFragment(@LayoutRes private val layoutResID: Int) : RxFragment
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return LayoutInflater.from(requireContext()).inflate(layoutResID, container, false)
+        return LayoutInflater.from(requireContext()).inflate(getLayoutId(), container, false)
     }
+
+    abstract fun getLayoutId(): Int
 
     override fun onResume() {
         super.onResume()

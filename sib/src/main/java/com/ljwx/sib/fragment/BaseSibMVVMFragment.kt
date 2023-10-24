@@ -1,6 +1,7 @@
 package com.ljwx.sib.fragment
 
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LiveData
@@ -11,7 +12,7 @@ import com.ljwx.baseapp.vm.ViewModelScope
 import java.lang.reflect.ParameterizedType
 
 abstract class BaseSibMVVMFragment<Binding : ViewDataBinding, ViewModel : BaseAndroidViewModel<*>>(@LayoutRes layoutRes: Int) :
-    BaseSibBindingFragment<Binding>(layoutRes) {
+    BaseSibBindingFragment<Binding>() {
 
     private val mViewModelScope by lazy {
         ViewModelScope()
@@ -22,11 +23,13 @@ abstract class BaseSibMVVMFragment<Binding : ViewDataBinding, ViewModel : BaseAn
      */
     protected lateinit var mViewModel: ViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        mViewModel = createViewModel()
-        lifecycle.addObserver(mViewModel)
-        initPopLoadingObserver()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (userNewBaseFragmentLogic) {
+            mViewModel = createViewModel()
+            lifecycle.addObserver(mViewModel)
+            initPopLoadingObserver()
+        }
     }
 
     open fun initPopLoadingObserver() {

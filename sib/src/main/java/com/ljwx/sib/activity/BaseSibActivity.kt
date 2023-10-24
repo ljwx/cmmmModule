@@ -46,8 +46,10 @@ open class BaseSibActivity : RxAppCompatActivity(), IPageStatusBar, IPageToolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStatusBar()
         requestedOrientation = getScreenOrientation()
+        if (userNewBaseActivityLogic) {
+            setStatusBar()
+        }
     }
 
     /**

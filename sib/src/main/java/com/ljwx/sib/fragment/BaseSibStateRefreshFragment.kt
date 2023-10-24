@@ -13,8 +13,8 @@ import com.ljwx.baseapp.page.IPagePopLoading
 import com.ljwx.baseapp.page.IPageRefreshLayout
 import com.ljwx.baseapp.page.IPageStateLayout
 
-abstract class BaseSibStateRefreshFragment(@LayoutRes layoutResID: Int) :
-    BaseSibFragment(layoutResID), IPagePopLoading, IPageStateLayout, IPageRefreshLayout {
+abstract class BaseSibStateRefreshFragment() :
+    BaseSibFragment(), IPagePopLoading, IPageStateLayout, IPageRefreshLayout {
 
 
     private val mPopupLoading by lazy {

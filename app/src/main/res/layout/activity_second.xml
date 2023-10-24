@@ -30,8 +30,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/base_toolbar_height"
             android:orientation="vertical"
             tools:context=".MainActivity">
+
+            <com.ljwx.baseedittext.MultipleStatusEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/view_pager"

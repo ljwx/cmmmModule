@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MultipleStatusEditText">
+        <attr name="mset_error" format="reference"/>
+        <attr name="mset_other" format="reference"/>
+    </declare-styleable>
+</resources>

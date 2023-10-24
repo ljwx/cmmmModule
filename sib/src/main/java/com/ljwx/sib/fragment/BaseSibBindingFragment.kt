@@ -8,8 +8,8 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 
-abstract class BaseSibBindingFragment<Binding : ViewDataBinding>(@LayoutRes private val layoutRes: Int) :
-    BaseSibStateRefreshFragment(layoutRes) {
+abstract class BaseSibBindingFragment<Binding : ViewDataBinding>() :
+    BaseSibStateRefreshFragment() {
 
     /**
      * DataBinding
@@ -21,9 +21,13 @@ abstract class BaseSibBindingFragment<Binding : ViewDataBinding>(@LayoutRes priv
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        mBinding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
-        quickLayout()
+        mBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
         return mBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        quickLayout()
     }
 
     private fun quickLayout() {
