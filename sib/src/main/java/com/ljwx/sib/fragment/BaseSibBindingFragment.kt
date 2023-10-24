@@ -37,7 +37,9 @@ abstract class BaseSibBindingFragment<Binding : ViewDataBinding>() :
 
     override fun onDestroy() {
         super.onDestroy()
-        mBinding.unbind()
+        if (userNewBaseFragmentLogic) {
+            mBinding.unbind()
+        }
     }
 
 }
