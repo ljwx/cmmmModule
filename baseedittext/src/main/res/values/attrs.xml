@@ -4,4 +4,8 @@
         <attr name="mset_error" format="reference"/>
         <attr name="mset_other" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="EditTextInput">
+        <attr name="content_invalid" format="boolean"/>
+    </declare-styleable>
 </resources>

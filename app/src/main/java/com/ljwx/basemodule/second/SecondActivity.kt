@@ -14,6 +14,7 @@ import com.ljwx.baseeventbus.flow.FlowEventBus
 import com.ljwx.basemodule.R
 import com.ljwx.basemodule.constance.ConstRouter
 import com.ljwx.basemodule.databinding.ActivitySecondBinding
+import com.ljwx.basemodule.debug.delayRun
 import com.ljwx.basemodule.vm.TestData
 
 @Route(path = ConstRouter.SECOND_ACTIVITY)
@@ -30,6 +31,14 @@ class SecondActivity :
         super.onCreate(savedInstanceState)
 
         commonProcessSteps()
+        mBinding.button.setOnClickListener {
+            mBinding.edit.contentInvalid(true)
+        }
+        mBinding.edit.setOnFocusChangeListener { view, b ->
+            if (b) {
+                mBinding.edit.contentInvalid(false)
+            }
+        }
 
     }
 

@@ -32,11 +32,20 @@
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/base_toolbar_height"
             android:orientation="vertical"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             tools:context=".MainActivity">
 
             <com.ljwx.baseedittext.MultipleStatusEditText
+                android:id="@+id/edit"
                 android:layout_width="match_parent"
+                android:enabled="true"
+                android:background="@drawable/selector_weather_test"
                 android:layout_height="wrap_content" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/view_pager"
