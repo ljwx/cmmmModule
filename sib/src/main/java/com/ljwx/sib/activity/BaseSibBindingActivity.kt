@@ -34,7 +34,9 @@ abstract class BaseSibBindingActivity<Binding : ViewDataBinding>() :
 
     override fun onDestroy() {
         super.onDestroy()
-        mBinding.unbind()
+        if (userNewBaseActivityLogic) {
+            mBinding.unbind()
+        }
     }
 
 }
