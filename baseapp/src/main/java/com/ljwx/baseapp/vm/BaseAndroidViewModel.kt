@@ -72,7 +72,7 @@ abstract class BaseAndroidViewModel<M : BaseDataRepository<*>>(application: Appl
 
     override fun onCleared() {
         super.onCleared()
-        mRepository.onRxCleared()
+        mRepository?.onRxCleared()
         onRxCleared()
         Log2.d(TAG, "ViewModel的onCleared执行")
     }
