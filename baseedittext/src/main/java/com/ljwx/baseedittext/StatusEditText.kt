@@ -6,7 +6,7 @@ import android.graphics.drawable.StateListDrawable
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
 
-class MultipleStatusEditText @JvmOverloads constructor(
+class StatusEditText @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null
 ) :
