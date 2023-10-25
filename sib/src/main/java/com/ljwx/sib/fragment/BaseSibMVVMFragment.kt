@@ -57,7 +57,9 @@ abstract class BaseSibMVVMFragment<Binding : ViewDataBinding, ViewModel : BaseAn
     }
 
     override fun observeData() {
-        mViewModel.scope()
+        if (userNewBaseFragmentLogic) {
+            mViewModel.scope()
+        }
     }
 
     open fun ViewModel.scope() {

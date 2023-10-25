@@ -50,7 +50,9 @@ abstract class BaseSibMVVMActivity<Binding : ViewDataBinding, ViewModel : BaseAn
     }
 
     override fun observeData() {
-        mViewModel.scope()
+        if (userNewBaseActivityLogic) {
+            mViewModel.scope()
+        }
     }
 
     open fun ViewModel.scope() {
