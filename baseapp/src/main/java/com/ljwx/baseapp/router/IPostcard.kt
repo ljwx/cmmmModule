@@ -1,5 +1,6 @@
 package com.ljwx.baseapp.router
 
+import android.app.Activity
 import android.os.Bundle
 import android.os.Parcelable
 import java.io.Serializable
@@ -26,5 +27,7 @@ interface IPostcard {
     fun with(key: String, value: Serializable?): IPostcard
 
     fun start()
+
+    fun start(activity: Activity, requestCode: Int)
 
 }

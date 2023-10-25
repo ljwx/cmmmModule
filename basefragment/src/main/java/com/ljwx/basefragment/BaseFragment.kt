@@ -62,7 +62,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), I
     /**
      * 路由快速跳转
      */
-    override fun startActivity(clazz: Class<*>) {
+    override fun startActivity(clazz: Class<*>, requestCode:Int?) {
         context?.startActivity(Intent(context, clazz))
     }
 

@@ -1,5 +1,7 @@
 package com.ljwx.router
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
 import com.alibaba.android.arouter.launcher.ARouter
@@ -108,6 +110,10 @@ class Postcard(private val path: String) : IPostcard {
 
     override fun start() {
         ARouter.getInstance().build(path).with(mBundle).navigation()
+    }
+
+    override fun start(activity: Activity, requestCode: Int) {
+        ARouter.getInstance().build(path).with(mBundle).navigation(activity, requestCode)
     }
 
 

@@ -50,8 +50,12 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
     /**
      * 路由快速跳转
      */
-    override fun startActivity(clazz: Class<*>) {
-        startActivity(Intent(this, clazz))
+    override fun startActivity(clazz: Class<*>, requestCode:Int?) {
+        if (requestCode == null) {
+            startActivity(Intent(this, clazz))
+        } else {
+            startActivityForResult(Intent(this, clazz), requestCode)
+        }
     }
 
     override fun routerTo(path: String): IPostcard {
