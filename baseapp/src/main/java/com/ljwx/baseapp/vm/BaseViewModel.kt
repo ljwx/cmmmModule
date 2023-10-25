@@ -6,6 +6,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.blankj.utilcode.util.StringUtils
 import com.ljwx.baseapp.constant.ConstTag
 import com.ljwx.baseapp.event.ISendLocalEvent
 import com.ljwx.baseapp.response.DataResult
@@ -100,6 +101,10 @@ abstract class BaseViewModel<M : BaseDataRepository<*>> : ViewModel(), IBaseView
 
     fun block(block: () -> Unit) {
 
+    }
+
+    override fun getString(string: Int) {
+        StringUtils.getString(string)
     }
 
 }

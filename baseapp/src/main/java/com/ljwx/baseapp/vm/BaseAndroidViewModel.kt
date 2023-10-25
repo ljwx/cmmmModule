@@ -100,4 +100,8 @@ abstract class BaseAndroidViewModel<M : BaseDataRepository<*>>(application: Appl
             .sendBroadcast(Intent(action))
     }
 
+    override fun getString(string: Int) {
+        getApplication<Application>().getString(string)
+    }
+
 }
