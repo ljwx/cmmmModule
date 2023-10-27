@@ -55,8 +55,12 @@ open class BaseSibActivity : RxAppCompatActivity(), IPageStatusBar, IPageToolbar
     /**
      * 路由快速跳转
      */
-    override fun startActivity(clazz: Class<*>) {
-        startActivity(Intent(this, clazz))
+    override fun startActivity(clazz: Class<*>, requestCode:Int?) {
+        if (requestCode == null) {
+            startActivity(Intent(this, clazz))
+        } else {
+            startActivityForResult(Intent(this, clazz), requestCode)
+        }
     }
 
     override fun routerTo(path: String): IPostcard {
@@ -70,6 +74,14 @@ open class BaseSibActivity : RxAppCompatActivity(), IPageStatusBar, IPageToolbar
 
     override fun getStatusBar(): IViewStatusBar {
         return mStatusBar;
+    }
+
+    override fun setStatusBarLight(light: Boolean) {
+        if (light) {
+            mStatusBar.setCustomStatusBar(com.ljwx.baseapp.R.color.white, true)
+        } else {
+            mStatusBar.setCustomStatusBar(com.ljwx.baseapp.R.color.base_app_textColorSecondary, false)
+        }
     }
 
     override fun setStatusBar(backgroundColor: Int, fontDark: Boolean): IViewStatusBar {

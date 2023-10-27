@@ -43,7 +43,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStatusBar()
+        setStatusBarLight(true)
         requestedOrientation = getScreenOrientation()
     }
 
@@ -73,6 +73,14 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
 
     override fun setStatusBar(backgroundColor: Int, fontDark: Boolean): IViewStatusBar {
         return mStatusBar.setCustomStatusBar(backgroundColor, fontDark)
+    }
+
+    override fun setStatusBarLight(light: Boolean) {
+        if (light) {
+            mStatusBar.setCustomStatusBar(com.ljwx.baseapp.R.color.white, true)
+        } else {
+            mStatusBar.setCustomStatusBar(com.ljwx.baseapp.R.color.base_app_textColorSecondary, false)
+        }
     }
 
     override fun initToolbar(toolbarId: Int): Toolbar? {

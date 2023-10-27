@@ -18,4 +18,5 @@ interface IPageStatusBar {
         fontDark: Boolean = true
     ): IViewStatusBar
 
+    fun setStatusBarLight(light: Boolean)
 }
