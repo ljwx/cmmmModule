@@ -134,6 +134,37 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
     /**
      * RxJava2版本的结果监听
      */
+    abstract inner class ObserverResponse<T> : io.reactivex.Observer<T> {
+        override fun onSubscribe(d: io.reactivex.disposables.Disposable) {
+            autoClear(d)
+        }
+
+        override fun onError(e: Throwable) {
+            Log2.d(TAG, "本次请求异常报错:" + e.message)
+            observerOnError?.invoke(e)
+        }
+
+        override fun onComplete() {
+            Log2.d(TAG, "本次请求完成")
+        }
+
+        override fun onNext(value: T) {
+            Log2.d(TAG, "本次请求结果已返回")
+            onResponse(value)
+        }
+
+        /**
+         * 接口结果响应
+         *
+         * @param response 结果
+         */
+        abstract fun onResponse(response: T)
+
+    }
+
+    /**
+     * RxJava2版本的结果监听
+     */
     abstract inner class QuickObserver<T : Any> : io.reactivex.Observer<T>, IQuickObserver<T> {
         override fun onSubscribe(d: io.reactivex.disposables.Disposable) {
             autoClear(d)
