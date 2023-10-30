@@ -22,6 +22,7 @@ import com.ljwx.baseapp.view.IViewStatusBar
 import com.ljwx.basedialog.common.BaseDialogBuilder
 import com.ljwx.router.Postcard
 import com.ljwx.sib.Log2
+import com.ljwx.sib.R
 import com.ljwx.sib.activity.statusbar.BaseStatusBar
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 
@@ -86,6 +87,10 @@ open class BaseSibActivity : RxAppCompatActivity(), IPageStatusBar, IPageToolbar
 
     override fun setStatusBar(backgroundColor: Int, fontDark: Boolean): IViewStatusBar {
         return mStatusBar.setCustomStatusBar(backgroundColor, fontDark)
+    }
+
+    open fun initToolbar() :Toolbar?{
+        return setToolbar(findViewById(com.ljwx.baseapp.R.id.base_app_toolbar))
     }
 
     override fun initToolbar(toolbarId: Int): Toolbar? {
