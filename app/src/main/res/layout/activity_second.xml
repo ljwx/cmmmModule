@@ -36,7 +36,7 @@
             android:focusableInTouchMode="true"
             tools:context=".MainActivity">
 
-            <com.ljwx.baseedittext.MultipleStatusEditText
+            <com.ljwx.baseedittext.StatusEditText
                 android:id="@+id/edit"
                 android:layout_width="match_parent"
                 android:enabled="true"
