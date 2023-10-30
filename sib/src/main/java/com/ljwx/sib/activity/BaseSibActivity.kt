@@ -56,6 +56,10 @@ open class BaseSibActivity : RxAppCompatActivity(), IPageStatusBar, IPageToolbar
     /**
      * 路由快速跳转
      */
+    open fun startActivity(clazz: Class<*>) {
+        startActivity(clazz, null)
+    }
+
     override fun startActivity(clazz: Class<*>, requestCode:Int?) {
         if (requestCode == null) {
             startActivity(Intent(this, clazz))
