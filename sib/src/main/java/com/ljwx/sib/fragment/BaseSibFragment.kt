@@ -67,8 +67,14 @@ abstract class BaseSibFragment() : RxFragment(), IPageLocalEvent,
     /**
      * 路由快速跳转
      */
-    override fun startActivity(clazz: Class<*>) {
-        context?.startActivity(Intent(context, clazz))
+    override fun startActivity(clazz: Class<*>, requestCode:Int?) {
+        context?.let {
+            if (requestCode == null) {
+                startActivity(Intent(it, clazz))
+            } else {
+                startActivityForResult(Intent(it, clazz), requestCode)
+            }
+        }
     }
 
     override fun routerTo(path: String): IPostcard {
