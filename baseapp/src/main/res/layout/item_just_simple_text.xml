@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/text_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/base_shape_bottom_line"
+    android:padding="@dimen/dp5"
+    android:textColor="@color/base_app_textColorPrimary"
+    android:textSize="@dimen/sp14"
+    tools:text="测试文字" />
