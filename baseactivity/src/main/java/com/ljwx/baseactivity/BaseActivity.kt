@@ -6,6 +6,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ActivityInfo
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -23,8 +27,9 @@ import com.ljwx.baseapp.router.IPostcard
 import com.ljwx.baseapp.view.IViewStatusBar
 import com.ljwx.basedialog.common.BaseDialogBuilder
 import com.ljwx.router.Postcard
+import kotlin.math.abs
 
-open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPageLocalEvent,
+open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPageLocalEvent,
     IPageDialogTips, IPageProcessStep, IPageActivity, IPageStartPage {
 
     open val TAG = this.javaClass.simpleName + "[Activity]"
@@ -54,7 +59,7 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         startActivity(clazz, null)
     }
 
-    override fun startActivity(clazz: Class<*>, requestCode:Int?) {
+    override fun startActivity(clazz: Class<*>, requestCode: Int?) {
         if (requestCode == null) {
             startActivity(Intent(this, clazz))
         } else {
@@ -83,7 +88,10 @@ open class BaseActivity : AppCompatActivity(), IPageStatusBar, IPageToolbar, IPa
         if (light) {
             mStatusBar.setCustomStatusBar(com.ljwx.baseapp.R.color.white, true)
         } else {
-            mStatusBar.setCustomStatusBar(com.ljwx.baseapp.R.color.base_app_textColorSecondary, false)
+            mStatusBar.setCustomStatusBar(
+                com.ljwx.baseapp.R.color.base_app_textColorSecondary,
+                false
+            )
         }
     }
 
