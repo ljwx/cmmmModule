@@ -96,6 +96,7 @@ dependencies {
     implementation project(path: ':baselanguage')
     implementation project(path: ':basescreenrecord')
     implementation project(path: ':baseresource')
+    implementation project(path: ':baselogcheck')
     implementation project(path: ':sib')
     implementation project(path: ':recordcheck')
 

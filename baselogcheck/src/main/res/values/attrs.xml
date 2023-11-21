@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LogRecyclerView">
+        <attr name="logrv_filter_category" format="string" />
+        <attr name="logrv_filter_tag" format="string" />
+        <attr name="logrv_interval_second" format="integer" />
+    </declare-styleable>
+</resources>

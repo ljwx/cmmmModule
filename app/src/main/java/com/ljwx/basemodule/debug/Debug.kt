@@ -24,31 +24,31 @@ fun BaseViewModel<*>.delayRun(time: Long = 2000, block: () -> Unit) {
     delayRunCommon(viewModelScope, time, block)
 }
 
-fun BaseActivity.interverDelay(
+fun BaseActivity.intervalDelay(
     times: Int = 15,
     delayTime: Long = 2000,
-    condition: () -> Boolean,
-    block: () -> Unit
+    condition: (() -> Boolean)? = null,
+    block: (times:Int) -> Unit
 ) {
-    interverDelayCommon(lifecycleScope, times, delayTime, condition, block)
+    intervalDelayCommon(lifecycleScope, times, delayTime, condition, block)
 }
 
-fun BaseFragment.interverDelay(
+fun BaseFragment.intervalDelay(
     times: Int = 15,
     delayTime: Long = 2000,
-    condition: () -> Boolean,
-    block: () -> Unit
+    condition: (() -> Boolean)? = null,
+    block: (times:Int) -> Unit
 ) {
-    interverDelayCommon(lifecycleScope, times, delayTime, condition, block)
+    intervalDelayCommon(lifecycleScope, times, delayTime, condition, block)
 }
 
-fun BaseViewModel<*>.interverDelay(
+fun BaseViewModel<*>.intervalDelay(
     times: Int = 15,
     delayTime: Long = 2000,
     condition: () -> Boolean,
-    block: () -> Unit
+    block: (times:Int) -> Unit
 ) {
-    interverDelayCommon(viewModelScope, times, delayTime, condition, block)
+    intervalDelayCommon(viewModelScope, times, delayTime, condition, block)
 }
 
 private fun delayRunCommon(lifecycleScope: CoroutineScope, time: Long, block: () -> Unit) {
@@ -60,19 +60,19 @@ private fun delayRunCommon(lifecycleScope: CoroutineScope, time: Long, block: ()
     }
 }
 
-private fun interverDelayCommon(
+private fun intervalDelayCommon(
     lifecycleScope: CoroutineScope,
     times: Int = 15,
     delayTime: Long = 2000,
-    condition: () -> Boolean,
-    block: () -> Unit
+    condition: (() -> Boolean)? = null,
+    block: (times: Int) -> Unit
 ) {
     lifecycleScope.launch(Dispatchers.IO) {
         for (i in 0 until times) {
             delay(delayTime)
-            if (condition()) {
+            if (condition == null || condition()) {
                 withContext(Dispatchers.Main) {
-                    block()
+                    block(i)
                 }
             }
         }

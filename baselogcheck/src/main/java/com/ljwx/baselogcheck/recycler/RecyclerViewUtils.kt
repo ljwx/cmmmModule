@@ -1,4 +1,4 @@
-package com.ljwx.baselog.recycler
+package com.ljwx.baselogcheck.recycler
 
 import android.content.Context
 import android.view.View

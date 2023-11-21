@@ -1,6 +1,8 @@
 package com.ljwx.baseactivity
 
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -36,6 +38,23 @@ open class BaseToolsActivity : AppCompatActivity() {
             sensor.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
             SensorManager.SENSOR_DELAY_NORMAL
         )
+    }
+
+    private val screenStatusReceiver by lazy {
+        object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                when (intent?.action) {
+                    Intent.ACTION_USER_PRESENT -> {
+                    }
+
+                    Intent.ACTION_SCREEN_OFF -> {
+                    }
+
+                    Intent.ACTION_SCREEN_ON -> {
+                    }
+                }
+            }
+        }
     }
 
     override fun onDestroy() {

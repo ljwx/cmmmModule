@@ -1,4 +1,4 @@
-package com.ljwx.baselog.display
+package com.ljwx.baselogcheck.display
 
 import androidx.annotation.RestrictTo
 import java.util.Vector
