@@ -42,7 +42,7 @@ class BaseLogAdapter : RecyclerView.Adapter<BaseLogAdapter.DisplayLogViewHolder>
     }
 
     fun submitData(data:List<Any>?) {
-        if (!data.isNullOrEmpty()) {
+        if (data != null) {
             this.data.clear()
             this.data.addAll(data)
             notifyDataSetChanged()
