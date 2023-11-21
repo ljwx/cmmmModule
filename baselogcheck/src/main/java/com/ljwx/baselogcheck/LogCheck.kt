@@ -51,7 +51,12 @@ object LogCheck {
 
     private fun runLog(category: String?, tag: String?, content: String?, level: Int) {
         if (tag != null && content != null) {
-            Log.d(tag, content)
+            when(level) {
+                leveD -> Log.d(tag, content)
+                leveW -> Log.w(tag, content)
+                leveE -> Log.e(tag, content)
+            }
+
             if (category != null) {
                 val spanStr = getSpanContent(level, "$tag:$content")
                 LogCheckPool.getLogPool(category).add(spanStr)
