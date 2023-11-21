@@ -2,6 +2,9 @@ package com.ljwx.baselogcheck
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
+import android.view.MotionEvent
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ljwx.baselogcheck.display.LogCheckPool
@@ -24,6 +27,9 @@ class LogRecyclerView @JvmOverloads constructor(
     private var intervalSecond = 2
 
     private var logPool: FixSizeVector<CharSequence>? = null
+
+    private var time = 0L
+    private var times = 0
 
     init {
         adapter = BaseLogAdapter()
@@ -51,6 +57,23 @@ class LogRecyclerView @JvmOverloads constructor(
                         (adapter as? BaseLogAdapter)?.submitData(filterResult)
                     }
                 }
+            }
+            setOnTouchListener { v, event ->
+                if (event.action != MotionEvent.ACTION_UP) {
+                    return@setOnTouchListener false
+                }
+                if (System.currentTimeMillis() - time > 5000) {
+                    time = System.currentTimeMillis()
+                    times = 0
+                } else {
+                    times += 1
+                }
+                if (times > 23) {
+                    LogCheckPool.getLogPool(filterCategory).clear()
+                    times = 0
+                    Toast.makeText(getContext(), "log clean success", Toast.LENGTH_LONG).show()
+                }
+                true
             }
         }
     }
