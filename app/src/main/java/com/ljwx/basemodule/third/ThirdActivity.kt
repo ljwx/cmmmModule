@@ -1,8 +1,9 @@
-package com.ljwx.basemodule
+package com.ljwx.basemodule.third
 
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.ljwx.baseactivity.BaseMVVMActivity
+import com.ljwx.basemodule.R
 import com.ljwx.basemodule.constance.ConstRouter
 import com.ljwx.basemodule.databinding.ActivityThirdBinding
 import com.ljwx.basemodule.vm.TestViewModel

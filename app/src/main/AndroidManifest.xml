@@ -16,7 +16,7 @@
         android:theme="@style/Theme.NewBaseModule"
         tools:targetApi="31">
         <activity
-            android:name=".ThirdActivity"
+            android:name=".third.ThirdActivity"
             android:exported="false" />
         <activity
             android:name=".second.SecondActivity"

@@ -31,14 +31,6 @@ class SecondActivity :
         super.onCreate(savedInstanceState)
 
         commonProcessSteps()
-        mBinding.button.setOnClickListener {
-            mBinding.edit.contentInvalid(true)
-        }
-        mBinding.edit.setOnFocusChangeListener { view, b ->
-            if (b) {
-                mBinding.edit.contentInvalid(false)
-            }
-        }
 
     }
 
@@ -51,21 +43,7 @@ class SecondActivity :
 
     override fun observeData() {
         super.observeData()
-        registerLocalEvent("test1") { action, intent ->
 
-        }
-        registerLocalEvent(null) { action, intent ->
-
-        }
-        registerLocalEvent("test2") { action, intent ->
-
-        }
-        registerLocalEvent("test3") { action, intent ->
-
-        }
-        registerLocalEvent("test4") { action, intent ->
-
-        }
     }
 
     override fun setClickListener() {
@@ -76,10 +54,7 @@ class SecondActivity :
             MemoryUtils.requestMemory()
         }
         mBinding.button.singleClick {
-            sendLocalEvent("test1")
-            sendLocalEvent("test2")
-            sendLocalEvent("test3")
-            sendLocalEvent("test4")
+            routerTo(ConstRouter.THIRD_ACTIVITY).start()
         }
         mBinding.task.singleClick {
             mViewModel.intervalPost()

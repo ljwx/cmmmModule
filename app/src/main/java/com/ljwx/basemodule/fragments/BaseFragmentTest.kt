@@ -37,6 +37,7 @@ class BaseFragmentTest :
         mBinding.et.filters = arrayOf(DividerInputFilter())
 //        mBinding.et.addTextChangedListener(LimitDecimalTextWatcher())
 
+        logCheckDebug()
     }
 
 }
