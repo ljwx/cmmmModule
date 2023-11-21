@@ -2,13 +2,14 @@ package com.ljwx.baselogcheck
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ljwx.baselogcheck.display.LogCheckPool
+import com.ljwx.baseapp.debug.ILogCheckRecyclerView
 import com.ljwx.baselogcheck.display.FixSizeVector
+import com.ljwx.baselogcheck.display.LogCheckPool
 import com.ljwx.baselogcheck.recycler.BaseLogAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +21,7 @@ class LogRecyclerView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : RecyclerView(context, attrs, defStyleAttr) {
+) : RecyclerView(context, attrs, defStyleAttr), ILogCheckRecyclerView {
 
     private var filterCategory = ""
     private var filterTag = ""
@@ -32,6 +33,9 @@ class LogRecyclerView @JvmOverloads constructor(
     private var times = 0
 
     init {
+        if (id == View.NO_ID) {
+            id = com.ljwx.baseapp.R.id.base_log_check_recycler
+        }
         adapter = BaseLogAdapter()
         layoutManager =
             layoutManager ?: LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -45,7 +49,7 @@ class LogRecyclerView @JvmOverloads constructor(
         }
     }
 
-    open fun run(lifecycleScope: CoroutineScope) {
+    override fun run(lifecycleScope: CoroutineScope) {
         if (!filterCategory.isNullOrEmpty()) {
             logPool = LogCheckPool.getLogPool(filterCategory)
             lifecycleScope.launch(Dispatchers.IO) {

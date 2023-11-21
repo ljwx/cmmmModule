@@ -3,42 +3,17 @@ package com.ljwx.baseactivity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.hardware.Sensor
-import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
-import android.hardware.SensorManager
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import kotlin.math.abs
+import androidx.lifecycle.lifecycleScope
+import com.ljwx.baseapp.debug.ILogCheckRecyclerView
+import com.ljwx.baseapp.extensions.visibleGone
+import com.ljwx.baseapp.shake.registerShake
 
 open class BaseToolsActivity : AppCompatActivity() {
 
-    private var sensorManager: SensorManager? = null
     private var sensorEventListener: SensorEventListener? = null
-
-    open fun registerSensorShake(callback: () -> Unit) {
-        val sensor = sensorManager ?: getSystemService(Context.SENSOR_SERVICE) as? SensorManager
-        sensorEventListener = sensorEventListener ?: object : SensorEventListener {
-            override fun onSensorChanged(event: SensorEvent?) {
-                if (event?.sensor?.type == Sensor.TYPE_ACCELEROMETER) {//加速度变更事件
-                    //value[0]:X轴,value[1]:Y轴，values[2]:Z轴
-                    val values = event.values
-                    if ((abs(values[0]) > 20) || abs(values[1]) > 20 || abs(values[2]) > 20) {
-                        callback.invoke()
-                    }
-                }
-            }
-
-            override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
-
-            }
-
-        }
-        sensor?.registerListener(
-            sensorEventListener,
-            sensor.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-            SensorManager.SENSOR_DELAY_NORMAL
-        )
-    }
 
     private val screenStatusReceiver by lazy {
         object : BroadcastReceiver() {
@@ -57,9 +32,19 @@ open class BaseToolsActivity : AppCompatActivity() {
         }
     }
 
+    open fun logCheck(open: Boolean) {
+        val recycler = findViewById<View>(com.ljwx.baseapp.R.id.base_log_check_recycler) ?: return
+        registerShake(open) {
+            var visible = recycler.visibility == View.VISIBLE
+            recycler.visibleGone(!visible)
+        }
+        if (open && recycler is ILogCheckRecyclerView) {
+            recycler.run(lifecycleScope)
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
-        sensorManager?.unregisterListener(sensorEventListener)
     }
 
 }

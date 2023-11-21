@@ -3,4 +3,5 @@
     <item name="base_app_quick_state_layout" type="id" />
     <item name="base_app_quick_refresh_layout" type="id" />
     <item name="base_app_toolbar" type="id" />
+    <item name="base_log_check_recycler" type="id"/>
 </resources>
