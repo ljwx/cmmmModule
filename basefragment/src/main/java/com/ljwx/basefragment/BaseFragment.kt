@@ -22,7 +22,7 @@ import com.ljwx.baseapp.router.IPostcard
 import com.ljwx.basedialog.common.BaseDialogBuilder
 import com.ljwx.router.Postcard
 
-open class BaseFragment(@LayoutRes private val layoutResID: Int) : Fragment(), IPageLocalEvent,
+open class BaseFragment(@LayoutRes private val layoutResID: Int) : BaseToolsFragment(), IPageLocalEvent,
     IPageDialogTips, IPageProcessStep, IPageStartPage {
 
     open val TAG = this.javaClass.simpleName + "[Fragment]"

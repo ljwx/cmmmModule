@@ -1,13 +1,13 @@
-package com.ljwx.baseactivity
+package com.ljwx.basefragment
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.hardware.SensorEventListener
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.ljwx.baseapp.debug.DebugUtils
 
-open class BaseToolsActivity : AppCompatActivity() {
+open class BaseToolsFragment : Fragment() {
 
     private var sensorEventListener: SensorEventListener? = null
 
