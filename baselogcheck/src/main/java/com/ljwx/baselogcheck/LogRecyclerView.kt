@@ -44,7 +44,7 @@ class LogRecyclerView @JvmOverloads constructor(
             logPool = LogCheckPool.getLogPool(filterCategory)
             lifecycleScope.launch(Dispatchers.IO) {
                 while (true) {
-                    delay(2000)
+                    delay(intervalSecond * 1000L)
                     val filterResult =
                         if (!filterTag.isNullOrEmpty()) logPool?.filter { it.contains(filterTag) } else logPool
                     withContext(Dispatchers.Main) {
