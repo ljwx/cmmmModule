@@ -26,6 +26,10 @@ interface IPostcard {
     fun with(key: String, value: Parcelable?): IPostcard
     fun with(key: String, value: Serializable?): IPostcard
 
+    fun withFromType(type: Int)
+
+    fun withDataId(id: String?)
+
     fun start()
 
     fun start(activity: Activity, requestCode: Int)

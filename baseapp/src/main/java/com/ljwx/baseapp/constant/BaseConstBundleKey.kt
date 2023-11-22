@@ -2,9 +2,9 @@ package com.ljwx.baseapp.constant
 
 object BaseConstBundleKey {
 
-    const val BUNDLE_TYPE = "bundle_type"
+    const val FROM_TYPE = "bundle_common_from_type"
+    const val DATA_ID = "bundle_id"
     const val BUNDLE_TYPE_STRING = "bundle_type_string"
-    const val BUNDLE_ID = "bundle_id"
     const val BUNDLE_PARAMS = "bundle_params"
 
 }
