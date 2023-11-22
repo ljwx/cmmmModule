@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
 import com.ljwx.baseapp.constant.BaseConstBundleKey
-import com.ljwx.baseapp.debug.DebugUtils
 import com.ljwx.baseapp.debug.ILogCheckRecyclerView
 import com.ljwx.baseapp.extensions.visibleGone
 import com.ljwx.baseapp.shake.registerShake
