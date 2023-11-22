@@ -14,6 +14,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.ljwx.baseapp.constant.BaseConstBundleKey
 import com.ljwx.baseapp.page.IPageLocalEvent
 import com.ljwx.baseapp.page.IPageProcessStep
 import com.ljwx.baseapp.page.IPageDialogTips
@@ -22,7 +23,8 @@ import com.ljwx.baseapp.router.IPostcard
 import com.ljwx.basedialog.common.BaseDialogBuilder
 import com.ljwx.router.Postcard
 
-open class BaseFragment(@LayoutRes private val layoutResID: Int) : BaseToolsFragment(), IPageLocalEvent,
+open class BaseFragment(@LayoutRes private val layoutResID: Int) : BaseToolsFragment(),
+    IPageLocalEvent,
     IPageDialogTips, IPageProcessStep, IPageStartPage {
 
     open val TAG = this.javaClass.simpleName + "[Fragment]"
@@ -36,6 +38,10 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : BaseToolsFrag
      */
     private val broadcastReceivers by lazy {
         HashMap<String, BroadcastReceiver>()
+    }
+
+    protected val bundleFromType by lazy {
+        arguments?.getInt(BaseConstBundleKey.FROM_TYPE, -10) ?: -10
     }
 
     override fun onAttach(context: Context) {
@@ -62,7 +68,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : BaseToolsFrag
     /**
      * 路由快速跳转
      */
-    override fun startActivity(clazz: Class<*>, requestCode:Int?) {
+    override fun startActivity(clazz: Class<*>, requestCode: Int?) {
         context?.startActivity(Intent(context, clazz))
     }
 
@@ -215,6 +221,10 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : BaseToolsFrag
 
     override fun getAsyncData() {
 
+    }
+
+    inline fun <reified F : Fragment> fragmentInstance(fromType: Int): F? {
+        return fragmentInstanceEx(fromType)
     }
 
     override fun onDestroyView() {

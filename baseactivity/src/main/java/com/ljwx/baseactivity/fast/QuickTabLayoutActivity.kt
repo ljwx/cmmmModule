@@ -30,7 +30,10 @@ open abstract class QuickTabLayoutActivity<Binding : ViewDataBinding, ViewModel 
     /**
      * 添加tab和对应的fragment
      */
-    fun addTabFragment(tab: TabLayout.Tab, fragment: Fragment, notify: Boolean = false) {
+    fun addTabFragment(tab: TabLayout.Tab, fragment: Fragment?, notify: Boolean = false) {
+        if (fragment == null) {
+            return
+        }
         mTabFragments[tab] = fragment
         if (notify) {
             getViewPager2().adapter?.notifyDataSetChanged()
@@ -40,7 +43,10 @@ open abstract class QuickTabLayoutActivity<Binding : ViewDataBinding, ViewModel 
     /**
      * 添加tab名称和对应的fragment
      */
-    fun addTabFragment(tabName: String, fragment: Fragment, notify: Boolean = true) {
+    fun addTabFragment(tabName: String, fragment: Fragment?, notify: Boolean = true) {
+        if (fragment == null) {
+            return
+        }
         val tab = getTabLayout().newTab()
         tab.text = tabName
         mTabFragments[tab] = fragment

@@ -295,8 +295,8 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
 
     }
 
-    inline fun <reified F:Fragment> getFragment() {
-
+    inline fun <reified F : Fragment> fragmentInstance(fromType: Int): F? {
+        return fragmentInstanceEx(fromType)
     }
 
     override fun onDestroy() {

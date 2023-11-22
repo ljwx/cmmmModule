@@ -1,12 +1,16 @@
 package com.ljwx.baseactivity
 
 import android.content.Intent
+import android.os.Bundle
 import android.os.Process
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
+import com.ljwx.baseapp.constant.BaseConstBundleKey
+import com.ljwx.baseapp.debug.DebugUtils
 import com.ljwx.baseapp.debug.ILogCheckRecyclerView
 import com.ljwx.baseapp.extensions.visibleGone
 import com.ljwx.baseapp.shake.registerShake
@@ -38,4 +42,15 @@ fun FragmentActivity.logCheckDebugEx(open: Boolean) {
     if (open && recycler is ILogCheckRecyclerView) {
         recycler.run(lifecycleScope)
     }
+}
+
+inline fun <reified F : Fragment> FragmentActivity.fragmentInstanceEx(fromType: Int): F? {
+    kotlin.runCatching {
+        val fragment = F::class.java.newInstance()
+        val bundle = Bundle()
+        bundle.putInt(BaseConstBundleKey.FROM_TYPE, fromType)
+        fragment.arguments = bundle
+        return fragment
+    }
+    return null
 }
