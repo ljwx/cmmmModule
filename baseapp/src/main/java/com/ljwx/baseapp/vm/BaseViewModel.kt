@@ -99,10 +99,6 @@ abstract class BaseViewModel<M : BaseDataRepository<*>> : ViewModel(), IBaseView
             .sendBroadcast(Intent(action))
     }
 
-    fun block(block: () -> Unit) {
-
-    }
-
     override fun getString(string: Int) {
         StringUtils.getString(string)
     }
