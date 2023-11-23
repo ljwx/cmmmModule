@@ -40,9 +40,11 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : BaseToolsFrag
         HashMap<String, BroadcastReceiver>()
     }
 
-    protected val bundleFromType by lazy {
+    protected val argumentsFromType by lazy {
         arguments?.getInt(BaseConstBundleKey.FROM_TYPE, -10) ?: -10
     }
+
+    protected val argumentsDataId by lazy { arguments?.getString(BaseConstBundleKey.DATA_ID) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

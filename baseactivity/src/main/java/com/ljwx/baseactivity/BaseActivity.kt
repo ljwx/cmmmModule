@@ -42,9 +42,9 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
 
     private var onBackPressInterceptors: (ArrayList<() -> Boolean>)? = null
 
-    protected val bundleFromType by lazy { intent.getIntExtra(BaseConstBundleKey.FROM_TYPE, -10) }
+    protected val argumentsFromType by lazy { intent.getIntExtra(BaseConstBundleKey.FROM_TYPE, -10) }
 
-    protected val bundleDataId by lazy { intent.getStringExtra(BaseConstBundleKey.DATA_ID) }
+    protected val argumentsDataId by lazy { intent.getStringExtra(BaseConstBundleKey.DATA_ID) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
