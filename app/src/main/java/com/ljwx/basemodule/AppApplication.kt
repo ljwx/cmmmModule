@@ -1,13 +1,15 @@
 package com.ljwx.basemodule
 
 import android.app.Application
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.ViewModelStoreOwner
 import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.Utils
 import com.ljwx.baseapp.util.BaseAppUtils
 import com.ljwx.baserefresh.BaseRefreshHeader
 import com.ljwx.baserefresh.BaseRefreshLayout
 
-class AppApplication : Application() {
+class AppApplication : Application() ,ViewModelStoreOwner{
 
     override fun onCreate() {
         super.onCreate()
@@ -25,6 +27,10 @@ class AppApplication : Application() {
         }
         ARouter.init(this)
 
+    }
+
+    override fun getViewModelStore(): ViewModelStore {
+        return ViewModelStore()
     }
 
 }
