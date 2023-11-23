@@ -21,7 +21,7 @@ import com.ljwx.baseapp.page.IPageDialogTips
 import com.ljwx.baseapp.page.IPageStartPage
 import com.ljwx.baseapp.router.IPostcard
 import com.ljwx.basedialog.common.BaseDialogBuilder
-import com.ljwx.router.Postcard
+import com.ljwx.router.RouterPostcard
 
 open class BaseFragment(@LayoutRes private val layoutResID: Int) : BaseToolsFragment(),
     IPageLocalEvent,
@@ -74,7 +74,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : BaseToolsFrag
 
     override fun routerTo(path: String): IPostcard {
         Log2.d(TAG, "路由跳转到:$path")
-        return Postcard(path)
+        return RouterPostcard(path)
     }
 
     override fun showDialogTips(

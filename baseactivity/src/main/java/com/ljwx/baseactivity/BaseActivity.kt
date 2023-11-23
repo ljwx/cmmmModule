@@ -6,13 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ActivityInfo
-import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorEventListener
-import android.hardware.SensorManager
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -28,8 +23,7 @@ import com.ljwx.baseapp.page.IPageToolbar
 import com.ljwx.baseapp.router.IPostcard
 import com.ljwx.baseapp.view.IViewStatusBar
 import com.ljwx.basedialog.common.BaseDialogBuilder
-import com.ljwx.router.Postcard
-import kotlin.math.abs
+import com.ljwx.router.RouterPostcard
 
 open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPageLocalEvent,
     IPageDialogTips, IPageProcessStep, IPageActivity, IPageStartPage {
@@ -75,7 +69,7 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
 
     override fun routerTo(path: String): IPostcard {
         Log2.d(TAG, "路由跳转到:$path")
-        return Postcard(path)
+        return RouterPostcard(path)
     }
 
     override fun getScreenOrientation(): Int {

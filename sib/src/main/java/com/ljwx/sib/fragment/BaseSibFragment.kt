@@ -10,7 +10,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import com.trello.rxlifecycle2.components.support.RxFragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -20,7 +19,7 @@ import com.ljwx.baseapp.page.IPageDialogTips
 import com.ljwx.baseapp.page.IPageStartPage
 import com.ljwx.baseapp.router.IPostcard
 import com.ljwx.basedialog.common.BaseDialogBuilder
-import com.ljwx.router.Postcard
+import com.ljwx.router.RouterPostcard
 import com.ljwx.sib.Log2
 
 abstract class BaseSibFragment() : RxFragment(), IPageLocalEvent,
@@ -79,7 +78,7 @@ abstract class BaseSibFragment() : RxFragment(), IPageLocalEvent,
 
     override fun routerTo(path: String): IPostcard {
         Log2.d(TAG, "路由跳转到:$path")
-        return Postcard(path)
+        return RouterPostcard(path)
     }
 
     override fun showDialogTips(

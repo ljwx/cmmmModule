@@ -1,7 +1,6 @@
 package com.ljwx.router
 
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
 import com.alibaba.android.arouter.launcher.ARouter
@@ -9,7 +8,7 @@ import com.ljwx.baseapp.constant.BaseConstBundleKey
 import com.ljwx.baseapp.router.IPostcard
 import java.io.Serializable
 
-class Postcard(private val path: String) : IPostcard {
+class RouterPostcard(private val path: String) : IPostcard {
 
     private var mBundle: Bundle? = null
 
@@ -109,14 +108,16 @@ class Postcard(private val path: String) : IPostcard {
         return this
     }
 
-    override fun withFromType(type: Int) {
+    override fun withFromType(type: Int): IPostcard {
         mBundle?.putInt(BaseConstBundleKey.FROM_TYPE, type)
+        return this
     }
 
-    override fun withDataId(id: String?) {
+    override fun withDataId(id: String?): IPostcard {
         id?.let {
             mBundle?.putString(BaseConstBundleKey.DATA_ID, id)
         }
+        return this
     }
 
     override fun start() {

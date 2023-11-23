@@ -20,9 +20,8 @@ import com.ljwx.baseapp.page.IPageToolbar
 import com.ljwx.baseapp.router.IPostcard
 import com.ljwx.baseapp.view.IViewStatusBar
 import com.ljwx.basedialog.common.BaseDialogBuilder
-import com.ljwx.router.Postcard
+import com.ljwx.router.RouterPostcard
 import com.ljwx.sib.Log2
-import com.ljwx.sib.R
 import com.ljwx.sib.activity.statusbar.BaseStatusBar
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 
@@ -70,7 +69,7 @@ open class BaseSibActivity : RxAppCompatActivity(), IPageStatusBar, IPageToolbar
 
     override fun routerTo(path: String): IPostcard {
         Log2.d(TAG, "路由跳转到:$path")
-        return Postcard(path)
+        return RouterPostcard(path)
     }
 
     override fun getScreenOrientation(): Int {
