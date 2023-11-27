@@ -4,18 +4,14 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import com.ljwx.baseactivity.fast.QuickMainActivity
 import com.ljwx.baseapp.extensions.singleClick
-import com.ljwx.baseapp.vm.AppScopeVM
 import com.ljwx.basemodule.constance.ConstRouter
 import com.ljwx.basemodule.databinding.ActivityMainBinding
-import com.ljwx.baseapp.extensions.delayRun
 import com.ljwx.basemodule.fragments.*
 import com.ljwx.basemodule.service.TestForegroundService
 import com.ljwx.basemodule.vm.TestData
 import com.ljwx.basemodule.vm.TestViewModel
-import com.ljwx.basemodule.vm.UserInfoVM
 import com.ljwx.provideclipboardauto.ClipboardFragment
 
 class MainActivity :
@@ -46,10 +42,6 @@ class MainActivity :
             routerTo(ConstRouter.SECOND_ACTIVITY).with("test", TestData(999)).start()
         }
 
-        AppScopeVM.get<UserInfoVM>().userName.observe {
-            Log.d("ljwx2", "main activity:$it")
-        }
-        AppScopeVM.get<UserInfoVM>().userName.value = "main"
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(Intent(this, TestForegroundService::class.java))
         }

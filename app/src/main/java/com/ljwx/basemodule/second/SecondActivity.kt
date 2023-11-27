@@ -10,7 +10,6 @@ import com.jeremyliao.liveeventbus.LiveEventBus
 import com.ljwx.baseactivity.fast.QuickTabLayoutActivity
 import com.ljwx.baseapp.extensions.singleClick
 import com.ljwx.baseapp.util.MemoryUtils
-import com.ljwx.baseapp.vm.AppScopeVM
 import com.ljwx.baseeventbus.flow.FlowEventBus
 import com.ljwx.basemodule.R
 import com.ljwx.basemodule.constance.ConstRouter
@@ -32,9 +31,6 @@ class SecondActivity :
         super.onCreate(savedInstanceState)
 
         commonProcessSteps()
-        AppScopeVM.get<UserInfoVM>().userName.observe{
-            Log.d("ljwx2", "second activity:$it")
-        }
 
     }
 
