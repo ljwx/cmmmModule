@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_main_activity"
+    app:startDestination="@id/baseFragment">
+
+    <fragment
+        android:id="@+id/baseFragment"
+        android:name="com.ljwx.basefragment.BaseFragment"
+        android:label="BaseFragment" />
+    <fragment
+        android:id="@+id/stateRefreshFragment"
+        android:name="com.ljwx.basemodule.fragments.StateRefreshFragment"
+        android:label="StateRefreshFragment" >
+        <action
+            android:id="@+id/action_stateRefreshFragment_to_baseFragment2"
+            app:destination="@id/baseFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+</navigation>

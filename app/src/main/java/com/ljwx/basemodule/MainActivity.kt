@@ -39,7 +39,7 @@ class MainActivity :
         unregisterLocalEvent("test4")
 
         mBinding.button.singleClick {
-            routerTo(ConstRouter.SECOND_ACTIVITY).with("test", TestData(999)).start()
+            routerTo(ConstRouter.SECOND_ACTIVITY).start()
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

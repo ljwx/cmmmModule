@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.blankj.utilcode.util.TimeUtils
 import com.blankj.utilcode.util.ToastUtils
-import com.ljwx.baseapp.common.CommonRegex
+import com.ljwx.baseapp.regex.CommonRegex
 import com.ljwx.baseapp.extensions.delayRun
 import com.ljwx.baseapp.extensions.isMatch
 import com.ljwx.basefragment.BaseBindingFragment

@@ -14,8 +14,6 @@ import com.ljwx.baseeventbus.flow.FlowEventBus
 import com.ljwx.basemodule.R
 import com.ljwx.basemodule.constance.ConstRouter
 import com.ljwx.basemodule.databinding.ActivitySecondBinding
-import com.ljwx.basemodule.vm.TestData
-import com.ljwx.basemodule.vm.UserInfoVM
 
 @Route(path = ConstRouter.SECOND_ACTIVITY)
 class SecondActivity :
@@ -36,9 +34,9 @@ class SecondActivity :
 
     override fun getFirstInitData() {
         super.getFirstInitData()
-        intent.getParcelableExtra<TestData>("test")?.let {
-//            showToast(it.code.toString())
-        }
+//        intent.getParcelableExtra<TestData>("test")?.let {
+////            showToast(it.code.toString())
+//        }
     }
 
     override fun observeData() {
@@ -57,14 +55,15 @@ class SecondActivity :
             routerTo(ConstRouter.THIRD_ACTIVITY).start()
         }
         mBinding.task.singleClick {
-            mViewModel.intervalPost()
+//            mViewModel.intervalPost()
+            mViewModel.saveStateTest.value = "保存一个值"
         }
     }
 
     override fun SecondViewModel.scope() {
-        mIntervelTest.observe {
-            Log.d("ljwx2", "轮询结果:" + it)
-        }
+//        mIntervelTest.observe {
+//            Log.d("ljwx2", "轮询结果:" + it)
+//        }
     }
 
     override fun getAsyncData() {

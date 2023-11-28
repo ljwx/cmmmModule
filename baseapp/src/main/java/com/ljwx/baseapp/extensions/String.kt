@@ -1,6 +1,6 @@
 package com.ljwx.baseapp.extensions
 
-import com.ljwx.baseapp.common.CommonRegex
+import com.ljwx.baseapp.regex.CommonRegex
 import java.util.regex.Pattern
 
 fun CharSequence?.isMatch(regex: String):Boolean {
