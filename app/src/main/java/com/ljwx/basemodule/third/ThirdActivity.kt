@@ -14,6 +14,7 @@ class ThirdActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
     }
 
     override fun TestViewModel.scope() {

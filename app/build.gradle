@@ -99,10 +99,16 @@ dependencies {
     implementation project(path: ':baselogcheck')
     implementation project(path: ':sib')
     implementation project(path: ':recordcheck')
+    implementation project(path: ':basedatabase')
+    implementation project(path: ':baseservice')
+    implementation project(path: ':provideclipboardauto')
 
     implementation 'io.github.ljwx:SplitTextView:0.3.8'
 
     def arouter = "1.4.1"
     implementation "com.alibaba:arouter-api:$arouter"
     kapt 'com.alibaba:arouter-compiler:1.2.2'
+
+    def room_version = "2.4.2"
+    kapt "androidx.room:room-compiler:$room_version"
 }

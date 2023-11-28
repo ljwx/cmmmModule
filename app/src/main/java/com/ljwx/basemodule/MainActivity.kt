@@ -1,16 +1,18 @@
 package com.ljwx.basemodule
 
+import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import com.blankj.utilcode.util.Utils
 import com.ljwx.baseactivity.fast.QuickMainActivity
 import com.ljwx.baseapp.extensions.singleClick
 import com.ljwx.basemodule.constance.ConstRouter
 import com.ljwx.basemodule.databinding.ActivityMainBinding
 import com.ljwx.basemodule.fragments.*
+import com.ljwx.basemodule.service.TestForegroundService
 import com.ljwx.basemodule.vm.TestData
 import com.ljwx.basemodule.vm.TestViewModel
+import com.ljwx.provideclipboardauto.ClipboardFragment
 
 class MainActivity :
     QuickMainActivity<ActivityMainBinding, TestViewModel>(R.layout.activity_main) {
@@ -25,9 +27,6 @@ class MainActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        Log.d("ljwx2", Utils.getApp().toString())
-        Log.d("ljwx2", applicationContext.toString())
-
         super.onCreate(savedInstanceState)
         addTabFragment("staterefresh", StateRefreshFragment())
         addTabFragment("basefragment", BaseFragmentTest())
@@ -35,7 +34,7 @@ class MainActivity :
 //        addTabFragment("toolbar", BaseToolbarFragment())
         addTabFragment("loadmore", LoadMoreFragment())
 //        addTabFragment("vmFragment", ViewModelFragment())
-//        addTabFragment("javaTest", TestJavaFragment(0))
+        addTabFragment("javaTest", ClipboardFragment())
 
         unregisterLocalEvent("test4")
 
@@ -43,6 +42,9 @@ class MainActivity :
             routerTo(ConstRouter.SECOND_ACTIVITY).with("test", TestData(999)).start()
         }
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(Intent(this, TestForegroundService::class.java))
+        }
     }
 
     override fun getScreenOrientation() = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
