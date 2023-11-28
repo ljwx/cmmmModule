@@ -12,18 +12,20 @@ import androidx.lifecycle.LifecycleOwner
 import com.ljwx.recyclerview.BR
 import com.ljwx.recyclerview.holder.ItemHolder
 
-class ItemTypeBinding<Item>(
+class ItemTypeBinding<Item>@JvmOverloads constructor(
     private val itemClass: Class<Item>,
     @LayoutRes
     private val layoutResId: Int,
     private val subtype: Int = 0,
-    private val brId: Int = BR.item,
+    private val brId: Int? = BR.item,
     private var itemClick: ((ItemHolder, Item) -> Unit)? = null,
 ) : ItemTypeLayout<Item>(itemClass, layoutResId, subtype, itemClick) {
 
     override fun bind(holder: ItemHolder, item: Item) {
         DataBindingUtil.bind<ViewDataBinding>(holder.itemView)?.let {
-            it.setVariable(brId, item)
+            if (brId != null) {
+                it.setVariable(brId, item)
+            }
             if (it.lifecycleOwner == null) {
                 it.lifecycleOwner = holder.itemView.getLifecycleOwner()
             }

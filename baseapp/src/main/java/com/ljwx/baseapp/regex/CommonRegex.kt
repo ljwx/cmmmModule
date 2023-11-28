@@ -1,4 +1,4 @@
-package com.ljwx.baseapp.common
+package com.ljwx.baseapp.regex
 
 //https://github.com/any86/any-rule
 object CommonRegex {

@@ -8,7 +8,7 @@ import javax.net.ssl.SSLContext
 import javax.net.ssl.SSLSocketFactory
 import javax.net.ssl.X509TrustManager
 
-object SSLUtils {
+object SSLVerifyUtils {
 
     fun getSSLSocketFactory(): SSLSocketFactory? {
         var ssfFactory: SSLSocketFactory? = null

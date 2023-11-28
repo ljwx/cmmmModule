@@ -7,7 +7,7 @@ import androidx.annotation.LayoutRes
 import com.ljwx.recyclerview.holder.ItemHolder
 import com.ljwx.recyclerview.singleClick
 
-open class ItemTypeLayout<Item>(
+open class ItemTypeLayout<Item>@JvmOverloads constructor(
     private val itemClass: Class<Item>,
     @LayoutRes
     private val layoutResId: Int,

@@ -13,17 +13,17 @@ import com.ljwx.recyclerview.itemtype.ItemBindClick
 import com.ljwx.recyclerview.itemtype.ItemTypeBinding
 import com.ljwx.recyclerview.itemtype.ItemTypeLayout
 
-open class QuickSingleAdapter<Item : Any>(
+open class QuickSingleAdapter<Item : Any>@JvmOverloads constructor(
     itemClass: Class<Item>,
     @LayoutRes
     private val layoutResId: Int,
-    brId: Int = BR.item,
+    brId: Int? = BR.item,
     diff: DiffUtil.ItemCallback<Item> = ItemDiffCallback(),
     itemClick: ((ItemHolder, Item) -> Unit)? = null,
 ) : ListAdapter<Item, ItemHolder>(AsyncDifferConfig.Builder(diff).build()),
     ItemBindClick<Item> {
 
-    private val TAG = "rv-" + this.javaClass.simpleName
+    private val TAG = this.javaClass.simpleName + "[recyclerview]"
 
     private val mItemType: ItemTypeLayout<Item> =
         ItemTypeBinding(itemClass, layoutResId, brId = brId)

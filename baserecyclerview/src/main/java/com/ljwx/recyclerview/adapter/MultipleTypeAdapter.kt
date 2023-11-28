@@ -18,7 +18,7 @@ open class MultipleTypeAdapter(
     config: AsyncDifferConfig<Any> = AsyncDifferConfig.Builder(ItemDiffCallback()).build(),
 ) : ListAdapter<Any, ItemHolder>(config) {
 
-    private val TAG = "rv-" + this.javaClass.simpleName
+    private val TAG = this.javaClass.simpleName + "[recyclerview]"
 
     /**
      * ItemType集合
