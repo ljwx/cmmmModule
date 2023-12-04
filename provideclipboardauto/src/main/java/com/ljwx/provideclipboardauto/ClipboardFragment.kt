@@ -12,6 +12,7 @@ import com.blankj.utilcode.util.ToastUtils
 import com.ljwx.baseapp.regex.CommonRegex
 import com.ljwx.baseapp.extensions.delayRun
 import com.ljwx.baseapp.extensions.isMatch
+import com.ljwx.baseapp.extensions.singleClick
 import com.ljwx.basefragment.BaseBindingFragment
 import com.ljwx.provideclipboardauto.database.ClipboardDataEntity
 import com.ljwx.provideclipboardauto.database.DBManager
@@ -69,12 +70,36 @@ class ClipboardFragment :
 
     override fun setClickListener() {
         super.setClickListener()
+        mBinding.get.singleClick {
+            lifecycleScope.launch(Dispatchers.IO) {
+                val item = DBManager.clipboardDao().getLast()
+                handle(item)
+            }
+        }
         mBinding.clear.setOnLongClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
                 DBManager.clipboardDao().clear()
                 updateList()
             }
             true
+        }
+    }
+
+    fun handle(clipboardDataEntity:ClipboardDataEntity?) {
+        if (clipboardDataEntity == null) {
+            return
+        }
+        clipboard?.setPrimaryClip(
+            ClipData.newPlainText(
+                "MIMETYPE_TEXT_PLAIN",
+                clipboardDataEntity?.url?:"空的"
+            )
+        )
+        ToastUtils.showLong("已复制")
+        lifecycleScope.launch(Dispatchers.IO) {
+            clipboardDataEntity.time = System.currentTimeMillis() - (1000 * 3600 * 24 * 30)
+            DBManager.clipboardDao().updateItem(clipboardDataEntity)
+            updateList()
         }
     }
 

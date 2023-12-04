@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.ljwx.baseapp.constant.ConstTag
@@ -27,10 +28,10 @@ abstract class BaseAndroidViewModel<M : BaseDataRepository<*>>(application: Appl
 
     private val mShowPopLoading = MutableLiveData<Triple<Boolean, Int, String>>()
     private val mDismissPopLoading = MutableLiveData<Triple<Boolean, Int, String>>()
-    val popLoadingShow: MutableLiveData<Triple<Boolean, Int, String>>
-        get() = mShowPopLoading
-    val popLoadingDismiss: MutableLiveData<Triple<Boolean, Int, String>>
-        get() = mDismissPopLoading
+    private val mFinishActivity = MutableLiveData<Boolean>()
+    val popLoadingShow: MutableLiveData<Triple<Boolean, Int, String>> = mShowPopLoading
+    val popLoadingDismiss: MutableLiveData<Triple<Boolean, Int, String>> = mDismissPopLoading
+    val finishActivity: LiveData<Boolean> = mFinishActivity
 
     init {
         Log2.d(TAG, "创建repository")
@@ -102,6 +103,10 @@ abstract class BaseAndroidViewModel<M : BaseDataRepository<*>>(application: Appl
 
     override fun getString(string: Int) {
         getApplication<Application>().getString(string)
+    }
+
+    override fun finishActivity(finish: Boolean) {
+        mFinishActivity.postValue(finish)
     }
 
 }

@@ -3,6 +3,7 @@ package com.ljwx.baseapp.vm
 import android.content.Intent
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -24,12 +25,14 @@ abstract class BaseViewModel<M : BaseDataRepository<*>> : ViewModel(), IBaseView
     private var mCompositeDisposable2: io.reactivex.disposables.CompositeDisposable? = null
     private var mCompositeDisposable3: io.reactivex.rxjava3.disposables.CompositeDisposable? = null
 
+    //是否显示,code,message
     private val mShowPopLoading = MutableLiveData<Triple<Boolean, Int, String>>()
     private val mDismissPopLoading = MutableLiveData<Triple<Boolean, Int, String>>()
-    val popLoadingShow: MutableLiveData<Triple<Boolean, Int, String>>
-        get() = mShowPopLoading
-    val popLoadingDismiss: MutableLiveData<Triple<Boolean, Int, String>>
-        get() = mDismissPopLoading
+    private val mFinishActivity = MutableLiveData<Boolean>()
+    val popLoadingShow: LiveData<Triple<Boolean, Int, String>> = mShowPopLoading
+    val popLoadingDismiss: LiveData<Triple<Boolean, Int, String>> = mDismissPopLoading
+    val finishActivity: LiveData<Boolean> = mFinishActivity
+
 
     init {
         Log2.d(TAG, "创建repository")
@@ -101,6 +104,10 @@ abstract class BaseViewModel<M : BaseDataRepository<*>> : ViewModel(), IBaseView
 
     override fun getString(string: Int) {
         StringUtils.getString(string)
+    }
+
+    override fun finishActivity(finish: Boolean) {
+
     }
 
 }

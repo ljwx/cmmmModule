@@ -11,7 +11,7 @@ import com.ljwx.baseapp.vm.BaseAndroidViewModel
 import com.ljwx.baseapp.vm.ViewModelScope
 import java.lang.reflect.ParameterizedType
 
-abstract class BaseSibMVVMFragment<Binding : ViewDataBinding, ViewModel : BaseAndroidViewModel<*>>(@LayoutRes layoutRes: Int) :
+abstract class BaseSibMVVMFragment<Binding : ViewDataBinding, ViewModel : BaseAndroidViewModel<*>> :
     BaseSibBindingFragment<Binding>() {
 
     private val mViewModelScope by lazy {
@@ -58,6 +58,11 @@ abstract class BaseSibMVVMFragment<Binding : ViewDataBinding, ViewModel : BaseAn
 
     override fun observeData() {
         if (userNewBaseFragmentLogic) {
+            mViewModel.finishActivity.observe(this) {
+                if (it) {
+                    activity?.finish()
+                }
+            }
             mViewModel.scope()
         }
     }

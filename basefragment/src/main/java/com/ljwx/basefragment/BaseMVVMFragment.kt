@@ -54,6 +54,11 @@ abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : BaseViewM
     }
 
     override fun observeData() {
+        mViewModel.finishActivity.observe(this) {
+            if (it) {
+                activity?.finish()
+            }
+        }
         mViewModel.scope()
     }
 

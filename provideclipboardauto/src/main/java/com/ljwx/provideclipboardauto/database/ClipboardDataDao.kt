@@ -15,6 +15,9 @@ interface ClipboardDataDao {
     @Query("select * from clipboard_data where url = :url limit 1")
     fun findItem(url: String): ClipboardDataEntity?
 
+    @Query("select * from clipboard_data order by time asc limit 1")
+    fun getLast():ClipboardDataEntity?
+
     @Update
     fun updateItem(item: ClipboardDataEntity)
 

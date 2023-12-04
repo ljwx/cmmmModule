@@ -11,4 +11,5 @@ interface IBaseViewModel<M> {
 
     fun getString(@StringRes string: Int)
 
+    fun finishActivity(finish: Boolean = true)
 }
