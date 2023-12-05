@@ -107,7 +107,7 @@ abstract class BaseViewModel<M : BaseDataRepository<*>> : ViewModel(), IBaseView
     }
 
     override fun finishActivity(finish: Boolean) {
-
+        mFinishActivity.postValue(finish)
     }
 
 }
