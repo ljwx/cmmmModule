@@ -1,0 +1,561 @@
+<resources>
+    <string name="delete">Delete</string>
+    <string name="Apr">Apr</string>
+    <string name="alert_sounds">Alarm Sounds</string>
+    <string name="invitation_sent">Invitation Sent!</string>
+    <string name="agp_reports">AGP Reports</string>
+    <string name="email_address">Email Address</string>
+    <string name="connect_a_new_device">Connect a New Device</string>
+    <string name="coefficient_of_variation">Coefficient of Variation</string>
+    <string name="mol_unit">mmol/L</string>
+    <string name="minutes">Minutes</string>
+    <string name="about_us">About Us</string>
+    <string name="alert_settings">Alarm Settings</string>
+    <string name="overlay">Compare</string>
+    <string name="type_here">Type Here</string>
+    <string name="device_exception">Device Exception</string>
+    <string name="select_two_or_more_dates_to_compare">Select two or more dates to compare.</string>
+    <string name="sound">Sound</string>
+    <string name="expired">Expired</string>
+    <string name="code">Code</string>
+    <string name="sun_of_week">Sun</string>
+    <string name="end_time">End Time</string>
+    <string name="launcher_get_stated_now">Register Now</string>
+    <string name="bsmonitoring_meal_clock_in">Meal</string>
+    <string name="login_code_code_has_been_sent">A temporary code has been sent to your email, please check.</string>
+    <string name="dailytrendchart_control_target">Suggested Target %1$s</string>
+    <string name="login_enter_password_again">Confirm Password</string>
+    <string name="personalcenter_remote_monitoring_tips">Want to be informed of someone\'s glucose levels? Ask him/her to share his/her glucose information with you so that you can follow him/her.</string>
+    <string name="Sep">Sep</string>
+    <string name="personalcenter_stop_sharing">Stop Sharing</string>
+    <string name="bsmonitoring_take_medicine_type_tips">What type of medicine did you take?</string>
+    <string name="login_enter_password">Enter Password</string>
+    <string name="common_loading">Loading</string>
+    <string name="bsmonitoring_manual_connect_sensor">Sorry, the device is not functional. Please remove it.</string>
+    <string name="Days">Days</string>
+    <string name="personalcenter_voice_vibrator">Vibration &amp; Sound</string>
+    <string name="Selected">Selected</string>
+    <string name="scan_connect_sensor_code">Scan the code to connect</string>
+    <string name="Jul">Jul</string>
+    <string name="dailybs_thu">Thu</string>
+    <string name="Jun">Jun</string>
+    <string name="personalcenter_account_remove_tip">Once the account is deleted, all data in the account will be deleted and cannot be recovered. Do you want to continue?</string>
+    <string name="user_agreement">User Agreement</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="personalcenter_blood_glucose_data">Data from Device</string>
+    <string name="bsmonitoring_sensor_not_connect_please_check">Signal Loss</string>
+    <string name="incorrect_verification_code">Incorrect Verification Code</string>
+    <string name="personalcenter_look_data">More Data</string>
+    <string name="dailytrendchart_average_glucose_level">Average Glucose</string>
+    <string name="common_medicine">Medicine</string>
+    <string name="common_sleep">Sleep</string>
+    <string name="CV">CV</string>
+    <string name="login_sibionics">Register</string>
+    <string name="bsmonitoring_sensor_reconnect">Searching</string>
+    <string name="personalcenter_active_follower">Active Follower</string>
+    <string name="personalcenter_cancel_monitoring_tips">Confirm to cancel monitoring? Once cancelled, you will be unable to view his/her glucose information.</string>
+    <string name="personalcenter_enter_nickname_hint">Enter your nickname here.</string>
+    <string name="personalcenter_pending_application">Pending Invitation</string>
+    <string name="login_in">Sign In</string>
+    <string name="personalcenter_my_sensor">Devices</string>
+    <string name="bsmonitoring_normal">Glucose in Range</string>
+    <string name="personalcenter_stop_sharing_tips">Are you sure to stop sharing with this follower? Once stopped, he/she will not be able to follow you.</string>
+    <string name="common_use_agreement">Terms of Use</string>
+    <string name="personalcenter_bs_target_range_setting">Your Target</string>
+    <string name="Aug">Aug</string>
+    <string name="personalcenter_app_version">Version</string>
+    <string name="personalcenter_select_country_search">Search</string>
+    <string name="bsmonitoring_connect_sensor_again">Try Again</string>
+    <string name="personalcenter_input_diabete_tips">Please select your type of diabetes.</string>
+    <string name="dailybs_tue">Tue</string>
+    <string name="dailytrendchart_all_select">Select All</string>
+    <string name="bsmonitoring_amount">Amount</string>
+    <string name="personalcenter_invitation_sent_tips">Your invitation email has been sent. When your invitation is accepted, all your glucose data will be shared with him/her.</string>
+    <string name="personalcenter_usename">Nickname</string>
+    <string name="dailybs_daily_bs">Daily Reports</string>
+    <string name="personalcenter_using">In Use</string>
+    <string name="personalcenter_account_hint">Enter Verification Code</string>
+    <string name="dailybs_bs_curve">Daily Trending</string>
+    <string name="login_select_and_agree_agreement">Tick the box to agree to the User Agreement and Privacy Policy.</string>
+    <string name="login_pwd_different">Please confirm your password.</string>
+    <string name="Nov">Nov</string>
+    <string name="launcher_bs_monitoring_system">Continuous Glucose Monitoring System</string>
+    <string name="bsmonitoring_success">Succeeded</string>
+    <string name="device_expired">Device Expired</string>
+    <string name="personalcenter_bs_remote_view">Remote View</string>
+    <string name="login_get_verification_get_code_hint">Get Code</string>
+    <string name="personalcenter_edit_data">Edit Profile</string>
+    <string name="select_language">Select Language</string>
+    <string name="bsmonitoring_medication_time">Time</string>
+    <string name="login_confirm">Continue</string>
+    <string name="personalcenter_your_target_range">Your Target</string>
+    <string name="bsmonitoring_food_name">What did you eat?</string>
+    <string name="personalcenter_reset_password">Reset Password</string>
+    <string name="bsmonitoring_motion_type">What did you do?</string>
+    <string name="personalcenter_language">Language</string>
+    <string name="login_pwd_not_empty">Password can not be blank.</string>
+    <string name="personalcenter_sensor_ends">SENSOR ENDS IN:</string>
+    <string name="login_password_hint">Password</string>
+    <string name="common_condition">Mood</string>
+    <string name="personalcenter_input_unit_tips">Select the glucose unit you prefer.</string>
+    <string name="login_password_incorrect">Incorrect password. Please try again.</string>
+    <string name="personalcenter_email_address11">Email Address：</string>
+    <string name="personalcenter_cancel_monitoring">Cancel Monitoring</string>
+    <string name="dailybs_mon">Mon</string>
+    <string name="login_get_verification_code_hint">Send Code</string>
+    <string name="none_of_all">None of All</string>
+    <string name="Alert">Alarm</string>
+    <string name="dailybs_fri">Fri</string>
+    <string name="login_input_account_hint">Account</string>
+    <string name="Oct">Oct</string>
+    <string name="personalcenter_clear_cache_tips">All local data will be cleared and cannot be recovered. Do you want to continue?</string>
+    <string name="login_verification_code_hint">Please paste the code sent by email</string>
+    <string name="bsmonitoring_glucose_trending">Glucose Trending</string>
+    <string name="login_comfirm_email">Please enter the correct email address</string>
+    <string name="personalcenter_follower_todo_tips">[%1$s] wants to share his/her glucose information with you.</string>
+    <string name="personalcenter_setting">Settings</string>
+    <string name="personalcenter_bs_remain">Remaining</string>
+    <string name="food_name">Food Name</string>
+    <string name="common_insulin">Insulin</string>
+    <string name="mg_dl">mg/dL</string>
+    <string name="personalcenter_my_sharer">My Sharer</string>
+    <string name="login_input_new_password">You\'ve already set your password.</string>
+    <string name="bsmonitoring_low">Low</string>
+    <string name="login_pwd_less_than_eight">Make sure your password is at least 8 characters and contain at least 1 number, 1 letter, and 1 special character.</string>
+    <string name="common_the_next_day">Next</string>
+    <string name="dailybs_wed">Wed</string>
+    <string name="login_input_email_hint">Enter Email</string>
+    <string name="personalcenter_bs_last_update">Last Update</string>
+    <string name="personalcenter_country">Country</string>
+    <string name="dailytrendchart_module_title">AGP Report</string>
+    <string name="Mar">Mar</string>
+    <string name="personalcenter_ble_link_code">Sensor Code</string>
+    <string name="May">May</string>
+    <string name="dailytrendchart_agp_atlas">Ambulatory Glucose Profile</string>
+    <string name="common_cancel">Cancel</string>
+    <string name="common_privacy_policy">Privacy Policy</string>
+    <string name="personalcenter_invite_follower">Invite Follower</string>
+    <string name="scan_connect_sensor">Connect Device</string>
+    <string name="personalcenter_login_out">Log Out</string>
+    <string name="launcher_personal_center">Profile</string>
+    <string name="personalcenter_clear_cache">Clear All Data</string>
+    <string name="personalcenter_use_type">Type of Diabetes</string>
+    <string name="bsmonitoring_Extremely_low">Very Low</string>
+    <string name="personalcenter_clock_in_events">Events</string>
+    <string name="login_register">Create an Account</string>
+    <string name="launcher_blood_sugar_monitoring">Monitoring</string>
+    <string name="scan_connect_sensor_tips">Please scan the DM code on the packaging box.</string>
+    <string name="dailybs_blood_glucose_target_range_time">Time in Range</string>
+    <string name="Feb">Feb</string>
+    <string name="login_forget_password">Forgot Password?</string>
+    <string name="personalcenter_my_profile">My Profile</string>
+    <string name="None">None</string>
+    <string name="done">Done</string>
+    <string name="TAR">TAR</string>
+    <string name="personalcenter_vibrator">Vibration</string>
+    <string name="personalcenter_bs_unit">Unit</string>
+    <string name="personalcenter_ble_start_time">Start Time</string>
+    <string name="personalcenter_account_remove">Remove the Account</string>
+    <string name="common_exercise">Exercise</string>
+    <string name="dailybs_blood_sugar_overview">Daily Overall</string>
+    <string name="device_is_unable_to_use">The device is not functional.</string>
+    <string name="personalcenter_refuse">Refuse</string>
+    <string name="bsmonitoring_sensor_invalid">No Device Connected</string>
+    <string name="bsmonitoring_today_status">How\'re you feeling?</string>
+    <string name="personalcenter_accept">Accept</string>
+    <string name="personalcenter_bs_alarm_style">Alarm Style</string>
+    <string name="TBR">TBR</string>
+    <string name="personalcenter_set_as_home_page">Set as Home Page</string>
+    <string name="bsmonitoring_take_drug_type_tips">What type of insulin did you take?</string>
+    <string name="SiJoy">SIBIONICS</string>
+    <string name="personalcenter_remote_monitoring">Remote Monitoring</string>
+    <string name="common_the_day_before">Previous</string>
+    <string name="dailybs_sat">Sat</string>
+    <string name="bsmonitoring_sensor_init">Warming Up</string>
+    <string name="bsmonitoring_in_data_synchronization_one_moment_please">Syncing</string>
+    <string name="bsmonitoring_Extremely_high">Very High</string>
+    <string name="personalcenter_invitation_sent">Invitation Sent</string>
+    <string name="personalcenter_ok">OK</string>
+    <string name="bsmonitoring_high">High</string>
+    <string name="Dec">Dec</string>
+    <string name="personalcenter_already_the_latest_version">Up-to-date</string>
+    <string name="bsmonitoring_finger_blood_value">Blood Glucose Level</string>
+    <string name="personalcenter_change_device">Change</string>
+    <string name="sijoy_team">The SIBIONICS Team</string>
+    <string name="login_code_not_empty">Verification code can not be blank.</string>
+    <string name="Jan">Jan</string>
+    <string name="personalcenter_alias">Alias</string>
+    <string name="personalcenter_my_follower">My Follower</string>
+    <string name="common_comfirm_code">Verification code is invalid.</string>
+    <string name="dailytrendchart_suggested">Suggested %1$s</string>
+    <string-array name="common_tnb_type">
+        <item>Undiagnosed</item>
+        <item>Type 1 Diabetes</item>
+        <item>Type 2 Diabetes</item>
+        <item>Gestational Diabetes</item>
+        <item>Elderly Diabetes</item>
+        <item>High-risk Diabetes</item>
+    </string-array>
+    <string-array name="month_array">
+        <item>Jan</item>
+        <item>Feb</item>
+        <item>Mar</item>
+        <item>Apr</item>
+        <item>May</item>
+        <item>Jun</item>
+        <item>Jul</item>
+        <item>Aug</item>
+        <item>Sep</item>
+        <item>Oct</item>
+        <item>Nov</item>
+        <item>Dec</item>
+    </string-array>
+    <string-array name="alarm_voice_list">
+        <item>Alarm Sounds 1</item>
+        <item>Alarm Sounds 2</item>
+        <item>Alarm Sounds 3</item>
+        <item>Alarm Sounds 4</item>
+        <item>Alarm Sounds 5</item>
+        <item>Alarm Sounds 6</item>
+        <item>Alarm Sounds 7</item>
+        <item>Alarm Sounds 8</item>
+        <item>Alarm Sounds 9</item>
+        <item>Alarm Sounds 10</item>
+    </string-array>
+    <string-array name="language_list_title">
+        <item>English</item>
+        <item>Deutsch</item>
+        <item>Русский</item>
+        <item>Italiano</item>
+        <item>Français</item>
+        <item>Español</item>
+        <item>Português</item>
+        <item>polski</item>
+        <item>Česky</item>
+        <item>Slovenský</item>
+    </string-array>
+    <string-array name="language_list_content">
+        <item>English</item>
+        <item>German</item>
+        <item>Russian</item>
+        <item>Italian</item>
+        <item>French</item>
+        <item>Spanish</item>
+        <item>Portuguese</item>
+        <item>Polish</item>
+        <item>Czech</item>
+        <item>Slovak</item>
+    </string-array>
+<!--    <string name="bsmonitoring_bs_index">Last Update：%1$s</string>-->
+    <string name="bsmonitoring_hour_three">3H</string>
+    <string name="bsmonitoring_hour_six">6H</string>
+    <string name="bsmonitoring_hour_twelve">12H</string>
+    <string name="bsmonitoring_hour_twenty_four">24H</string>
+    <string name="personalcenter_bg_data">Sensor Reading\n(%1$s)</string>
+    <string name="bsmonitoring_hour_for_recent">%1$dH Trending</string>
+    <string name="personalcenter_restore_default_home">Restore Default Home Page</string>
+    <string name="personalcenter_alarm_events_bs_value">Sensor Reading:%1$s</string>
+    <string name="common_be_overdue_log_in_again">Login Expired</string>
+    <string name="common_ble_connected">Device Connected</string>
+    <string name="common_ble_unconnected">Device not Connected</string>
+    <string name="common_ble_connecting">Connecting Device</string>
+    <string name="common_connection_code_error">Sensor code error. Please try again.</string>
+    <string name="chart_noData">No Data</string>
+    <string name="common_sensor_init_reminder">Preparing to initialize… Please wait for at least 1 minute.</string>
+    <string name="common_i_know">Got It</string>
+    <string name="bsmonitoring_cannot_be_greater_than_the_current_time">Cannot be later than the current time.</string>
+    <string name="bsmonitoring_end_time_cannot_be_less_than_begin_time">Please check the end time.</string>
+    <string name="bsmonitoring_input_correct_finger_blood_value">Please enter the correct blood glucose value.</string>
+    <string name="bsmonitoring_glucose_warning">Glucose Alarm</string>
+    <string name="bsmonitoring_sensor_disconnect">Disconnected</string>
+    <string name="bsmonitoring_getup_time_more_than_sleep_time_two_days">The time interval between the end time and the start time must not exceed 1 days.</string>
+    <string name="personalcenter_my_report">My Report</string>
+    <string name="common_yes">Yes</string>
+    <string name="personalcenter_bs_alarm_range_setting">Alarm Target</string>
+    <string name="launcher_guide_skip">Skip</string>
+    <string name="personalcenter_wearing_cycle">Wear Period: %1$s</string>
+    <string name="personalcenter_sensors_name">Name of Device： %1$s</string>
+    <string name="login_log_in_using_your_registered_account">Please enter your SIBIONICS account to login</string>
+    <string name="login_phone_not_empty">Email cannot be blank</string>
+    <string name="login_region_of_residence">Country/Region of Residence</string>
+    <string name="personalcenter_input_email_tips">Please enter the email of whom you want to share data with.</string>
+    <string name="personalcenter_data_sharing">Data Sharing</string>
+    <string name="login_already_existing_account">Already have a SIBIONICS account? Sign In</string>
+    <string name="personalcenter_select_country">Select Country</string>
+    <string name="common_know">Confirm</string>
+    <string name="personalcenter_view_report">View Report</string>
+    <string name="personalcenter_enter_email">Enter Email Address</string>
+    <string name="personalcenter_export_report">Import Report</string>
+    <string name="common_input_connect_code">Via Code</string>
+    <string name="bsmonitoring_finger_blood">Blood Glucose</string>
+    <string name="launcher_exitApp">Tap Again to exit.</string>
+    <string name="permission_camera">Please enable the storage permission and camera to ensure the device works properly.</string>
+    <string name="login_phone_not_exsit">Email does not exist.</string>
+    <string name="personalcenter_enter_nickname">Enter Nickname</string>
+    <string name="personalcenter_connect_sensor">Connect the Sensor</string>
+    <string name="personalcenter_total_pieces">Total</string>
+    <string name="personalcenter_data_sharing_subtitle">Sharing data with your friends</string>
+    <string name="bsmonitoring_clock_in_record">Record</string>
+    <string name="scan_ambientBrightnessTip">Please turn on the camera flash.</string>
+    <string name="launcher_link_prompt">Please enter the 8-digit Sensor code on the packaging box.</string>
+    <string name="personalcenter_sensor_connect_fail">Sensor connection failed</string>
+    <string name="launcher_jump">Skip</string>
+    <string name="common_update_now">Update Now</string>
+    <string name="personalcenter_upper_bg_alarm_record">High Alarm</string>
+    <string name="personalcenter_lower_bg_alarm_record">Low Alarm</string>
+    <string name="launcher_wear_instructions">Guideline</string>
+    <string name="personalcenter_complete_profile_not_empty_tips">Please fill in all blanks.</string>
+    <string name="tips">Tips</string>
+    <string name="login_account_pwd_error">Incorrect password, please try again or tap "Forget Password?"</string>
+    <string name="common_no">No</string>
+    <string name="bsmonitoring_select_end_time">Please select</string>
+    <string name="login_account_tips">Make sure your account contains at least 8 characters, including letters, numbers, or special characters.</string>
+    <string name="personalcenter_sensor_connect_fail_tip">Connection failed, please check if the Sensor is working normally within 6 meters of phone.</string>
+    <string name="personalcenter_blood_glucose_record">Alarm Records</string>
+    <string name="personalcenter_login_out_tip">Are you sure you want to log out of the account?</string>
+    <string name="glucose_target_lower_than">Your glucose target cannot be lower than %1$s.</string>
+    <string name="glucose_target_higher_than">Your glucose target cannot be higher than %1$s.</string>
+    <string name="alert_target_lower_than">Your alarm target cannot be lower than %1$s.</string>
+    <string name="alert_target_higher_than">Your alarm target cannot be higher than %1$s.</string>
+    <string name="high_target_greater_than_low_target">The high target should be greater than the low target.</string>
+    <string name="alert_high_target_greater_than_low_target">The high glucose alarm target should be greater than the low alert target.</string>
+    <string name="dailybs_tar">TAR</string>
+    <string name="dailybs_tbr">TBR</string>
+    <string name="personalcenter_alert">Alarm</string>
+    <string name="scan_this_is_not_the_correct_dm_code">The QR code is incorrect.</string>
+    <string name="personalcenter_contact_us">Contact Us</string>
+    <string name="login_you_must_be_of_legal_age_to_accept">You must be of legal age to accept, or have your legal guardian accept on your behalf.</string>
+    <string name="bsmonitoring_amount_pills_grams">Amount</string>
+    <string name="bsmonitoring_amount_units">Amount (units)</string>
+    <string name="dailytrendchart_range">(Range: %1$s-%2$s)</string>
+    <string name="personalcenter_time">Time</string>
+    <string name="personalcenter_sensor_glucose">Sensor Glucose</string>
+    <string name="min">min</string>
+    <string name="hour">hour</string>
+    <string name="day">day</string>
+    <string name="days">days</string>
+    <string name="network_not_connected">Network Not Connected</string>
+    <!--SmartRefresh-->
+    <string name="srl_header_failed">Refresh Failed</string>
+    <string name="srl_header_finish">Refresh Succeeded</string>
+    <string name="srl_header_loading">Wait For Loading…</string>
+    <string name="srl_header_pulling">Pull Down To Refresh</string>
+    <string name="srl_header_refreshing">Refreshing…</string>
+    <string name="srl_header_release">Release To Refresh</string>
+    <string name="srl_header_update">\'Last Update\' M-d HH:mm</string>
+    <string name="srl_footer_failed">Load Failed</string>
+    <string name="srl_footer_finish">Load Succeeded</string>
+    <string name="srl_footer_loading">Wait For Loading…</string>
+    <string name="srl_footer_nothing">No More Data</string>
+    <string name="srl_footer_pulling">Pull Up to Load More</string>
+    <string name="srl_footer_refreshing">Wait For Refreshing…</string>
+    <string name="srl_footer_release">Release To Load More</string>
+    <!--加载更多-->
+    <string name="brvah_load_complete">Tap to load more</string>
+    <string name="brvah_load_end">@string/srl_footer_nothing</string>
+    <string name="brvah_load_failed">Failed to load more.</string>
+    <string name="brvah_loading">Loading...</string>
+    <!--相册-->
+    <string name="picture_camera_roll">Photo Album</string>
+    <string name="picture_cancel">@string/common_cancel</string>
+    <string name="picture_preview">Preview</string>
+    <string name="picture_please_select">@string/bsmonitoring_select_end_time</string>
+    <string name="picture_completed">Completed</string>
+    <string name="picture_prompt">@string/tips</string>
+    <string name="picture_jurisdiction">The read permission was denied.</string>
+    <string name="picture_go_setting">Go to Settings</string>
+    <string name="common_sports">Exercise</string>
+    <string name="network_abnormal_please_try_again_later">Network abnormal, please try again later.</string>
+    <string name="common_ble_connect_fail">Connection Failed</string>
+    <string name="error">Error</string>
+    <string name="new_version_is_available_please_upgrade">There is a newer version, please upgrade.</string>
+    <string name="scan_enter_the_sensor_code">Enter the Sensor code</string>
+    <string name="scan_local_images">Scan Local Images</string>
+    <string name="personalcenter_email_report">Email Report</string>
+    <string name="personalcenter_enter_the_nickname_or_email_address">Enter the nickname or email address.</string>
+    <string name="personalcenter_your_report_has_been_successfully_sent_to_email">Your report has been successfully sent to %1$s</string>
+    <string name="dailytrendchart_select_a_custom_date">Select a date range</string>
+    <string name="dailytrendchart_please_select_90_or_fewer_days">Please select 90 or fewer days</string>
+    <string name="dailytrendchart_glucose_statistics">Glucose Statistic</string>
+    <string name="dailytrendchart_report">Report</string>
+    <string name="personalcenter_From">From</string>
+    <string name="personalcenter_To">To</string>
+    <string name="dailytrendchart_start_date">Start Date</string>
+    <string name="dailytrendchart_end_date">End Date</string>
+    <string name="launcher_please_enter_the_sensor_code_on_the_packaging_box">Please enter the Sensor code on the packaging box.</string>
+    <string name="dailytrendchart_reports">Reports</string>
+    <string name="dailytrendchart_insufficient_data_to_generate_an_agp_report">The available data is insufficient to generate an AGP report.</string>
+    <string name="dailytrendchart_custom">Others</string>
+    <string name="dailytrendchart_your_report_is_on_its_way">Your report is on its way.</string>
+    <string name="dailytrendchart_download">Download</string>
+    <string name="dailytrendchart_your_report_is_complete">Your report is completed.</string>
+    <string name="dailytrendchart_retry">Retry</string>
+    <string name="dailytrendchart_report_download_failed">Failed to download the report.</string>
+    <string name="dailytrendchart_please_try_again">Please try again.</string>
+    <string name="dailytrendchart_gmi">GMI</string>
+    <string name="personalcenter_date_of_birth">Date of Birth</string>
+    <string name="personalcenter_please_select_your_date_of_birth">Please select your date of birth.</string>
+    <string name="dailytrendchart_the_end_date_cannot_be_less_than_the_start">The End Date cannot be earlier than the Start Date.</string>
+    <string name="personalcenter_not_found">Not Found</string>
+    <string name="scan_this_is_not_sib_qr_code">@string/scan_this_is_not_the_correct_dm_code</string>
+    <string name="personalcenter_sensor_reading">Sensor Reading</string>
+    <string name="data_is_insufficient_to_analyse">The available CGM data is insufficient \n to generate an AGP graph.</string>
+    <string name="dailytrendchart_network_timeout">Network Timeout</string>
+    <string name="dailytrendchart_report_apply_success_loading_please_wait">Request succeeded. The report is loading, please wait.</string>
+    <string name="dailytrendchart_sorry_get_report_failed">Sorry. Failed to get report.</string>
+    <string name="warming_up">Warming Up</string>
+    <string name="override_alert">Override Do Not Disturb</string>
+    <string name="override_alert_attention">You can still receive blood glucose alarm notifications with sound even in the "Do Not Disturb" mode. (Only available on Android 8.0 or above.)</string>
+    <string name="override_alert_attention_share">You can still receive his/her blood glucose alarm notifications with sound even in the "Do Not Disturb" mode. (Only available on Android 8.0 or above.)</string>
+    <string name="common_blood_sugar">Blood Glucose</string>
+    <string name="personalcenter_version_update">Update</string>
+    <string name="dailytrendchart_report_apply_failed">Sorry. Failed to get report.</string>
+    <string name="please_confirm_your_email">Please confirm your email.</string>
+    <string name="dailybs_hour_h">h</string>
+    <string name="launch_location_service_tips">Allow SIBIONICS to use location on your phone to provide accurate location services.</string>
+
+    <!--单独处理-->
+    <string name="login_user_agreement">User Agreement</string>
+    <string name="login_privacy_policy">Privacy Policy</string>
+    <string name="common_login_agreement">I have read and agreed to the User Agreement &amp; Privacy Policy.</string>
+    <string name="override_alert_setting_tips">You must Allow Do Not Disturb permission to continue</string>
+
+    <string name="login_code_to_obtain">%1$ss</string>
+    <string name="login_only_can_input_number_or_word">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ`-=[]\;\"\\,./~\|!@#$%^*()_+}{:?¥£¢€₱&amp;&lt;&gt;&quot;&apos;</string>
+
+    <string name="year_y">y</string>
+    <string name="month_m">m</string>
+    <string name="day_d">d</string>
+
+    <string name="please_upgrade_version">The current version is too low, please upgrade the version!</string>
+    <string name="can_not_connect_area_tips">Sorry, unable to connect, because the country of sale for this Sensor does not match the App to use in your country. Please download the App corresponding to your country of sale.</string>
+    <string name="unable_to_connect">Unable to Connect</string>
+    <string name="can_not_connect_channel_tips">Sorry, unable to connect, because the App you\'re using is not required by the sale channel. Please download the App corresponding to the sale channel.</string>
+    <string name="please_fill_in_your_nickname">Please fill in your nickname.</string>
+    <string name="number_short">No.</string>
+    <string name="connect_a_device">Connect a Device</string>
+    <string name="legal_documents">Legal Documents</string>
+    <string name="share_data_to_institution_tips_title">Share Your Data with a New Medical Institution</string>
+    <string name="share_data_to_institution_tips_content">[%1$s] \nYou are invited to share all your glucose data. Once shared, your glucose data will be visible to the clinic. You can stop sharing with the clinic at any time.</string>
+    <string name="decline">Decline</string>
+    <string name="sharing_succeeded">Sharing Succeeded</string>
+    <string name="personalcenter_professional_medical_institution">Professional Medical Institution</string>
+    <string name="share_your_glucose_data_institution_tips">Share your glucose data with a professional medical institution.</string>
+    <string name="family_and_friends">Family &amp; Friends</string>
+    <string name="personalcenter_share_your_glucose_data_with_whomever_you_want">Share your glucose data with whomever you want.</string>
+    <string name="sharing_records">Sharing Records</string>
+    <string name="unconnected_to_a_professional_medical_institution">Unconnected to a Professional Medical Institution</string>
+    <string name="data_is_sharing_with">Data is sharing with</string>
+    <string name="are_you_sure_you_want_to_stop_sharing_data_tips">Are you sure you want to stop sharing data with [%1$s]? Once stopped sharing, your data will be no longer available to it.</string>
+    <string name="last_7_days">Last 7 Days</string>
+    <string name="seven_days_ago">7 Days Ago</string>
+    <string name="no_sharing_records">No Sharing Records</string>
+    <string name="accepted">Accepted</string>
+    <string name="declined">Declined</string>
+    <string name="share_denied">Sharing Declined</string>
+    <string name="incompatible_sensor">Incompatible Sensor</string>
+    <string name="this_sensor_cannot_be_used_with_this_version_of_the_app">This Sensor cannot be used with this version of the app.</string>
+    <!--蓝牙库通知栏显示-->
+    <string name="proximity_notification_text">%s is connected.</string>
+    <string name="i_have_read_and_accept_the_terms_of_use">I have read and accepted the User Agreement.</string>
+    <string name="i_have_read_and_understand_the_privacy_notice">I have read and understood the Privacy Policy.</string>
+    <string name="i_hereby_consent_to_the_processing_of_my_health">I hereby agree that my health-related data can be processed in accordance with the Privacy Policy when using the App.</string>
+    <string name="launcher_user_agreement_and_privacy_policy_updates">User Agreement and Privacy Policy Updates</string>
+    <string name="launcher_the_user_agreement_has_been_updated_please_check_the_latest_version">The User Agreement has been updated, please check the latest version.</string>
+    <string name="check_updates">Check Updates</string>
+    <string name="if_you_refuse_to_accept_you_will_log_out_of_the_app">If you refuse to accept, you will log out of the App.</string>
+    <string name="back">Back</string>
+    <string name="the_account_has_not_been_registered">The account has not been registered yet, please double check.</string>
+    <string name="password_error">Password error.</string>
+    <string name="extremely_low_glucose_alarm">Urgent Low Glucose Alarm</string>
+    <string name="low_glucose_alarm">Low Glucose Alarm</string>
+    <string name="alarm_interval">Alarm Interval</string>
+    <string name="when_the_glucose_is_lower_than">When glucose goes below</string>
+    <string name="high_glucose_alarm">High Glucose Alarm</string>
+    <string name="signal_loss_alarm">Signal Loss Alarm</string>
+    <string name="off">OFF</string>
+    <string name="on">ON</string>
+    <string name="permission_explain_location">To support the glucose data monitoring function of the sensor, the application requires the use of Bluetooth connectivity, which obtainings location information . To facilitate background operation of the app and the automatic reconnection feature for the blood glucose sensor\'s Bluetooth disconnection, it will still acquire location information data to enable the automatic connection of the blood glucose sensor, even if the application is closed or not in use.</string>
+    <string name="carbs">Carbs</string>
+    <string name="food">Food</string>
+    <string name="pictures">Pictures</string>
+    <string name="value_should_be_a_whole_number_between_0_and_500">Value should be a whole number between 0 and 500</string>
+    <string name="take_a_photo">Take a photo</string>
+    <string name="select_from_album">Select from album</string>
+    <string name="delete_note">Delete Note</string>
+    <string name="do_you_wish_to_delete_this_note">Do you wish to delete this note?</string>
+    <string name="unit_weight_g">g</string>
+    <string name="help">Help</string>
+    <string name="how_to_apply_your_sensor">How to apply your Sensor</string>
+    <string name="how_to_connect_the_app">How to connect the App</string>
+    <string name="please_apply_a_new_sensor_first">Please apply a new sensor first.</string>
+    <string name="step_1_how_to_apply_a_sensor">Step 1: How to apply a sensor</string>
+    <string name="step_2_how_to_connect_the_app">Step 2: How to connect the app</string>
+    <string name="step_3_start_connecting">Step 3: Start connecting</string>
+    <string name="allow_alarms_to_sound_even_when_silent_or_do_not_disturb_is_on_urgent_low_glucose_alarm_can_t_be_silenced">Allow alarms to sound even when Silent or Do Not Disturb is on. Urgent Low Glucose Alarm can\'t be silenced.</string>
+    <string name="this_alarm_will_always_play_a_sound_even_if_your_phone_is_muted_or_do_not_disturb_is_on">This alarm will always play a sound even if your phone is muted or Do Not Disturb is ON.</string>
+    <string name="when_the_app_cannot_receive_glucose_readings_from_the_sensor_you_will_receive_a_signal_loss_alarm">You will receive a signal loss alarm when the app stops receiving glucose readings from your sensor.</string>
+    <string name="receive_a_low_glucose_alarm_when_your_glucose_is_lower_than_this_value">Receive a Low Glucose Alarm when your glucose is lower than this value.</string>
+    <string name="snooze">Snooze</string>
+    <string name="repeat">Repeat</string>
+    <string name="for_more_than">For More Than</string>
+    <string name="alarms">Alarms</string>
+    <string name="receive_a_high_glucose_alarm_when_your_glucose_is_higher_than_this_value">Receive a High Glucose Alarm when your glucose is higher than this value.</string>
+    <string name="sounds">Sounds</string>
+    <string name="remind_you_when_loss_time_is_longer_than_this_value">Remind you when his/her loss time is longer than this value.</string>
+    <string name="the_average_of_all_the_cgm_glucose_readings_from_the_selected_date_range">The average of all the CGM glucose readings from the selected date range.</string>
+    <string name="glucose_management_indicator_gmi">Glucose Management Indicator GMI</string>
+    <string name="glucose_management_indicator_uses_average_sensor_glucose_data_gmi_can_be_used_as_an_indicator_of_how_well_your_glucose_levels_have_been_controlled">Glucose Management Indicator uses average Sensor glucose data. GMI can be used as an indicator of how well your glucose levels have been controlled.</string>
+    <string name="time_in_range_tir">Time in Range&#160;&#160;TIR</string>
+    <string name="the_percentage_of_time_that_glucose_levels_are_in_target_ranges">The percentage of time that glucose levels are in target ranges.</string>
+    <string name="ambulatory_glucose_profile_agp">Ambulatory Glucose Profile AGP</string>
+    <string name="agp_is_a_summary_of_glucose_values_from_the_report_period_with_median_50_and_other_percentiles_shown_as_if_they_occured_in_a_single_day">AGP is a summary of glucose values from the report period, with median(50%) and other percentiles shown as if they occured in a single day.</string>
+    <string name="coefficient_of_variation_cv">Coefficient of variation&#160;&#160;&#160;CV</string>
+    <string name="time_below_range_tbr">Time below Range&#160;&#160;TBR</string>
+    <string name="the_percentage_of_time_that_glucose_levels_are_in_low_ranges">The percentage of time that glucose levels are in low ranges.</string>
+    <string name="time_above_range_tar">Time above Range&#160;&#160;TAR</string>
+    <string name="the_percentage_of_time_that_glucose_levels_are_in_high_ranges">The percentage of time that glucose levels are in high ranges.</string>
+    <string name="average_glucose_mg">Average Glucose&#160;&#160;&#160;MG</string>
+    <string name="coefficient_of_variation_is_a_standardized_measure_that_assesses_the_magnitude_of_glucose_variability_the_larger_the_cv_the_larger_the_variability_in_cgm_readings">Coefficient of variation is a standardized measure that assesses the magnitude of glucose variability. The larger the %CV, the larger the variability in CGM readings.</string>
+    <string name="urgent_low_glucose">Urgent Low Glucose</string>
+    <string name="low_glucose">Low Glucose</string>
+    <string name="high_glucose">High Glucose</string>
+    <string name="current_glucose">Current Glucose</string>
+    <string name="unable_to_receive_glucose_readings_from_your_sensor_please_check_the_connection">Unable to receive glucose readings from your sensor, please check the connection.</string>
+    <string name="alarm_notifications_unavailable">Alarm notifications Unavailable</string>
+    <string name="check_phone_settings">Check Phone Settings</string>
+    <string name="alarms_require_your_phone_s_settings_to_be_configured_correctly">Alarms require your phone\'s settings to be configured correctly.</string>
+    <string name="please_allow_app_permissions_to_receive_alarms">Please allow app permissions to receive alarms.</string>
+    <string name="when_glucose_goes_above">When glucose goes above</string>
+    <string name="step_1">Step 1</string>
+    <string name="step_2">Step 2</string>
+    <string name="apply_site_select_the_back_of_your_upper_arm">Apply site: Select the back of your upper arm.</string>
+    <string name="note_avoid_areas_with_wounds_or_insulin_injection_site">Note: Avoid areas with wounds or insulin injection site.</string>
+    <string name="clean_the_back_of_your_upper_arm_with_alcohol_wipe_and_wait_for_the_skin_to_dry">Clean the back of your upper arm with alcohol wipe and wait for the skin to dry.</string>
+    <string name="step_3">Step 3</string>
+    <string name="step_4">Step 4</string>
+    <string name="step_5">Step 5</string>
+    <string name="step_6">Step 6</string>
+    <string name="step_7">Step 7</string>
+    <string name="open_the_sensor_pack_and_sensor_applicator_and_line_up_the_two_components_as_shown">Open the Sensor Pack and Sensor Applicator, and line up the two components as shown.</string>
+    <string name="press_firmly_down_on_the_sensor_applicator_until_it_comes_to_a_stop_lift_the_sensor_applicator_out_of_the_sensor_pack_and_make_sure">Press firmly down on the Sensor Applicator until it comes to a stop. Lift the Sensor Applicator out of the Sensor Pack and make sure the Sensor and the inner surface of the Applicator are at the same level. Remove the safety clip after well-installed.</string>
+    <string name="note_do_not_press_the_button_on_the_top_and_do_not_touch_the_inside_of_the_sensor">Note: Do not press the button on the top and do not touch the inside of the Sensor Applicator because it contains a tip.</string>
+    <string name="place_the_sensor_applicator_over_the_prepared_site_and_push_down_firmly">Place the Sensor Applicator over the prepared site and press the button to apply the sensor to your body.</string>
+    <string name="precaution_do_not_push_down_on_the_sensor_applicator_until">Note: Do NOT push down on the Sensor Applicator until placed over the prepared site to prevent unintended injury.</string>
+    <string name="gently_pull_the_sensor_applicator_away_from_your_body">Gently pull the Sensor Applicator away from your body.</string>
+    <string name="make_sure_the_sensor_is_placed_as_shown_and_gently_press_the_edge_of_the">Make sure the Sensor is placed as shown, and gently press the edge of the adhesive tape to make it stick firmly to the skin.</string>
+    <string name="turn_on_the_bluetooth_and_tap_connect_a_device_after_logging_in">Turn on the Bluetooth and tap \"Connect a Device\" after logging in.</string>
+    <string name="enter_the_scanning_page_scan_the_sensor_code_on_the_package">Enter the Scanning page, scan the Sensor code on the package or directly enter the Sensor code on the package to connect.</string>
+    <string name="enter_the_connection_succeeded_page_and_wait_60_minutes_for_initialization">Enter the Connection Succeeded page and wait 60 minutes for initialization.</string>
+    <string name="after_the_countdown_you_will_see_real_time_glucose_data_uploaded_every_five">After the countdown, you will see real-time glucose data uploaded every five minutes and receive alams.</string>
+    <string name="how_to_connect_the_sensor">How to Connect the Sensor</string>
+    <string name="urgent_low_alarm">Urgent Low Alarm</string>
+    <string name="unable_to_receive_glucose_readings_from_friend">【%1$s】\'s Signal Loss \n Unable to receive glucose readings from his/her sensor.</string>
+    <string name="no_record_for_the_day">No record for the day</string>
+    <string name="more">More</string>
+    <string name="remind_you_when_signal_loss_time_is_longer_than_this_value">Remind you when Signal Loss time is longer than this value.</string>
+    <string name="target_range">Target Range</string>
+    <string name="friends_current_glucose_value">%1$s\'s Current Glucose：%2$s</string>
+    <string name="camera_permission_is_not_enabled">Camera permission is not enabled.</string>
+    <string name="to_ensure_the_transmission_of_glucose_data_please_make_sure_the_app_is_running">To ensure the transmission of glucose data, please make sure the app is running.</string>
+</resources>

@@ -1,0 +1,548 @@
+<resources>
+    <string name="delete">Cancella</string>
+    <string name="Apr">Apr</string>
+    <string name="alert_sounds">Suono Allarme</string>
+    <string name="invitation_sent">Invito inviato!</string>
+    <string name="agp_reports">Rapporti AGP</string>
+    <string name="email_address">Indirizzo Email</string>
+    <string name="connect_a_new_device">Collega Altra Periferica</string>
+    <string name="coefficient_of_variation">Coefficiente di Variazione</string>
+    <string name="mol_unit">mmol/L</string>
+    <string name="minutes">Minuti</string>
+    <string name="about_us">Su di noi</string>
+    <string name="alert_settings">Impostazioni Allarme</string>
+    <string name="overlay">Confrontare</string>
+    <string name="type_here">Digita Qui</string>
+    <string name="device_exception">Dispositivo Escluso</string>
+    <string name="select_two_or_more_dates_to_compare">Seleziona due o più date da confrontare.</string>
+    <string name="sound">Suono</string>
+    <string name="expired">Scaduto</string>
+    <string name="code">Codice</string>
+    <string name="sun_of_week">Dom</string>
+    <string name="end_time">Ora Fine</string>
+    <string name="launcher_get_stated_now">Registra Ora</string>
+    <string name="bsmonitoring_meal_clock_in">Dieta</string>
+    <string name="login_code_code_has_been_sent">Un codice temporaneo è stato inviato alla vostra email, si prega controllare</string>
+    <string name="dailytrendchart_control_target">Target Consigliato %1$s</string>
+    <string name="login_enter_password_again">Conferma Password</string>
+    <string name="personalcenter_remote_monitoring_tips">Volete essere informati sui livelli di glucosio di qualcuno? Chiedere di condividere le proprie informazioni sul glucosio con voi in modo da poterli seguire.</string>
+    <string name="Sep">Set</string>
+    <string name="personalcenter_stop_sharing">Stop Condivisione</string>
+    <string name="bsmonitoring_take_medicine_type_tips">Che tipo di farmaco prendi?</string>
+    <string name="login_enter_password">Immetti Password</string>
+    <string name="common_loading">Carica</string>
+    <string name="bsmonitoring_manual_connect_sensor">Spiacenti, il dispositivo non funziona. Rimuoverlo.</string>
+    <string name="Days">Giorni</string>
+    <string name="personalcenter_voice_vibrator">Vibrazione &amp; Suono</string>
+    <string name="Selected">Selezio.</string>
+    <string name="scan_connect_sensor_code">Scan codice per navigare</string>
+    <string name="Jul">Lug</string>
+    <string name="dailybs_thu">Gio</string>
+    <string name="Jun">Giu</string>
+    <string name="personalcenter_account_remove_tip">Una volta eliminato l\'account, tutti i dati nell\'account verranno eliminati e non possono essere recuperati. Vuoi continuare?</string>
+    <string name="user_agreement">Accordo utente</string>
+    <string name="privacy_policy">Informativa sulla Privacy</string>
+    <string name="personalcenter_blood_glucose_data">Dati dal Dispositivo</string>
+    <string name="bsmonitoring_sensor_not_connect_please_check">Segnale Perso</string>
+    <string name="incorrect_verification_code">Codice Verifica Errato</string>
+    <string name="personalcenter_look_data">Più Dati</string>
+    <string name="dailytrendchart_average_glucose_level">Glucosio Medio</string>
+    <string name="common_medicine">farmaco</string>
+    <string name="common_sleep">Sonno</string>
+    <string name="CV">CV</string>
+    <string name="login_sibionics">Registrare</string>
+    <string name="bsmonitoring_sensor_reconnect">Ricerca</string>
+    <string name="personalcenter_active_follower">Seguaci Attivi</string>
+    <string name="personalcenter_cancel_monitoring_tips">Confermare annullamento controllo? Se annullato, non sarà più possibile visualizzare le sue informazioni sul glucosio.</string>
+    <string name="personalcenter_enter_nickname_hint">Inserire il soprannome qui</string>
+    <string name="personalcenter_pending_application">Invito in Sospeso</string>
+    <string name="login_in">Accedere</string>
+    <string name="personalcenter_my_sensor">Apparati</string>
+    <string name="bsmonitoring_normal">Glu nel range</string>
+    <string name="personalcenter_stop_sharing_tips">Siete sicuri di voler interrompere la condivisione con questo follower? Una volta interrotta, non potrà più seguirvi.</string>
+    <string name="common_use_agreement">Condizioni d\'Uso</string>
+    <string name="personalcenter_bs_target_range_setting">Vostro scopo</string>
+    <string name="Aug">Ago</string>
+    <string name="personalcenter_app_version">Versione</string>
+    <string name="personalcenter_select_country_search">Ricerca</string>
+    <string name="bsmonitoring_connect_sensor_again">Riprovare</string>
+    <string name="personalcenter_input_diabete_tips">Si prega di selezionare il tipo di diabete.</string>
+    <string name="dailybs_tue">Mar</string>
+    <string name="dailytrendchart_all_select">Scegli Tutto</string>
+    <string name="bsmonitoring_amount">Quantià</string>
+    <string name="personalcenter_invitation_sent_tips">La tua email di invito è stata inviata. Quando la tua invito sarà accettato, tutti i tuoi dati sulla glicemia saranno condivisi con lui/lei.</string>
+    <string name="personalcenter_usename">Soprannome</string>
+    <string name="dailybs_daily_bs">Rapporti del giorno</string>
+    <string name="personalcenter_using">In Uso</string>
+    <string name="personalcenter_account_hint">Inserire Codice di Verifica</string>
+    <string name="dailybs_bs_curve">Andamento giornaliero</string>
+    <string name="login_select_and_agree_agreement">Spuntare la casella per accettare l\'Accordo dell\'Utente e l\'Informativa sulla Privacy.</string>
+    <string name="login_pwd_different">Si prega di confermare la password.</string>
+    <string name="Nov">Nov</string>
+    <string name="launcher_bs_monitoring_system">Sistema Monitoraggio Continuo del Glucosio</string>
+    <string name="bsmonitoring_success">Riuscito</string>
+    <string name="device_expired">Dispositivo Scaduto</string>
+    <string name="personalcenter_bs_remote_view">Vista Remota</string>
+    <string name="login_get_verification_get_code_hint">Ricevi Codice</string>
+    <string name="personalcenter_edit_data">Edita profilo</string>
+    <string name="select_language">Scegli Lingua</string>
+    <string name="bsmonitoring_medication_time">Ora</string>
+    <string name="login_confirm">Continuo</string>
+    <string name="personalcenter_your_target_range">Vostro scopo</string>
+    <string name="bsmonitoring_food_name">Cosa avete mangiato?</string>
+    <string name="personalcenter_reset_password">Ripristino Password</string>
+    <string name="bsmonitoring_motion_type">Cosa hai fatto?</string>
+    <string name="personalcenter_language">Lingua</string>
+    <string name="login_pwd_not_empty">La password non può essere in bianco.</string>
+    <string name="personalcenter_sensor_ends">SENSORE CESSA IN: </string>
+    <string name="login_password_hint">Password</string>
+    <string name="common_condition">Stato</string>
+    <string name="personalcenter_input_unit_tips">Selezionare l\'unità di glucosio preferita.</string>
+    <string name="login_password_incorrect">Password errata. Si prega di riprovare.</string>
+    <string name="personalcenter_email_address11">Indirizzo Email: </string>
+    <string name="personalcenter_cancel_monitoring">Annulla Controllo</string>
+    <string name="dailybs_mon">Lun</string>
+    <string name="login_get_verification_code_hint">Invia Codice</string>
+    <string name="none_of_all">Nessuno</string>
+    <string name="Alert">Allarme</string>
+    <string name="dailybs_fri">Ven</string>
+    <string name="login_input_account_hint">Conto</string>
+    <string name="Oct">Ott</string>
+    <string name="personalcenter_clear_cache_tips">Tutti i dati locali saranno cancellati e non potranno essere recuperati. Vuoi continuare?</string>
+    <string name="login_verification_code_hint">Incollare il codice inviato via e-mail</string>
+    <string name="bsmonitoring_glucose_trending">Andamento Glucosio</string>
+    <string name="login_comfirm_email">Formato E-mail Errato</string>
+    <string name="personalcenter_follower_todo_tips">[%1$s] vuole condividere con te le sue informazioni sul glucosio.</string>
+    <string name="personalcenter_setting">Impostazioni</string>
+    <string name="personalcenter_bs_remain">Restano</string>
+    <string name="food_name">Nome del Cibo</string>
+    <string name="common_insulin">Insulina</string>
+    <string name="mg_dl">Mg/dL</string>
+    <string name="personalcenter_my_sharer">Partecipe</string>
+    <string name="login_input_new_password">La password è già stata impostata.</string>
+    <string name="bsmonitoring_low">Basso</string>
+    <string name="login_pwd_less_than_eight">Verificate che la password sia di almeno 8 caratteri e contenga almeno 1 numero, 1 lettera e 1 carattere speciale.</string>
+    <string name="common_the_next_day">Dopo</string>
+    <string name="dailybs_wed">Mer</string>
+    <string name="login_input_email_hint">Immetti Email</string>
+    <string name="personalcenter_bs_last_update">Aggiornato il</string>
+    <string name="personalcenter_country">Paese</string>
+    <string name="dailytrendchart_module_title">Rapporto AGP</string>
+    <string name="Mar">Mar</string>
+    <string name="personalcenter_ble_link_code">Sigla Sensore</string>
+    <string name="May">Mag</string>
+    <string name="dailytrendchart_agp_atlas">Profilo Glicemico Ambulatoriale</string>
+    <string name="common_cancel">Annulla</string>
+    <string name="common_privacy_policy">Informativa sulla Privacy</string>
+    <string name="personalcenter_invite_follower">Invita Seguaci</string>
+    <string name="scan_connect_sensor">Collegare Dispositivo</string>
+    <string name="personalcenter_login_out">Uscire</string>
+    <string name="launcher_personal_center">Profilo</string>
+    <string name="personalcenter_clear_cache">Azzera I dati</string>
+    <string name="personalcenter_use_type">Tipo di Diabete</string>
+    <string name="bsmonitoring_Extremely_low">Molto Basso</string>
+    <string name="personalcenter_clock_in_events">Eventi</string>
+    <string name="login_register">Creare un Account</string>
+    <string name="launcher_blood_sugar_monitoring">Monitoraggio</string>
+    <string name="scan_connect_sensor_tips">Si prega di scansionare il codice DM sulla scatola di imballaggio.</string>
+    <string name="dailybs_blood_glucose_target_range_time">Tempo in intervallo</string>
+    <string name="Feb">Feb</string>
+    <string name="login_forget_password">Password Persa?</string>
+    <string name="personalcenter_my_profile">Mio Profilo</string>
+    <string name="None">Nulla</string>
+    <string name="done">Fine</string>
+    <string name="TAR">TAR</string>
+    <string name="personalcenter_vibrator">Vibrazione</string>
+    <string name="personalcenter_bs_unit">Unità</string>
+    <string name="personalcenter_ble_start_time">Ora Inizio</string>
+    <string name="personalcenter_account_remove">Rimuovere l\'Account</string>
+    <string name="common_exercise">Attività</string>
+    <string name="dailybs_blood_sugar_overview">Media del giorno</string>
+    <string name="device_is_unable_to_use">Il dispositivo non funziona.</string>
+    <string name="personalcenter_refuse">Nega</string>
+    <string name="bsmonitoring_sensor_invalid">Periferica non connessa</string>
+    <string name="bsmonitoring_today_status">Come ti senti?</string>
+    <string name="personalcenter_accept">Accetta</string>
+    <string name="personalcenter_bs_alarm_style">Tipo Allarme</string>
+    <string name="TBR">TBR</string>
+    <string name="personalcenter_set_as_home_page">Imposta com Home Page</string>
+    <string name="bsmonitoring_take_drug_type_tips">Quale tipo di insulina hai preso?</string>
+    <string name="SiJoy">SIBIONICS</string>
+    <string name="personalcenter_remote_monitoring">Monitoraggio da Remoto</string>
+    <string name="common_the_day_before">Anteriore</string>
+    <string name="dailybs_sat">Sab</string>
+    <string name="bsmonitoring_sensor_init">Riscaldare</string>
+    <string name="bsmonitoring_in_data_synchronization_one_moment_please">Sincronizza</string>
+    <string name="bsmonitoring_Extremely_high">Molto Alto</string>
+    <string name="personalcenter_invitation_sent">Invito Inviato</string>
+    <string name="personalcenter_ok">OK</string>
+    <string name="bsmonitoring_high">Alto</string>
+    <string name="Dec">Dic</string>
+    <string name="personalcenter_already_the_latest_version">Aggiornato</string>
+    <string name="bsmonitoring_finger_blood_value">Livello Glicemia</string>
+    <string name="personalcenter_change_device">Cambia</string>
+    <string name="sijoy_team">Il team SIBIONICS</string>
+    <string name="login_code_not_empty">Il codice di verifica non può essere in bianco.</string>
+    <string name="Jan">Gen</string>
+    <string name="personalcenter_alias">Alias</string>
+    <string name="personalcenter_my_follower">Mio Seguace</string>
+    <string name="common_comfirm_code">Il codice di verifica non è valido.</string>
+    <string name="dailytrendchart_suggested">Consigliato %1$s</string>
+    <string-array name="common_tnb_type">
+        <item>Non diagnosticata</item>
+        <item>Diabete di Tipo 1</item>
+        <item>Diabete di Tipo 2</item>
+        <item>Diabete Gestazionale</item>
+        <item>Diabete Anziani</item>
+        <item>Diabete Alto rischio</item>
+    </string-array>
+    <string-array name="month_array">
+        <item>Gen</item>
+        <item>Feb</item>
+        <item>Mar</item>
+        <item>Apr</item>
+        <item>Mag</item>
+        <item>Giu</item>
+        <item>Lug</item>
+        <item>Ago</item>
+        <item>Set</item>
+        <item>Ott</item>
+        <item>Nov</item>
+        <item>Dic</item>
+    </string-array>
+    <string-array name="alarm_voice_list">
+        <item>Suono Allarme 1</item>
+        <item>Suono Allarme 2</item>
+        <item>Suono Allarme 3</item>
+        <item>Suono Allarme 4</item>
+        <item>Suono Allarme 5</item>
+        <item>Suono Allarme 6</item>
+        <item>Suono Allarme 7</item>
+        <item>Suono Allarme 8</item>
+        <item>Suono Allarme 9</item>
+        <item>Suono Allarme 10</item>
+    </string-array>
+    <string-array name="language_list_title">
+        <item>English</item>
+        <item>Deutsch</item>
+        <item>Русский</item>
+        <item>Italiano</item>
+        <item>Français</item>
+        <item>Español</item>
+        <item>Português</item>
+        <item>polski</item>
+        <item>Česky</item>
+        <item>Slovenský</item>
+    </string-array>
+    <string-array name="language_list_content">
+        <item>Inglese</item>
+        <item>Tedesco</item>
+        <item>Russo</item>
+        <item>Italiano</item>
+        <item>Francese</item>
+        <item>Spagnolo</item>
+        <item>Portoghese</item>
+        <item>Polacco</item>
+        <item>Ceco</item>
+        <item>Slovacco</item>
+    </string-array>
+<!--    <string name="bsmonitoring_bs_index">Aggiornato il：%1$s</string>-->
+    <string name="bsmonitoring_hour_three">3O</string>
+    <string name="bsmonitoring_hour_six">6O</string>
+    <string name="bsmonitoring_hour_twelve">12O</string>
+    <string name="bsmonitoring_hour_twenty_four">24O</string>
+    <string name="personalcenter_bg_data">Lettura del Sensore\n(%1$s)</string>
+    <string name="bsmonitoring_hour_for_recent">Andamento di %1$d ore</string>
+    <string name="personalcenter_restore_default_home">Ripristina la Home Page Predefinita</string>
+    <string name="personalcenter_alarm_events_bs_value">Lettura del Sensore:%1$s</string>
+    <string name="common_be_overdue_log_in_again">Accesso Scaduto</string>
+    <string name="common_ble_connected">Dispositivo Connesso</string>
+    <string name="common_ble_unconnected">Dispositivo non Connesso</string>
+    <string name="common_ble_connecting">Connessione Dispositivo</string>
+    <string name="common_connection_code_error">Errore codice del sensore. Si prega di riprovare</string>
+    <string name="chart_noData">Nessun Dato</string>
+    <string name="common_sensor_init_reminder">Codice di connessione errato…si prega di attendere almeno 1 minuto.</string>
+    <string name="common_i_know">Avuto</string>
+    <string name="bsmonitoring_cannot_be_greater_than_the_current_time">Non può essere più tardi dell\'ora corrente.</string>
+    <string name="bsmonitoring_end_time_cannot_be_less_than_begin_time">Controllare l\'ora finale.</string>
+    <string name="bsmonitoring_input_correct_finger_blood_value">Si prega di inserire il valore corretto della glicemia.</string>
+    <string name="bsmonitoring_glucose_warning">Allarme Glucosio</string>
+    <string name="bsmonitoring_sensor_disconnect">Sconnesso</string>
+    <string name="bsmonitoring_getup_time_more_than_sleep_time_two_days">L\'intervallo di tempo tra l\'ora di fine e l\'ora di inizio non deve superare 1 giorno.</string>
+    <string name="personalcenter_my_report">Mio Rapporto</string>
+    <string name="common_yes">Sì</string>
+    <string name="personalcenter_bs_alarm_range_setting">Target di Allarme</string>
+    <string name="launcher_guide_skip">Salta</string>
+    <string name="personalcenter_wearing_cycle">Periodo di Usura: %1$s</string>
+    <string name="personalcenter_sensors_name">Nome Dispositivo: %1$s</string>
+    <string name="login_log_in_using_your_registered_account">Si prega di inserire il proprio conto SIBIONICS per accedere</string>
+    <string name="login_phone_not_empty">E-mail non può essere in bianco</string>
+    <string name="login_region_of_residence">Paese/Regione di Residenza</string>
+    <string name="personalcenter_input_email_tips">Inserire l\'e-mail della persona con cui si desidera condividere i dati.</string>
+    <string name="personalcenter_data_sharing">Condivisione Dati</string>
+    <string name="login_already_existing_account">Avete già un conto SIBIONICS? Accedere</string>
+    <string name="personalcenter_select_country">Selezionare Paese</string>
+    <string name="common_know">Confermare</string>
+    <string name="personalcenter_view_report">Vedere Rapporto</string>
+    <string name="personalcenter_enter_email">Inserire Indirizzo E-mail</string>
+    <string name="personalcenter_export_report">Importare Rapporto</string>
+    <string name="common_input_connect_code">Via Codice</string>
+    <string name="bsmonitoring_finger_blood">Glicemia</string>
+    <string name="launcher_exitApp">Toccare Ancora per uscire.</string>
+    <string name="permission_camera">Abilitare il permesso per archiviare e per la fotocamera per garantire che il dispositivo funzioni</string>
+    <string name="login_phone_not_exsit">L\' E-mail non esiste.</string>
+    <string name="personalcenter_enter_nickname">Inserire Soprannome</string>
+    <string name="personalcenter_connect_sensor">Collegare il Sensore</string>
+    <string name="personalcenter_total_pieces">Totale</string>
+    <string name="personalcenter_data_sharing_subtitle">Condivisione dei dati con i vostri amici</string>
+    <string name="bsmonitoring_clock_in_record">Annotare</string>
+    <string name="scan_ambientBrightnessTip">Accendere il flash della fotocamera.</string>
+    <string name="launcher_link_prompt">Inserire il codice del Sensore a 8 cifre sulla confezione.</string>
+    <string name="personalcenter_sensor_connect_fail">Connessione del sensore non riuscita</string>
+    <string name="launcher_jump">Salta</string>
+    <string name="common_update_now">Aggiornare Ora</string>
+    <string name="personalcenter_upper_bg_alarm_record">Allarme Alto</string>
+    <string name="personalcenter_lower_bg_alarm_record">Allarme Basso</string>
+    <string name="launcher_wear_instructions">Linea guida</string>
+    <string name="personalcenter_complete_profile_not_empty_tips">Compilare tutti gli spazi vuoti.</string>
+    <string name="tips">Spunti</string>
+    <string name="login_account_pwd_error">Password errata, si prega di riprovare o toccare "Password Dimenticata?"</string>
+    <string name="common_no">No</string>
+    <string name="bsmonitoring_select_end_time">Pregasi Selezionare</string>
+    <string name="login_account_tips">Assicurarsi che il proprio account contenga almeno 8 caratteri, tra cui lettere, numeri o caratteri speciali.</string>
+    <string name="personalcenter_sensor_connect_fail_tip">Connessione fallita, verificare che il sensore funzioni normalmente entro 6 metri dal telefono.</string>
+    <string name="personalcenter_blood_glucose_record">Registri di allarme</string>
+    <string name="personalcenter_login_out_tip">Sicuri di voler uscire dall\'account?</string>
+    <string name="glucose_target_lower_than">Il target di glucosio non può essere inferiore a %1$s.</string>
+    <string name="glucose_target_higher_than">Il target di glucosio non può essere superiore a %1$s.</string>
+    <string name="alert_target_lower_than">Il target di allarme non può essere inferiore a %1$s.</string>
+    <string name="alert_target_higher_than">Il target di allarme non può essere superiore a %1$s.</string>
+    <string name="high_target_greater_than_low_target">Il target alto deve essere maggiore del target basso.</string>
+    <string name="alert_high_target_greater_than_low_target">Il target di allarme del glucosio alto deve essere maggiore del target di allarme basso.</string>
+    <string name="dailybs_tar">TAR</string>
+    <string name="dailybs_tbr">TBR</string>
+    <string name="personalcenter_alert">Allarme</string>
+    <string name="scan_this_is_not_the_correct_dm_code">Il codice QR non è corretto.</string>
+    <string name="personalcenter_contact_us">Contattateci</string>
+    <string name="login_you_must_be_of_legal_age_to_accept">Si deve essere maggiorenni per accettare o far accettare al proprio tutore legale a nome vostro.</string>
+    <string name="bsmonitoring_amount_pills_grams">Quantià</string>
+    <string name="bsmonitoring_amount_units">Quantià (unità)</string>
+    <string name="dailytrendchart_range">(Intervallo: %1$s-%2$s)</string>
+    <string name="personalcenter_time">Ora</string>
+    <string name="personalcenter_sensor_glucose">Sensore Glucosio</string>
+    <string name="min">min</string>
+    <string name="hour">ora</string>
+    <string name="day">giorno</string>
+    <string name="days">Giorni</string>
+    <string name="network_not_connected">Rete Non Connessa</string>
+    <!--SmartRefresh-->
+    <string name="srl_header_failed">Aggiornamento Fallito</string>
+    <string name="srl_header_finish">Aggiornamento Riuscito</string>
+    <string name="srl_header_loading">Attendere Caricamento...</string>
+    <string name="srl_header_pulling">Premere Giù Per Aggiornare</string>
+    <string name="srl_header_refreshing">Aggiornamento...</string>
+    <string name="srl_header_release">Rilascia e Aggiorna</string>
+    <string name="srl_header_update">\'Aggiornato il\' M-d HH:mm</string>
+    <string name="srl_footer_failed">Carica Fallita</string>
+    <string name="srl_footer_finish">Carica Riuscita</string>
+    <string name="srl_footer_loading">Attendere Caricamento...</string>
+    <string name="srl_footer_nothing">Nessun dato</string>
+    <string name="srl_footer_pulling">Sco su per cari.alt.</string>
+    <string name="srl_footer_refreshing">Attendere Aggiornamento…</string>
+    <string name="srl_footer_release">Rilasciare per Caricare Di Più</string>
+    <!--加载更多-->
+    <string name="brvah_load_complete">Toccare per caricare di più</string>
+    <string name="brvah_load_end">@string/srl_footer_nothing</string>
+    <string name="brvah_load_failed">Caricare di più,non riuscito.</string>
+    <string name="brvah_loading">Loading...</string>
+    <!--相册-->
+    <string name="picture_camera_roll">Album delle Foto</string>
+    <string name="picture_cancel">@string/common_cancel</string>
+    <string name="picture_preview">Anteprima</string>
+    <string name="picture_please_select">@string/bsmonitoring_select_end_time</string>
+    <string name="picture_completed">Completato</string>
+    <string name="picture_prompt">@string/tips</string>
+    <string name="picture_jurisdiction">Il permesso di lettura è stato negato.</string>
+    <string name="picture_go_setting">Andare a Impostazioni</string>
+    <string name="common_sports">Attività</string>
+    <string name="network_abnormal_please_try_again_later">Rete anormale, riprovare più tardi.</string>
+    <string name="common_ble_connect_fail">Connessione Non riuscita</string>
+    <string name="error">Errore</string>
+    <string name="new_version_is_available_please_upgrade">C\'è una versione più recente, si prega di aggiornare.</string>
+    <string name="scan_enter_the_sensor_code">Inserire Sigla Sensore</string>
+    <string name="scan_local_images">Scansione di Immagini Locali</string>
+    <string name="personalcenter_email_report">Rapporto via Email</string>
+    <string name="personalcenter_enter_the_nickname_or_email_address">Inserire soprannome o indirizzo e-mail</string>
+    <string name="personalcenter_your_report_has_been_successfully_sent_to_email">Il vostro rapporto è stato inviato con successo a %1$s</string>
+    <string name="dailytrendchart_select_a_custom_date">Seleziona un intervallo di date scelte</string>
+    <string name="dailytrendchart_please_select_90_or_fewer_days">Seleziona 90 giorni o meno</string>
+    <string name="dailytrendchart_glucose_statistics">Statistica del Glucosio</string>
+    <string name="dailytrendchart_report">Report</string>
+    <string name="personalcenter_From">Da</string>
+    <string name="personalcenter_To">A</string>
+    <string name="dailytrendchart_start_date">Data Iniziale</string>
+    <string name="dailytrendchart_end_date">Data Fine</string>
+    <string name="launcher_please_enter_the_sensor_code_on_the_packaging_box">Inserire la sigla del sensore riportata sulla confezione.</string>
+    <string name="dailytrendchart_reports">Rapporti</string>
+    <string name="dailytrendchart_insufficient_data_to_generate_an_agp_report">I dati disponibili sono insufficienti per generare un rapporto AGP.</string>
+    <string name="dailytrendchart_custom">Scelta</string>
+    <string name="dailytrendchart_your_report_is_on_its_way">Il rapporto sta arrivando</string>
+    <string name="dailytrendchart_download">Scaricare</string>
+    <string name="dailytrendchart_your_report_is_complete">Il rapporto è completato.</string>
+    <string name="dailytrendchart_retry">Ritenta</string>
+    <string name="dailytrendchart_report_download_failed">Impossibile scaricare il rapporto.</string>
+    <string name="dailytrendchart_please_try_again">Si prega di riprovare.</string>
+    <string name="dailytrendchart_gmi">GMI</string>
+    <string name="personalcenter_date_of_birth">Data di Nascita</string>
+    <string name="personalcenter_please_select_your_date_of_birth">Si prega di selezionare la data di nascita.</string>
+    <string name="dailytrendchart_the_end_date_cannot_be_less_than_the_start">La data finale non può essere anteriore alla data di inizio.</string>
+    <string name="personalcenter_not_found">Non Trovato</string>
+    <string name="scan_this_is_not_sib_qr_code">@string/scan_this_is_not_the_correct_dm_code</string>
+    <string name="personalcenter_sensor_reading">Lettura del Sensore</string>
+    <string name="data_is_insufficient_to_analyse">I dati CGM disponibili sono insufficienti \n per generare un grafico AGP.</string>
+    <string name="dailytrendchart_network_timeout">Tempo di Rete Scaduto</string>
+    <string name="dailytrendchart_report_apply_success_loading_please_wait">Richiesta riuscita. Il rapporto è in caricamento, attendere.</string>
+    <string name="dailytrendchart_sorry_get_report_failed">Spiacenti. Ricezione impossibile</string>
+    <string name="warming_up">Riscaldare</string>
+    <string name="override_alert">Ignorare Non disturbare</string>
+    <string name="override_alert_attention">Potete ancora ricevere le notifiche di allarme glicemico con suono anche in modalità "Non disturbare". (Disponibile solo su Android 8.0 o superiore).</string>
+    <string name="override_alert_attention_share">Potete ancora ricevere le sue notifiche di allarme glicemico con suono anche in modalità "Non disturbare".(Disponibile solo su Android 8.0 o superiore).</string>
+    <string name="launch_location_service_tips">Consenti a SIBIONICS di utilizzare la pos.del telefono servizi di local.accurati.</string>
+    <string name="common_blood_sugar">Glicemia</string>
+    <string name="dailytrendchart_report_apply_failed">Spiacenti. Ricezione impossibile</string>
+    <string name="please_confirm_your_email">Si prega di confermare la vostra e-mail</string>
+    <string name="dailybs_hour_h">h</string>
+    <string name="personalcenter_version_update">Aggiornare</string>
+    <string name="override_alert_setting_tips">È necessario consentire l\'autorizzazione Non disturbare per continuare</string>
+    <string name="can_not_connect_area_tips">Sorry, unable to connect, because the country of sale for this Sensor does not match the App to use in your country. Please download the App corresponding to your country of sale.</string>
+    <string name="unable_to_connect">Unable to Connect</string>
+    <string name="can_not_connect_channel_tips">Sorry, unable to connect, because the App you\'re using is not required by the sale channel. Please download the App corresponding to the sale channel.</string>
+    <string name="please_fill_in_your_nickname">Inserire il vostro soprannome.</string>
+    <string name="number_short">N.</string>
+    <string name="connect_a_device">Collega Periferica</string>
+    <string name="legal_documents">Documenti legali</string>
+    <string name="share_data_to_institution_tips_title">Condividete i Vostri Dati con una Nuova Istituzione Medica</string>
+    <string name="share_data_to_institution_tips_content">[%1$s] \nSei invitato a condividere tutti i tuoi dati sulla glicemia. Una volta condivisi, i tuoi dati sulla glicemia saranno visibili alla clinica. Puoi interrompere la condivisione con la clinica in qualsiasi momento.</string>
+    <string name="decline">Rifiutare</string>
+    <string name="sharing_succeeded">Condivisione Riuscita</string>
+    <string name="personalcenter_professional_medical_institution">Istituto Medico Professionale</string>
+    <string name="share_your_glucose_data_institution_tips">Condividete i vostri dati sul glucosio con un istituto medico professionale.</string>
+    <string name="family_and_friends">Famiglia e Amici</string>
+    <string name="personalcenter_share_your_glucose_data_with_whomever_you_want">Condividete i vostri dati sul glucosio con chiunque vogliate.</string>
+    <string name="sharing_records">Condivisione Cartelle</string>
+    <string name="unconnected_to_a_professional_medical_institution">Non collegato a un Istituto Medico Professionale</string>
+    <string name="data_is_sharing_with">I dati vengono condivisi con</string>
+    <string name="are_you_sure_you_want_to_stop_sharing_data_tips">Siete sicuri di voler interrompere la condivisione dei dati con [%1$s]? Una volta interrotta la condivisione, i vostri dati non saranno più disponibili.</string>
+    <string name="last_7_days">Ultimi 7 giorni</string>
+    <string name="seven_days_ago">7 giorni fa</string>
+    <string name="no_sharing_records">Nessuna condivisione di record</string>
+    <string name="accepted">Accettato</string>
+    <string name="declined">Rifiutato</string>
+    <string name="share_denied">Condivisione rifiutata</string>
+    <string name="incompatible_sensor">Sensore non compatibile</string>
+    <string name="this_sensor_cannot_be_used_with_this_version_of_the_app">Questo sensore non può essere utilizzato con questa versione dell\'app.</string>
+    <string name="proximity_notification_text">%s è connesso.</string>
+    <string name="i_have_read_and_accept_the_terms_of_use">Ho letto e accettato l\'Accordo dell\'Utente.</string>
+    <string name="i_have_read_and_understand_the_privacy_notice">Ho letto e compreso l\'Informativa sulla privacy.</string>
+    <string name="i_hereby_consent_to_the_processing_of_my_health">Con la presente acconsento al trattamento dei miei dati relativi alla salute secondo l\'Informativa sulla privacy durante l\'utilizzo dell\'App.</string>
+    <string name="launcher_user_agreement_and_privacy_policy_updates">Aggiornamenti dell\'Accordo dell\'Utente e della Politica sulla Privacy</string>
+    <string name="launcher_the_user_agreement_has_been_updated_please_check_the_latest_version">L\'Accordo dell\'Utente è stato aggiornato, controlla l\'ultima versione.</string>
+    <string name="check_updates">Controlla gli aggiornamenti</string>
+    <string name="if_you_refuse_to_accept_you_will_log_out_of_the_app">Se rifiuti di accettare, uscirai dall\'app.</string>
+    <string name="back">Indietro</string>
+    <string name="the_account_has_not_been_registered">The account has not been registered yet, please double check.</string>
+    <string name="password_error">Password error.</string>
+    <string name="extremely_low_glucose_alarm">Allarme basso glucosio urgente</string>
+    <string name="low_glucose_alarm">Allarme basso glucosio</string>
+    <string name="alarm_interval">Alarm Interval</string>
+    <string name="when_the_glucose_is_lower_than">Quando il glucosio scende al di sotto</string>
+    <string name="high_glucose_alarm">Allarme alto glucosio</string>
+    <string name="signal_loss_alarm">Allarme di perdita di segnale</string>
+    <string name="off">OFF</string>
+    <string name="on">ON</string>
+    <string name="permission_explain_location">Per supportare la funzione di monitoraggio dei dati del glucosio del sensore, l\'applicazione richiede l\'uso della connettività Bluetooth, che ottiene informazioni sulla posizione.
+Per agevolare il funzionamento in background dell\'app e la funzione di riconnessione automatica per la disconnessione Bluetooth del sensore di glucosio nel sangue, acquisirà comunque dati di informazioni sulla posizione per consentire la connessione automatica del sensore di glucosio nel sangue, anche se l\'applicazione è chiusa o non in uso.</string>
+    <string name="carbs">Carbs</string>
+    <string name="food">Cibo</string>
+    <string name="pictures">Immagini</string>
+    <string name="value_should_be_a_whole_number_between_0_and_500">Il valore deve essere un numero intero compreso tra 0 e 500</string>
+    <string name="take_a_photo">Scatta una foto</string>
+    <string name="select_from_album">Seleziona dall\'album</string>
+    <string name="delete_note">Elimina nota</string>
+    <string name="do_you_wish_to_delete_this_note">Vuoi eliminare questa nota?</string>
+    <string name="unit_weight_g">g</string>
+    <string name="help">Aiuto</string>
+    <string name="how_to_apply_your_sensor">Come applicare il sensore</string>
+    <string name="how_to_connect_the_app">Come collegare l\'app</string>
+    <string name="please_apply_a_new_sensor_first">Applicare prima un nuovo sensore.</string>
+    <string name="step_1_how_to_apply_a_sensor">Passo 1: Come applicare un sensore</string>
+    <string name="step_2_how_to_connect_the_app">Passo 2: Come collegare l\'app</string>
+    <string name="step_3_start_connecting">Passo 3: Inizia la connessione</string>
+    <string name="allow_alarms_to_sound_even_when_silent_or_do_not_disturb_is_on_urgent_low_glucose_alarm_can_t_be_silenced">Consenti agli allarmi di suonare anche quando è attiva la funzione Silenzioso o Non disturbare. L\'allarme basso glucosio urgente non può essere disattivato.</string>
+    <string name="this_alarm_will_always_play_a_sound_even_if_your_phone_is_muted_or_do_not_disturb_is_on">Questo allarme emetterà sempre un suono anche se il telefono è disattivato o in modalità NON Disturbare.</string>
+    <string name="when_the_app_cannot_receive_glucose_readings_from_the_sensor_you_will_receive_a_signal_loss_alarm">Riceverai un allarme di perdita di segnale quando l\'app smetterà di ricevere letture glicemiche dal sensore.</string>
+    <string name="receive_a_low_glucose_alarm_when_your_glucose_is_lower_than_this_value">Ricevi un allarme basso glucosio quando è inferiore a questo valore.</string>
+    <string name="snooze">Sospendi</string>
+    <string name="repeat">Repeat</string>
+    <string name="for_more_than">Per più di</string>
+    <string name="alarms">Allarmi</string>
+    <string name="receive_a_high_glucose_alarm_when_your_glucose_is_higher_than_this_value">Ricevi un allarme alto glucosio quando supera questo valore.</string>
+    <string name="sounds">Sounds</string>
+    <string name="remind_you_when_loss_time_is_longer_than_this_value">Avvisa quando il tempo di perdita del segnale è superiore a questo valore.</string>
+    <string name="the_average_of_all_the_cgm_glucose_readings_from_the_selected_date_range">La media di tutte le letture glicemiche CGM dall\'intervallo di date selezionato.</string>
+    <string name="glucose_management_indicator_gmi">Indicatore di gestione del glucosio GMI</string>
+    <string name="glucose_management_indicator_uses_average_sensor_glucose_data_gmi_can_be_used_as_an_indicator_of_how_well_your_glucose_levels_have_been_controlled">L\'indicatore di gestione del glucosio utilizza i dati medi del glucosio del sensore. Il GMI può essere utilizzato come indicatore del grado di controllo dei livelli di glucosio.</string>
+    <string name="time_in_range_tir">Tempo in intervallo TIR</string>
+    <string name="the_percentage_of_time_that_glucose_levels_are_in_target_ranges">La percentuale di tempo in cui i livelli di glucosio rientrano negli intervalli target.</string>
+    <string name="ambulatory_glucose_profile_agp">Profilo glicemico ambulatoriale AGP</string>
+    <string name="agp_is_a_summary_of_glucose_values_from_the_report_period_with_median_50_and_other_percentiles_shown_as_if_they_occured_in_a_single_day">AGP è un riepilogo dei valori di glucosio del periodo di riferimento, con la mediana (50 %) e gli altri percentili mostrati come se si fossero verificati in un unico giorno.</string>
+    <string name="coefficient_of_variation_cv">Coefficiente di variazione CV</string>
+    <string name="time_below_range_tbr">Tempo al di sotto dell\'intervallo TBR</string>
+    <string name="the_percentage_of_time_that_glucose_levels_are_in_low_ranges">La percentuale di tempo in cui i livelli di glucosio sono in intervalli bassi.</string>
+    <string name="time_above_range_tar">Tempo al di sopra dell\'intervallo TAR</string>
+    <string name="the_percentage_of_time_that_glucose_levels_are_in_high_ranges">La percentuale di tempo in cui i livelli di glucosio sono in intervalli elevati.</string>
+    <string name="average_glucose_mg">Glucosio Medio MG</string>
+    <string name="coefficient_of_variation_is_a_standardized_measure_that_assesses_the_magnitude_of_glucose_variability_the_larger_the_cv_the_larger_the_variability_in_cgm_readings">Il coefficiente di variazione è una misura standardizzata che valuta l\'entità della variabilità del glucosio. Maggiore è la %CV, maggiore è la variabilità nelle letture CGM.</string>
+    <string name="urgent_low_glucose">Basso glucosio urgente</string>
+    <string name="low_glucose">Basso glucosio</string>
+    <string name="high_glucose">Glucosio alto</string>
+    <string name="current_glucose">Glucosio attuale</string>
+    <string name="unable_to_receive_glucose_readings_from_your_sensor_please_check_the_connection">Impossibile ricevere letture glicemiche dal sensore, controllare la connessione.</string>
+    <string name="alarm_notifications_unavailable">Notifiche di allarme non disponibili.</string>
+    <string name="check_phone_settings">Verifica le impostazioni del telefono.</string>
+    <string name="alarms_require_your_phone_s_settings_to_be_configured_correctly">Gli allarmi richiedono una corretta configurazione delle impostazioni del tuo telefono.</string>
+    <string name="please_allow_app_permissions_to_receive_alarms">Si prega di consentire le autorizzazioni dell\'app per ricevere allarmi.</string>
+    <string name="when_glucose_goes_above">Quando il glucosio sale</string>
+    <string name="step_1">Passo 1</string>
+    <string name="step_2">Passo 2</string>
+    <string name="apply_site_select_the_back_of_your_upper_arm">Sito di applicazione: Scegli la parte posteriore del braccio.</string>
+    <string name="note_avoid_areas_with_wounds_or_insulin_injection_site">Nota: Evita le aree con ferite o sul sito di iniezione di insulina.</string>
+    <string name="clean_the_back_of_your_upper_arm_with_alcohol_wipe_and_wait_for_the_skin_to_dry">Pulire la parte posteriore del braccio con un batuffolo imbevuto di alcol e attendere che la pelle si asciughi.</string>
+    <string name="step_3">Passo 3</string>
+    <string name="step_4">Passo 4</string>
+    <string name="step_5">Passo 5</string>
+    <string name="step_6">Passo 6</string>
+    <string name="step_7">Passo 7</string>
+    <string name="open_the_sensor_pack_and_sensor_applicator_and_line_up_the_two_components_as_shown">Aprire il Pacchetto dei sensori e l’Applicatore e allineare i due componenti come mostrato.</string>
+    <string name="press_firmly_down_on_the_sensor_applicator_until_it_comes_to_a_stop_lift_the_sensor_applicator_out_of_the_sensor_pack_and_make_sure">Premere con decisione verso il basso sull\'applicatore del sensore fino a quando non si arresta. Sollevare l\'applicatore dal pacchetto dei sensori e assicurarsi che il sensore e la superficie interna dell\'applicatore siano allo stesso livello. Rimuovere la clip di sicurezza dopo averla ben installata.</string>
+    <string name="note_do_not_press_the_button_on_the_top_and_do_not_touch_the_inside_of_the_sensor">Nota: Non premere il pulsante sulla parte superiore e non toccare l\'interno dell\'applicatore perché possiede una punta.</string>
+    <string name="place_the_sensor_applicator_over_the_prepared_site_and_push_down_firmly">Posizionare l\'applicatore del sensore sul sito preparato e premere con decisione per applicare il sensore al corpo.</string>
+    <string name="precaution_do_not_push_down_on_the_sensor_applicator_until">Nota: NON spingere verso il basso l\'applicatore fino a quando non viene posizionato sul sito preparato per evitare lesioni involontarie.</string>
+    <string name="gently_pull_the_sensor_applicator_away_from_your_body">Allontanare delicatamente l\'applicatore del sensore dal corpo.</string>
+    <string name="make_sure_the_sensor_is_placed_as_shown_and_gently_press_the_edge_of_the">Assicurati che il sensore sia posizionato come mostrato e premi delicatamente il bordo del nastro adesivo per farlo aderire saldamente alla pelle.</string>
+    <string name="turn_on_the_bluetooth_and_tap_connect_a_device_after_logging_in">Attivare il Bluetooth e toccare \"Collega Periferica\" dopo aver effettuato l\'accesso.</string>
+    <string name="enter_the_scanning_page_scan_the_sensor_code_on_the_package">Accedere alla pagina Scansione, scansionare il Sigla Sensore sulla confezione o inserire direttamente il Sigla Sensore sulla confezione da collegare.</string>
+    <string name="enter_the_connection_succeeded_page_and_wait_60_minutes_for_initialization">Accedere alla pagina Connessione riuscita e attendere 60 minuti per l\'inizializzazione.</string>
+    <string name="after_the_countdown_you_will_see_real_time_glucose_data_uploaded_every_five">Dopo il conto alla rovescia, vedrai i dati in tempo reale sulla glicemia caricati ogni cinque minuti e riceverai allarmi.</string>
+    <string name="how_to_connect_the_sensor">Come collegare il sensore</string>
+    <string name="urgent_low_alarm">Allarme basso urgente</string>
+    <string name="unable_to_receive_glucose_readings_from_friend">Segnale Perso di [%1$s] \nImpossibile ricevere letture glicemiche dal suo sensore.</string>
+    <string name="no_record_for_the_day">Nessun record per la giornata</string>
+    <string name="more">Di più</string>
+    <string name="remind_you_when_signal_loss_time_is_longer_than_this_value">Avvisa quando il tempo di perdita del segnale è superiore a questo valore.</string>
+    <string name="target_range">Campo di tiro</string>
+    <string name="friends_current_glucose_value">Glucosio attuale di %1$s ：%2$s</string>
+    <string name="camera_permission_is_not_enabled">Camera permission is not enabled.</string>
+    <string name="to_ensure_the_transmission_of_glucose_data_please_make_sure_the_app_is_running">To ensure the transmission of glucose data, please make sure the app is running.</string>
+
+</resources>

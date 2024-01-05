@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_custom_mark_view"
+    android:paddingTop="@dimen/dp_2"
+    android:paddingBottom="@dimen/dp_6"
+    android:paddingHorizontal="@dimen/dp_6">
+
+    <TextView
+        android:id="@+id/tv_bs_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_20"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="10.5" />
+
+    <TextView
+        android:id="@+id/tv_bs_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_5"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_10"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_bs_value"
+        app:layout_constraintLeft_toRightOf="@id/tv_bs_value"
+        tools:text="@string/mol_unit" />
+
+    <TextView
+        android:id="@+id/tv_bs_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_9"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_11"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/tv_bs_value"
+        app:layout_constraintLeft_toRightOf="@id/tv_bs_unit"
+        app:layout_constraintTop_toTopOf="@id/tv_bs_value"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tv_bs_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_10"
+        app:layout_constraintLeft_toLeftOf="@id/tv_bs_value"
+        app:layout_constraintTop_toBottomOf="@id/tv_bs_value"
+        tools:text="02-03 06:00" />
+</androidx.constraintlayout.widget.ConstraintLayout>

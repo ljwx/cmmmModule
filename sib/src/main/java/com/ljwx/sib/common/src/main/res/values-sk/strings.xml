@@ -1,0 +1,561 @@
+<resources>
+    <string name="delete">Zmažte</string>
+    <string name="Apr">Apr</string>
+    <string name="alert_sounds">Zvuk alarmu</string>
+    <string name="invitation_sent">Pozvánka odoslaná!</string>
+    <string name="agp_reports">Reporty AGP</string>
+    <string name="email_address">Mailová adresa</string>
+    <string name="connect_a_new_device">Pripoj zariadenie</string>
+    <string name="coefficient_of_variation">Variačný koeficient</string>
+    <string name="mol_unit">mmol/L</string>
+    <string name="minutes">minút</string>
+    <string name="about_us">O nás</string>
+    <string name="alert_settings">Nastavenia alarmu</string>
+    <string name="overlay">Porovnať</string>
+    <string name="type_here">Napíšte tu</string>
+    <string name="device_exception">Výnimka zariadenia</string>
+    <string name="select_two_or_more_dates_to_compare">Vyberte dva alebo viac dátumov na porovnanie.</string>
+    <string name="sound">Zvuk</string>
+    <string name="expired">Vypršalo</string>
+    <string name="code">Kód</string>
+    <string name="sun_of_week">Ned</string>
+    <string name="end_time">Koniec</string>
+    <string name="launcher_get_stated_now">Registrácia sa</string>
+    <string name="bsmonitoring_meal_clock_in">Diet</string>
+    <string name="login_code_code_has_been_sent">Na váš e-mail bol odoslaný dočasný kód, skontrolujte ho.</string>
+    <string name="dailytrendchart_control_target">Navrhovaný cieľ %1$s</string>
+    <string name="login_enter_password_again">Potvrdiť heslo</string>
+    <string name="personalcenter_remote_monitoring_tips">Chcete byť informovaní o niekoho hladine glukózy? Požiadajte ho/ju, aby vám poskytol/poskytla informácie o svojej glykémii, aby ste ho/ju mohli sledovať.</string>
+    <string name="Sep">Sep</string>
+    <string name="personalcenter_stop_sharing">Zastaviť</string>
+    <string name="bsmonitoring_take_medicine_type_tips">Aký druh lieku ste užívali?</string>
+    <string name="login_enter_password">Zadajte heslo</string>
+    <string name="common_loading">Načítať</string>
+    <string name="bsmonitoring_manual_connect_sensor">Je nám ľúto, ale zariadenie nie je funkčné. Prosím, odstráňte ho.</string>
+    <string name="Days">dní</string>
+    <string name="personalcenter_voice_vibrator">Vibrácie a zvuk</string>
+    <string name="Selected">Vybrané</string>
+    <string name="scan_connect_sensor_code">Skenujte kód a pripojte</string>
+    <string name="Jul">Jul</string>
+    <string name="dailybs_thu">Štv</string>
+    <string name="Jun">Jun</string>
+    <string name="personalcenter_account_remove_tip">Po vymazaní účtu sa vymažú všetky údaje v účte a nie je možné ich obnoviť. Chcete pokračovať?</string>
+    <string name="user_agreement">Doh s používa.</string>
+    <string name="privacy_policy">Ochrana údajov</string>
+    <string name="personalcenter_blood_glucose_data">Údaje zo zariadenia</string>
+    <string name="bsmonitoring_sensor_not_connect_please_check">Bez signálu</string>
+    <string name="incorrect_verification_code">Nesprávny overovací kód</string>
+    <string name="personalcenter_look_data">Ďalšie</string>
+    <string name="dailytrendchart_average_glucose_level">Priemerná glykémia</string>
+    <string name="common_medicine">Lieky</string>
+    <string name="common_sleep">Spať</string>
+    <string name="CV">CV</string>
+    <string name="login_sibionics">Registrácia</string>
+    <string name="bsmonitoring_sensor_reconnect">Hľadanie</string>
+    <string name="personalcenter_active_follower">Aktívny sledovateľ</string>
+    <string name="personalcenter_cancel_monitoring_tips">Potvrdzujete zrušenie monitorovania? Po zrušení monitorovania nebudete môcť zobraziť jeho/jej informácie o glukóze.</string>
+    <string name="personalcenter_enter_nickname_hint">Tu zadajte svoju prezývku.</string>
+    <string name="personalcenter_pending_application">Čaká sa na pozvánku</string>
+    <string name="login_in">Prihláste sa</string>
+    <string name="personalcenter_my_sensor">Stroje</string>
+    <string name="bsmonitoring_normal">Glu v rozsahu</string>
+    <string name="personalcenter_stop_sharing_tips">Určite chcete prestať zdieľať s týmto sledovateľom? Po zastavení vás nebude môcť sledovať.</string>
+    <string name="common_use_agreement">Zmluvné podmienky</string>
+    <string name="personalcenter_bs_target_range_setting">Váš cieľ</string>
+    <string name="Aug">Aug</string>
+    <string name="personalcenter_app_version">Verzia</string>
+    <string name="personalcenter_select_country_search">Hľadať</string>
+    <string name="bsmonitoring_connect_sensor_again">Skúste znova</string>
+    <string name="personalcenter_input_diabete_tips">Vyberte svoj typ cukrovky.</string>
+    <string name="dailybs_tue">Uto</string>
+    <string name="dailytrendchart_all_select">Všetky</string>
+    <string name="bsmonitoring_amount">Počet</string>
+    <string name="personalcenter_invitation_sent_tips">Váš email s pozvánkou bol odoslaný. Keď bude vaša pozvánka prijatá, všetky vaše údaje o hladine glukózy budú s ním/ňou zdieľané.</string>
+    <string name="personalcenter_usename">Prezývka</string>
+    <string name="dailybs_daily_bs">Denné reporty</string>
+    <string name="personalcenter_using">Použité</string>
+    <string name="personalcenter_account_hint">Zadajte overovací kód</string>
+    <string name="dailybs_bs_curve">Denný trend</string>
+    <string name="login_select_and_agree_agreement">Zaškrtnutím vyjadrite súhlas s používateľskou zmluvou a zásadami ochrany osobných údajov.</string>
+    <string name="login_pwd_different">Potvrďte svoje heslo.</string>
+    <string name="Nov">Nov</string>
+    <string name="launcher_bs_monitoring_system">Systém kontinuálneho monitorovania glukózy</string>
+    <string name="bsmonitoring_success">Úspešne</string>
+    <string name="device_expired">Platnosť zariadenia vypršala</string>
+    <string name="personalcenter_bs_remote_view">Vzdialené</string>
+    <string name="login_get_verification_get_code_hint">Kód</string>
+    <string name="personalcenter_edit_data">Upraviť</string>
+    <string name="select_language">Vyberte jazyk</string>
+    <string name="bsmonitoring_medication_time">Čas</string>
+    <string name="login_confirm">Ďalej</string>
+    <string name="personalcenter_your_target_range">Váš cieľ</string>
+    <string name="bsmonitoring_food_name">Čo ste jedli?</string>
+    <string name="personalcenter_reset_password">Obnoviť heslo</string>
+    <string name="bsmonitoring_motion_type">Čo ste urobili?</string>
+    <string name="personalcenter_language">Jazyk</string>
+    <string name="login_pwd_not_empty">Heslo nemôže byť prázdne.</string>
+    <string name="personalcenter_sensor_ends">SENZOR KONČÍ ZA: </string>
+    <string name="login_password_hint">Heslo</string>
+    <string name="common_condition">Stav</string>
+    <string name="personalcenter_input_unit_tips">Vyberte požadovanú jednotku glukózy.</string>
+    <string name="login_password_incorrect">Nesprávne heslo. Skúste to znova.</string>
+    <string name="personalcenter_email_address11">E-mailová adresa </string>
+    <string name="personalcenter_cancel_monitoring">Zruš monitorovane</string>
+    <string name="dailybs_mon">Pon</string>
+    <string name="login_get_verification_code_hint">Pošli kód</string>
+    <string name="none_of_all">Žiadny</string>
+    <string name="Alert">Alarm</string>
+    <string name="dailybs_fri">Pia</string>
+    <string name="login_input_account_hint">Účet</string>
+    <string name="Oct">Oct</string>
+    <string name="personalcenter_clear_cache_tips">Všetky lokálne údaje budú vymazané a nebude možné ich obnoviť. Chcete pokračovať?</string>
+    <string name="login_verification_code_hint">Vložte kód zaslaný e-mailom</string>
+    <string name="bsmonitoring_glucose_trending">Trendy glykémie</string>
+    <string name="login_comfirm_email">Nesprávny formát e-mailu</string>
+    <string name="personalcenter_follower_todo_tips">[%1$s] chce s vami zdieľať svoje informácie o glukóze.</string>
+    <string name="personalcenter_setting">Nastavenia</string>
+    <string name="personalcenter_bs_remain">Ostáva</string>
+    <string name="food_name">Názov jedla</string>
+    <string name="common_insulin">Inzulín</string>
+    <string name="mg_dl">mg/dL</string>
+    <string name="personalcenter_my_sharer">Zdieľa</string>
+    <string name="login_input_new_password">Nastavili ste heslo.</string>
+    <string name="bsmonitoring_low">Malá</string>
+    <string name="login_pwd_less_than_eight">Uistite sa, že vaše heslo má aspoň 8 znakov a obsahuje aspoň 1 číslo, 1 písmeno a 1 špeciálny znak.</string>
+    <string name="common_the_next_day">Viac</string>
+    <string name="dailybs_wed">Str</string>
+    <string name="login_input_email_hint">Zadajte e-mail</string>
+    <string name="personalcenter_bs_last_update">Posledná akt</string>
+    <string name="personalcenter_country">Krajina</string>
+    <string name="dailytrendchart_module_title">AGP report</string>
+    <string name="Mar">Mar</string>
+    <string name="personalcenter_ble_link_code">Kód snímača</string>
+    <string name="May">May</string>
+    <string name="dailytrendchart_agp_atlas">Ambulantný profil glukózy</string>
+    <string name="common_cancel">Zrušiť</string>
+    <string name="common_privacy_policy">Ochrana údajov</string>
+    <string name="personalcenter_invite_follower">Pozvať</string>
+    <string name="scan_connect_sensor">Pripojiť</string>
+    <string name="personalcenter_login_out">Odhlás</string>
+    <string name="launcher_personal_center">Profil</string>
+    <string name="personalcenter_clear_cache">Vymazať údaje</string>
+    <string name="personalcenter_use_type">Typ cukrovky</string>
+    <string name="bsmonitoring_Extremely_low">Veľmi nízka</string>
+    <string name="personalcenter_clock_in_events">Udalosť</string>
+    <string name="login_register">Vytvoriť konto</string>
+    <string name="launcher_blood_sugar_monitoring">Monitorovanie</string>
+    <string name="scan_connect_sensor_tips">Naskenujte prosím DM kód na obale.</string>
+    <string name="dailybs_blood_glucose_target_range_time">Čas v rozmedzí</string>
+    <string name="Feb">Feb</string>
+    <string name="login_forget_password">Neviete heslo?</string>
+    <string name="personalcenter_my_profile">Môj profil</string>
+    <string name="None">Žiadne</string>
+    <string name="done">Ok</string>
+    <string name="TAR">TAR</string>
+    <string name="personalcenter_vibrator">Vibrácie</string>
+    <string name="personalcenter_bs_unit">Údaj</string>
+    <string name="personalcenter_ble_start_time">Čas začiatku</string>
+    <string name="personalcenter_account_remove">Odstránenie účtu</string>
+    <string name="common_exercise">Pohyb</string>
+    <string name="dailybs_blood_sugar_overview">Denne Celkovo</string>
+    <string name="device_is_unable_to_use">Zariadenie nie je funkčné.</string>
+    <string name="personalcenter_refuse">Odmie.</string>
+    <string name="bsmonitoring_sensor_invalid">Žiadne zariadenie</string>
+    <string name="bsmonitoring_today_status">Ako sa cítite?</string>
+    <string name="personalcenter_accept">Prijať</string>
+    <string name="personalcenter_bs_alarm_style">Štýl alarmu</string>
+    <string name="TBR">TBR</string>
+    <string name="personalcenter_set_as_home_page">Nastaviť ako hlavnú</string>
+    <string name="bsmonitoring_take_drug_type_tips">Aký typ inzulínu ste užívali?</string>
+    <string name="SiJoy">SIBIONICS</string>
+    <string name="personalcenter_remote_monitoring">Vzdialené monitorovanie</string>
+    <string name="common_the_day_before">Predošlý</string>
+    <string name="dailybs_sat">Sob</string>
+    <string name="bsmonitoring_sensor_init">Zahrievanie</string>
+    <string name="bsmonitoring_in_data_synchronization_one_moment_please">Synch</string>
+    <string name="bsmonitoring_Extremely_high">Veľmi vysoká</string>
+    <string name="personalcenter_invitation_sent">Pozvánka odoslaná</string>
+    <string name="personalcenter_ok">OK</string>
+    <string name="bsmonitoring_high">Vysoká</string>
+    <string name="Dec">Dec</string>
+    <string name="personalcenter_already_the_latest_version">Aktuálne</string>
+    <string name="bsmonitoring_finger_blood_value">Hladina glukózy v krvi</string>
+    <string name="personalcenter_change_device">Zmeniť</string>
+    <string name="sijoy_team">Tím SIBIONICS</string>
+    <string name="login_code_not_empty">Overovací kód nemôže byť prázdny.</string>
+    <string name="Jan">Jan</string>
+    <string name="personalcenter_alias">Alias</string>
+    <string name="personalcenter_my_follower">Sleduje</string>
+    <string name="common_comfirm_code">Overovací kód je neplatný.</string>
+    <string name="dailytrendchart_suggested">Navrhovaná hodnota %1$s</string>
+    <string-array name="common_tnb_type">
+        <item>Nezistené</item>
+        <item>Diabetes typu 1</item>
+        <item>Diabetes typu 2</item>
+        <item>Gestačný diabetes</item>
+        <item>Diabetes starších</item>
+        <item>Diabetes s rizikom</item>
+    </string-array>
+    <string-array name="month_array">
+        <item>Jan</item>
+        <item>Feb</item>
+        <item>Mar</item>
+        <item>Apr</item>
+        <item>May</item>
+        <item>Jun</item>
+        <item>Jul</item>
+        <item>Aug</item>
+        <item>Sep</item>
+        <item>Oct</item>
+        <item>Nov</item>
+        <item>Dec</item>
+    </string-array>
+    <string-array name="alarm_voice_list">
+        <item>Zvuk alarmu 1</item>
+        <item>Zvuk alarmu 2</item>
+        <item>Zvuk alarmu 3</item>
+        <item>Zvuk alarmu 4</item>
+        <item>Zvuk alarmu 5</item>
+        <item>Zvuk alarmu 6</item>
+        <item>Zvuk alarmu 7</item>
+        <item>Zvuk alarmu 8</item>
+        <item>Zvuk alarmu 9</item>
+        <item>Zvuk alarmu 10</item>
+    </string-array>
+    <string-array name="language_list_content">
+        <item>Anglický</item>
+        <item>Nemecký</item>
+        <item>Ruský</item>
+        <item>Taliansky</item>
+        <item>Francúzsky</item>
+        <item>Španielsky</item>
+        <item>Portugalský</item>
+        <item>Poľský</item>
+        <item>Český</item>
+        <item>Slovenský</item>
+    </string-array>
+    <string-array name="language_list_title">
+        <item>English</item>
+        <item>Deutsch</item>
+        <item>Русский</item>
+        <item>Italiano</item>
+        <item>Français</item>
+        <item>Español</item>
+        <item>Português</item>
+        <item>polski</item>
+        <item>Česky</item>
+        <item>Slovenský</item>
+    </string-array>
+<!--    <string name="bsmonitoring_bs_index">Posledná akt：%1$s</string>-->
+    <string name="bsmonitoring_hour_three">3H</string>
+    <string name="bsmonitoring_hour_six">6H</string>
+    <string name="bsmonitoring_hour_twelve">12H</string>
+    <string name="bsmonitoring_hour_twenty_four">24H</string>
+    <string name="personalcenter_bg_data">Čítanie snímača\n(%1$s)</string>
+    <string name="bsmonitoring_hour_for_recent">%1$dH Trendy</string>
+    <string name="personalcenter_restore_default_home">Obnoviť predvolenú domovskú</string>
+    <string name="personalcenter_alarm_events_bs_value">Čítanie snímača:%1$s</string>
+    <string name="common_be_overdue_log_in_again">Prihlásenie vypršal</string>
+    <string name="common_ble_connected">Zariadenie pripojené</string>
+    <string name="common_ble_unconnected">Zariadenie nie je pripojené</string>
+    <string name="common_ble_connecting">Pripája sa zariadenie</string>
+    <string name="common_connection_code_error">Chyba kódu snímača. Skúste to znova.</string>
+    <string name="chart_noData">Žiadne údaje</string>
+    <string name="common_sensor_init_reminder">Pripravuje sa inicializácia...Počkajte prosím aspoň 1 minútu.</string>
+    <string name="common_i_know">Mám to</string>
+    <string name="bsmonitoring_cannot_be_greater_than_the_current_time">Nemôže byť neskôr ako aktuálny čas.</string>
+    <string name="bsmonitoring_end_time_cannot_be_less_than_begin_time">Skontrolujte prosím čas ukončenia.</string>
+    <string name="bsmonitoring_input_correct_finger_blood_value">Zadajte prosím správnu hodnotu glykémie.</string>
+    <string name="bsmonitoring_glucose_warning">Glukózový alarm</string>
+    <string name="bsmonitoring_sensor_disconnect">Odpojené</string>
+    <string name="bsmonitoring_getup_time_more_than_sleep_time_two_days">Časový interval medzi časom ukončenia a časom začiatku nesmie presiahnuť 1 deň.</string>
+    <string name="personalcenter_my_report">Môj prehľad</string>
+    <string name="common_yes">Áno</string>
+    <string name="personalcenter_bs_alarm_range_setting">Cieľ alarmu</string>
+    <string name="launcher_guide_skip">Prejsť</string>
+    <string name="personalcenter_wearing_cycle">Obdobie nosenia: %1$s</string>
+    <string name="personalcenter_sensors_name">Názov zariadenia: %1$s</string>
+    <string name="login_log_in_using_your_registered_account">Prosím, zadajte svoje konto SIBIONICS, aby ste sa prihlásili</string>
+    <string name="login_phone_not_empty">E-mail nemôže byť prázdny</string>
+    <string name="login_region_of_residence">Krajina/región</string>
+    <string name="personalcenter_input_email_tips">Zadajte e-mail, s ktorým chcete zdieľať údaje.</string>
+    <string name="personalcenter_data_sharing">Zdieľanie údajov</string>
+    <string name="login_already_existing_account">Už máte konto SIBIONICS? Prihláste sa</string>
+    <string name="personalcenter_select_country">Vyberte krajinu</string>
+    <string name="common_know">Potvrďte</string>
+    <string name="personalcenter_view_report">Zobraziť prehľad</string>
+    <string name="personalcenter_enter_email">Zadajte e-mailovú adresu</string>
+    <string name="personalcenter_export_report">Importovať správu</string>
+    <string name="common_input_connect_code">Cez kód</string>
+    <string name="bsmonitoring_finger_blood">Glukóza v krvi</string>
+    <string name="launcher_exitApp">Ťuknutím na Opäť skončíte.</string>
+    <string name="permission_camera">Povoľte povolenie ukladania a fotoaparát, aby ste zabezpečili správne fungovanie zariadenia.</string>
+    <string name="login_phone_not_exsit">E-mail neexistuje.</string>
+    <string name="personalcenter_enter_nickname">Zadajte prezývku</string>
+    <string name="personalcenter_connect_sensor">Pripojenie snímača</string>
+    <string name="personalcenter_total_pieces">Celkom</string>
+    <string name="personalcenter_data_sharing_subtitle">Zdieľanie údajov s priateľmi</string>
+    <string name="bsmonitoring_clock_in_record">Záznam</string>
+    <string name="scan_ambientBrightnessTip">Zapnite blesk fotoaparátu.</string>
+    <string name="launcher_link_prompt">Zadajte 8-miestny kód snímača na obale</string>
+    <string name="personalcenter_sensor_connect_fail">Pripojenie snímača zlyhalo</string>
+    <string name="launcher_jump">Prejsť</string>
+    <string name="common_update_now">Aktualizujte</string>
+    <string name="personalcenter_upper_bg_alarm_record">Vysoký alarm</string>
+    <string name="personalcenter_lower_bg_alarm_record">Nízky alarm</string>
+    <string name="launcher_wear_instructions">Návod</string>
+    <string name="personalcenter_complete_profile_not_empty_tips">Vyplňte prázdne políčka.</string>
+    <string name="tips">Tipy</string>
+    <string name="login_account_pwd_error">Nesprávne heslo, skúste to znova alebo klepnite na "Zabudli ste heslo?"</string>
+    <string name="common_no">Nie</string>
+    <string name="bsmonitoring_select_end_time">Prosím, vyberte</string>
+    <string name="login_account_tips">Uistite sa, že vaše konto obsahuje aspoň 8 znakov vrátane písmen, číslic alebo špeciálnych znakov.</string>
+    <string name="personalcenter_sensor_connect_fail_tip">Pripojenie zlyhalo, skontrolujte, či snímač funguje normálne v okruhu 6 metrov od telefónu.</string>
+    <string name="personalcenter_blood_glucose_record">Záznamy alarmu</string>
+    <string name="personalcenter_login_out_tip">Ste si istí, že sa chcete odhlásiť z konta?</string>
+    <string name="glucose_target_lower_than">Vaša cieľová hodnota glukózy nemôže byť nižšia ako %1$s.</string>
+    <string name="glucose_target_higher_than">Vaša cieľová hodnota glukózy nemôže byť vyššia ako %1$s.</string>
+    <string name="alert_target_lower_than">Vaša cieľová hodnota alarmu nesmie byť nižšia ako %1$s.</string>
+    <string name="alert_target_higher_than">Vaša cieľová hodnota alarmu nemôže byť vyššia ako %1$s.</string>
+    <string name="high_target_greater_than_low_target">Vysoká cieľová hodnota by mala byť vyššia ako nízka cieľová hodnota.</string>
+    <string name="alert_high_target_greater_than_low_target">Vysoká cieľová hodnota alarmu glukózy by mala byť väčšia ako nízka cieľová hodnota alarmu.</string>
+    <string name="dailybs_tar">TAR</string>
+    <string name="dailybs_tbr">TBR</string>
+    <string name="personalcenter_alert">Alarm</string>
+    <string name="scan_this_is_not_the_correct_dm_code">Kód QR je nesprávny.</string>
+    <string name="personalcenter_contact_us">Kontakt</string>
+    <string name="login_you_must_be_of_legal_age_to_accept">Na akceptovanie musíte byť plnoletý, alebo to musí vo vašom mene akceptovať váš zákonný zástupca.</string>
+    <string name="bsmonitoring_amount_pills_grams">Počet</string>
+    <string name="bsmonitoring_amount_units">Počet (jednotky)</string>
+    <string name="dailytrendchart_range">(Rozsah: %1$s-%2$s)</string>
+    <string name="personalcenter_time">Čas</string>
+    <string name="personalcenter_sensor_glucose">Senzor glukózy</string>
+    <string name="min">min</string>
+    <string name="hour">hodina</string>
+    <string name="day">deň</string>
+    <string name="days">dní</string>
+    <string name="network_not_connected">Sieť Nie je pripojená</string>
+    <!--SmartRefresh-->
+    <string name="srl_header_failed">Obnovenie zlyhalo</string>
+    <string name="srl_header_finish">Obnovenie úspešné</string>
+    <string name="srl_header_loading">Počkajte na načítanie...</string>
+    <string name="srl_header_pulling">Stiahnuť na obnovenie</string>
+    <string name="srl_header_refreshing">Obnovenie...</string>
+    <string name="srl_header_release">Pustiť na obnovenie</string>
+    <string name="srl_header_update">\'Posledná akt\' M-d HH:mm</string>
+    <string name="srl_footer_failed">Neúspešné</string>
+    <string name="srl_footer_finish">Načítanie úspešné</string>
+    <string name="srl_footer_loading">Počkajte na načítanie...</string>
+    <string name="srl_footer_nothing">Žia ďal úda</string>
+    <string name="srl_footer_pulling">Zatiah hore nač.viac</string>
+    <string name="srl_footer_refreshing">Počkajte na obnovenie...</string>
+    <string name="srl_footer_release">Uvoľnite na načítanie údajov</string>
+    <!--加载更多-->
+    <string name="brvah_load_complete">Ťuknutím načítate ďalšie</string>
+    <string name="brvah_load_end">@string/srl_footer_nothing</string>
+    <string name="brvah_load_failed">Nepodarilo sa načítať viac.</string>
+    <string name="brvah_loading">Loading...</string>
+    <!--相册-->
+    <string name="picture_camera_roll">Fotoalbum</string>
+    <string name="picture_cancel">@string/common_cancel</string>
+    <string name="picture_preview">Náhľad</string>
+    <string name="picture_please_select">@string/bsmonitoring_select_end_time</string>
+    <string name="picture_completed">Dokončené</string>
+    <string name="picture_prompt">@string/tips</string>
+    <string name="picture_jurisdiction">Oprávnenie na čítanie bolo zamietnuté.</string>
+    <string name="picture_go_setting">Prejdite do Nastavení</string>
+    <string name="common_sports">Pohyb</string>
+    <string name="network_abnormal_please_try_again_later">Sieť abnormálna, skúste to prosím neskôr.</string>
+    <string name="common_ble_connect_fail">Pripojenie zlyhalo</string>
+    <string name="error">Chyba</string>
+    <string name="new_version_is_available_please_upgrade">K dispozícii je novšia verzia, aktualizujte ju.</string>
+    <string name="scan_enter_the_sensor_code">Kód snímača</string>
+    <string name="scan_local_images">Skenovanie lokálnych snímok</string>
+    <string name="personalcenter_email_report">E-mail report</string>
+    <string name="personalcenter_enter_the_nickname_or_email_address">Zadajte prezývku alebo e-mailovú adresu.</string>
+    <string name="personalcenter_your_report_has_been_successfully_sent_to_email">Vaša správa bola úspešne odoslaná na adresu %1$s</string>
+    <string name="dailytrendchart_select_a_custom_date">Vyberte vlastný rozsah dátumov</string>
+    <string name="dailytrendchart_please_select_90_or_fewer_days">Vyberte 90 alebo menej dní</string>
+    <string name="dailytrendchart_glucose_statistics">Štatistika glukózy</string>
+    <string name="dailytrendchart_report">Report</string>
+    <string name="personalcenter_From">Od</string>
+    <string name="personalcenter_To">Do</string>
+    <string name="dailytrendchart_start_date">Začiatok</string>
+    <string name="dailytrendchart_end_date">Koniec</string>
+    <string name="launcher_please_enter_the_sensor_code_on_the_packaging_box">Zadajte kód snímača uvedený na obale.</string>
+    <string name="dailytrendchart_reports">Reporty</string>
+    <string name="dailytrendchart_insufficient_data_to_generate_an_agp_report">Dostupné údaje nie sú dostatočné na vytvorenie správy AGP.</string>
+    <string name="dailytrendchart_custom">Svoje</string>
+    <string name="dailytrendchart_your_report_is_on_its_way">Váš report je na ceste.</string>
+    <string name="dailytrendchart_download">Na stiahnutie</string>
+    <string name="dailytrendchart_your_report_is_complete">Váš report je dokončený.</string>
+    <string name="dailytrendchart_retry">Znova</string>
+    <string name="dailytrendchart_report_download_failed">Nepodarilo sa stiahnuť report.</string>
+    <string name="dailytrendchart_please_try_again">Skúste to znova.</string>
+    <string name="dailytrendchart_gmi">GMI</string>
+    <string name="personalcenter_date_of_birth">Dátum narodenia</string>
+    <string name="personalcenter_please_select_your_date_of_birth">Prosím, vyberte svoj dátum narodenia.</string>
+    <string name="dailytrendchart_the_end_date_cannot_be_less_than_the_start">Dátum ukončenia nemôže byť skorší ako dátum začiatku.</string>
+    <string name="personalcenter_not_found">Nenájdené</string>
+    <string name="scan_this_is_not_sib_qr_code">@string/scan_this_is_not_the_correct_dm_code</string>
+    <string name="personalcenter_sensor_reading">Čítanie snímača</string>
+    <string name="data_is_insufficient_to_analyse">Dostupné údaje CGM sú nedostatočné \n na vytvorenie grafu AGP.</string>
+    <string name="dailytrendchart_network_timeout">Časový limit siete</string>
+    <string name="dailytrendchart_report_apply_success_loading_please_wait">Žiadosť bola úspešná. Správa sa načítava, počkajte, prosím.</string>
+    <string name="dailytrendchart_sorry_get_report_failed">Je nám ľúto. Nepodarilo sa získať report.</string>
+    <string name="warming_up">Zahrievanie</string>
+    <string name="override_alert">Zrušenie Nerušiť</string>
+    <string name="override_alert_attention">Aj v režime "Nerušiť" môžete prijímať upozornenia na glukózu v krvi so zvukom. (K dispozícii len v systéme Android 8.0 alebo novšom.)</string>
+    <string name="override_alert_attention_share">Stále môžete prijímať jeho/jej upozornenia na alarm glukózy v krvi so zvukom aj v režime "Nerušiť". (K dispozícii len v systéme Android 8.0 alebo novšom.)</string>
+    <string name="common_blood_sugar">Glukóza v krvi</string>
+    <string name="personalcenter_version_update">Aktualizácia</string>
+    <string name="dailytrendchart_report_apply_failed">Je nám ľúto. Nepodarilo sa získať report.</string>
+    <string name="please_confirm_your_email">Potvrďte prosím svoj e-mail</string>
+    <string name="dailybs_hour_h">h</string>
+    <string name="override_alert_setting_tips">Ak chcete pokračovať, musíte povoliť povolenie Nerušiť</string>
+    <string name="launch_location_service_tips">Povoľte SIBIONICS používať lokáciu vášho mobilu, aby poskytla presné lokal služby.</string>
+
+    <!--单独处理-->
+    <string name="login_user_agreement">zmluvou</string>
+    <string name="login_privacy_policy">zásadami ochrany osobných údajov</string>
+    <string name="common_login_agreement">Prečítal som si a súhlasím so zmluvou a zásadami ochrany osobných údajov.</string>
+
+    <string name="login_code_to_obtain">%1$ss</string>
+    <string name="login_only_can_input_number_or_word">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ`-=[]\;\"\\,./~\|!@#$%^*()_+}{:?¥£¢€₱&amp;&lt;&gt;&quot;&apos;</string>
+
+    <string name="year_y">y</string>
+    <string name="month_m">m</string>
+    <string name="day_d">d</string>
+
+    <string name="please_upgrade_version">The current version is too low, please upgrade the version!</string>
+    <string name="can_not_connect_area_tips">Sorry, unable to connect, because the country of sale for this Sensor does not match the App to use in your country. Please download the App corresponding to your country of sale.</string>
+    <string name="unable_to_connect">Unable to Connect</string>
+    <string name="can_not_connect_channel_tips">Sorry, unable to connect, because the App you\'re using is not required by the sale channel. Please download the App corresponding to the sale channel.</string>
+    <string name="please_fill_in_your_nickname">Prosím, vyplňte svoju prezývku.</string>
+    <string name="number_short">Č.</string>
+    <string name="connect_a_device">Pripoj zariadene</string>
+    <string name="legal_documents">Právne dokumenty</string>
+    <string name="share_data_to_institution_tips_title">Zdieľanie údajov s novou zdravotníckou inštitúciou</string>
+    <string name="share_data_to_institution_tips_content">[%1$s] \nSte pozvaný/á zdieľať všetky vaše údaje o hladine glukózy. Raz zdieľané, vaše údaje o hladine glukózy budú viditeľné pre kliniku. Môžete kedykoľvek prestávať zdieľať s klinikou.</string>
+    <string name="decline">Odmietnuť</string>
+    <string name="sharing_succeeded">Zdieľanie sa podarilo</string>
+    <string name="personalcenter_professional_medical_institution">Odborná Zdravotnícka Inštitúcia</string>
+    <string name="share_your_glucose_data_institution_tips">Zdieľajte svoje údaje o glukóze s profesionálnou zdravotníckou inštitúciou.</string>
+    <string name="family_and_friends">Rodina a Priatelia</string>
+    <string name="personalcenter_share_your_glucose_data_with_whomever_you_want">Zdieľajte svoje údaje o glukóze s kýmkoľvek chcete.</string>
+    <string name="sharing_records">Zdieľanie záznamov</string>
+    <string name="unconnected_to_a_professional_medical_institution">Bez prepojenia na profesionálne zdravotnícke zariadenie</string>
+    <string name="data_is_sharing_with">Údaje sa zdieľajú s</string>
+    <string name="are_you_sure_you_want_to_stop_sharing_data_tips">Ste si istí, že chcete zastaviť zdieľanie údajov s [%1$s]? Po zastavení zdieľania vaše údaje už nebudú dostupné.</string>
+    <string name="last_7_days">Posledných 7 dní</string>
+    <string name="seven_days_ago">Pred 7 dňami</string>
+    <string name="no_sharing_records">Žiadne záznamy o zdieľaní</string>
+    <string name="accepted">Prijaté</string>
+    <string name="declined">Odmietnuté</string>
+    <string name="share_denied">Zdieľanie odmietnuté</string>
+    <string name="incompatible_sensor">Nekompatibilný senzor</string>
+    <string name="this_sensor_cannot_be_used_with_this_version_of_the_app">Tento senzor nemôže byť použitý s touto verziou aplikácie.</string>
+    <string name="proximity_notification_text">%s je pripojené.</string>
+    <string name="i_have_read_and_accept_the_terms_of_use">Prečítal(a) som a akceptoval(a) som Používateľskú dohodu.</string>
+    <string name="i_have_read_and_understand_the_privacy_notice">Prečítal(a) som a pochopil(a) som Zásady ochrany osobných údajov.</string>
+    <string name="i_hereby_consent_to_the_processing_of_my_health">Týmto súhlasím s tým, že moje údaje týkajúce sa zdravia môžu byť spracované v súlade s zásadami ochrany osobných údajov pri používaní aplikácie.</string>
+    <string name="launcher_user_agreement_and_privacy_policy_updates">Aktualizácie Zmluvy s používateľom a Zásad ochrany osobných údajov</string>
+    <string name="launcher_the_user_agreement_has_been_updated_please_check_the_latest_version">Používateľská zmluva bola aktualizovaná, prosím, skontrolujte najnovšiu verziu.</string>
+    <string name="check_updates">Skontrolovať aktualizácie</string>
+    <string name="if_you_refuse_to_accept_you_will_log_out_of_the_app">Ak odmietnete prijať, budete odhlásený(á) z aplikácie.</string>
+    <string name="back">Vrátiť sa</string>
+    <string name="the_account_has_not_been_registered">The account has not been registered yet, please double check.</string>
+    <string name="password_error">Password error.</string>
+    <string name="extremely_low_glucose_alarm">Naliehavý Alarm Nízkej Hladiny Glukózy</string>
+    <string name="low_glucose_alarm">Alarm Nízkej Hladiny Glukózy</string>
+    <string name="alarm_interval">Alarm Interval</string>
+    <string name="permission_explain_location">Na podporu funkcie monitorovania dát o hladine glukózy senzora vyžaduje aplikácia použitie Bluetooth konektivity, ktorá získava informácie o polohe.
+Na zabezpečenie pozadia prevádzky aplikácie a automatickej funkcie opätovného pripojenia pri odpojení Bluetooth senzora hladiny glukózy v krvi bude stále získavať údaje o polohe, aby umožnilo automatické pripojenie senzora hladiny glukózy v krvi, aj keď je aplikácia zatvorená alebo nie je používaná.</string>
+    <string name="when_the_glucose_is_lower_than">Keď glukóza klesne pod</string>
+    <string name="high_glucose_alarm">Alarm Vysokej Hladiny Glukózy</string>
+    <string name="signal_loss_alarm">Alarm Bez Signálu</string>
+    <string name="off">VYPNUTÉ</string>
+    <string name="on">ZAPNUTÉ</string>
+    <string name="carbs">Carbs</string>
+    <string name="food">Jedlo</string>
+    <string name="pictures">Obrázky</string>
+    <string name="value_should_be_a_whole_number_between_0_and_500">Hodnota by mala byť celé číslo od 0 do 500</string>
+    <string name="take_a_photo">Poriadiť si fotku</string>
+    <string name="select_from_album">Vybrať z albumu</string>
+    <string name="delete_note">Odstrániť Poznámku</string>
+    <string name="do_you_wish_to_delete_this_note">Prajete si vymazať túto poznámku?</string>
+    <string name="unit_weight_g">g</string>
+    <string name="help">Napoveda</string>
+    <string name="how_to_apply_your_sensor">Ako aplikovať Senzor</string>
+    <string name="how_to_connect_the_app">Ako pripojiť aplikáciu</string>
+    <string name="please_apply_a_new_sensor_first">Najprv aplikovať nový senzor.</string>
+    <string name="step_1_how_to_apply_a_sensor">Krok 1: Ako aplikovať senzor</string>
+    <string name="step_2_how_to_connect_the_app">Krok 2: Ako pripojiť aplikáciu</string>
+    <string name="step_3_start_connecting">Krok 3: Začnite sa pripájať</string>
+    <string name="allow_alarms_to_sound_even_when_silent_or_do_not_disturb_is_on_urgent_low_glucose_alarm_can_t_be_silenced">Povoľte zvonenie alarmov, aj keď je zapnuté Tichý režim alebo Nerušiť. Naliehavý Alarm Nízkej Hladiny Glukózy nemožno stlmiť.</string>
+    <string name="this_alarm_will_always_play_a_sound_even_if_your_phone_is_muted_or_do_not_disturb_is_on">Tento alarm vždy prehrá zvuk, aj keď je váš telefón stlmený alebo je zapnutý režim Nerušiť.</string>
+    <string name="when_the_app_cannot_receive_glucose_readings_from_the_sensor_you_will_receive_a_signal_loss_alarm">Keď aplikácia prestane prijímať hodnoty glukózy z vášho senzora, dostanete alarm bez signálu.</string>
+    <string name="receive_a_low_glucose_alarm_when_your_glucose_is_lower_than_this_value">Ak je vaša hladina glukózy nižšia ako táto hodnota, dostanete alarm nízkej hladiny glukózy.</string>
+    <string name="snooze">Funkcia odloženia</string>
+    <string name="repeat">Repeat</string>
+    <string name="for_more_than">Pre viac ako</string>
+    <string name="alarms">Alarmy</string>
+    <string name="receive_a_high_glucose_alarm_when_your_glucose_is_higher_than_this_value">Ak je vaša hladina glukózy vyššia ako táto hodnota, dostanete alarm vysokej hladiny glukózy.</string>
+    <string name="sounds">Sounds</string>
+    <string name="remind_you_when_loss_time_is_longer_than_this_value">Pripomenúť vám, keď je čas Bez Signálu dlhší ako táto hodnota.</string>
+    <string name="the_average_of_all_the_cgm_glucose_readings_from_the_selected_date_range">Priemer všetkých hodnôt glukózy CGM z vybraného rozsahu dátumov.</string>
+    <string name="glucose_management_indicator_gmi">Indikátor Riadenia Glukózy GMI</string>
+    <string name="glucose_management_indicator_uses_average_sensor_glucose_data_gmi_can_be_used_as_an_indicator_of_how_well_your_glucose_levels_have_been_controlled">Indikátor riadenia glukózy používa priemerné údaje o glukóze senzora. GMI môže byť použitý ako indikátor toho, ako dobre boli vaše hladiny glukózy kontrolované.</string>
+    <string name="time_in_range_tir">Čas v rozmedzí TIR</string>
+    <string name="the_percentage_of_time_that_glucose_levels_are_in_target_ranges">Percento času, kedy sú hladiny glukózy v cieľových rozsahoch.</string>
+    <string name="ambulatory_glucose_profile_agp">Ambulantný profil glukózy AGP</string>
+    <string name="agp_is_a_summary_of_glucose_values_from_the_report_period_with_median_50_and_other_percentiles_shown_as_if_they_occured_in_a_single_day">AGP je súhrn hodnôt glukózy z vykazovaného obdobia, pričom medián (50%) a ďalšie percentily sa zobrazujú, akoby sa vyskytli za jeden deň.</string>
+    <string name="coefficient_of_variation_cv">Variačný koeficient CV</string>
+    <string name="time_below_range_tbr">Čas pod Rozsahom TBR</string>
+    <string name="the_percentage_of_time_that_glucose_levels_are_in_low_ranges">Percento času, kedy sú hladiny glukózy v nízkych rozsahoch.</string>
+    <string name="time_above_range_tar">Čas nad Rozsahom TAR</string>
+    <string name="the_percentage_of_time_that_glucose_levels_are_in_high_ranges">Percento času, kedy sú hladiny glukózy vo vysokých rozsahoch.</string>
+    <string name="average_glucose_mg">Priemerná glykémia MG</string>
+    <string name="coefficient_of_variation_is_a_standardized_measure_that_assesses_the_magnitude_of_glucose_variability_the_larger_the_cv_the_larger_the_variability_in_cgm_readings">Variačný koeficient je štandardizované opatrenie, ktoré hodnotí veľkosť variability glukózy. Čím väčšie je %CV, tým väčšia je variabilita hodnôt CGM.</string>
+    <string name="urgent_low_glucose">Naliehavá Nízka Hladina Glukózy</string>
+    <string name="low_glucose">Nízka Hladina Glukózy</string>
+    <string name="high_glucose">Vysoká Hladina Glukózy</string>
+    <string name="current_glucose">Aktuálna glukóza</string>
+    <string name="unable_to_receive_glucose_readings_from_your_sensor_please_check_the_connection">Nie je možné prijímať hodnoty glukózy zo senzora, prosím skontrolujte pripojenie</string>
+    <string name="alarm_notifications_unavailable">Oznámenia o alarme nie sú k dispozícii.</string>
+    <string name="check_phone_settings">Skontrolujte nastavenia telefónu.</string>
+    <string name="alarms_require_your_phone_s_settings_to_be_configured_correctly">Alarmy vyžadujú správnu konfiguráciu nastavení vášho telefónu.</string>
+    <string name="please_allow_app_permissions_to_receive_alarms">Prosím, dovoľte oprávnenia aplikácie pre prijímanie poplachov.</string>
+    <string name="when_glucose_goes_above">Keď glukóza stúpa vyššie</string>
+    <string name="step_1">Krok 1</string>
+    <string name="step_2">Krok 2</string>
+    <string name="apply_site_select_the_back_of_your_upper_arm">Použiť web: Vyberte zadnú časť ramena.</string>
+    <string name="note_avoid_areas_with_wounds_or_insulin_injection_site">Poznámka: Vyhnite sa oblastiam s ranami alebo miestami vpichu inzulínu.</string>
+    <string name="clean_the_back_of_your_upper_arm_with_alcohol_wipe_and_wait_for_the_skin_to_dry">Očistite zadnú časť hornej časti paže alkoholovým tampónom a počkajte, kým pokožka nevyschne.</string>
+    <string name="step_3">Krok 3</string>
+    <string name="step_4">Krok 4</string>
+    <string name="step_5">Krok 5</string>
+    <string name="step_6">Krok 6</string>
+    <string name="step_7">Krok 7</string>
+    <string name="open_the_sensor_pack_and_sensor_applicator_and_line_up_the_two_components_as_shown">Otvorte balík senzorov a aplikátor senzorov a zarovnajte tieto dva komponenty tak, ako je to znázornené.</string>
+    <string name="press_firmly_down_on_the_sensor_applicator_until_it_comes_to_a_stop_lift_the_sensor_applicator_out_of_the_sensor_pack_and_make_sure">Pevne zatlačte na aplikátor snímača, až kým sa nezastaví. Zdvihnite aplikátor snímača z balenia snímača a uistite sa, že snímač a vnútorný povrch aplikátora sú na rovnakej úrovni. Po dobre nainštalovaní odstráňte bezpečnostnú sponu.</string>
+    <string name="note_do_not_press_the_button_on_the_top_and_do_not_touch_the_inside_of_the_sensor">Poznámka: Nestláčajte tlačidlo na vrchu a nedotýkajte sa vnútornej strany aplikátora snímača, pretože obsahuje hrot.</string>
+    <string name="place_the_sensor_applicator_over_the_prepared_site_and_push_down_firmly">Umiestnite aplikátor senzora na pripravené miesto a pevne zatlačte, aby ste senzor aplikovali na svoje telo.</string>
+    <string name="precaution_do_not_push_down_on_the_sensor_applicator_until">Poznámka: Netlačte na aplikátor senzora, kým ho neumiestníte na pripravené miesto, aby ste predišli neúmyselnému zraneniu.</string>
+    <string name="gently_pull_the_sensor_applicator_away_from_your_body">Jemne vytiahnite aplikátor snímača z tela.</string>
+    <string name="make_sure_the_sensor_is_placed_as_shown_and_gently_press_the_edge_of_the">Uistite sa, že senzor je umiestnený ako je ukázané, a jemne stlačte okraj lepiacej pásky, aby sa dobre prilepila na kožu.</string>
+    <string name="turn_on_the_bluetooth_and_tap_connect_a_device_after_logging_in">Zapnite Bluetooth a po prihlásení klepnite na \"Pripoj zariadene\".</string>
+    <string name="enter_the_scanning_page_scan_the_sensor_code_on_the_package">Vstúpte na stránku skenovania, naskenujte kód snímača na obale alebo priamo zadajte kód snímača na obale, aby ste sa pripojili.</string>
+    <string name="enter_the_connection_succeeded_page_and_wait_60_minutes_for_initialization">Vstúpte na stránku úspešné pripojenie a počkajte 60 minút na inicializáciu.</string>
+    <string name="after_the_countdown_you_will_see_real_time_glucose_data_uploaded_every_five">Po odpočítavaní uvidíte každých päť minút nahrané údaje o glukóze a dostanete upozornenia.</string>
+    <string name="how_to_connect_the_sensor">Ako pripojenie snímača</string>
+    <string name="urgent_low_alarm">Naliehavý nízky alarm</string>
+    <string name="unable_to_receive_glucose_readings_from_friend">[%1$s] Bez Signálu \nNie je možné prijímať hodnoty glukózy z ich senzora.</string>
+    <string name="no_record_for_the_day">Žiadny záznam dňa</string>
+    <string name="more">Viac</string>
+    <string name="remind_you_when_signal_loss_time_is_longer_than_this_value">Pripomenúť vám, keď je čas Bez Signálu dlhší ako táto hodnota.</string>
+    <string name="target_range">Strelecký poligon</string>
+    <string name="friends_current_glucose_value">Aktuálná Glukóza %1$s: %2$s</string>
+    <string name="camera_permission_is_not_enabled">Camera permission is not enabled.</string>
+    <string name="to_ensure_the_transmission_of_glucose_data_please_make_sure_the_app_is_running">To ensure the transmission of glucose data, please make sure the app is running.</string>
+</resources>

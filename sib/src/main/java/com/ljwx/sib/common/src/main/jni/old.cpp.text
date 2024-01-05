@@ -1,0 +1,1394 @@
+#include "glucose_target.h"
+
+using namespace std;
+
+char* get_target_vesion()
+{
+	return (char*)global_algorithm_version;
+}
+
+int calc_remainder(long long start_tstp)
+{
+	start_tstp = start_tstp - start_tstp % 60;
+	int remainder = start_tstp % 300;
+	return remainder;
+}
+
+
+
+int gen_timecode_correct_datetime(long long* origin_tstp, int N, int remainder, int* code_array, long long* correct_tstp)
+{
+	int stats_code = 200;
+	try
+	{
+		for (int i = 0; i < N; i++)
+		{
+			code_array[i] = 0;
+			correct_tstp[i] = origin_tstp[i];
+		}
+
+		for (int i = 0; i < N; i++)
+		{
+			long long temp_tstp = origin_tstp[i];
+			temp_tstp = temp_tstp - temp_tstp % 60;//删除秒
+			//long long day = temp_tstp - temp_tstp % 86400;
+			//long long day_s = temp_tstp % 86400;//保留一天时间戳
+
+			time_t timestamp1 = (time_t)temp_tstp;
+			struct  tm time1;
+			//localtime_s(&time1, &timestamp1);//for windows
+			localtime_r(&timestamp1, &time1);//for linux
+
+			int hour = time1.tm_hour;
+			int minute = time1.tm_min;
+
+			float code1 = float(hour * 60 * 60 + minute * 60 - remainder) / 300.0;
+
+			//float code1 = float(day_s - remainder) / 300.0;
+			int code2 = round(code1);
+			int time_diff = code2 * 300 + remainder - (hour * 60 * 60 + minute * 60);
+			correct_tstp[i] = temp_tstp + time_diff;
+			if (code2 == -1)
+			{
+				code2 = 287;
+			}
+			else if (code2 == 288)
+			{
+				code2 = 0;
+			}
+			code_array[i] = code2;
+		}
+	}
+	catch (const std::exception&)
+	{
+		stats_code = 500;
+	}
+	return stats_code;
+}
+
+
+int gen_tir_code(float glucose, int type, float* threshold)
+{
+	//	glucose = round(glucose * 10) / 10.0;
+	int code = 0;
+	switch (type)
+	{
+	case 0:
+	{
+		//			if (glucose <= 3.9)
+		if (glucose - 3.9 < 0.0005)
+			code = -1;
+		//			else if (glucose < 7.8)
+		else if (glucose - 7.8 < -0.0005)
+			code = 0;
+		else
+			code = 1;
+		break;
+	}
+	case 1:
+	{
+		//			if (glucose < 3.0)
+		if (glucose - 3.0 < -0.005)
+			code = -2;
+		//			else if (glucose < 3.9)
+		else if (glucose - 3.9 < -0.005)
+			code = -1;
+		//			else if (glucose <= 10.0)
+		else if (glucose - 10.0 < 0.005)
+			code = 0;
+		//			else if (glucose <= 13.9)
+		else if (glucose - 13.9 < 0.005)
+			code = 1;
+		else
+			code = 2;
+		break;
+	}
+	case 2:
+	{
+		//			if (glucose < 3.0)
+		if (glucose - 3.0 < -0.005)
+			code = -2;
+		//			else if (glucose < 3.5)
+		else if (glucose - 3.5 < -0.005)
+			code = -1;
+		//			else if (glucose <= 7.8)
+		else if (glucose - 7.8 < 0.005)
+			code = 0;
+		else
+			code = 1;
+		break;
+	}
+	case 3:
+	{
+		//			if (glucose < 3.9)
+		if (glucose - 3.9 < -0.005)
+			code = -1;
+		//			else if (glucose <= 10.0)
+		else if (glucose - 10.0 < 0.005)
+			code = 0;
+		//			else if (glucose <= 13.9)
+		else if (glucose - 13.9 < 0.005)
+			code = 1;
+		else
+			code = 2;
+		break;
+	}
+	case 4:
+	{
+		if (glucose - threshold[0] < 0.005)
+			code = -2;
+		else if (glucose - threshold[1] < -0.005)
+			code = -1;
+		else if (glucose - threshold[2] < -0.005)
+			code = 0;
+		else if (glucose - threshold[3] < -0.005)
+			code = 1;
+		else
+			code = 2;
+		break;
+	}
+	default:
+	{
+		//			if (glucose <= 3.9)
+		if (glucose - 3.9 < 0.0005)
+			code = -1;
+		//			else if (glucose < 7.8)
+		else if (glucose - 7.8 < -0.0005)
+			code = 0;
+		else
+			code = 1;
+		break;
+	}
+	}
+	return code;
+}
+
+
+int gen_tir_code_array(float* glucose, int N, int* tir_code_array, int type, float* threshold)
+{
+	int stats_code = 200;
+	//	int N = length(glucose);
+	if (N <= 0)
+	{
+		stats_code = 500;
+	}
+	try {
+		for (int i = 0; i < N; i++)
+		{
+			tir_code_array[i] = 0;
+		}
+		for (int i = 0; i < N; i++)
+		{
+			tir_code_array[i] = gen_tir_code(glucose[i], type, threshold);
+		}
+	}
+	catch (const std::exception&)
+	{
+		stats_code = 500;
+	}
+	return stats_code;
+}
+
+
+float calc_mean(float* bg_array, int N)
+{
+	if (N <= 0)
+	{
+		return 0;
+	}
+	float mean_value = 0;
+	float sum_value = 0;
+	//	int N = length(bg);
+	for (int i = 0; i < N; i++)
+	{
+		sum_value += bg_array[i];
+	}
+	if (sum_value != 0)
+		mean_value = sum_value / N;
+	return mean_value;
+}
+
+
+
+float calc_std(float* bg, int N)
+{
+	if (N <= 0)
+	{
+		return 0;
+	}
+	float mean_value = calc_mean(bg, N);
+	float var_sum = 0;
+	float std = 0;
+	for (int i = 0; i < N; i++)
+	{
+		var_sum += (bg[i] - mean_value) * (bg[i] - mean_value);
+	}
+	if (var_sum != 0)
+		std = sqrt(var_sum / (N - 1));
+	return std;
+
+}
+
+
+
+float mg2eA1c(float mg)
+{
+	float eA1c = (mg + 0.582) / 1.198;
+	return eA1c;
+}
+
+
+float mg2gmi(float mg, int flag)
+{
+	float gmi = 0;
+	if (flag == 0)
+		gmi = 3.31 + 0.02392 * mg;
+	else
+		gmi = 12.71 + 4.70587 * mg;
+	return gmi;
+}
+
+
+float calc_AUCmd(float* bg_median_array, int N)
+{
+	if (N <= 0)
+	{
+		return 0;
+	}
+	return calc_mean(bg_median_array, N);
+}
+
+
+
+int calc_cv(float sdbg, float mg, float* cv)
+{
+	cv[0] = 0;
+	int stats_code = 200;
+	try
+	{
+		if (mg == 0)
+		{
+			stats_code = 500;
+		}
+		cv[0] = sdbg / mg;
+	}
+	catch (const std::exception&)
+	{
+		stats_code = 500;
+	}
+	return stats_code;
+}
+
+
+float calc_mage(float* bg_array, int N, float threshold)
+{
+	vector<float>peaks_effective = {};
+	int flag_arrow = 0;
+	vector<int> idx;
+
+	float temp_max = 0;
+	float temp_min = 0;
+	if (bg_array[0] > bg_array[1])
+	{
+		temp_max = bg_array[0];
+		temp_min = bg_array[1];
+	}
+	else
+	{
+		temp_max = bg_array[1];
+		temp_min = bg_array[0];
+	}
+	for (int i = 1; i < N; i++)
+	{
+		float now = bg_array[i];
+		if (flag_arrow == 0)
+		{
+			if (temp_max == temp_min)
+			{
+				if (now > temp_max)
+				{
+					temp_max = now;
+				}
+				if (now < temp_min)
+				{
+					temp_min = now;
+				}
+			}
+			else
+			{
+				if (temp_min > now)
+				{
+					temp_min = now;
+				}
+				if (temp_max < now)
+				{
+					temp_max = now;
+				}
+				if ((temp_max - temp_min) >= threshold)
+				{
+					if (now == temp_max)
+					{
+						flag_arrow = 1;
+						peaks_effective.push_back(temp_min);
+						peaks_effective.push_back(now);
+					}
+					else
+					{
+						flag_arrow = -1;
+						peaks_effective.push_back(temp_max);
+						peaks_effective.push_back(now);
+					}
+					idx.push_back(0);
+					idx.push_back(i);
+				}
+			}
+		}
+		else
+		{
+			float before = peaks_effective[peaks_effective.size() - 1];
+			if (flag_arrow == -1)
+			{
+				if ((now - before) >= threshold)
+				{
+					peaks_effective.push_back(now);
+					idx.push_back(i);
+					flag_arrow = -flag_arrow;
+				}
+				else
+				{
+					if ((now - before) < 0)
+					{
+						peaks_effective.pop_back();
+						peaks_effective.push_back(now);
+						idx.pop_back();
+						idx.push_back(i);
+					}
+				}
+			}
+			if (flag_arrow == 1)
+			{
+				if ((before - now) >= threshold)
+				{
+					peaks_effective.push_back(now);
+					idx.push_back(i);
+					flag_arrow = -flag_arrow;
+				}
+				else
+				{
+					if ((before - now) < 0)
+					{
+						peaks_effective.pop_back();
+						peaks_effective.push_back(now);
+						idx.pop_back();
+						idx.push_back(i);
+					}
+				}
+			}
+		}
+	}
+
+	float temp_sum = 0;
+	for (int i = 1; i < peaks_effective.size(); i = i + 2)
+	{
+		temp_sum += abs(peaks_effective[i] - peaks_effective[i - 1]);
+	}
+	float mage = 0;
+	if (peaks_effective.size() >= 2)
+	{
+		mage = temp_sum / (int(peaks_effective.size() / 2));
+	}
+
+	//vector<float>(peaks_effective).swap(peaks_effective);
+	//vector<int>(idx).swap(idx);
+	peaks_effective.clear();
+	idx.clear();
+	return mage;
+}
+
+
+float calc_lage(float* bg_array, int N)
+{
+	if (N <= 0)
+	{
+		return 0;
+	}
+	float min = bg_array[0];
+	float max = bg_array[0];
+	for (int i = 1; i < N; i++)
+	{
+		float now = bg_array[i];
+		if (now > max)
+			max = now;
+		if (now < min)
+			min = now;
+	}
+	return max - min;
+}
+
+
+
+float calc_modd(float* bg_current_array, int* code_current_array, int N_current, float* bg_ref_array, int* code_ref_array, int N_ref)
+{
+	vector<float>current = {};
+	vector<float>ref = {};
+	for (int i = 0; i < N_current; i++)
+	{
+		int code = code_current_array[i];
+		float glucose = bg_current_array[i];
+		for (int j = 0; j < N_ref; j++)
+		{
+			int code_ref = code_ref_array[j];
+			float glucose_ref = bg_ref_array[j];
+			if (code == code_ref)
+			{
+
+				current.push_back(glucose);
+				ref.push_back(glucose_ref);
+				break;
+			}
+		}
+	}
+	float diff_sum = 0;
+	for (int i = 0; i < current.size(); i++)
+	{
+		diff_sum += abs(current[i] - ref[i]);
+	}
+	float modd = 0;
+	if (current.size() > 0)
+	{
+		modd = diff_sum / current.size();
+	}
+	current.clear();
+	ref.clear();
+	return modd;
+}
+
+long long num2dur(int n)
+{
+	return n * 300;
+}
+
+int calc_max_index(float* bg_array, int N)
+{
+	if (N <= 0)
+	{
+		return -1;
+	}
+	float max = bg_array[0];
+	int idx = 0;
+
+	for (int i = 1; i < N; i++)
+	{
+		float now = bg_array[i];
+		if (now > max)
+		{
+			max = now;
+			idx = i;
+		}
+	}
+	return idx;
+}
+
+int calc_tir(int* code_array, int N, float* tir, long long* tir_time)
+{
+	int stats_code = 200;
+	vector<int> tir_counts = { 0,0,0,0,0 };
+	try
+	{
+		if (N <= 0)
+		{
+			stats_code = 500;
+		}
+
+		for (int i = 0; i < N; i++)
+		{
+			tir_counts[code_array[i] + 2]++;
+		}
+		tir[0] = float(tir_counts[0]) / N;
+		tir[1] = float(tir_counts[1]) / N;
+		tir[2] = float(tir_counts[2]) / N;
+		tir[3] = float(tir_counts[3]) / N;
+		tir[4] = float(tir_counts[4]) / N;
+
+		int max_idx = calc_max_index(tir, 5);
+		tir[max_idx] = 1.00;
+		for (int i = 0; i < 5; i++)
+		{
+			if(i!=max_idx)
+			{
+				tir[i] = round(tir[i]*1000)/1000;
+				tir[max_idx] = tir[max_idx] - tir[i];
+			}
+		}
+
+		tir_time[0] = num2dur(tir_counts[0]);
+		tir_time[1] = num2dur(tir_counts[1]);
+		tir_time[2] = num2dur(tir_counts[2]);
+		tir_time[3] = num2dur(tir_counts[3]);
+		tir_time[4] = num2dur(tir_counts[4]);
+	}
+	catch (const std::exception&)
+	{
+		stats_code = 500;
+	}
+	tir_counts.clear();
+	return stats_code;
+}
+
+
+int calc_event(float* bg_array, int* tir_code_array, long long* correct_datetime_array, int N, int* tir_type_array, long long* start_array, long long* end_array, float* extre_values, int* event_num)
+{
+	int stats_code = 200;
+	event_num[0] = 0;
+	try
+	{
+		if (N <= 0)
+		{
+			stats_code = 500;
+		}
+		if (N != 0)
+		{
+			long long start_time = correct_datetime_array[0];
+			long long end_time = correct_datetime_array[0];
+			float maximum = bg_array[0];
+			long long dur = 0;
+
+			//高血糖事件
+			int count_p = 0;
+			int start_flag = 0;
+			for (int i = 0; i < N - 2; i++)
+			{
+				count_p = int(tir_code_array[i] > 0) + int(tir_code_array[i + 1] > 0) + int(tir_code_array[i + 2] > 0);
+				if (start_flag == 0)
+				{
+					if (count_p == 3)
+					{
+						tir_type_array[event_num[0]] = 1;
+						start_array[event_num[0]] = correct_datetime_array[i];
+						end_array[event_num[0]] = correct_datetime_array[i + 2];
+						extre_values[event_num[0]] = max(max(bg_array[i], bg_array[i + 1]), max(bg_array[i + 2], bg_array[i + 1]));
+						start_flag = 1;
+					}
+				}
+				else
+				{
+					if (count_p == 0)
+					{
+						end_array[event_num[0]] = correct_datetime_array[i - 1];
+						event_num[0]++;
+						start_flag = 0;
+					}
+					else
+					{
+						end_array[event_num[0]] = correct_datetime_array[i + 2];
+						extre_values[event_num[0]] = max(extre_values[event_num[0]], bg_array[i + 2]);
+						//cout << tir_type_array[event_num[0]] << "\t" << correct_datetime_array[i + 2] << "\t" << bg_array[i + 2] << endl;
+					}
+				}
+			}
+			if (start_flag == 1)
+			{
+				//end_array[event_num[0]] = correct_datetime_array[N - 1];
+				event_num[0]++;
+				start_flag == 0;
+			}
+
+			//低血糖事件
+			count_p = 0;
+			start_flag = 0;
+			for (int i = 0; i < N - 2; i++)
+			{
+				count_p = int(tir_code_array[i] < 0) + int(tir_code_array[i + 1] < 0) + int(tir_code_array[i + 2] < 0);
+				if (start_flag == 0)
+				{
+					if (count_p == 3)
+					{
+						tir_type_array[event_num[0]] = -1;
+						start_array[event_num[0]] = correct_datetime_array[i];
+						end_array[event_num[0]] = correct_datetime_array[i + 2];
+						extre_values[event_num[0]] = min(min(bg_array[i], bg_array[i + 1]), min(bg_array[i + 2], bg_array[i + 1]));
+						start_flag = 1;
+					}
+				}
+				else
+				{
+					if (count_p == 0)
+					{
+						end_array[event_num[0]] = correct_datetime_array[i - 1];
+						event_num[0]++;
+						start_flag = 0;
+					}
+					else
+					{
+						end_array[event_num[0]] = correct_datetime_array[i + 2];
+						extre_values[event_num[0]] = min(extre_values[event_num[0]], bg_array[i + 2]);
+					}
+				}
+			}
+			if (start_flag == 1)
+			{
+				//end_array[event_num[0]] = correct_datetime_array[N - 1];
+				event_num[0]++;
+				start_flag == 0;
+			}
+
+			//极高血糖事件
+			count_p = 0;
+			start_flag = 0;
+			for (int i = 0; i < N - 2; i++)
+			{
+				count_p = int(tir_code_array[i] == 2) + int(tir_code_array[i + 1] == 2) + int(tir_code_array[i + 2] == 2);
+				if (start_flag == 0)
+				{
+					if (count_p == 3)
+					{
+						tir_type_array[event_num[0]] = 2;
+						start_array[event_num[0]] = correct_datetime_array[i];
+						end_array[event_num[0]] = correct_datetime_array[i + 2];
+						extre_values[event_num[0]] = max(max(bg_array[i], bg_array[i + 1]), max(bg_array[i + 2], bg_array[i + 1]));
+						start_flag = 1;
+					}
+				}
+				else
+				{
+					if (count_p == 0)
+					{
+						end_array[event_num[0]] = correct_datetime_array[i - 1];
+						event_num[0]++;
+						start_flag = 0;
+					}
+					else
+					{
+						end_array[event_num[0]] = correct_datetime_array[i + 2];
+						extre_values[event_num[0]] = max(extre_values[event_num[0]], bg_array[i + 2]);
+					}
+				}
+			}
+			if (start_flag == 1)
+			{
+				//end_array[event_num[0]] = correct_datetime_array[N - 1];;
+				event_num[0]++;
+				start_flag == 0;
+			}
+
+			//极低血糖事件
+			count_p = 0;
+			start_flag = 0;
+			for (int i = 0; i < N - 2; i++)
+			{
+				count_p = int(tir_code_array[i] == -2) + int(tir_code_array[i + 1] == -2) + int(tir_code_array[i + 2] == -2);
+				if (start_flag == 0)
+				{
+					if (count_p == 3)
+					{
+						tir_type_array[event_num[0]] = -2;
+						start_array[event_num[0]] = correct_datetime_array[i];
+						end_array[event_num[0]] = correct_datetime_array[i + 2];
+						extre_values[event_num[0]] = min(min(bg_array[i], bg_array[i + 1]), min(bg_array[i + 2], bg_array[i + 1]));
+						start_flag = 1;
+					}
+				}
+				else
+				{
+					if (count_p == 0)
+					{
+						end_array[event_num[0]] = correct_datetime_array[i - 1];
+						event_num[0]++;
+						start_flag = 0;
+					}
+					else
+					{
+						end_array[event_num[0]] = correct_datetime_array[i + 2];
+						extre_values[event_num[0]] = min(extre_values[event_num[0]], bg_array[i + 2]);
+					}
+				}
+			}
+			if (start_flag == 1)
+			{
+				//end_array[event_num[0]] = correct_datetime_array[N - 1];
+				event_num[0]++;
+				start_flag == 0;
+			}
+
+
+			for (int k = 0; k < event_num[0]; k++)
+			{
+				end_array[k] = end_array[k] + 300;
+			}
+		}
+	}
+	catch (const std::exception&)
+	{
+		stats_code = 500;
+	}
+	return stats_code;
+}
+
+
+int calc_event_night(float* bg_array_day, int* tir_code_array_day, long long* correct_datetime_array_day, int N,
+	int* tir_type_array, long long* start_array, long long* end_array, float* extre_values, int* event_num)
+{
+	int stats_code = 200;
+	if (N <= 0)
+	{
+		stats_code = 500;
+	}
+	else
+	{
+		float* bg_array_night = new float[N];
+		int* tir_code_array_night = new int[N];
+		long long* correct_datetime_array_night = new long long[N];
+		int Nnight = 0;
+
+		long long start_time = correct_datetime_array_day[0];
+		time_t timestamp_start = (time_t)start_time;
+		struct  tm tm_start;
+		//localtime_s(&tm_start, &timestamp_start);//for windows
+		localtime_r(&timestamp_start, &tm_start);//for linux
+
+		tm tm_start_day = { 0 };
+		tm_start_day.tm_year = tm_start.tm_year;
+		tm_start_day.tm_mon = tm_start.tm_mon;
+		tm_start_day.tm_mday = tm_start.tm_mday;
+
+		time_t timestamp_start_day = mktime(&tm_start_day);
+		long long timestamp_start_day_long = (long long)timestamp_start_day;
+		long long timestamp_start_day_long_6am = timestamp_start_day_long + 21600;
+
+		for (int i = 0; i < N; i++)
+		{
+			long long timestamp_now = correct_datetime_array_day[i];
+			if ((timestamp_now < timestamp_start_day_long_6am)&(timestamp_now >= timestamp_start_day_long))
+			{
+				bg_array_night[Nnight] = bg_array_day[i];
+				tir_code_array_night[Nnight] = tir_code_array_day[i];
+				correct_datetime_array_night[Nnight] = timestamp_now;
+				Nnight++;
+			}
+		}
+
+		stats_code = calc_event(bg_array_night, tir_code_array_night, correct_datetime_array_night, Nnight, tir_type_array, start_array, end_array, extre_values, event_num);
+		delete[] bg_array_night;
+		delete[] tir_code_array_night;
+		delete[] correct_datetime_array_night;
+	}
+	return stats_code;
+}
+
+
+
+
+
+int calc_lbgi_hbgi(float* bg_array, int N, float* lbgi, float* hbgi)
+{
+	lbgi[0] = 0;
+	hbgi[0] = 0;
+	int stats_code = 200;
+	vector<float> fbg = {};
+	vector<float> rbg = {};
+	vector<float> rlbg = {};
+	vector<float> rhbg = {};
+	try
+	{
+
+		if (N <= 0)
+		{
+			stats_code = 500;
+		}
+
+		float rlbg_sum = 0;
+		float rhbg_sum = 0;
+		for (int i = 0; i < N; i++)
+		{
+			float now_bg = bg_array[i];
+			float now_fbg = 1.794 * (pow(log(now_bg), 1.026) - 1.861);
+			float now_rbg = 10 * now_fbg * now_fbg;
+			fbg.push_back(now_fbg);
+			rbg.push_back(now_rbg);
+			if (now_fbg < 0)
+			{
+				rlbg.push_back(now_rbg);
+				rlbg_sum += now_rbg;
+			}
+
+			if (now_fbg > 0)
+			{
+				rhbg.push_back(now_rbg);
+				rhbg_sum += now_rbg;
+			}
+
+		}
+		if (rlbg.size() > 0)
+		{
+			lbgi[0] = rlbg_sum / rlbg.size();
+		}
+		if (rhbg.size() > 0)
+		{
+			hbgi[0] = rhbg_sum / rhbg.size();
+		}
+
+	}
+	catch (const std::exception&)
+	{
+		stats_code = 500;
+	}
+	//vector<float>(fbg).swap(fbg);
+	//vector<float>(rbg).swap(rbg);
+	//vector<float>(rlbg).swap(rlbg);
+	//vector<float>(rhbg).swap(rhbg);
+	fbg.clear();
+	rbg.clear();
+	rlbg.clear();
+	rhbg.clear();
+	return stats_code;
+}
+
+
+void sort_value(float* in_array, int N)
+{
+	for (int i = 0; i < N - 1; ++i)
+	{
+		int f = 1;
+		for (int j = 0; j < N - i - 1; ++j)
+		{
+			if (in_array[j] > in_array[j + 1])
+			{
+				float t = in_array[j];
+				in_array[j] = in_array[j + 1];
+				in_array[j + 1] = t;
+				f = 0;
+			}
+		}
+		if (f == 1)
+			break;
+	}
+}
+
+
+float percentile(float* bg_t_array, int N, int p)
+{
+	if (N <= 0)
+	{
+		return 0;
+	}
+	sort_value(bg_t_array, N);
+	float p1 = p / 100.0;
+	float idx = p1 * (N - 1);
+	float idx_below_d = floor(idx);
+	int idx_below = (int)(idx_below_d);
+	int idx_above = idx_below + 1;
+	float weights_above = idx - idx_below;
+	float weights_below = 1.0 - weights_above;
+	float v_below = bg_t_array[idx_below];
+	float v_above = bg_t_array[idx_above];
+	float value = v_below * weights_below + v_above * weights_above;
+	return value;
+}
+
+
+int bg_group_time(float* bg_array, int* code_array, int N, float** bg_array_group, int* code_len_array)
+{
+	int stats_code = 200;
+	try
+	{
+		if (N <= 0)
+		{
+			stats_code = 500;
+		}
+		for (int i = 0; i < 288; i++)
+			code_len_array[i] = 0;
+		for (int i = 0; i < N; i++)
+		{
+			int code = code_array[i];
+			int col = code_len_array[code];
+			if (code_len_array[code] < 14)
+			{
+				bg_array_group[code][col] = bg_array[i];
+			}
+			code_len_array[code]++;
+		}
+		for (int i = 0; i < 288; i++)
+		{
+			if ((code_len_array[i] > 14) | (code_len_array[i] <= 0))
+			{
+				stats_code = 500;
+			}
+		}
+	}
+	catch (const std::exception&)
+	{
+		stats_code = 500;
+	}
+	return stats_code;
+}
+
+
+int gen_agp(float* bg_array, int* code_array, int N, float* per5_array, float* per25_array, float* per50_array, float* per75_array, float* per95_array)
+{
+	int stats_code = 200;
+
+	float** group_array = new float* [288];
+	for (int i = 0; i < 288; i++)
+	{
+		group_array[i] = new float[14];
+	}
+	int* code_len_array = new int[288];
+
+	try
+	{
+		stats_code = bg_group_time(bg_array, code_array, N, group_array, code_len_array);
+		if (stats_code == 200)
+		{
+			for (int i = 0; i < 288; i++)
+			{
+				/*float* temp_group = group_array[i];*/
+				int code_N = code_len_array[i];
+				per5_array[i] = percentile(group_array[i], code_N, 5);
+				per25_array[i] = percentile(group_array[i], code_N, 25);
+				per50_array[i] = percentile(group_array[i], code_N, 50);
+				per75_array[i] = percentile(group_array[i], code_N, 75);
+				per95_array[i] = percentile(group_array[i], code_N, 95);
+				//delete[] temp_group;
+			}
+		}
+		for (int i = 0; i < 288; i++)
+		{
+			delete[] group_array[i];
+		}
+		delete[] group_array;
+		delete[] code_len_array;
+
+	}
+	catch (const std::exception&)
+	{
+		stats_code = 500;
+	}
+
+	return stats_code;
+}
+
+
+//float* agp_kalman_filter(float* bg_array, int N)
+//{
+//	float* bg_filtered_array = new float[N];
+//	float agp_state_kalman = 0.0;
+//	float agp_state_pre = 0.0;
+//	float agp_Pminus = 0.0;
+//	float agp_K = 0.0;
+//	float agp_R = 1.2;
+//	float agp_Q = 0.5;
+//	float agp_P = 0.01;
+//
+//	for (int i = 0; i < N; i++)
+//	{
+//		float data = bg_array[i];
+//		if (i > 1)
+//		{
+//			agp_state_pre = agp_state_kalman;
+//			agp_Pminus = agp_P + agp_Q;
+//			agp_K = agp_Pminus / (agp_Pminus + agp_R);
+//			agp_state_kalman = agp_state_pre + agp_K * (data - agp_state_pre);
+//			agp_P = (1 - agp_K) * agp_Pminus;
+//		}
+//		else
+//		{
+//			agp_state_kalman = data;
+//		}
+//		bg_filtered_array[i] = agp_state_kalman;
+//	}
+//	return bg_filtered_array;
+//}
+
+void agp_kalman_filter(float* bg_array, int N)
+{
+	//float* bg_filtered_array = new float[N];
+	float agp_state_kalman = 0.0;
+	float agp_state_pre = 0.0;
+	float agp_Pminus = 0.0;
+	float agp_K = 0.0;
+	float agp_R = 1.2;
+	float agp_Q = 0.5;
+	float agp_P = 0.01;
+
+	for (int i = 0; i < N; i++)
+	{
+		float data = bg_array[i];
+		if (i > 1)
+		{
+			agp_state_pre = agp_state_kalman;
+			agp_Pminus = agp_P + agp_Q;
+			agp_K = agp_Pminus / (agp_Pminus + agp_R);
+			agp_state_kalman = agp_state_pre + agp_K * (data - agp_state_pre);
+			agp_P = (1 - agp_K) * agp_Pminus;
+		}
+		else
+		{
+			agp_state_kalman = data;
+		}
+		bg_array[i] = agp_state_kalman;
+	}
+	//return bg_filtered_array;
+}
+
+
+//float* Reversal_function(float* bg_array, int N)
+//{
+//	float* bg_reversal_array = new float[N];
+//	for (int i = 0; i < N; i++)
+//	{
+//		bg_reversal_array[N - i - 1] = bg_array[i];
+//	}
+//	return bg_reversal_array;
+//}
+
+void Reversal_function(float* bg_array, int N)
+{
+	double temp_data = 0;
+	int i = 0;
+	for (i = 0; i < int(N / 2); i++)
+	{
+		temp_data = bg_array[i];
+		bg_array[i] = bg_array[N - 1 - i];
+		bg_array[N - 1 - i] = temp_data;
+	}
+}
+
+
+void agp_filter(float* bg_array, int N)
+{
+	//float* bg_filtered_array = new float[N];
+	Reversal_function(bg_array, N);
+	agp_kalman_filter(bg_array, N);
+	Reversal_function(bg_array, N);
+	agp_kalman_filter(bg_array, N);
+	Reversal_function(bg_array, N);
+	agp_kalman_filter(bg_array, N);
+	Reversal_function(bg_array, N);
+	agp_kalman_filter(bg_array, N);
+	Reversal_function(bg_array, N);
+	agp_kalman_filter(bg_array, N);
+	Reversal_function(bg_array, N);
+	agp_kalman_filter(bg_array, N);
+	Reversal_function(bg_array, N);
+	agp_kalman_filter(bg_array, N);
+	Reversal_function(bg_array, N);
+	agp_kalman_filter(bg_array, N);
+	Reversal_function(bg_array, N);
+	agp_kalman_filter(bg_array, N);
+	Reversal_function(bg_array, N);
+	agp_kalman_filter(bg_array, N);
+	Reversal_function(bg_array, N);
+	agp_kalman_filter(bg_array, N);
+	Reversal_function(bg_array, N);
+	agp_kalman_filter(bg_array, N);
+	Reversal_function(bg_array, N);
+	agp_kalman_filter(bg_array, N);
+	Reversal_function(bg_array, N);
+	agp_kalman_filter(bg_array, N);
+}
+
+
+
+int group_by_day(float* bg_array, int N, int* code_array, long long* datetime_array, float** bg_group_array, int** code_group_array, long long** datetime_group_array, int* day_len_array, int* dur_days)
+{
+	int stats_code = 200;
+	dur_days[0] = 0;
+
+	try
+	{
+		if (N <= 0)
+		{
+			stats_code = 500;
+		}
+		long long start_time = datetime_array[0];
+		long long end_time = datetime_array[N - 1];
+
+		time_t timestamp_start = (time_t)start_time;
+		struct  tm tm_start;
+		//localtime_s(&tm_start, &timestamp_start);//for windows
+		localtime_r(&timestamp_start, &tm_start);//for linux
+
+
+		tm tm_start_day = { 0 };
+		tm_start_day.tm_year = tm_start.tm_year;
+		tm_start_day.tm_mon = tm_start.tm_mon;
+		tm_start_day.tm_mday = tm_start.tm_mday;
+
+		time_t timestamp_start_day = mktime(&tm_start_day);
+		long long timestamp_start_day_long = (long long)timestamp_start_day;
+
+		time_t timestamp_end = (time_t)end_time;
+		struct  tm tm_end;
+		//localtime_s(&tm_end, &timestamp_end);//for windows
+		localtime_r(&timestamp_end, &tm_end);//for linux
+
+
+		tm tm_end_day = { 0 };
+		tm_end_day.tm_year = tm_end.tm_year;
+		tm_end_day.tm_mon = tm_end.tm_mon;
+		tm_end_day.tm_mday = tm_end.tm_mday;
+
+		time_t timestamp_end_day = mktime(&tm_end_day);
+		long long timestamp_end_day_long = (long long)timestamp_end_day;
+
+
+		long long dur = timestamp_end_day_long - timestamp_start_day_long;
+		if (dur < 0)
+		{
+			stats_code = 500;
+			return stats_code;
+		}
+		dur_days[0] = (int)(dur / 86400) + 1;
+		if (dur_days[0] > 15)
+		{
+			stats_code = 500;
+			return stats_code;
+		}
+
+		for (int i = 0; i < dur_days[0]; i++)
+			if (i < 15)
+				day_len_array[i] = 0;
+
+		for (int i = 0; i < N; i++)
+		{
+			long long now = datetime_array[i];
+			long long dur_now = now - timestamp_start_day_long;
+			if (dur_now < 0)
+			{
+				stats_code = 500;
+				break;
+			}
+			int group_idx = (int)(dur_now / 86400);
+			int col = day_len_array[group_idx];
+			if ((group_idx > 15)|(group_idx<0))
+			{
+				stats_code = 500;
+				break;
+			}
+			if (day_len_array[group_idx] < 288)
+			{
+				bg_group_array[group_idx][col] = bg_array[i];
+				code_group_array[group_idx][col] = code_array[i];
+				datetime_group_array[group_idx][col] = datetime_array[i];
+			}
+			day_len_array[group_idx]++;
+		}
+		for (int i = 0; i < dur_days[0]; i++)
+		{
+			if ((day_len_array[i] > 288) | (day_len_array[i] <= 0))
+			{
+				stats_code = 500;
+				break;
+			}
+		}
+	}
+	catch (const std::exception&)
+	{
+		stats_code = 500;
+	}
+	return stats_code;
+}
+
+float calc_max(float* bg_array, int N)
+{
+	if (N <= 0)
+	{
+		return 0;
+	}
+	float max = bg_array[0];
+	for (int i = 1; i < N; i++)
+	{
+		float now = bg_array[i];
+		if (now > max)
+			max = now;
+	}
+	return max;
+}
+
+
+float calc_min(float* bg_array, int N)
+{
+	if (N <= 0)
+	{
+		return 0;
+	}
+	float min = bg_array[0];
+	for (int i = 1; i < N; i++)
+	{
+		float now = bg_array[i];
+		if (now < min)
+			min = now;
+	}
+	return min;
+}
+
+int group_by_hourDur(float* bg_array, int N, int* code_array, float** bg_group_array, int* hour_len_array)
+{
+	int stats_code = 200;
+	for (int i = 0; i < 24; i++)
+	{
+		hour_len_array[i] = 0;
+	}
+	try
+	{
+		if (N <= 0)
+		{
+			stats_code = 500;
+		}
+		for (int i = 0; i < 24; i++)
+		{
+			hour_len_array[i] = 0;
+		}
+		for (int i = 0; i < N; i++)
+		{
+			int hour = int(code_array[i] / 12);
+			if (hour_len_array[hour] < 168)
+			{
+				bg_group_array[hour][hour_len_array[hour]] = bg_array[i];
+			}
+			hour_len_array[hour]++;
+		}
+		for (int i = 0; i < 24; i++)
+		{
+			if (hour_len_array[i] > 168)
+			{
+				stats_code = 500;
+				break;
+			}
+		}
+	}
+	catch (const std::exception&)
+	{
+		stats_code = 500;
+	}
+	return stats_code;
+}
+
+
+int calc_hour_data_part1(float* bg_array, int N, int* code_array, int type, float* threshold, float** multi_hour)
+{
+	//float** multi_hour = new float* [9];
+	//for (int i = 0; i < 9; i++)
+	//{
+	//	multi_hour[i] = new float[24];
+	//}
+	int stats_code = 200;
+	float** bg_group_array_hour = new float* [24];
+	for (int i = 0; i < 24; i++)
+	{
+		bg_group_array_hour[i] = new float[168];
+	}
+	int* hour_len_array = new int[24];
+	try
+	{
+		stats_code = group_by_hourDur(bg_array, N, code_array, bg_group_array_hour, hour_len_array);
+		if (stats_code==200)
+		{
+			for (int i = 0; i < 24; i++)
+			{
+
+				int hour_len = hour_len_array[i];
+				//float* bg_hour_array = bg_group_array_hour[i];
+				float* bg_hour_array = new float[hour_len];
+				for (int j = 0; j < hour_len; j++)
+				{
+					bg_hour_array[j] = bg_group_array_hour[i][j];
+				}
+				//int* tir_code_hour_array = gen_tir_code_array(bg_hour_array, hour_len, type);//ÑªÌÇË®Æ½±àÂë
+				int* tir_code_hour_array = new int[N];
+				int stats_tir_code = gen_tir_code_array(bg_hour_array, hour_len, tir_code_hour_array, type, threshold);
+				float* tir = new float[5];
+				long long* tir_time = new long long[5];
+				float* cv = new float[1];
+				try {
+					int stats_tir = calc_tir(tir_code_hour_array, hour_len, tir, tir_time);//tir
+
+					float hour_max = calc_max(bg_hour_array, hour_len);
+					float hour_min = calc_min(bg_hour_array, hour_len);
+					float mg = 0;
+					float sdbg = 0;
+					mg = calc_mean(bg_hour_array, hour_len);
+					sdbg = calc_std(bg_hour_array, hour_len);
+					int stats_cv = calc_cv(sdbg, mg, cv);
+
+					multi_hour[0][i] = tir[0] + tir[1];
+					multi_hour[1][i] = tir[2];
+					multi_hour[2][i] = tir[3] + tir[4];
+					multi_hour[3][i] = hour_len;
+					multi_hour[4][i] = hour_max;
+					multi_hour[5][i] = hour_min;
+					multi_hour[6][i] = mg;
+					multi_hour[7][i] = sdbg;
+					multi_hour[8][i] = cv[0];
+				}
+				catch (const std::exception&)
+				{
+					stats_code = 500;
+				}
+				delete[] bg_hour_array;
+				delete[] tir_code_hour_array;
+				delete[] tir;
+				delete[] tir_time;
+				delete[] cv;
+			}
+		}
+	}
+	catch (const std::exception&)
+	{
+		stats_code = 500;
+	}
+	for (int i = 0; i < 24; i++)
+	{
+		delete[] bg_group_array_hour[i];
+	}
+	delete[] bg_group_array_hour;
+	delete[] hour_len_array;
+	return stats_code;
+}
+
+
+int calc_hour_data_part2(float* per5_array, float* per25_array, float* per50_array, float* per75_array, float* per95_array, float** multi_hour_agp)
+{
+	int stats_code = 200;
+	float* hour_5 = new float[24];
+	float* hour_25 = new float[24];
+	float* hour_50 = new float[24];
+	float* hour_75 = new float[24];
+	float* hour_95 = new float[24];
+	try
+	{
+		for (int i = 0; i < 24; i++)
+		{
+			hour_5[i] = 0;
+			hour_25[i] = 0;
+			hour_50[i] = 0;
+			hour_75[i] = 0;
+			hour_95[i] = 0;
+		}
+		for (int i = 0; i < 288; i++)
+		{
+			int hour = int(i / 12);
+			hour_5[hour] = hour_5[hour] + per5_array[i];
+			hour_25[hour] = hour_25[hour] + per25_array[i];
+			hour_50[hour] = hour_50[hour] + per50_array[i];
+			hour_75[hour] = hour_75[hour] + per75_array[i];
+			hour_95[hour] = hour_95[hour] + per95_array[i];
+		}
+		for (int i = 0; i < 24; i++)
+		{
+			multi_hour_agp[0][i] = (hour_95[i] - hour_5[i]) / 12;
+			multi_hour_agp[1][i] = hour_50[i] / 12;
+			multi_hour_agp[2][i] = (hour_75[i] - hour_25[i]) / 12;
+		}
+	}
+	catch (const std::exception&)
+	{
+		stats_code = 500;
+	}
+	delete[] hour_5;
+	delete[] hour_25;
+	delete[] hour_50;
+	delete[] hour_75;
+	delete[] hour_95;
+	return stats_code;
+}

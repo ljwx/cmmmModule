@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="login_code_to_obtain">%1$ss</string>
+    <string name="login_only_can_input_number_or_word">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ`-=[]\;\"\\,./~\|!@#$%^*()_+}{:?¥£¢€₱&amp;&lt;&gt;&quot;&apos;</string>
+
+
+    <string name="year_y">y</string>
+    <string name="month_m">m</string>
+    <string name="day_d">d</string>
+
+    <string name="please_upgrade_version">The current version is too low, please upgrade the version!</string>
+
+</resources>

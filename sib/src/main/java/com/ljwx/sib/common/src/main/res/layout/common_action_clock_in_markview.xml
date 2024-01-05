@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingTop="@dimen/dp_10"
+    android:paddingLeft="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_8"
+    android:paddingBottom="@dimen/dp_10"
+    android:background="@drawable/bg_radiu05_000000_solid">
+
+
+    <TextView
+        android:id="@+id/tv_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="身体状况"
+        android:textSize="@dimen/font_12"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_max="@dimen/dp_60"
+        />
+
+    <TextView
+        android:id="@+id/tv_clock_in_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="02-03 06:00"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/dp_2"
+        android:textSize="@dimen/font_10"
+        app:layout_constraintTop_toBottomOf="@id/tv_action"
+        app:layout_constraintStart_toStartOf="@id/tv_action"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tv_other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/tv_action"
+        app:layout_constraintStart_toEndOf="@id/tv_action"
+        app:layout_constraintBottom_toBottomOf="@id/tv_action"
+
+        android:layout_marginStart="@dimen/dp_10"
+        tools:text="15.5"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
