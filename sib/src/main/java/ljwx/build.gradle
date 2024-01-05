@@ -1,0 +1,4 @@
+package ljwx
+
+configurations.maybeCreate("default")
+artifacts.add("default", file('SIBIO-HOS-A-V2.0.1.7-temp_releas-2023.11.21.10.46_scan_error_foreground.aar'))
