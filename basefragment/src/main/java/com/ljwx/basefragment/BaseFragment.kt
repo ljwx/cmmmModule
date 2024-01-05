@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.ljwx.baseapp.constant.BaseConstBundleKey
 import com.ljwx.baseapp.page.IPageLocalEvent
@@ -22,6 +23,10 @@ import com.ljwx.baseapp.page.IPageStartPage
 import com.ljwx.baseapp.router.IPostcard
 import com.ljwx.basedialog.common.BaseDialogBuilder
 import com.ljwx.router.RouterPostcard
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 open class BaseFragment(@LayoutRes private val layoutResID: Int) : BaseToolsFragment(),
     IPageLocalEvent,
@@ -227,6 +232,15 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : BaseToolsFrag
 
     inline fun <reified F : Fragment> fragmentInstance(fromType: Int): F? {
         return fragmentInstanceEx(fromType)
+    }
+
+    fun delayRunJava(time: Long = 2000, runnable: Runnable) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            delay(time)
+            withContext(Dispatchers.Main) {
+                runnable.run()
+            }
+        }
     }
 
     override fun onDestroyView() {

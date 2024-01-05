@@ -1,6 +1,6 @@
 @file:Suppress("NOTHING_TO_INLINE")
 
-package com.ljwx.basenetwork.retrofit
+package com.ljwx.basenetwork.czy.result
 
 
 sealed class HttpResult<T> {
@@ -28,6 +28,7 @@ inline fun <T> HttpResult<T>.onFailure(action: (Throwable) -> Unit): HttpResult<
 }
 
 inline fun <T> HttpResult<T>.getOrNull(): T? = if (this is HttpResult.Success) value else null
+
 inline fun <T> HttpResult<T>.getOrElse(transformOnFailure: (Throwable) -> T): T = when (this) {
     is HttpResult.Success -> value
     is HttpResult.Failure -> transformOnFailure(exception)

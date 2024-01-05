@@ -1,5 +1,6 @@
-package com.ljwx.basenetwork.retrofit
+package com.ljwx.basenetwork.czy
 
+import com.ljwx.basenetwork.czy.result.HttpResult
 import com.squareup.moshi.Moshi
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -9,26 +10,26 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
-class RetrofitResultConverterFactory private constructor(private val factory: MoshiConverterFactory) :
+class HttpResultConverterFactory private constructor(private val factory: MoshiConverterFactory) :
     Converter.Factory() {
 
 
     companion object {
-        fun create(moshi: Moshi = Moshi.Builder().build()): RetrofitResultConverterFactory {
-            return RetrofitResultConverterFactory(MoshiConverterFactory.create(moshi))
+        fun create(moshi: Moshi = Moshi.Builder().build()): HttpResultConverterFactory {
+            return HttpResultConverterFactory(MoshiConverterFactory.create(moshi))
         }
     }
 
-    fun asLenient(): RetrofitResultConverterFactory {
-        return RetrofitResultConverterFactory(factory.asLenient())
+    fun asLenient(): HttpResultConverterFactory {
+        return HttpResultConverterFactory(factory.asLenient())
     }
 
-    fun failOnUnknown(): RetrofitResultConverterFactory {
-        return RetrofitResultConverterFactory(factory.failOnUnknown())
+    fun failOnUnknown(): HttpResultConverterFactory {
+        return HttpResultConverterFactory(factory.failOnUnknown())
     }
 
-    fun withNullSerialization(): RetrofitResultConverterFactory {
-        return RetrofitResultConverterFactory(factory.withNullSerialization())
+    fun withNullSerialization(): HttpResultConverterFactory {
+        return HttpResultConverterFactory(factory.withNullSerialization())
     }
 
     override fun responseBodyConverter(

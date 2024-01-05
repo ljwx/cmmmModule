@@ -10,6 +10,7 @@ import autodispose2.androidx.lifecycle.AndroidLifecycleScopeProvider
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.ObservableSource
+import io.reactivex.schedulers.Schedulers
 
 
 fun <T> Observable<T>.lifecycle(
@@ -34,4 +35,8 @@ fun <T> Observable<T>.lifecycle(): Observable<T> {
         }
 
     }
+}
+
+fun <T> Observable<T>.switch(): Observable<T> {
+    return observeOn(AndroidSchedulers.mainThread())
 }

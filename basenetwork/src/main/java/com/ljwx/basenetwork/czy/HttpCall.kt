@@ -1,6 +1,6 @@
 @file:Suppress("NOTHING_TO_INLINE")
 
-package com.ljwx.basenetwork.retrofit
+package com.ljwx.basenetwork.czy
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -14,7 +14,7 @@ import retrofit2.HttpException
 import retrofit2.Response
 import retrofit2.awaitResponse
 
-class RetrofitCall<T>(call: Call<T>, scope: CoroutineScope, callback: ((Response<T>) -> Unit)? = null) {
+class HttpCall<T>(call: Call<T>, scope: CoroutineScope, callback: ((Response<T>) -> Unit)? = null) {
     private var job: Job? = null
     private var failure: ((Throwable) -> Unit)? = null
     private val finally: MutableList<() -> Unit> = mutableListOf()
@@ -40,12 +40,12 @@ class RetrofitCall<T>(call: Call<T>, scope: CoroutineScope, callback: ((Response
         }
     }
 
-    fun onFailure(block: (Throwable) -> Unit): RetrofitCall<T> {
+    fun onFailure(block: (Throwable) -> Unit): HttpCall<T> {
         this.failure = block
         return this
     }
 
-    fun onFinally(block: () -> Unit): RetrofitCall<T> {
+    fun onFinally(block: () -> Unit): HttpCall<T> {
         this.finally.add(block)
         return this
     }
@@ -56,28 +56,16 @@ class RetrofitCall<T>(call: Call<T>, scope: CoroutineScope, callback: ((Response
 }
 
 
-inline fun <T> Call<T>.onSuccess(fragment: Fragment, noinline callback: (T) -> Unit) =
-    onSuccess(fragment.lifecycleScope, callback)
+inline fun <T> Call<T>.onSuccess(fragment: Fragment, noinline callback: (T) -> Unit) = onSuccess(fragment.lifecycleScope, callback)
+inline fun <T> Call<T>.onSuccess(activity: FragmentActivity, noinline callback: (T) -> Unit) = onSuccess(activity.lifecycleScope, callback)
 
-inline fun <T> Call<T>.onSuccess(activity: FragmentActivity, noinline callback: (T) -> Unit) =
-    onSuccess(activity.lifecycleScope, callback)
-
-fun <T> Call<T>.onSuccess(scope: CoroutineScope, callback: (T) -> Unit) = RetrofitCall(this, scope) {
+fun <T> Call<T>.onSuccess(scope: CoroutineScope, callback: (T) -> Unit) = HttpCall(this, scope) {
     if (!it.isSuccessful) {
         throw HttpException(it)
     }
     callback(it.body() ?: throw KotlinNullPointerException("response body was null"))
 }
 
-inline fun <T> Call<T>.onResponse(fragment: Fragment, noinline callback: (Response<T>) -> Unit) =
-    RetrofitCall(this, fragment.lifecycleScope, callback)
-
-inline fun <T> Call<T>.onResponse(
-    activity: FragmentActivity,
-    noinline callback: (Response<T>) -> Unit
-) = RetrofitCall(this, activity.lifecycleScope, callback)
-
-inline fun <T> Call<T>.onResponse(
-    scope: CoroutineScope,
-    noinline callback: ((Response<T>) -> Unit)? = null
-) = RetrofitCall(this, scope, callback)
+inline fun <T> Call<T>.onResponse(fragment: Fragment, noinline callback: (Response<T>) -> Unit) = HttpCall(this, fragment.lifecycleScope, callback)
+inline fun <T> Call<T>.onResponse(activity: FragmentActivity, noinline callback: (Response<T>) -> Unit) = HttpCall(this, activity.lifecycleScope, callback)
+inline fun <T> Call<T>.onResponse(scope: CoroutineScope, noinline callback: ((Response<T>) -> Unit)? = null) = HttpCall(this, scope, callback)

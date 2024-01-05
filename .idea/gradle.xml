@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/baseactivity" />
             <option value="$PROJECT_DIR$/baseapp" />
+            <option value="$PROJECT_DIR$/basedatabase" />
             <option value="$PROJECT_DIR$/basedialog" />
             <option value="$PROJECT_DIR$/baseedittext" />
             <option value="$PROJECT_DIR$/baseeventbus" />
@@ -32,12 +33,14 @@
             <option value="$PROJECT_DIR$/baserouter" />
             <option value="$PROJECT_DIR$/basescaffold" />
             <option value="$PROJECT_DIR$/basescreenrecord" />
+            <option value="$PROJECT_DIR$/baseservice" />
             <option value="$PROJECT_DIR$/basestate" />
             <option value="$PROJECT_DIR$/baseswitchenv" />
             <option value="$PROJECT_DIR$/basetoolbar" />
             <option value="$PROJECT_DIR$/baseutils" />
             <option value="$PROJECT_DIR$/baseview" />
             <option value="$PROJECT_DIR$/provideacountinput" />
+            <option value="$PROJECT_DIR$/provideclipboardauto" />
             <option value="$PROJECT_DIR$/recordcheck" />
             <option value="$PROJECT_DIR$/sib" />
           </set>

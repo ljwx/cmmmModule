@@ -1,15 +1,13 @@
-package com.ljwx.basenetwork.retrofit
+package com.ljwx.basenetwork.czy
 
+import com.ljwx.basenetwork.czy.result.HttpResult
 import okhttp3.Request
 import okio.Timeout
 import retrofit2.*
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
-/**
- * 相应结果统一处理
- */
-class RetrofitResultAdapterFactory : CallAdapter.Factory() {
+class HttpResultAdapterFactory() : CallAdapter.Factory() {
 
 
     override fun get(

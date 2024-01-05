@@ -1,5 +1,6 @@
 package com.ljwx.basenetwork.retrofit.test
 
+import com.ljwx.baseapp.response.BaseResponse
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.Call
 import retrofit2.http.GET
@@ -19,4 +20,9 @@ interface TestService {
     open fun search2(
         @Query("msg") msg: String = "10"
     ): Observable<String>
+
+    @GET("/api/api-mima/mima.php")
+    open fun search3(
+        @Query("msg") msg: String = "10"
+    ): Call<BaseResponse<String>>
 }
