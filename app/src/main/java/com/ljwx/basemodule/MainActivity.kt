@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import com.ljwx.baseactivity.fast.QuickMainActivity
 import com.ljwx.baseapp.extensions.singleClick
 import com.ljwx.basemodule.constance.ConstRouter
@@ -45,6 +46,11 @@ class MainActivity :
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(Intent(this, TestForegroundService::class.java))
         }
+
+        registerLocalEvent("refresh") { action, intent ->
+            Log.d("事件", "接收到刷新事件")
+        }
+        sendLocalEvent("refresh")
     }
 
     override fun getScreenOrientation() = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED

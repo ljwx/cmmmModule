@@ -1,6 +1,7 @@
 package com.ljwx.basemodule.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,9 @@ import com.ljwx.basemodule.databinding.FragmentJavaTestBinding;
 import com.ljwx.baseswitchenv.ActivityEnvExtensionKt;
 import com.ljwx.baseswitchenv.AppEnvItem;
 import com.ljwx.baseswitchenv.ShakeSelectAppEnv;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function0;
 
 public class TestJavaFragment extends BaseBindingFragment<FragmentJavaTestBinding> {
 
@@ -46,6 +50,10 @@ public class TestJavaFragment extends BaseBindingFragment<FragmentJavaTestBindin
             public void selected(@NonNull AppEnvItem item) {
 
             }
+        });
+
+        delayRunJava(1000, () -> {
+            Log.d("日志", "执行任务");
         });
 
     }
