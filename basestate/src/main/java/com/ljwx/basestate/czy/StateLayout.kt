@@ -10,7 +10,11 @@ import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
 import androidx.annotation.RestrictTo
 
-open class StateLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : FrameLayout(context, attrs, defStyle) {
+open class StateLayout @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyle: Int = 0
+) : FrameLayout(context, attrs, defStyle) {
 
     private var vContent: View? = null
 
@@ -19,8 +23,14 @@ open class StateLayout @JvmOverloads constructor(context: Context, attrs: Attrib
     init {
         val transition = LayoutTransition()
 
-        transition.setAnimator(LayoutTransition.APPEARING,  ObjectAnimator.ofFloat(null, View.ALPHA, 0f, 1f))
-        transition.setAnimator(LayoutTransition.DISAPPEARING,  ObjectAnimator.ofFloat(null, View.ALPHA, 1f, 0f))
+        transition.setAnimator(
+            LayoutTransition.APPEARING,
+            ObjectAnimator.ofFloat(null, View.ALPHA, 0f, 1f)
+        )
+        transition.setAnimator(
+            LayoutTransition.DISAPPEARING,
+            ObjectAnimator.ofFloat(null, View.ALPHA, 1f, 0f)
+        )
 
         layoutTransition = transition
     }

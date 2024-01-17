@@ -2,6 +2,8 @@ package com.ljwx.provideclipboardauto
 
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,10 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.blankj.utilcode.util.TimeUtils
 import com.blankj.utilcode.util.ToastUtils
-import com.ljwx.baseapp.regex.CommonRegex
 import com.ljwx.baseapp.extensions.delayRun
 import com.ljwx.baseapp.extensions.isMatch
 import com.ljwx.baseapp.extensions.singleClick
+import com.ljwx.baseapp.regex.CommonRegex
 import com.ljwx.basefragment.BaseBindingFragment
 import com.ljwx.provideclipboardauto.database.ClipboardDataEntity
 import com.ljwx.provideclipboardauto.database.DBManager
@@ -21,6 +23,7 @@ import com.ljwx.recyclerview.quick.QuickSingleAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
 
 class ClipboardFragment :
     BaseBindingFragment<FragmentClipboardBinding>(R.layout.fragment_clipboard) {
@@ -59,12 +62,12 @@ class ClipboardFragment :
                     clipboardDataEntity.url
                 )
             )
-            ToastUtils.showShort("已复制")
-            lifecycleScope.launch(Dispatchers.IO) {
-                clipboardDataEntity.time = System.currentTimeMillis() - (1000 * 3600 * 24 * 30)
-                DBManager.clipboardDao().updateItem(clipboardDataEntity)
-                updateList()
-            }
+//            ToastUtils.showShort("已复制")
+//            lifecycleScope.launch(Dispatchers.IO) {
+//                clipboardDataEntity.time = System.currentTimeMillis() - (1000 * 3600 * 24 * 30)
+//                DBManager.clipboardDao().updateItem(clipboardDataEntity)
+//                updateList()
+//            }
         }
     }
 
@@ -101,6 +104,12 @@ class ClipboardFragment :
             DBManager.clipboardDao().updateItem(clipboardDataEntity)
             updateList()
         }
+        val uri = Uri.parse(clipboardDataEntity?.url?:"空的")
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+//intent.setClassName("com.UCMobile","com.uc.browser.InnerUCMobile");//打开UC浏览器
+        intent.setPackage("com.quark.browser")
+//        intent.setClassName("com.quark.browser", "MainActivity") //打开QQ浏览器
+        startActivity(intent)
     }
 
     override fun onHiddenChanged(hidden: Boolean) {
@@ -156,6 +165,7 @@ class ClipboardFragment :
                 if (it.startsWith("http")) {
                     val exist = DBManager.clipboardDao().findItem(it)
                     if (exist != null) {
+                        ToastUtils.showShort("已存在,不添加")
                         return@launch
                     } else {
                         item.url = it
@@ -168,6 +178,7 @@ class ClipboardFragment :
             }
             item.time = TimeUtils.getNowMills()
             DBManager.clipboardDao().addItem(item)
+            ToastUtils.showShort("添加一条")
             updateList()
         }
     }
@@ -175,13 +186,13 @@ class ClipboardFragment :
     private fun getClipboardData(): List<CharSequence>? {
         val clipData = clipboard?.primaryClip
         if (clipData != null && clipData.itemCount > 0) {
-            ToastUtils.showShort("有" + clipData.itemCount + "条")
             val list = ArrayList<CharSequence>()
             for (i in 0 until clipData.itemCount) {
                 list.add(clipData.getItemAt(i).text)
             }
             return list
         }
+        ToastUtils.showShort("剪切板空的")
         Log.d("剪切板", "空的")
         return null
     }
