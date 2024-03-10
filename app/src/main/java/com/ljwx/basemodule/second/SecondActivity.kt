@@ -14,6 +14,8 @@ import com.ljwx.baseeventbus.flow.FlowEventBus
 import com.ljwx.basemodule.R
 import com.ljwx.basemodule.constance.ConstRouter
 import com.ljwx.basemodule.databinding.ActivitySecondBinding
+import com.ljwx.basemodule.fragments.HideTestFragment
+import com.ljwx.basemodule.fragments.LoadMoreFragment
 
 @Route(path = ConstRouter.SECOND_ACTIVITY)
 class SecondActivity :
@@ -25,10 +27,14 @@ class SecondActivity :
 
     override fun getScreenOrientation() = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
 
+    private var hideTestFragment: HideTestFragment? = null
+    private var otherFragment: LoadMoreFragment? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         commonProcessSteps()
+        addShow()
 
     }
 
@@ -52,7 +58,8 @@ class SecondActivity :
             MemoryUtils.requestMemory()
         }
         mBinding.button.singleClick {
-            routerTo(ConstRouter.THIRD_ACTIVITY).start()
+//            routerTo(ConstRouter.THIRD_ACTIVITY).start()
+            hide()
         }
         mBinding.task.singleClick {
 //            mViewModel.intervalPost()
@@ -69,6 +76,22 @@ class SecondActivity :
     override fun getAsyncData() {
         super.getAsyncData()
 //        mViewModel.requestTest()
+    }
+
+    private fun addShow() {
+        hideTestFragment = hideTestFragment ?: HideTestFragment()
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container_test, HideTestFragment()).commit()
+    }
+
+    private fun hide() {
+        hideTestFragment = hideTestFragment ?: HideTestFragment()
+        otherFragment = otherFragment ?: LoadMoreFragment()
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container_test, otherFragment!!)
+            .hide(hideTestFragment!!)
+            .show(otherFragment!!)
+            .commit()
     }
 
 }
