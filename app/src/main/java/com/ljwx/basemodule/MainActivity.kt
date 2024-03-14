@@ -5,8 +5,10 @@ import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.ljwx.baseactivity.fast.QuickMainActivity
 import com.ljwx.baseapp.extensions.singleClick
+import com.ljwx.basemodule.config.ConfigLaunchFunctionFragment
 import com.ljwx.basemodule.constance.ConstRouter
 import com.ljwx.basemodule.databinding.ActivityMainBinding
 import com.ljwx.basemodule.fragments.*
@@ -15,6 +17,7 @@ import com.ljwx.basemodule.vm.TestData
 import com.ljwx.basemodule.vm.TestViewModel
 import com.ljwx.provideclipboardauto.ClipboardFragment
 
+@Route(path = ConstRouter.FUNCTION_DEBUG_MAIN)
 class MainActivity :
     QuickMainActivity<ActivityMainBinding, TestViewModel>(R.layout.activity_main) {
 
@@ -36,6 +39,7 @@ class MainActivity :
         addTabFragment("loadmore", LoadMoreFragment())
 //        addTabFragment("vmFragment", ViewModelFragment())
         addTabFragment("javaTest", ClipboardFragment())
+        addTabFragment("config", ConfigLaunchFunctionFragment())
 
         unregisterLocalEvent("test4")
 

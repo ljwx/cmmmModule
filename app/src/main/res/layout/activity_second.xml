@@ -82,5 +82,10 @@
             android:layout_marginTop="@dimen/dp100"
             android:text="启动任务" />
 
+        <FrameLayout
+            android:id="@+id/fragment_container_test"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
     </com.ljwx.basescaffold.QuickStateRefreshLayout>
 </layout>
