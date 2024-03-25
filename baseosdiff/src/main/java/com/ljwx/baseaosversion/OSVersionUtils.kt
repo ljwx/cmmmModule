@@ -61,4 +61,12 @@ object OSVersionUtils {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
     }
 
+    fun greaterOrEqual6(): Boolean {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+    }
+
+    fun greaterThan6(): Boolean {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+    }
+
 }
