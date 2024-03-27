@@ -28,7 +28,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-open class BaseFragment(@LayoutRes private val layoutResID: Int) : BaseToolsFragment(),
+open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.baseapp.R.layout.baseapp_state_layout_empty) : BaseToolsFragment(),
     IPageLocalEvent,
     IPageDialogTips, IPageProcessStep, IPageStartPage {
 
@@ -56,12 +56,16 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : BaseToolsFrag
         mActivity = context as AppCompatActivity
     }
 
+    open fun getLayoutRes() :Int{
+        return layoutResID
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return LayoutInflater.from(requireContext()).inflate(layoutResID, container, false)
+        return LayoutInflater.from(requireContext()).inflate(getLayoutRes(), container, false)
     }
 
     override fun onResume() {
