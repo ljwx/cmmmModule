@@ -4,7 +4,7 @@ import android.Manifest
 
 object BaseBleUtils {
 
-    fun permission{
+    fun permission() {
 
         Manifest.permission.BLUETOOTH
     }
