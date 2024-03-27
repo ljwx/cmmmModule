@@ -2,7 +2,6 @@ package com.ljwx.baseapp.vm.model
 
 import com.ljwx.baseapp.constant.ConstTag
 import com.ljwx.baseapp.response.BaseResponse
-import com.ljwx.baseapp.response.DataResult
 import com.ljwx.baseapp.util.Log2
 
 abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
@@ -84,7 +83,6 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
 
         override fun onError(e: Throwable) {
             Log2.d(TAG, "本次请求异常报错:" + e.message)
-            globalObserverOnError?.invoke(e)
         }
 
         override fun onComplete() {
@@ -105,10 +103,10 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
             if (response is BaseResponse<*>) {
                 if (response.isSuccess()) {
                     Log2.d(TAG, "接口返回response,结果为成功")
-                    onResponseSuccess(DataResult.Success(response))
+                    onResponseSuccess(response)
                 } else {
                     Log2.d(TAG, "接口返回response,结果为失败")
-                    onResponseFail(DataResult.Fail(response))
+                    onResponseFail(response)
                 }
             }
         }
@@ -118,15 +116,23 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
          *
          * @param dataResult 成功的结果
          */
-        abstract override fun onResponseSuccess(dataResult: DataResult.Success<T>)
+        abstract override fun onResponseSuccess(response: T)
 
         /**
          * 接口数据失败
          *
          * @param dataResult 失败的结果
          */
-        override fun onResponseFail(dataResult: DataResult.Fail<T>) {
-            globalResponseFail?.invoke(dataResult.data)
+        override fun onResponseFail(response: T) {
+            onResponse(response)
+        }
+
+        override fun onErrorGlobal(e: Throwable) {
+            globalObserverOnError?.invoke(e)
+        }
+
+        override fun onResponseFailGlobal(response: T) {
+            globalResponseFail?.invoke(response)
         }
 
     }
@@ -193,10 +199,10 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
             if (response is BaseResponse<*>) {
                 if (response.isSuccess()) {
                     Log2.d(TAG, "接口返回response,结果为成功")
-                    onResponseSuccess(DataResult.Success(response))
+                    onResponseSuccess(response)
                 } else {
                     Log2.d(TAG, "接口返回response,结果为失败")
-                    onResponseFail(DataResult.Fail(response))
+                    onResponseFail(response)
                 }
             }
         }
@@ -206,15 +212,23 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
          *
          * @param dataResult 成功的结果
          */
-        abstract override fun onResponseSuccess(dataResult: DataResult.Success<T>)
+        abstract override fun onResponseSuccess(response: T)
 
         /**
          * 接口数据失败
          *
          * @param dataResult 失败的结果
          */
-        override fun onResponseFail(dataResult: DataResult.Fail<T>) {
-            globalResponseFail?.invoke(dataResult.data)
+        override fun onResponseFail(response: T) {
+            onResponseFailGlobal(response)
+        }
+
+        override fun onErrorGlobal(e: Throwable) {
+            globalObserverOnError?.invoke(e)
+        }
+
+        override fun onResponseFailGlobal(response: T) {
+            globalResponseFail?.invoke(response)
         }
 
     }
