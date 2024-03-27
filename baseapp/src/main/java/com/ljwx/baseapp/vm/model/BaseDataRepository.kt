@@ -9,23 +9,23 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
 
     companion object {
 
-        private var observerOnError: ((e: Throwable) -> Unit)? = null
+        private var globalObserverOnError: ((e: Throwable) -> Unit)? = null
 
-        private var responseFail: ((data: Any?) -> Unit)? = null
+        private var globalResponseFail: ((data: Any?) -> Unit)? = null
 
         /**
          * 通用的请求错误逻辑(代码执行错误)
          */
         fun setCommonOnError(onError: (e: Throwable) -> Unit) {
             //包含了接口响应404
-            observerOnError = onError
+            globalObserverOnError = onError
         }
 
         /**
          * 通用的请求失败逻辑(接口返回结果失败)
          */
         fun setCommonResponseFail(responseFail: (data: Any?) -> Unit) {
-            Companion.responseFail = responseFail
+            globalResponseFail = responseFail
         }
     }
 
@@ -84,7 +84,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
 
         override fun onError(e: Throwable) {
             Log2.d(TAG, "本次请求异常报错:" + e.message)
-            observerOnError?.invoke(e)
+            globalObserverOnError?.invoke(e)
         }
 
         override fun onComplete() {
@@ -126,7 +126,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
          * @param dataResult 失败的结果
          */
         override fun onResponseFail(dataResult: DataResult.Fail<T>) {
-            responseFail?.invoke(dataResult.data)
+            globalResponseFail?.invoke(dataResult.data)
         }
 
     }
@@ -141,7 +141,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
 
         override fun onError(e: Throwable) {
             Log2.d(TAG, "本次请求异常报错:" + e.message)
-            observerOnError?.invoke(e)
+            globalObserverOnError?.invoke(e)
         }
 
         override fun onComplete() {
@@ -172,7 +172,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
 
         override fun onError(e: Throwable) {
             Log2.d(TAG, "本次请求异常报错:" + e.message)
-            observerOnError?.invoke(e)
+            globalObserverOnError?.invoke(e)
         }
 
         override fun onComplete() {
@@ -214,7 +214,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
          * @param dataResult 失败的结果
          */
         override fun onResponseFail(dataResult: DataResult.Fail<T>) {
-            responseFail?.invoke(dataResult.data)
+            globalResponseFail?.invoke(dataResult.data)
         }
 
     }
