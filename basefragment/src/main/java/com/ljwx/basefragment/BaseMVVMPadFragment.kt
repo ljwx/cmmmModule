@@ -15,7 +15,7 @@ abstract class BaseMVVMPadFragment<Binding : ViewDataBinding, BindingPad : ViewD
     @LayoutRes private val layoutResPad: Int
 ) : BaseBindingPadFragment<Binding, BindingPad>(layoutRes, layoutResPad) {
 
-    private val mViewModelScope by lazy {
+    protected val mViewModelScope by lazy {
         ViewModelScope()
     }
 
@@ -42,7 +42,7 @@ abstract class BaseMVVMPadFragment<Binding : ViewDataBinding, BindingPad : ViewD
 
     open fun createViewModel(): ViewModel {
         val type = javaClass.genericSuperclass as ParameterizedType
-        val modelClass = type.actualTypeArguments.getOrNull(1) as Class<ViewModel>
+        val modelClass = type.actualTypeArguments.getOrNull(2) as Class<ViewModel>
         return if (useActivityScopeVM()) mViewModelScope.getActivityScopeViewModel(
             requireActivity(),
             modelClass

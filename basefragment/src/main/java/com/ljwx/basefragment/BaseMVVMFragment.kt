@@ -13,7 +13,7 @@ import java.lang.reflect.ParameterizedType
 abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel<*>>(@LayoutRes layoutRes: Int) :
     BaseBindingFragment<Binding>(layoutRes) {
 
-    private val mViewModelScope by lazy {
+    protected val mViewModelScope by lazy {
         ViewModelScope()
     }
 
