@@ -19,6 +19,7 @@ abstract class BaseBindingPadFragment<Binding : ViewDataBinding, BindingPad : Vi
      * DataBinding
      */
     protected lateinit var mBinding: Binding
+    protected lateinit var mBindingPad: BindingPad
 
     protected var isPad = OtherUtils.isDevicePad()
 
@@ -27,9 +28,13 @@ abstract class BaseBindingPadFragment<Binding : ViewDataBinding, BindingPad : Vi
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        mBinding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
+        if (isPad) {
+            mBindingPad = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
+        } else {
+            mBinding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
+        }
         quickLayout()
-        return mBinding.root
+        return if (isPad) mBindingPad.root else mBinding.root
     }
 
     override fun getLayoutRes(): Int {
