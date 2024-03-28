@@ -42,7 +42,12 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
 
     private var onBackPressInterceptors: (ArrayList<() -> Boolean>)? = null
 
-    protected val argumentsFromType by lazy { intent.getIntExtra(BaseConstBundleKey.FROM_TYPE, -10) }
+    protected val argumentsFromType by lazy {
+        intent.getIntExtra(
+            BaseConstBundleKey.FROM_TYPE,
+            -10
+        )
+    }
 
     protected val argumentsDataId by lazy { intent.getStringExtra(BaseConstBundleKey.DATA_ID) }
 
@@ -285,7 +290,7 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
 
     }
 
-    override fun getAsyncData() {
+    override fun getAsyncData(refresh: Boolean) {
 
     }
 

@@ -59,7 +59,7 @@ open class BaseSibActivity : RxAppCompatActivity(), IPageStatusBar, IPageToolbar
         startActivity(clazz, null)
     }
 
-    override fun startActivity(clazz: Class<*>, requestCode:Int?) {
+    override fun startActivity(clazz: Class<*>, requestCode: Int?) {
         if (requestCode == null) {
             startActivity(Intent(this, clazz))
         } else {
@@ -84,7 +84,10 @@ open class BaseSibActivity : RxAppCompatActivity(), IPageStatusBar, IPageToolbar
         if (light) {
             mStatusBar.setCustomStatusBar(com.ljwx.baseapp.R.color.white, true)
         } else {
-            mStatusBar.setCustomStatusBar(com.ljwx.baseapp.R.color.base_app_textColorSecondary, false)
+            mStatusBar.setCustomStatusBar(
+                com.ljwx.baseapp.R.color.base_app_textColorSecondary,
+                false
+            )
         }
     }
 
@@ -92,7 +95,7 @@ open class BaseSibActivity : RxAppCompatActivity(), IPageStatusBar, IPageToolbar
         return mStatusBar.setCustomStatusBar(backgroundColor, fontDark)
     }
 
-    open fun initToolbar() :Toolbar?{
+    open fun initToolbar(): Toolbar? {
         return setToolbar(findViewById(com.ljwx.baseapp.R.id.base_app_toolbar))
     }
 
@@ -286,7 +289,7 @@ open class BaseSibActivity : RxAppCompatActivity(), IPageStatusBar, IPageToolbar
 
     }
 
-    override fun getAsyncData() {
+    override fun getAsyncData(refresh: Boolean) {
 
     }
 

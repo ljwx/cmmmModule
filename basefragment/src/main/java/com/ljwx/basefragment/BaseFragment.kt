@@ -28,7 +28,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.baseapp.R.layout.baseapp_state_layout_empty) : BaseToolsFragment(),
+open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.baseapp.R.layout.baseapp_state_layout_empty) :
+    BaseToolsFragment(),
     IPageLocalEvent,
     IPageDialogTips, IPageProcessStep, IPageStartPage {
 
@@ -56,7 +57,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
         mActivity = context as AppCompatActivity
     }
 
-    open fun getLayoutRes() :Int{
+    open fun getLayoutRes(): Int {
         return layoutResID
     }
 
@@ -230,7 +231,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
 
     }
 
-    override fun getAsyncData() {
+    override fun getAsyncData(refresh: Boolean) {
 
     }
 

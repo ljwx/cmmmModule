@@ -12,6 +12,6 @@ interface IPageProcessStep {
 
     fun setClickListener()
 
-    fun getAsyncData()
+    fun getAsyncData(refresh: Boolean = true)
 
 }

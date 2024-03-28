@@ -1,8 +1,8 @@
 package com.ljwx.baseapp.response
 
-sealed class DataResult<out R : Any> {
+sealed class DataResult<out R> {
 
-    data class Success<out T : Any>(val data: T) : DataResult<T>()
+    data class Success<out T>(val data: T) : DataResult<T>()
     data class Fail<out T : Any>(val data: T) : DataResult<T>()
     data class Error(val exception: Exception) : DataResult<Nothing>()
 

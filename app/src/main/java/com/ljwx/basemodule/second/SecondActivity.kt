@@ -73,8 +73,8 @@ class SecondActivity :
 //        }
     }
 
-    override fun getAsyncData() {
-        super.getAsyncData()
+    override fun getAsyncData(refresh: Boolean) {
+        super.getAsyncData(refresh)
 //        mViewModel.requestTest()
     }
 
