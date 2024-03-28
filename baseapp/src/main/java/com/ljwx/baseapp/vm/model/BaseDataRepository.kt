@@ -115,9 +115,9 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
         /**
          * 接口数据成功
          *
-         * @param data 成功的结果
+         * @param response 成功的结果
          */
-        abstract override fun <D> onResponseSuccess(data: D)
+        abstract override fun onResponseSuccess(response: T)
 
         /**
          * 接口数据失败
@@ -180,10 +180,9 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
         /**
          * 接口数据成功
          *
-         * @param data 成功的结果
+         * @param response 成功的结果
          */
-
-        abstract override fun <D> onResponseSuccess(data: D)
+        abstract override fun onResponseSuccess(response: T)
 
         /**
          * 接口数据失败
