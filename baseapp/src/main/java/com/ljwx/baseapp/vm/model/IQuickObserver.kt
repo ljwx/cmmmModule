@@ -4,7 +4,7 @@ interface IQuickObserver<T : Any> {
 
     fun onResponse(response: T)
 
-    fun onResponseSuccess(response: T)
+    fun <D> onResponseSuccess(data: D)
 
     fun onResponseFail(response: T)
 
