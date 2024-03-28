@@ -66,7 +66,7 @@ class TestRepository : BaseSecondRepository<TestService, TestService>() {
             .lifecycle()
             .subscribe(object : QuickObserver3<String>() {
 
-                override fun onResponseSuccess(result: DataResult.Success<String>) {
+                override fun onResponseSuccess(result: String) {
 
                 }
             })
