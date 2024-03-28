@@ -83,6 +83,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
 
         override fun onError(e: Throwable) {
             Log2.d(TAG, "本次请求异常报错:" + e.message)
+            onErrorGlobal(e)
         }
 
         override fun onComplete() {
@@ -114,17 +115,17 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
         /**
          * 接口数据成功
          *
-         * @param dataResult 成功的结果
+         * @param response 成功的结果
          */
         abstract override fun onResponseSuccess(response: T)
 
         /**
          * 接口数据失败
          *
-         * @param dataResult 失败的结果
+         * @param response 失败的结果
          */
         override fun onResponseFail(response: T) {
-            onResponse(response)
+            onResponseFailGlobal(response)
         }
 
         override fun onErrorGlobal(e: Throwable) {
@@ -140,37 +141,6 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
     /**
      * RxJava2版本的结果监听
      */
-    abstract inner class ObserverResponse<T> : io.reactivex.Observer<T> {
-        override fun onSubscribe(d: io.reactivex.disposables.Disposable) {
-            autoClear(d)
-        }
-
-        override fun onError(e: Throwable) {
-            Log2.d(TAG, "本次请求异常报错:" + e.message)
-            globalObserverOnError?.invoke(e)
-        }
-
-        override fun onComplete() {
-            Log2.d(TAG, "本次请求完成")
-        }
-
-        override fun onNext(value: T) {
-            Log2.d(TAG, "本次请求结果已返回")
-            onResponse(value)
-        }
-
-        /**
-         * 接口结果响应
-         *
-         * @param response 结果
-         */
-        abstract fun onResponse(response: T)
-
-    }
-
-    /**
-     * RxJava2版本的结果监听
-     */
     abstract inner class QuickObserver<T : Any> : io.reactivex.Observer<T>, IQuickObserver<T> {
         override fun onSubscribe(d: io.reactivex.disposables.Disposable) {
             autoClear(d)
@@ -178,7 +148,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
 
         override fun onError(e: Throwable) {
             Log2.d(TAG, "本次请求异常报错:" + e.message)
-            globalObserverOnError?.invoke(e)
+            onErrorGlobal(e)
         }
 
         override fun onComplete() {
@@ -230,6 +200,37 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
         override fun onResponseFailGlobal(response: T) {
             globalResponseFail?.invoke(response)
         }
+
+    }
+
+    /**
+     * RxJava2版本的结果监听,简单封装
+     */
+    abstract inner class ObserverResponse<T> : io.reactivex.Observer<T> {
+        override fun onSubscribe(d: io.reactivex.disposables.Disposable) {
+            autoClear(d)
+        }
+
+        override fun onError(e: Throwable) {
+            Log2.d(TAG, "本次请求异常报错:" + e.message)
+            globalObserverOnError?.invoke(e)
+        }
+
+        override fun onComplete() {
+            Log2.d(TAG, "本次请求完成")
+        }
+
+        override fun onNext(value: T) {
+            Log2.d(TAG, "本次请求结果已返回")
+            onResponse(value)
+        }
+
+        /**
+         * 接口结果响应
+         *
+         * @param response 结果
+         */
+        abstract fun onResponse(response: T)
 
     }
 

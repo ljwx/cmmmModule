@@ -4,9 +4,9 @@ interface IQuickObserver<T : Any> {
 
     fun onResponse(response: T)
 
-    fun onResponseSuccess(dataResult: T)
+    fun onResponseSuccess(response: T)
 
-    fun onResponseFail(dataResult: T)
+    fun onResponseFail(response: T)
 
     fun onErrorGlobal(e: Throwable)
 
