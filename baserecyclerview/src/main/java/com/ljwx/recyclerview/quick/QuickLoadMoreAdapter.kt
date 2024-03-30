@@ -1,6 +1,7 @@
 package com.ljwx.recyclerview.quick
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.*
@@ -10,6 +11,7 @@ import com.ljwx.recyclerview.adapter.MultipleTypeAdapter
 import com.ljwx.recyclerview.diff.ItemDiffCallback
 import com.ljwx.recyclerview.holder.ItemHolder
 import com.ljwx.recyclerview.itemtype.*
+import com.ljwx.recyclerview.loadmore.LoadMoreStatus
 import com.ljwx.recyclerview.loadmore.LoadMoreTrigger
 import com.ljwx.recyclerview.loadmore.view.LoadMoreItem
 
@@ -21,16 +23,6 @@ class QuickLoadMoreAdapter<Item : Any>(
     itemClick: ((ItemHolder, Item) -> Unit)? = null,
 ) : MultipleTypeAdapter(config = AsyncDifferConfig.Builder(ItemDiffCallback()).build()),
     ItemBindClick<Item> {
-
-    companion object {
-        const val STATE_LOADING = 0
-        const val STATE_OFFLINE = 1
-        const val STATE_EMPTY = 2
-
-        const val STATE_HAS_MORE = 3
-        const val STATE_COMPLETE = 4
-        const val STATE_ERROR = 5
-    }
 
     private var mItemType: ItemTypeLayout<Item>
 
@@ -44,11 +36,7 @@ class QuickLoadMoreAdapter<Item : Any>(
 
     init {
         val loadMoreItem = mLoadMoreItemType as ItemType<Any, ItemHolder>
-        mItemType = ItemTypeBinding(
-            itemClass,
-            layoutResId,
-            itemClick = itemClick
-        )
+        mItemType = ItemTypeBinding(itemClass, layoutResId, itemClick = itemClick)
         mItemTypes = arrayOf(loadMoreItem, (mItemType as ItemType<Any, ItemHolder>))
     }
 
@@ -67,17 +55,21 @@ class QuickLoadMoreAdapter<Item : Any>(
         mLoadMoreTrigger.onLoadMore = listener
     }
 
-    fun setLoadMoreErrorView(@LayoutRes layout: Int, @IdRes retryId: Int) {
-        mLoadMorePresenter.loadMoreError = Pair(layout, retryId)
+    fun setLoadMoreLoadingView(@LayoutRes layout: Int) {
+        mLoadMorePresenter.loadMoreLoadingLayout = layout
     }
 
-    fun setLoadMoreComplete(@LayoutRes layout: Int) {
+    fun setLoadMoreErrorView(@LayoutRes layout: Int, @IdRes retryId: Int?) {
+        mLoadMorePresenter.loadMoreErrorLayout = Pair(layout, retryId)
+    }
+
+    fun setLoadMoreCompleteView(@LayoutRes layout: Int) {
         mLoadMorePresenter.loadMoreCompleteLayout = layout
     }
 
     fun startLoading(online: Boolean = true) {
         if (currentList.isEmpty()) {
-            setStatus(if (online) STATE_LOADING else STATE_OFFLINE)
+            setStatus(if (online) LoadMoreStatus.STATE_LOADING else LoadMoreStatus.STATE_OFFLINE)
         }
     }
 
@@ -86,7 +78,7 @@ class QuickLoadMoreAdapter<Item : Any>(
      */
     fun startLoadMore() {
         if (!mLoadMoreTrigger.isLoading) {
-            setStatus(STATE_HAS_MORE)
+            setStatus(LoadMoreStatus.STATE_HAS_MORE)
             mLoadMoreTrigger.loadMore()
         }
     }
@@ -95,7 +87,11 @@ class QuickLoadMoreAdapter<Item : Any>(
      * 加载错误
      */
     fun showError() {
-        setStatus(STATE_ERROR)
+        setStatus(LoadMoreStatus.STATE_ERROR)
+    }
+
+    fun showComplete() {
+        setStatus(LoadMoreStatus.STATE_COMPLETE)
     }
 
 
@@ -104,18 +100,19 @@ class QuickLoadMoreAdapter<Item : Any>(
         val newList = if (isRefresh) list else (listOf<Any>() + currentList + list)
         submitList(newList)
         when {
-            newList.isEmpty() -> setStatus(STATE_EMPTY)
-            hasMore -> setStatus(STATE_HAS_MORE)
-            else -> setStatus(STATE_COMPLETE)
+            newList.isEmpty() -> setStatus(LoadMoreStatus.STATE_EMPTY)
+            hasMore -> setStatus(LoadMoreStatus.STATE_HAS_MORE)
+            else -> setStatus(LoadMoreStatus.STATE_COMPLETE)
         }
     }
 
-    private fun setStatus(status: Int) {
+    private fun setStatus(@LoadMoreStatus.LoadMoreStatus status: String) {
         if (mLoadMoreVisible && mLoadMoreItem.state != status) {
             mLoadMoreItem.state = status
         }
+        Log.d("加载更多", "newStatus:"+status+",loadMoreVisible:"+mLoadMoreVisible+",itemStatus:"+mLoadMoreItem.state)
         notifyItemChanged(itemCount - 1)
-        mLoadMoreTrigger.hasMore = status == STATE_HAS_MORE
+        mLoadMoreTrigger.hasMore = status == LoadMoreStatus.STATE_HAS_MORE
         mLoadMoreTrigger.isLoading = false
     }
 

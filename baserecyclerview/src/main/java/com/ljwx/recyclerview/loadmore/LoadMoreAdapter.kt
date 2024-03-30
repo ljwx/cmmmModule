@@ -19,16 +19,6 @@ class LoadMoreAdapter(
     config: AsyncDifferConfig<Any> = AsyncDifferConfig.Builder(ItemDiffCallback()).build(),
 ) : MultipleTypeAdapter(*itemTypes, config = config) {
 
-    companion object {
-        const val STATE_LOADING = 0
-        const val STATE_OFFLINE = 1
-        const val STATE_EMPTY = 2
-
-        const val STATE_HAS_MORE = 3
-        const val STATE_COMPLETE = 4
-        const val STATE_ERROR = 5
-    }
-
     private val mLoadMoreItem = LoadMoreItem()
     private val mLoadMoreItemType =
         ItemTypeViewClass(LoadMoreItem::class.java, LoadMoreView::class.java) { holder, item ->
@@ -57,11 +47,15 @@ class LoadMoreAdapter(
         mLoadMoreTrigger.onLoadMore = listener
     }
 
-    fun setLoadMoreErrorView(@LayoutRes layout: Int, @IdRes retryId: Int) {
-        mLoadMorePresenter.loadMoreError = Pair(layout, retryId)
+    fun setLoadMoreLoadingView(@LayoutRes layout: Int) {
+        mLoadMorePresenter.loadMoreLoadingLayout = layout
     }
 
-    fun setLoadMoreComplete(@LayoutRes layout: Int) {
+    fun setLoadMoreErrorView(@LayoutRes layout: Int, @IdRes retryId: Int) {
+        mLoadMorePresenter.loadMoreErrorLayout = Pair(layout, retryId)
+    }
+
+    fun setLoadMoreCompleteView(@LayoutRes layout: Int) {
         mLoadMorePresenter.loadMoreCompleteLayout = layout
     }
 
@@ -75,7 +69,7 @@ class LoadMoreAdapter(
 
     fun startLoading(online: Boolean = true) {
         if (currentList.isEmpty()) {
-            setStatus(if (online) STATE_LOADING else STATE_OFFLINE)
+            setStatus(if (online) LoadMoreStatus.STATE_LOADING else LoadMoreStatus.STATE_OFFLINE)
         }
     }
 
@@ -84,7 +78,7 @@ class LoadMoreAdapter(
      */
     fun startLoadMore() {
         if (!mLoadMoreTrigger.isLoading) {
-            setStatus(STATE_HAS_MORE)
+            setStatus(LoadMoreStatus.STATE_HAS_MORE)
             mLoadMoreTrigger.loadMore()
         }
     }
@@ -93,7 +87,11 @@ class LoadMoreAdapter(
      * 加载错误
      */
     fun showError() {
-        setStatus(STATE_ERROR)
+        setStatus(LoadMoreStatus.STATE_ERROR)
+    }
+
+    fun showComplete() {
+        setStatus(LoadMoreStatus.STATE_COMPLETE)
     }
 
 
@@ -102,18 +100,18 @@ class LoadMoreAdapter(
         val newList = if (isRefresh) list else (listOf<Any>() + currentList + list)
         submitList(newList)
         when {
-            newList.isEmpty() -> setStatus(STATE_EMPTY)
-            hasMore -> setStatus(STATE_HAS_MORE)
-            else -> setStatus(STATE_COMPLETE)
+            newList.isEmpty() -> setStatus(LoadMoreStatus.STATE_EMPTY)
+            hasMore -> setStatus(LoadMoreStatus.STATE_HAS_MORE)
+            else -> setStatus(LoadMoreStatus.STATE_COMPLETE)
         }
     }
 
-    private fun setStatus(status: Int) {
+    private fun setStatus(@LoadMoreStatus.LoadMoreStatus status: String) {
         if (mLoadMoreVisible && mLoadMoreItem.state != status) {
             mLoadMoreItem.state = status
         }
         notifyItemChanged(itemCount - 1)
-        mLoadMoreTrigger.hasMore = status == STATE_HAS_MORE
+        mLoadMoreTrigger.hasMore = status == LoadMoreStatus.STATE_HAS_MORE
         mLoadMoreTrigger.isLoading = false
     }
 
