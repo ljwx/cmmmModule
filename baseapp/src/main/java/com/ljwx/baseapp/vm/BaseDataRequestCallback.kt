@@ -1,6 +1,6 @@
 package com.ljwx.baseapp.vm
 
-abstract class DataRequestCallback<D> {
+abstract class BaseDataRequestCallback<D> {
 
     abstract fun onSuccess(data: D)
 
