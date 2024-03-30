@@ -19,12 +19,13 @@ object GlobalDataRepository {
         userInfo.observe(owner, observer)
     }
 
-    fun <T : IBaseUserInfo> setUserInfo(info: T, changeType: Int? = 0) {
-        info.setInfoChangeType(changeType)
+    fun setUserInfo(info: IBaseUserInfo?, changeType: Int? = 0) {
+        info?.setInfoChangeType(changeType)
         userInfo.value = info
     }
 
-    fun <T : IBaseUserInfo> postUserInfo(info: T) {
+    fun postUserInfo(info: IBaseUserInfo?, changeType: Int? = 0) {
+        info?.setInfoChangeType(changeType)
         userInfo.postValue(info)
     }
 
@@ -32,12 +33,13 @@ object GlobalDataRepository {
         configInfo.observe(owner, observer)
     }
 
-    fun <T : IBaseConfigInfo> setConfigInfo(info: T, changeType: Int? = 0) {
-        info.setInfoChangeType(changeType)
+    fun setConfigInfo(info: IBaseConfigInfo?, changeType: Int? = 0) {
+        info?.setInfoChangeType(changeType)
         configInfo.value = info
     }
 
-    fun <T : IBaseConfigInfo> postUserInfo(info: T) {
+    fun postConfigInfo(info: IBaseConfigInfo?, changeType: Int? = 0) {
+        info?.setInfoChangeType(changeType)
         configInfo.postValue(info)
     }
 

@@ -17,7 +17,7 @@ import com.ljwx.basemodule.vm.TestViewModel
 class ThirdActivity :
     BaseMVVMActivity<ActivityThirdBinding, TestViewModel>(R.layout.activity_third) {
 
-    override var enableUserInfoChangeListener = false
+    override var enableUserInfoChangeListener = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,7 @@ class ThirdActivity :
 
             }
             info.setInfoChangeType(3)
-            GlobalDataRepository.postUserInfo(info)
+            GlobalDataRepository.postUserInfo(null)
         }
     }
 
@@ -48,8 +48,8 @@ class ThirdActivity :
 
     override fun userInfoChange(data: IBaseUserInfo?, type: Int) {
         super.userInfoChange(data, type)
+        Log.d(TAG, "asdf3")
         if (type == 3) {
-            Log.d(TAG, "asdf3")
         }
     }
 }
