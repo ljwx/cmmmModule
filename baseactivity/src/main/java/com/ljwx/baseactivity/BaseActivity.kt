@@ -28,25 +28,18 @@ import com.ljwx.router.RouterPostcard
 open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPageLocalEvent,
     IPageDialogTips, IPageProcessStep, IPageActivity, IPageStartPage {
 
-    open val TAG = this.javaClass.simpleName + "[Activity]"
+    open val TAG = this.javaClass.simpleName + "-[page"
 
-    private val mStatusBar by lazy {
-        BaseStatusBar(this)
-    }
+    private val mStatusBar by lazy { BaseStatusBar(this) }
 
     private var mStateSaved = false
 
-    private val broadcastReceivers by lazy {
-        HashMap<String, BroadcastReceiver>()
-    }
+    private val broadcastReceivers by lazy { HashMap<String, BroadcastReceiver>() }
 
     private var onBackPressInterceptors: (ArrayList<() -> Boolean>)? = null
 
     protected val argumentsFromType by lazy {
-        intent.getIntExtra(
-            BaseConstBundleKey.FROM_TYPE,
-            -10
-        )
+        intent.getIntExtra(BaseConstBundleKey.FROM_TYPE, -10)
     }
 
     protected val argumentsDataId by lazy { intent.getStringExtra(BaseConstBundleKey.DATA_ID) }

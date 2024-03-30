@@ -9,7 +9,10 @@ import com.google.android.material.tabs.TabLayout
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.ljwx.baseactivity.fast.QuickTabLayoutActivity
 import com.ljwx.baseapp.extensions.singleClick
+import com.ljwx.baseapp.infochange.BaseUserInfo
+import com.ljwx.baseapp.infochange.IBaseUserInfo
 import com.ljwx.baseapp.util.MemoryUtils
+import com.ljwx.baseapp.vm.GlobalDataRepository
 import com.ljwx.baseeventbus.flow.FlowEventBus
 import com.ljwx.basemodule.R
 import com.ljwx.basemodule.constance.ConstRouter
@@ -29,6 +32,8 @@ class SecondActivity :
 
     private var hideTestFragment: HideTestFragment? = null
     private var otherFragment: LoadMoreFragment? = null
+
+    override var enableUserInfoChangeListener = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,8 +63,7 @@ class SecondActivity :
             MemoryUtils.requestMemory()
         }
         mBinding.button.singleClick {
-//            routerTo(ConstRouter.THIRD_ACTIVITY).start()
-            hide()
+            routerTo(ConstRouter.THIRD_ACTIVITY).start()
         }
         mBinding.task.singleClick {
 //            mViewModel.intervalPost()
@@ -84,14 +88,11 @@ class SecondActivity :
             .add(R.id.fragment_container_test, HideTestFragment()).commit()
     }
 
-    private fun hide() {
-        hideTestFragment = hideTestFragment ?: HideTestFragment()
-        otherFragment = otherFragment ?: LoadMoreFragment()
-        supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container_test, otherFragment!!)
-            .hide(hideTestFragment!!)
-            .show(otherFragment!!)
-            .commit()
+    override fun userInfoChange(data: IBaseUserInfo?, type: Int) {
+        super.userInfoChange(data, type)
+        if (type == 3) {
+            Log.d(TAG, "asdf2")
+        }
     }
 
 }

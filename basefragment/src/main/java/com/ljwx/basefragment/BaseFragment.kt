@@ -33,7 +33,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
     IPageLocalEvent,
     IPageDialogTips, IPageProcessStep, IPageStartPage {
 
-    open val TAG = this.javaClass.simpleName + "[Fragment]"
+    open val TAG = this.javaClass.simpleName + "-[page"
 
     protected var mActivity: AppCompatActivity? = null
 

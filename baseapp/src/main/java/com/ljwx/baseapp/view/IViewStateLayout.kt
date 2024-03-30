@@ -4,13 +4,13 @@ import android.view.View
 import android.view.View.OnClickListener
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
-import com.ljwx.baseapp.constant.LayoutStatus
+import com.ljwx.baseapp.constant.BaseLayoutStatus
 
 interface IViewStateLayout {
 
-    fun showStateLayout(@LayoutStatus.LayoutStatus state: Int, @LayoutRes layout: Int)
+    fun showStateLayout(@BaseLayoutStatus.LayoutStatus state: Int, @LayoutRes layout: Int)
 
-    fun setStateLayout(@LayoutStatus.LayoutStatus state: Int, @LayoutRes layout: Int)
+    fun setStateLayout(@BaseLayoutStatus.LayoutStatus state: Int, @LayoutRes layout: Int)
 
     fun setContent(view: View)
 
