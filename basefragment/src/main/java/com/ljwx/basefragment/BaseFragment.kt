@@ -37,7 +37,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
 
     protected var mActivity: AppCompatActivity? = null
 
-    private var isLoaded = false
+    private var isLazyInitialized = false
 
     /**
      * 广播事件
@@ -71,9 +71,9 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
 
     override fun onResume() {
         super.onResume()
-        if (!isLoaded && !isHidden) {
+        if (!isLazyInitialized && !isHidden) {
             lazyInit()
-            isLoaded = true
+            isLazyInitialized = true
         }
     }
 
@@ -251,7 +251,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
     override fun onDestroyView() {
         super.onDestroyView()
         Log2.d(TAG, "执行onDestroyView")
-        isLoaded = false
+        isLazyInitialized = false
     }
 
     override fun onDetach() {
