@@ -42,9 +42,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
     /**
      * 广播事件
      */
-    private val broadcastReceivers by lazy {
-        HashMap<String, BroadcastReceiver>()
-    }
+    private var broadcastReceivers: HashMap<String, BroadcastReceiver>? = null
 
     protected val argumentsFromType by lazy {
         arguments?.getInt(BaseConstBundleKey.FROM_TYPE, -10) ?: -10
@@ -173,7 +171,8 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
                 }
             }
         }
-        broadcastReceivers[action] = receiver
+        broadcastReceivers = broadcastReceivers ?: HashMap()
+        broadcastReceivers?.put(action, receiver)
         Log2.d(TAG, "注册事件广播:$action")
         context?.let {
             LocalBroadcastManager.getInstance(it).registerReceiver(receiver, intentFilter)
@@ -192,13 +191,13 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
 
     override fun unregisterLocalEvent(action: String?) {
         action?.let {
-            broadcastReceivers[it]?.let {
+            broadcastReceivers?.get(action)?.let {
                 context?.let { c ->
                     Log2.d(TAG, "注销事件广播:$action")
                     LocalBroadcastManager.getInstance(c).unregisterReceiver(it)
                 }
             }
-            broadcastReceivers.remove(it)
+            broadcastReceivers?.remove(it)
         }
     }
 
@@ -263,7 +262,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
     override fun onDestroy() {
         super.onDestroy()
         Log2.d(TAG, "执行onDestroy")
-        broadcastReceivers.keys.toList().forEach {
+        broadcastReceivers?.keys?.toList()?.forEach {
             unregisterLocalEvent(it)
         }
     }

@@ -34,7 +34,7 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
 
     private var mStateSaved = false
 
-    private val broadcastReceivers by lazy { HashMap<String, BroadcastReceiver>() }
+    private var broadcastReceivers: HashMap<String, BroadcastReceiver>? = null
 
     private var onBackPressInterceptors: (ArrayList<() -> Boolean>)? = null
 
@@ -219,7 +219,8 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
                 }
             }
         }
-        broadcastReceivers[action] = receiver
+        broadcastReceivers = broadcastReceivers ?: HashMap()
+        broadcastReceivers?.put(action, receiver)
         Log2.d(TAG, "注册事件广播:$action")
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, intentFilter)
     }
@@ -234,11 +235,11 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
 
     override fun unregisterLocalEvent(action: String?) {
         action?.let {
-            broadcastReceivers[it]?.let {
+            broadcastReceivers?.get(it)?.let {
                 Log2.d(TAG, "注销事件广播:$action")
                 LocalBroadcastManager.getInstance(this).unregisterReceiver(it)
             }
-            broadcastReceivers.remove(it)
+            broadcastReceivers?.remove(it)
         }
     }
 
@@ -294,7 +295,7 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
     override fun onDestroy() {
         super.onDestroy()
         Log2.d(TAG, "执行onDestroy")
-        broadcastReceivers.keys.toList().forEach {
+        broadcastReceivers?.keys?.toList()?.forEach {
             unregisterLocalEvent(it)
         }
     }
