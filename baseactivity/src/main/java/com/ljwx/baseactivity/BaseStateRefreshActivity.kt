@@ -7,7 +7,7 @@ import com.ljwx.baseapp.BasePopupLoading
 import com.ljwx.baseapp.R
 import com.ljwx.baseapp.view.IViewRefreshLayout
 import com.ljwx.baseapp.view.IViewStateLayout
-import com.ljwx.baseapp.constant.LayoutStatus
+import com.ljwx.baseapp.constant.BaseLayoutStatus
 import com.ljwx.baseapp.extensions.isMainThread
 import com.ljwx.baseapp.page.IPagePopLoading
 import com.ljwx.baseapp.page.IPageRefreshLayout
@@ -101,7 +101,7 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
     override fun setStateLayoutClick(
         id: Int,
         listener: View.OnClickListener,
-        @LayoutStatus.LayoutStatus vararg stateLayout: Int
+        @BaseLayoutStatus.LayoutStatus vararg stateLayout: Int
     ) {
         this.mStateLayout?.setClickListener(id, listener)
 //        if (retryId != null) {
@@ -119,24 +119,24 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
      * @param state 哪种状态
      * @param layout 对应的布局
      */
-    fun setStateLayoutRes(@LayoutStatus.LayoutStatus state: Int, @LayoutRes layout: Int) {
+    fun setStateLayoutRes(@BaseLayoutStatus.LayoutStatus state: Int, @LayoutRes layout: Int) {
         when (state) {
-            LayoutStatus.LOADING -> {
+            BaseLayoutStatus.LOADING -> {
                 mStateLayout?.setLayoutLoading(layout)
 //                mStateLayout?.emptyLayout = layout
             }
 
-            LayoutStatus.EMPTY -> {
+            BaseLayoutStatus.EMPTY -> {
                 mStateLayout?.setLayoutEmpty(layout)
 //                mStateLayout?.emptyLayout = layout
             }
 
-            LayoutStatus.ERROR -> {
+            BaseLayoutStatus.ERROR -> {
                 mStateLayout?.setLayoutError(layout)
 //                mStateLayout?.errorLayout = layout
             }
 
-            LayoutStatus.OFFLINE -> {
+            BaseLayoutStatus.OFFLINE -> {
 
             }
 
@@ -165,25 +165,25 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
         }
     }
 
-    private fun showState(@LayoutStatus.LayoutStatus state: Int, tag: Any?) {
+    private fun showState(@BaseLayoutStatus.LayoutStatus state: Int, tag: Any?) {
         when (state) {
-            LayoutStatus.LOADING -> {
+            BaseLayoutStatus.LOADING -> {
                 mStateLayout?.showLoading(tag)
             }
 
-            LayoutStatus.CONTENT -> {
+            BaseLayoutStatus.CONTENT -> {
                 mStateLayout?.showContent()
             }
 
-            LayoutStatus.EMPTY -> {
+            BaseLayoutStatus.EMPTY -> {
                 mStateLayout?.showEmpty()
             }
 
-            LayoutStatus.ERROR -> {
+            BaseLayoutStatus.ERROR -> {
                 mStateLayout?.showError(tag)
             }
 
-            LayoutStatus.OFFLINE -> {
+            BaseLayoutStatus.OFFLINE -> {
 
             }
         }

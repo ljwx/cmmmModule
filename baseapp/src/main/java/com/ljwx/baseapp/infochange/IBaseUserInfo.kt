@@ -1,4 +1,4 @@
-package com.ljwx.baseapp.user
+package com.ljwx.baseapp.infochange
 
 
 interface IBaseUserInfo {

@@ -3,7 +3,7 @@ package com.ljwx.baseapp.page
 import android.view.View
 import androidx.annotation.IdRes
 import com.ljwx.baseapp.view.IViewStateLayout
-import com.ljwx.baseapp.constant.LayoutStatus
+import com.ljwx.baseapp.constant.BaseLayoutStatus
 
 interface IPageStateLayout {
     /**
@@ -15,7 +15,7 @@ interface IPageStateLayout {
      * 显示多状态
      */
     fun showStateLayout(
-        @LayoutStatus.LayoutStatus state: Int,
+        @BaseLayoutStatus.LayoutStatus state: Int,
         show: Boolean = true,
         tag: Any? = null
     )
@@ -26,7 +26,7 @@ interface IPageStateLayout {
     fun setStateLayoutClick(
         @IdRes id: Int,
         listener: View.OnClickListener,
-        @LayoutStatus.LayoutStatus vararg stateLayout: Int
+        @BaseLayoutStatus.LayoutStatus vararg stateLayout: Int
     )
 
     /**

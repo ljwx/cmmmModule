@@ -28,22 +28,21 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-open class BaseFragment(@LayoutRes private val layoutResID: Int) : BaseToolsFragment(),
+open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.baseapp.R.layout.baseapp_state_layout_empty) :
+    BaseToolsFragment(),
     IPageLocalEvent,
     IPageDialogTips, IPageProcessStep, IPageStartPage {
 
-    open val TAG = this.javaClass.simpleName + "[Fragment]"
+    open val TAG = this.javaClass.simpleName + "-[page"
 
     protected var mActivity: AppCompatActivity? = null
 
-    private var isLoaded = false
+    private var isLazyInitialized = false
 
     /**
      * 广播事件
      */
-    private val broadcastReceivers by lazy {
-        HashMap<String, BroadcastReceiver>()
-    }
+    private var broadcastReceivers: HashMap<String, BroadcastReceiver>? = null
 
     protected val argumentsFromType by lazy {
         arguments?.getInt(BaseConstBundleKey.FROM_TYPE, -10) ?: -10
@@ -56,19 +55,23 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : BaseToolsFrag
         mActivity = context as AppCompatActivity
     }
 
+    open fun getLayoutRes(): Int {
+        return layoutResID
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return LayoutInflater.from(requireContext()).inflate(layoutResID, container, false)
+        return LayoutInflater.from(requireContext()).inflate(getLayoutRes(), container, false)
     }
 
     override fun onResume() {
         super.onResume()
-        if (!isLoaded && !isHidden) {
+        if (!isLazyInitialized && !isHidden) {
             lazyInit()
-            isLoaded = true
+            isLazyInitialized = true
         }
     }
 
@@ -168,7 +171,8 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : BaseToolsFrag
                 }
             }
         }
-        broadcastReceivers[action] = receiver
+        broadcastReceivers = broadcastReceivers ?: HashMap()
+        broadcastReceivers?.put(action, receiver)
         Log2.d(TAG, "注册事件广播:$action")
         context?.let {
             LocalBroadcastManager.getInstance(it).registerReceiver(receiver, intentFilter)
@@ -187,13 +191,13 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : BaseToolsFrag
 
     override fun unregisterLocalEvent(action: String?) {
         action?.let {
-            broadcastReceivers[it]?.let {
+            broadcastReceivers?.get(action)?.let {
                 context?.let { c ->
                     Log2.d(TAG, "注销事件广播:$action")
                     LocalBroadcastManager.getInstance(c).unregisterReceiver(it)
                 }
             }
-            broadcastReceivers.remove(it)
+            broadcastReceivers?.remove(it)
         }
     }
 
@@ -226,7 +230,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : BaseToolsFrag
 
     }
 
-    override fun getAsyncData() {
+    override fun getAsyncData(refresh: Boolean) {
 
     }
 
@@ -246,7 +250,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : BaseToolsFrag
     override fun onDestroyView() {
         super.onDestroyView()
         Log2.d(TAG, "执行onDestroyView")
-        isLoaded = false
+        isLazyInitialized = false
     }
 
     override fun onDetach() {
@@ -258,7 +262,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int) : BaseToolsFrag
     override fun onDestroy() {
         super.onDestroy()
         Log2.d(TAG, "执行onDestroy")
-        broadcastReceivers.keys.toList().forEach {
+        broadcastReceivers?.keys?.toList()?.forEach {
             unregisterLocalEvent(it)
         }
     }

@@ -2,30 +2,29 @@ package com.ljwx.baseapp.vm.model
 
 import com.ljwx.baseapp.constant.ConstTag
 import com.ljwx.baseapp.response.BaseResponse
-import com.ljwx.baseapp.response.DataResult
 import com.ljwx.baseapp.util.Log2
 
 abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
 
     companion object {
 
-        private var observerOnError: ((e: Throwable) -> Unit)? = null
+        private var globalObserverOnError: ((e: Throwable) -> Unit)? = null
 
-        private var responseFail: ((data: Any?) -> Unit)? = null
+        private var globalResponseFail: ((data: Any?) -> Unit)? = null
 
         /**
          * 通用的请求错误逻辑(代码执行错误)
          */
         fun setCommonOnError(onError: (e: Throwable) -> Unit) {
             //包含了接口响应404
-            observerOnError = onError
+            globalObserverOnError = onError
         }
 
         /**
          * 通用的请求失败逻辑(接口返回结果失败)
          */
         fun setCommonResponseFail(responseFail: (data: Any?) -> Unit) {
-            Companion.responseFail = responseFail
+            globalResponseFail = responseFail
         }
     }
 
@@ -84,7 +83,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
 
         override fun onError(e: Throwable) {
             Log2.d(TAG, "本次请求异常报错:" + e.message)
-            observerOnError?.invoke(e)
+            onErrorGlobal(e)
         }
 
         override fun onComplete() {
@@ -105,10 +104,10 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
             if (response is BaseResponse<*>) {
                 if (response.isSuccess()) {
                     Log2.d(TAG, "接口返回response,结果为成功")
-                    onResponseSuccess(DataResult.Success(response))
+                    onResponseSuccess(response)
                 } else {
                     Log2.d(TAG, "接口返回response,结果为失败")
-                    onResponseFail(DataResult.Fail(response))
+                    onResponseFail(response)
                 }
             }
         }
@@ -116,23 +115,96 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
         /**
          * 接口数据成功
          *
-         * @param dataResult 成功的结果
+         * @param response 成功的结果
          */
-        abstract override fun onResponseSuccess(dataResult: DataResult.Success<T>)
+        abstract override fun onResponseSuccess(response: T)
 
         /**
          * 接口数据失败
          *
-         * @param dataResult 失败的结果
+         * @param response 失败的结果
          */
-        override fun onResponseFail(dataResult: DataResult.Fail<T>) {
-            responseFail?.invoke(dataResult.data)
+        override fun onResponseFail(response: T) {
+            onResponseFailGlobal(response)
+        }
+
+        override fun onErrorGlobal(e: Throwable) {
+            globalObserverOnError?.invoke(e)
+        }
+
+        override fun onResponseFailGlobal(response: T) {
+            globalResponseFail?.invoke(response)
         }
 
     }
 
     /**
      * RxJava2版本的结果监听
+     */
+    abstract inner class QuickObserver<T : Any> : io.reactivex.Observer<T>, IQuickObserver<T> {
+        override fun onSubscribe(d: io.reactivex.disposables.Disposable) {
+            autoClear(d)
+        }
+
+        override fun onError(e: Throwable) {
+            Log2.d(TAG, "本次请求异常报错:" + e.message)
+            onErrorGlobal(e)
+        }
+
+        override fun onComplete() {
+            Log2.d(TAG, "本次请求完成")
+        }
+
+        override fun onNext(value: T) {
+            onResponse(value)
+        }
+
+        /**
+         * 接口结果响应
+         *
+         * @param response 结果
+         */
+        override fun onResponse(response: T) {
+            Log2.d(TAG, "接口返回response")
+            if (response is BaseResponse<*>) {
+                if (response.isSuccess()) {
+                    Log2.d(TAG, "接口返回response,结果为成功")
+                    onResponseSuccess(response)
+                } else {
+                    Log2.d(TAG, "接口返回response,结果为失败")
+                    onResponseFail(response)
+                }
+            }
+        }
+
+        /**
+         * 接口数据成功
+         *
+         * @param response 成功的结果
+         */
+        abstract override fun onResponseSuccess(response: T)
+
+        /**
+         * 接口数据失败
+         *
+         * @param dataResult 失败的结果
+         */
+        override fun onResponseFail(response: T) {
+            onResponseFailGlobal(response)
+        }
+
+        override fun onErrorGlobal(e: Throwable) {
+            globalObserverOnError?.invoke(e)
+        }
+
+        override fun onResponseFailGlobal(response: T) {
+            globalResponseFail?.invoke(response)
+        }
+
+    }
+
+    /**
+     * RxJava2版本的结果监听,简单封装
      */
     abstract inner class ObserverResponse<T> : io.reactivex.Observer<T> {
         override fun onSubscribe(d: io.reactivex.disposables.Disposable) {
@@ -141,7 +213,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
 
         override fun onError(e: Throwable) {
             Log2.d(TAG, "本次请求异常报错:" + e.message)
-            observerOnError?.invoke(e)
+            globalObserverOnError?.invoke(e)
         }
 
         override fun onComplete() {
@@ -159,63 +231,6 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
          * @param response 结果
          */
         abstract fun onResponse(response: T)
-
-    }
-
-    /**
-     * RxJava2版本的结果监听
-     */
-    abstract inner class QuickObserver<T : Any> : io.reactivex.Observer<T>, IQuickObserver<T> {
-        override fun onSubscribe(d: io.reactivex.disposables.Disposable) {
-            autoClear(d)
-        }
-
-        override fun onError(e: Throwable) {
-            Log2.d(TAG, "本次请求异常报错:" + e.message)
-            observerOnError?.invoke(e)
-        }
-
-        override fun onComplete() {
-            Log2.d(TAG, "本次请求完成")
-        }
-
-        override fun onNext(value: T) {
-            onResponse(value)
-        }
-
-        /**
-         * 接口结果响应
-         *
-         * @param response 结果
-         */
-        override fun onResponse(response: T) {
-            Log2.d(TAG, "接口返回response")
-            if (response is BaseResponse<*>) {
-                if (response.isSuccess()) {
-                    Log2.d(TAG, "接口返回response,结果为成功")
-                    onResponseSuccess(DataResult.Success(response))
-                } else {
-                    Log2.d(TAG, "接口返回response,结果为失败")
-                    onResponseFail(DataResult.Fail(response))
-                }
-            }
-        }
-
-        /**
-         * 接口数据成功
-         *
-         * @param dataResult 成功的结果
-         */
-        abstract override fun onResponseSuccess(dataResult: DataResult.Success<T>)
-
-        /**
-         * 接口数据失败
-         *
-         * @param dataResult 失败的结果
-         */
-        override fun onResponseFail(dataResult: DataResult.Fail<T>) {
-            responseFail?.invoke(dataResult.data)
-        }
 
     }
 

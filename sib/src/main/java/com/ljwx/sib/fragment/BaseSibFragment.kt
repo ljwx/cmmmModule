@@ -66,7 +66,7 @@ abstract class BaseSibFragment() : RxFragment(), IPageLocalEvent,
     /**
      * 路由快速跳转
      */
-    override fun startActivity(clazz: Class<*>, requestCode:Int?) {
+    override fun startActivity(clazz: Class<*>, requestCode: Int?) {
         context?.let {
             if (requestCode == null) {
                 startActivity(Intent(it, clazz))
@@ -223,7 +223,7 @@ abstract class BaseSibFragment() : RxFragment(), IPageLocalEvent,
 
     }
 
-    override fun getAsyncData() {
+    override fun getAsyncData(refresh: Boolean) {
 
     }
 

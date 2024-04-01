@@ -28,21 +28,19 @@ import com.ljwx.router.RouterPostcard
 open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPageLocalEvent,
     IPageDialogTips, IPageProcessStep, IPageActivity, IPageStartPage {
 
-    open val TAG = this.javaClass.simpleName + "[Activity]"
+    open val TAG = this.javaClass.simpleName + "-[page"
 
-    private val mStatusBar by lazy {
-        BaseStatusBar(this)
-    }
+    private val mStatusBar by lazy { BaseStatusBar(this) }
 
     private var mStateSaved = false
 
-    private val broadcastReceivers by lazy {
-        HashMap<String, BroadcastReceiver>()
-    }
+    private var broadcastReceivers: HashMap<String, BroadcastReceiver>? = null
 
     private var onBackPressInterceptors: (ArrayList<() -> Boolean>)? = null
 
-    protected val argumentsFromType by lazy { intent.getIntExtra(BaseConstBundleKey.FROM_TYPE, -10) }
+    protected val argumentsFromType by lazy {
+        intent.getIntExtra(BaseConstBundleKey.FROM_TYPE, -10)
+    }
 
     protected val argumentsDataId by lazy { intent.getStringExtra(BaseConstBundleKey.DATA_ID) }
 
@@ -221,7 +219,8 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
                 }
             }
         }
-        broadcastReceivers[action] = receiver
+        broadcastReceivers = broadcastReceivers ?: HashMap()
+        broadcastReceivers?.put(action, receiver)
         Log2.d(TAG, "注册事件广播:$action")
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, intentFilter)
     }
@@ -236,11 +235,11 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
 
     override fun unregisterLocalEvent(action: String?) {
         action?.let {
-            broadcastReceivers[it]?.let {
+            broadcastReceivers?.get(it)?.let {
                 Log2.d(TAG, "注销事件广播:$action")
                 LocalBroadcastManager.getInstance(this).unregisterReceiver(it)
             }
-            broadcastReceivers.remove(it)
+            broadcastReceivers?.remove(it)
         }
     }
 
@@ -285,7 +284,7 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
 
     }
 
-    override fun getAsyncData() {
+    override fun getAsyncData(refresh: Boolean) {
 
     }
 
@@ -296,7 +295,7 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
     override fun onDestroy() {
         super.onDestroy()
         Log2.d(TAG, "执行onDestroy")
-        broadcastReceivers.keys.toList().forEach {
+        broadcastReceivers?.keys?.toList()?.forEach {
             unregisterLocalEvent(it)
         }
     }

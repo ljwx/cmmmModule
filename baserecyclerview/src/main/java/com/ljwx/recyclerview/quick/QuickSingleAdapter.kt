@@ -23,7 +23,7 @@ open class QuickSingleAdapter<Item : Any>@JvmOverloads constructor(
 ) : ListAdapter<Item, ItemHolder>(AsyncDifferConfig.Builder(diff).build()),
     ItemBindClick<Item> {
 
-    private val TAG = this.javaClass.simpleName + "[recyclerview]"
+    private val TAG = this.javaClass.simpleName + "-[rv"
 
     private val mItemType: ItemTypeLayout<Item> =
         ItemTypeBinding(itemClass, layoutResId, brId = brId)

@@ -1,8 +1,6 @@
 package com.ljwx.basefragment
 
 import android.os.Bundle
-import androidx.annotation.LayoutRes
-import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -10,10 +8,10 @@ import com.ljwx.baseapp.vm.BaseViewModel
 import com.ljwx.baseapp.vm.ViewModelScope
 import java.lang.reflect.ParameterizedType
 
-abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel<*>>(@LayoutRes layoutRes: Int) :
-    BaseBindingFragment<Binding>(layoutRes) {
+abstract class BaseVMFragment<ViewModel : BaseViewModel<*>> :
+    BaseStateRefreshFragment() {
 
-    protected val mViewModelScope by lazy {
+    private val mViewModelScope by lazy {
         ViewModelScope()
     }
 

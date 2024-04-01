@@ -18,6 +18,8 @@ abstract class BaseLoadMoreFragment<Binding : ViewDataBinding, ViewModel : BaseV
 
     protected var mPageSize = 15
 
+    protected var mLoadMoreOffset = 0
+
     protected lateinit var mLoadMoreAdapter: QuickLoadMoreAdapter<Item>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,15 +42,23 @@ abstract class BaseLoadMoreFragment<Binding : ViewDataBinding, ViewModel : BaseV
         onLoadData(true)
     }
 
-    open fun changePage(isRefresh: Boolean) {
+    open fun changePageNum(isRefresh: Boolean) {
         mPage = if (isRefresh) 0 else mPage + 1
     }
 
-    fun addLoadMoreData(datas: List<Any>, isRefresh: Boolean) {
+    open fun addLoadMoreData(datas: List<Any>, isRefresh: Boolean) {
         mLoadMoreAdapter.addList(datas, hasMore(datas), isRefresh)
     }
 
-    private fun hasMore(datas: List<Any>): Boolean {
+    fun onLoadMoreError() {
+        mLoadMoreAdapter.showError()
+    }
+
+    fun onLoadMoreFinish() {
+        mLoadMoreAdapter.showComplete()
+    }
+
+    open fun hasMore(datas: List<Any>): Boolean {
         return !(datas.isNullOrEmpty() || datas.size < mPageSize)
     }
 }

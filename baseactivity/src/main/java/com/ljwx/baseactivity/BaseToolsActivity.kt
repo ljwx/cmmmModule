@@ -5,15 +5,20 @@ import android.content.Context
 import android.content.Intent
 import android.hardware.SensorEventListener
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.ljwx.baseapp.debug.DebugUtils
+import com.ljwx.baseapp.infochange.IBaseConfigInfo
 import com.ljwx.baseapp.page.IPageInfoChange
-import com.ljwx.baseapp.vm.BaseViewModel
+import com.ljwx.baseapp.infochange.IBaseUserInfo
 import com.ljwx.baseapp.vm.GlobalDataRepository
 
-open class BaseToolsActivity : AppCompatActivity() ,IPageInfoChange{
+open class BaseToolsActivity : AppCompatActivity(), IPageInfoChange {
+
+    private val Tag = this.javaClass.simpleName + "-[page"
 
     protected open var enableUserInfoChangeListener = false
+    protected open var enableConfigInfoChangeListener = false
     private var sensorEventListener: SensorEventListener? = null
 
     private val screenStatusReceiver by lazy {
@@ -36,8 +41,13 @@ open class BaseToolsActivity : AppCompatActivity() ,IPageInfoChange{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (enableUserInfoChangeListener) {
-            GlobalDataRepository.observeUserInfo(this){
-                userInfoChange(it)
+            GlobalDataRepository.observeUserInfo(this) {
+                userInfoChange(it, it?.getInfoChangeType() ?: 0)
+            }
+        }
+        if (enableConfigInfoChangeListener) {
+            GlobalDataRepository.observeConfigInfo(this) {
+                configInfoChange(it, it?.getInfoChangeType() ?: 0)
             }
         }
     }
@@ -46,8 +56,12 @@ open class BaseToolsActivity : AppCompatActivity() ,IPageInfoChange{
         logCheckDebugEx(DebugUtils.isDebug())
     }
 
-    override fun <T> userInfoChange(data: T, type: Int) {
+    override fun userInfoChange(data: IBaseUserInfo?, type: Int) {
+        Log.d(Tag, "监测到用户信息改变")
+    }
 
+    override fun configInfoChange(data: IBaseConfigInfo?, type: Int) {
+        Log.d(Tag, "监测到配置信息改变")
     }
 
     override fun onDestroy() {

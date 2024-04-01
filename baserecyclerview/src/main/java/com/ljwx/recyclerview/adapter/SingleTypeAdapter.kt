@@ -14,7 +14,7 @@ class SingleTypeAdapter<Item : Any, Holder : ItemHolder>(
     config: AsyncDifferConfig<Item> = AsyncDifferConfig.Builder<Item>(ItemDiffCallback()).build(),
 ) : ListAdapter<Item, Holder>(config) {
 
-    private val TAG = this.javaClass.simpleName + "[recyclerview]"
+    private val TAG = this.javaClass.simpleName + "-[rv"
 
     private val itemType: ItemType<Item, Holder> = type
 

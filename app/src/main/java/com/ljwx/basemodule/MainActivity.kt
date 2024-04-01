@@ -8,6 +8,8 @@ import android.util.Log
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.ljwx.baseactivity.fast.QuickMainActivity
 import com.ljwx.baseapp.extensions.singleClick
+import com.ljwx.baseapp.infochange.IBaseUserInfo
+import com.ljwx.baseapp.vm.GlobalDataRepository
 import com.ljwx.basemodule.config.ConfigLaunchFunctionFragment
 import com.ljwx.basemodule.constance.ConstRouter
 import com.ljwx.basemodule.databinding.ActivityMainBinding
@@ -21,6 +23,7 @@ import com.ljwx.provideclipboardauto.ClipboardFragment
 class MainActivity :
     QuickMainActivity<ActivityMainBinding, TestViewModel>(R.layout.activity_main) {
 
+    override var enableUserInfoChangeListener = true
     private val dialog by lazy {
         TestDialog()
     }
@@ -59,9 +62,10 @@ class MainActivity :
 
     override fun getScreenOrientation() = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
 
-    override fun TestViewModel.scope() {
-        mResponse.observe {
-
+    override fun userInfoChange(data: IBaseUserInfo?, type: Int) {
+        super.userInfoChange(data, type)
+        if (type == 3) {
+            Log.d(TAG, "asdf1")
         }
     }
 
