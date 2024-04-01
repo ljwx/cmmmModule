@@ -20,7 +20,7 @@ object FileReadUtils {
                     return line
                 }
                 while (read() != null) {
-                    stringBuilder.append(line);
+                    stringBuilder.append(line)
                 }
                 fis.close();
                 content = stringBuilder.toString();
