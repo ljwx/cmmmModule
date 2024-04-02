@@ -10,7 +10,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
 
         private var globalObserverOnError: ((e: Throwable) -> Unit)? = null
 
-        private var globalResponseFail: ((data: Any?) -> Unit)? = null
+        private var globalResponseFail: ((code: Int?, message: String?) -> Unit)? = null
 
         /**
          * 通用的请求错误逻辑(代码执行错误)
@@ -23,7 +23,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
         /**
          * 通用的请求失败逻辑(接口返回结果失败)
          */
-        fun setCommonResponseFail(responseFail: (data: Any?) -> Unit) {
+        fun setCommonResponseFail(responseFail: (code: Int?, message: String?) -> Unit) {
             globalResponseFail = responseFail
         }
     }
@@ -107,7 +107,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
                     onResponseSuccess(response)
                 } else {
                     Log2.d(TAG, "接口返回response,结果为失败")
-                    onResponseFail(response)
+                    onResponseFail(response.code, response.msg)
                 }
             }
         }
@@ -124,16 +124,16 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
          *
          * @param response 失败的结果
          */
-        override fun onResponseFail(response: T) {
-            onResponseFailGlobal(response)
+        override fun onResponseFail(code: Int?, message: String?) {
+            onResponseFailGlobal(code, message)
         }
 
         override fun onErrorGlobal(e: Throwable) {
             globalObserverOnError?.invoke(e)
         }
 
-        override fun onResponseFailGlobal(response: T) {
-            globalResponseFail?.invoke(response)
+        override fun onResponseFailGlobal(code: Int?, message: String?) {
+            globalResponseFail?.invoke(code, message)
         }
 
     }
@@ -172,7 +172,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
                     onResponseSuccess(response)
                 } else {
                     Log2.d(TAG, "接口返回response,结果为失败")
-                    onResponseFail(response)
+                    onResponseFail(response.code, response.msg)
                 }
             }
         }
@@ -189,16 +189,16 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
          *
          * @param dataResult 失败的结果
          */
-        override fun onResponseFail(response: T) {
-            onResponseFailGlobal(response)
+        override fun onResponseFail(code: Int?, message: String?) {
+            onResponseFailGlobal(code, message)
         }
 
         override fun onErrorGlobal(e: Throwable) {
             globalObserverOnError?.invoke(e)
         }
 
-        override fun onResponseFailGlobal(response: T) {
-            globalResponseFail?.invoke(response)
+        override fun onResponseFailGlobal(code: Int?, message: String?) {
+            globalResponseFail?.invoke(code, message)
         }
 
     }
