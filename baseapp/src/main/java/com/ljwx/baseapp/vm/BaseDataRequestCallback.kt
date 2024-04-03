@@ -10,7 +10,7 @@ abstract class BaseDataRequestCallback<D> {
 
     }
 
-    open fun onError(code: Int?, message: String? = null, exception: Exception? = null) {
+    open fun onError(code: Int?, message: String? = null, exception: Throwable? = null) {
 
     }
 
