@@ -124,7 +124,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
          *
          * @param response 失败的结果
          */
-        override fun onResponseFail(code: Int?, message: String?, data: T?) {
+        override fun onResponseFail(code: Int?, message: String?, data: Any?) {
             onResponseFailGlobal(code, message)
         }
 
@@ -189,7 +189,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
          *
          * @param dataResult 失败的结果
          */
-        override fun onResponseFail(code: Int?, message: String?, data: T?) {
+        override fun onResponseFail(code: Int?, message: String?, data: Any?) {
             onResponseFailGlobal(code, message)
         }
 
