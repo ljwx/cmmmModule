@@ -84,7 +84,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
 
         override fun onError(e: Throwable) {
             Log2.d(TAG, "本次请求异常报错:" + e.message)
-            onErrorGlobal(null, e)
+            onResponseError(null, null, e)
         }
 
         override fun onComplete() {
@@ -133,12 +133,16 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
             onResponseFailGlobal(code, message)
         }
 
-        override fun onErrorGlobal(code: Int?, e: Throwable?) {
-            globalObserverOnError?.invoke(code, e)
-        }
-
         override fun onResponseFailGlobal(code: Int?, message: String?) {
             globalResponseFail?.invoke(code, message)
+        }
+
+        override fun onResponseError(code: Int?, message: String?, e: Throwable?) {
+            onResponseErrorGlobal(null, e)
+        }
+
+        override fun onResponseErrorGlobal(code: Int?, e: Throwable?) {
+            globalObserverOnError?.invoke(code, e)
         }
 
     }
@@ -153,7 +157,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
 
         override fun onError(e: Throwable) {
             Log2.d(TAG, "本次请求异常报错:" + e.message)
-            onErrorGlobal(null, e)
+            onResponseError(null, null, e)
         }
 
         override fun onComplete() {
@@ -202,12 +206,16 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
             onResponseFailGlobal(code, message)
         }
 
-        override fun onErrorGlobal(code: Int?, e: Throwable?) {
-            globalObserverOnError?.invoke(code, e)
-        }
-
         override fun onResponseFailGlobal(code: Int?, message: String?) {
             globalResponseFail?.invoke(code, message)
+        }
+
+        override fun onResponseError(code: Int?, message: String?, e: Throwable?) {
+            onResponseErrorGlobal(code, e)
+        }
+
+        override fun onResponseErrorGlobal(code: Int?, e: Throwable?) {
+            globalObserverOnError?.invoke(code, e)
         }
 
     }
