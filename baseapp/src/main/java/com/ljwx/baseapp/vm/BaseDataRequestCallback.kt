@@ -1,7 +1,5 @@
 package com.ljwx.baseapp.vm
 
-import java.lang.Exception
-
 abstract class BaseDataRequestCallback<D> {
 
     abstract fun onSuccess(data: D?)
