@@ -23,7 +23,7 @@ fun CharSequence?.isFloat(): Boolean {
     return this.isMatch(CommonRegex.decimal)
 }
 
-fun String?.safeToInt(default: Int): Int {
+fun String?.toIntSafe(default: Int): Int {
     return if (isInt()) {
         this!!.toInt()
     } else {
