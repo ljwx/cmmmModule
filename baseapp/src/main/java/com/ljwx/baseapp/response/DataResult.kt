@@ -4,7 +4,7 @@ sealed class DataResult<out R> {
 
     data class Success<out T>(val data: T) : DataResult<T>()
     data class Fail<out T>(val data: T) : DataResult<T>()
-    data class Error(val exception: Exception) : DataResult<Nothing>()
+    data class Error(val exception: Exception?) : DataResult<Nothing>()
 
     interface Result<D : Any> {
         fun onResult(result: DataResult<D>)
