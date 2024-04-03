@@ -2,6 +2,7 @@ package com.ljwx.baseapp.util
 
 import android.app.Application
 import androidx.lifecycle.ViewModelStoreOwner
+import com.blankj.utilcode.util.Utils
 
 object BaseAppUtils {
 
@@ -9,6 +10,7 @@ object BaseAppUtils {
 
     fun init(application: Application) {
         this.application = application
+        Utils.init(application)
     }
 
     fun getApplication(): Application {
