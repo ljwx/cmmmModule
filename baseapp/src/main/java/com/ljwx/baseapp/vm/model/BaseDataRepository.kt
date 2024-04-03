@@ -120,7 +120,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
          */
         abstract override fun onResponseSuccess(response: T)
 
-        open fun onResponseFailCompat(code: String?, message: String?, data: Any?) {
+        open fun onResponseFailCompat(code: String?, message: String?, data: Any? = null) {
             onResponseFail(code.toIntSafe(0), message, data)
         }
 
@@ -189,7 +189,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
          */
         abstract override fun onResponseSuccess(response: T)
 
-        open fun onResponseFailCompat(code: String?, message: String?, data: Any?) {
+        open fun onResponseFailCompat(code: String?, message: String?, data: Any? = null) {
             onResponseFail(code.toIntSafe(0), message, data)
         }
 
