@@ -2,11 +2,11 @@ package com.ljwx.baseapp.vm
 
 import java.lang.Exception
 
-abstract class DataRequestCallback<D> {
+abstract class BaseDataRequestCallback<D> {
 
     abstract fun onSuccess(data: D?)
 
-    open fun onFail(code: Int?, message: String?, data: D?) {
+    open fun onFail(code: Int?, message: String?, data: Any?) {
 
     }
 
