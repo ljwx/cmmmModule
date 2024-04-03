@@ -1,6 +1,7 @@
 package com.ljwx.baseapp.vm.model
 
 import com.ljwx.baseapp.constant.ConstTag
+import com.ljwx.baseapp.extensions.toIntSafe
 import com.ljwx.baseapp.response.BaseResponse
 import com.ljwx.baseapp.util.Log2
 
@@ -119,6 +120,10 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
          */
         abstract override fun onResponseSuccess(response: T)
 
+        open fun onResponseFailCompat(code: String?, message: String?, data: Any?) {
+            onResponseFail(code.toIntSafe(0), message, data)
+        }
+
         /**
          * 接口数据失败
          *
@@ -183,6 +188,10 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
          * @param response 成功的结果
          */
         abstract override fun onResponseSuccess(response: T)
+
+        open fun onResponseFailCompat(code: String?, message: String?, data: Any?) {
+            onResponseFail(code.toIntSafe(0), message, data)
+        }
 
         /**
          * 接口数据失败
