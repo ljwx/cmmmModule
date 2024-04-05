@@ -20,7 +20,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/base_divider_high"
-            android:background="@drawable/base_shape_divider_line" />
+            android:background="@color/base_divider_dcdcdc" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"

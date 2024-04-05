@@ -4,7 +4,7 @@
     android:id="@+id/text_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/base_shape_bottom_line"
+    android:background="@drawable/shape_transparent_divider_dc"
     android:padding="@dimen/dp5"
     android:textColor="@color/base_app_textColorPrimary"
     android:textSize="@dimen/sp14"
