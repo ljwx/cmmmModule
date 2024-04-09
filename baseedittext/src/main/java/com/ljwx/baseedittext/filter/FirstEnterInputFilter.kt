@@ -5,11 +5,11 @@ import android.text.Spanned
 import android.util.Log
 
 /**
- * 首个输入不能为空格
+ * 首个输入不能为换行
  */
-class FirstTrimInputFilter : InputFilter {
+class FirstEnterInputFilter : InputFilter {
 
-    private val filter = " "
+    private val filter = "\n"
 
     /**
      * @param source 即将输入的文字
