@@ -2,6 +2,7 @@ package com.ljwx.recyclerview.quick
 
 import android.annotation.SuppressLint
 import android.util.Log
+import android.view.View
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.*
@@ -30,9 +31,11 @@ class QuickLoadMoreAdapter<Item : Any>(
     private val mLoadMoreItemType =
         ItemTypeViewClass(LoadMoreItem::class.java, LoadMoreView::class.java) { holder, item ->
             mLoadMorePresenter.showState(holder.itemView, item.state)
+            mLoadMoreBind?.invoke(holder.itemView, item.state)
         }
     private val mLoadMoreTrigger = LoadMoreTrigger()
     private val mLoadMorePresenter = LoadMoreViewPresenter()
+    private var mLoadMoreBind: ((holderView: View, state: String) -> Unit)? = null
 
     init {
         val loadMoreItem = mLoadMoreItemType as ItemType<Any, ItemHolder>
@@ -110,7 +113,10 @@ class QuickLoadMoreAdapter<Item : Any>(
         if (mLoadMoreVisible && mLoadMoreItem.state != status) {
             mLoadMoreItem.state = status
         }
-        Log.d("加载更多", "newStatus:"+status+",loadMoreVisible:"+mLoadMoreVisible+",itemStatus:"+mLoadMoreItem.state)
+        Log.d(
+            "加载更多",
+            "newStatus:" + status + ",loadMoreVisible:" + mLoadMoreVisible + ",itemStatus:" + mLoadMoreItem.state
+        )
         notifyItemChanged(itemCount - 1)
         mLoadMoreTrigger.hasMore = status == LoadMoreStatus.STATE_HAS_MORE
         mLoadMoreTrigger.isLoading = false
@@ -161,6 +167,10 @@ class QuickLoadMoreAdapter<Item : Any>(
 
     override fun setOnItemBind(binder: (ItemHolder, Item) -> Unit) {
         mItemType.setOnItemBind(binder)
+    }
+
+    open fun setLoadMoreBind(bind: (holderView: View, state: String) -> Unit) {
+
     }
 
     override fun setOnItemClick(itemClick: ((ItemHolder, Item) -> Unit)) {
