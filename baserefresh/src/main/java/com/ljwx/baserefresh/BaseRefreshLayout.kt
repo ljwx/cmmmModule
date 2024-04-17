@@ -3,6 +3,7 @@ package com.ljwx.baserefresh
 import android.content.Context
 import android.util.AttributeSet
 import android.view.ViewGroup
+import com.ljwx.baseapp.page.IPageRefreshLayout
 import com.ljwx.baseapp.view.IViewRefreshHeader
 import com.ljwx.baseapp.view.IViewRefreshLayout
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -42,8 +43,20 @@ open class BaseRefreshLayout @JvmOverloads constructor(
 
         constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
 
+        private var refreshPage: IPageRefreshLayout? = null
+
+        init {
+            super.setOnRefreshListener {
+                refreshPage?.onRefreshData()
+            }
+        }
+
         public override fun onFinishInflate() {
             super.onFinishInflate()
+        }
+
+        override fun setRefreshPage(refreshPage: IPageRefreshLayout) {
+
         }
 
         override fun setRefreshHeader(header: IViewRefreshHeader) {

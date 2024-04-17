@@ -81,7 +81,10 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
      * 快速使用刷新布局
      */
     open fun useCommonRefreshLayout() {
-        val refreshLayout = findViewById<View>(R.id.base_app_quick_refresh_layout)
+        var refreshLayout = findViewById<View>(R.id.base_app_quick_refresh_layout)
+        if (refreshLayout == null) {
+            refreshLayout = findViewById(R.id.base_app_page_refresh_layout)
+        }
         if (refreshLayout != null && refreshLayout is IViewRefreshLayout) {
             initRefreshLayout(refreshLayout)
         }
@@ -203,17 +206,21 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
     override fun initRefreshLayout(refreshLayout: IViewRefreshLayout?) {
         this.mRefreshLayout = refreshLayout
         // 下拉刷新触发
-        refreshLayout?.setOnRefreshListener(object : IViewRefreshLayout.RefreshListener {
-            override fun onRefresh(refreshLayout: IViewRefreshLayout) {
-                onRefreshData()
-            }
-        })
+//        refreshLayout?.setOnRefreshListener(object : IViewRefreshLayout.RefreshListener {
+//            override fun onRefresh(refreshLayout: IViewRefreshLayout) {
+//                onRefreshData()
+//            }
+//        })
+    }
+
+    override fun initRefreshLayout(refreshId: Int) {
+        this.mRefreshLayout = findViewById<View>(refreshId) as? IViewRefreshLayout
     }
 
     /**
      * 下拉刷新逻辑
      */
-    override fun onRefreshData() {
+    override fun onRefreshData(manual: Boolean) {
 
     }
 

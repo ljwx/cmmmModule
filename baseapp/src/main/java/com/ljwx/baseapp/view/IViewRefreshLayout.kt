@@ -1,8 +1,11 @@
 package com.ljwx.baseapp.view
 
 import android.view.ViewGroup
+import com.ljwx.baseapp.page.IPageRefreshLayout
 
 interface IViewRefreshLayout {
+
+    fun setRefreshPage(refreshPage: IPageRefreshLayout)
 
     fun setRefreshHeader(header: IViewRefreshHeader)
 

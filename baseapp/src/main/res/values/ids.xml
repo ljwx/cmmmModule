@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <item name="base_app_page_refresh_layout" type="id" />
     <item name="base_app_quick_state_layout" type="id" />
     <item name="base_app_quick_refresh_layout" type="id" />
     <item name="base_app_toolbar" type="id" />
