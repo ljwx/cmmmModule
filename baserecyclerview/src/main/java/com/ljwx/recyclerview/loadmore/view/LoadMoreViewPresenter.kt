@@ -24,7 +24,7 @@ class LoadMoreViewPresenter {
         if (state == LoadMoreStatus.STATE_ERROR) {
             var retryId = (loadMoreErrorLayout?.second) ?: R.id.rv_load_more_retry
             (holderView as? LoadMoreView)?.showStateError(loadMoreErrorLayout?.first)?.apply {
-                findViewById<View>(retryId).singleClick {
+                findViewById<View>(retryId)?.singleClick {
                     ((holderView.parent as? RecyclerView)?.adapter as? LoadMoreAdapter)?.startLoadMore()
                     ((holderView.parent as? RecyclerView)?.adapter as? QuickLoadMoreAdapter<*>)?.startLoadMore()
                 }
