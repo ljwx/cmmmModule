@@ -56,7 +56,7 @@ open class BaseRefreshLayout @JvmOverloads constructor(
         }
 
         override fun setRefreshPage(refreshPage: IPageRefreshLayout) {
-
+            this.refreshPage = refreshPage
         }
 
         override fun setRefreshHeader(header: IViewRefreshHeader) {

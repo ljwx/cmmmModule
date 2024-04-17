@@ -209,6 +209,7 @@ abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int = R.layout.b
 
     override fun initRefreshLayout(refreshLayout: IViewRefreshLayout?) {
         this.mRefreshLayout = refreshLayout
+        refreshLayout?.setRefreshPage(this)
 //        refreshLayout?.setOnRefreshListener(object : IViewRefreshLayout.RefreshListener {
 //            override fun onRefresh(refreshLayout: IViewRefreshLayout) {
 //                onRefreshData()
@@ -218,6 +219,7 @@ abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int = R.layout.b
 
     override fun initRefreshLayout(refreshId: Int) {
         this.mRefreshLayout = view?.findViewById<View>(refreshId) as? IViewRefreshLayout
+        this.mRefreshLayout?.setRefreshPage(this)
     }
 
     /**

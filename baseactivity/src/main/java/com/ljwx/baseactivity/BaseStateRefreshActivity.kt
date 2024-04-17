@@ -205,6 +205,7 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
 
     override fun initRefreshLayout(refreshLayout: IViewRefreshLayout?) {
         this.mRefreshLayout = refreshLayout
+        refreshLayout?.setRefreshPage(this)
         // 下拉刷新触发
 //        refreshLayout?.setOnRefreshListener(object : IViewRefreshLayout.RefreshListener {
 //            override fun onRefresh(refreshLayout: IViewRefreshLayout) {
@@ -215,6 +216,7 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
 
     override fun initRefreshLayout(refreshId: Int) {
         this.mRefreshLayout = findViewById<View>(refreshId) as? IViewRefreshLayout
+        this.mRefreshLayout?.setRefreshPage(this)
     }
 
     /**
