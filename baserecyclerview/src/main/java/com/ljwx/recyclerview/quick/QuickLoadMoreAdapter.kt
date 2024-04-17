@@ -170,7 +170,7 @@ class QuickLoadMoreAdapter<Item : Any>(
     }
 
     open fun setLoadMoreBind(bind: (holderView: View, state: String) -> Unit) {
-
+        mLoadMoreBind = bind
     }
 
     override fun setOnItemClick(itemClick: ((ItemHolder, Item) -> Unit)) {
