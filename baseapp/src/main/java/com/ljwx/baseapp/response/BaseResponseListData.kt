@@ -1,17 +1,22 @@
 package com.ljwx.baseapp.response
 
 open class BaseResponseListData<Item> {
-    val items: List<Item>? = null
-    val limit: Int? = null
-    val offset: Int? = null
-    val total: Int? = null
+    var items: List<Item>? = null
+    var limit: Int? = null
+    var offset: Int? = null
+    var total: Int? = null
 
-    fun hasMore(): Boolean {
+    open fun hasMore(): Boolean {
         return (offset ?: 0) < (total ?: 0)
     }
 
-    fun isRefresh(): Boolean {
-        return offset == null || offset < 1
+    open fun isRefresh(): Boolean {
+        return offset == null || offset!! < 1
     }
+
+    override fun toString(): String {
+        return "BaseResponseListData(limit=$limit, offset=$offset, total=$total, itemsSize=${items?.size?:0})"
+    }
+
 
 }
