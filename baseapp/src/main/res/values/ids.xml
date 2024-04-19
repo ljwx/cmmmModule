@@ -5,4 +5,5 @@
     <item name="base_app_quick_refresh_layout" type="id" />
     <item name="base_app_toolbar" type="id" />
     <item name="base_log_check_recycler" type="id"/>
+    <item name="base_pop_loading_textview" type="id"/>
 </resources>

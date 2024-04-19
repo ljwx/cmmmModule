@@ -4,11 +4,13 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Window
+import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import com.blankj.utilcode.util.ThreadUtils
+import com.ljwx.baseapp.extensions.visibleGone
 
-class BasePopupLoading(private val context: Context) {
+open class BasePopupLoading(private val context: Context) {
 
     companion object {
 
@@ -20,8 +22,11 @@ class BasePopupLoading(private val context: Context) {
 
     private var mLoadingLayout: Int? = null
 
+    private var mTips: TextView? = null
+
     private val dialog by lazy {
         val view = LayoutInflater.from(context).inflate(mLoadingLayout ?: loadingLayout, null)
+        mTips = view.findViewById(R.id.base_pop_loading_textview)
         val dialog = AlertDialog.Builder(context, R.style.dialogNoBg).setView(view).create()
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog
@@ -44,6 +49,7 @@ class BasePopupLoading(private val context: Context) {
     fun showPopup(
         show: Boolean,
         cancelable: Boolean = true,
+        tips: CharSequence? = null,
         focusable: Boolean = true,
         canceledOnTouchOutside: Boolean = false,
         backgroundTransparent: Boolean = false
@@ -53,6 +59,9 @@ class BasePopupLoading(private val context: Context) {
         }
         dialog.setCancelable(cancelable)
         dialog.setCanceledOnTouchOutside(canceledOnTouchOutside)
+        tips?.let {
+            mTips?.setText(it)
+        }
         dialog.show()
         val lp = dialog.window?.attributes
         lp?.width = 300
@@ -62,6 +71,12 @@ class BasePopupLoading(private val context: Context) {
         dialog.window?.attributes = lp
     }
 
+    open fun modifyTips(charSequence: CharSequence, visible: Boolean = true) {
+        mTips?.visibleGone(visible)
+        if (visible) {
+            mTips?.setText(charSequence)
+        }
+    }
 
     fun isShowing(): Boolean {
         return dialog.isShowing
@@ -71,9 +86,7 @@ class BasePopupLoading(private val context: Context) {
         if (!dialog.isShowing) {
             return
         }
-        ThreadUtils.runOnUiThread {
-            dialog.dismiss()
-        }
+        dialog.dismiss()
     }
 
 }

@@ -2,19 +2,12 @@
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300px"
     android:layout_height="300px"
     android:layout_gravity="center"
     android:background="@android:color/transparent">
 
-    <!--    <ProgressBar-->
-    <!--        android:id="@+id/progress"-->
-    <!--        android:layout_width="40dp"-->
-    <!--        android:layout_height="40dp"-->
-    <!--        android:layout_margin="12dp"-->
-    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
-    <!--        app:layout_constraintRight_toRightOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <ProgressBar
         android:layout_width="wrap_content"
@@ -24,5 +17,15 @@
         android:background="@drawable/shape_base_app_loading_background"
         android:indeterminateDrawable="@anim/base_app_loading"
         android:padding="20dp" />
+
+    <TextView
+        android:id="@+id/base_pop_loading_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="loading..."
+        android:visibility="gone"
+        tools:visibility="visible" />
 
 </FrameLayout>
