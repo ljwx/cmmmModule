@@ -14,7 +14,7 @@ public class DrawableTextView extends AppCompatTextView {
 
     private Drawable drawableLeft = null, drawableTop = null, drawableRight = null,
             drawableBottom = null;
-    private int drawableWidth, drawableHeight;
+    private int drawableWidth, drawableHeight, drawableSize;
 
     private int drawablePadding;
 
@@ -45,6 +45,11 @@ public class DrawableTextView extends AppCompatTextView {
             } else if (attr == R.styleable.DrawableTextView_drawableHeight) {
                 drawableHeight = typedArray.getDimensionPixelSize(attr, 0);
             }
+        }
+        drawableSize = typedArray.getDimensionPixelSize(R.styleable.DrawableTextView_drawableSize, 0);
+        if (drawableSize > 0) {
+            drawableWidth = drawableSize;
+            drawableHeight = drawableSize;
         }
         if (null != drawableLeft) {
             drawableLeft.setBounds(0, 0, drawableWidth, drawableHeight);
