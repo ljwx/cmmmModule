@@ -46,6 +46,7 @@ abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int = R.layout.b
 
     override fun showPopLoading(
         show: Boolean,
+        message: CharSequence?,
         cancelable: Boolean,
         transparent: Boolean,
         level: Int
@@ -56,7 +57,7 @@ abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int = R.layout.b
         activity?.runOnUiThread {
 //            mPopupLoading.setCancelable(cancelable)
 //            dialog.setCanceledOnTouchOutside(canceledOnTouchOutside)
-            mPopupLoading.showPopup(show, cancelable, backgroundTransparent = transparent)
+            mPopupLoading.showPopup(show, cancelable, message, backgroundTransparent = transparent)
         }
     }
 

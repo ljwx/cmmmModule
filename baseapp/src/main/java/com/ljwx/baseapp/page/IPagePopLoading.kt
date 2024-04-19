@@ -9,6 +9,7 @@ interface IPagePopLoading {
      */
     fun showPopLoading(
         show: Boolean = true,
+        message: CharSequence? = null,
         cancelable: Boolean = true,
         transparent: Boolean = false,
         level: Int = 3

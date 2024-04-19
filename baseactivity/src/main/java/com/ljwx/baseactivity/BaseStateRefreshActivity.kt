@@ -44,6 +44,7 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
 
     override fun showPopLoading(
         show: Boolean,
+        message: CharSequence?,
         cancelable: Boolean,
         transparent: Boolean,
         level: Int
@@ -51,7 +52,7 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
         runOnUiThread {
 //            mPopupLoading.setCancelable(cancelable)
 //            dialog.setCanceledOnTouchOutside(canceledOnTouchOutside)
-            mPopupLoading.showPopup(show, cancelable, backgroundTransparent = transparent)
+            mPopupLoading.showPopup(show, cancelable, message, backgroundTransparent = transparent)
         }
     }
 
