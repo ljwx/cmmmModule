@@ -39,6 +39,8 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
 
     private var isLazyInitialized = false
 
+    protected var mScreenHeight = -1//辅助计算键盘高度
+
     /**
      * 广播事件
      */

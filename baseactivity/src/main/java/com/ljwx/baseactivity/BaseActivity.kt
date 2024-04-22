@@ -30,6 +30,8 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
 
     open val TAG = this.javaClass.simpleName + "-[page"
 
+    protected var mScreenHeight = -1//辅助计算键盘高度
+
     private val mStatusBar by lazy { BaseStatusBar(this) }
 
     private var mStateSaved = false
