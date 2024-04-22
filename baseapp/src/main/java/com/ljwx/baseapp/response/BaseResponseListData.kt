@@ -7,7 +7,7 @@ open class BaseResponseListData<Item> {
     var total: Int? = null
 
     open fun hasMore(): Boolean {
-        return (offset ?: 0) < (total ?: 0)
+        return (offset ?: 0) + (items?.size ?: 0) < (total ?: 0)
     }
 
     open fun isRefresh(): Boolean {
@@ -15,7 +15,7 @@ open class BaseResponseListData<Item> {
     }
 
     override fun toString(): String {
-        return "BaseResponseListData(limit=$limit, offset=$offset, total=$total, itemsSize=${items?.size?:0})"
+        return "BaseResponseListData(limit=$limit, offset=$offset, total=$total, itemsSize=${items?.size ?: 0})"
     }
 
 

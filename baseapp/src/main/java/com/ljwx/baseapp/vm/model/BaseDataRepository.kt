@@ -3,9 +3,13 @@ package com.ljwx.baseapp.vm.model
 import com.ljwx.baseapp.constant.ConstTag
 import com.ljwx.baseapp.extensions.toIntSafe
 import com.ljwx.baseapp.response.BaseResponse
+import com.ljwx.baseapp.response.BaseResponseListData
 import com.ljwx.baseapp.util.Log2
 
 abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
+
+    open val pageDataSize = 20
+    protected var pageDataOffset = 0
 
     companion object {
 
@@ -36,6 +40,14 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
 
     protected val mApiServer
         get() = createServer()
+
+    open fun refreshOffset(refresh: Boolean) {
+        pageDataOffset = if (refresh) 0 else pageDataOffset
+    }
+
+    open fun increaseOffset(list: List<Any?>?) {
+        pageDataOffset += list?.size ?: 0
+    }
 
 
     /**
