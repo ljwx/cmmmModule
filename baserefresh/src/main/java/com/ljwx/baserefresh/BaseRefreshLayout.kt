@@ -55,6 +55,10 @@ open class BaseRefreshLayout @JvmOverloads constructor(
             super.onFinishInflate()
         }
 
+        override fun enableRefresh(enable: Boolean) {
+            super.setEnableRefresh(enable)
+        }
+
         override fun setRefreshPage(refreshPage: IPageRefreshLayout) {
             this.refreshPage = refreshPage
         }

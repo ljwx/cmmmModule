@@ -6,6 +6,8 @@ import com.ljwx.baseapp.view.IViewRefreshLayout
 
 interface IPageRefreshLayout {
 
+    fun enableRefresh(): Boolean
+
     /**
      * 初始化下拉刷新布局
      */

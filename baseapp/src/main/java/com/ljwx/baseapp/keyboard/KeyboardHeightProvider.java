@@ -135,7 +135,7 @@ public class KeyboardHeightProvider extends PopupWindow {
      *
      * @param observer The observer to be added to this provider.
      */
-    public void setKeyboardHeightObserver(KeyboardHeightCallback observer) {
+    public void setKeyboardHeightListener(KeyboardHeightCallback observer) {
         this.observer = observer;
     }
 

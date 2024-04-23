@@ -5,6 +5,8 @@ import com.ljwx.baseapp.page.IPageRefreshLayout
 
 interface IViewRefreshLayout {
 
+    fun enableRefresh(enable: Boolean)
+
     fun setRefreshPage(refreshPage: IPageRefreshLayout)
 
     fun setRefreshHeader(header: IViewRefreshHeader)
