@@ -13,9 +13,11 @@ import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.ljwx.baseactivity.statusbar.BaseStatusBar
 import com.ljwx.baseapp.constant.BaseConstBundleKey
+import com.ljwx.baseapp.keyboard.KeyboardHeightProvider
 import com.ljwx.baseapp.page.IPageActivity
 import com.ljwx.baseapp.page.IPageLocalEvent
 import com.ljwx.baseapp.page.IPageDialogTips
+import com.ljwx.baseapp.page.IPageKeyboardHeight
 import com.ljwx.baseapp.page.IPageProcessStep
 import com.ljwx.baseapp.page.IPageStartPage
 import com.ljwx.baseapp.page.IPageStatusBar
@@ -26,11 +28,18 @@ import com.ljwx.basedialog.common.BaseDialogBuilder
 import com.ljwx.router.RouterPostcard
 
 open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPageLocalEvent,
-    IPageDialogTips, IPageProcessStep, IPageActivity, IPageStartPage {
+    IPageDialogTips, IPageProcessStep, IPageActivity, IPageStartPage, IPageKeyboardHeight {
 
     open val TAG = this.javaClass.simpleName + "-[page"
 
+    /**
+     * 键盘
+     */
     protected var mScreenHeight = -1//辅助计算键盘高度
+
+    protected var keyboardHighProvider: KeyboardHeightProvider? = null
+
+    private var hidePopBottom = 0
 
     private val mStatusBar by lazy { BaseStatusBar(this) }
 
@@ -50,6 +59,10 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
         super.onCreate(savedInstanceState)
         setStatusBarLight(true)
         requestedOrientation = getScreenOrientation()
+        if (enableKeyboardHeightListener()) {
+            createKeyboardHeightProvider()
+            keyboardHeightRootView()?.post { keyboardHighProvider?.start() }
+        }
     }
 
     /**
@@ -127,6 +140,9 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
     override fun onResume() {
         super.onResume()
         mStateSaved = false
+        if (enableKeyboardHeightListener()) {
+            setKeyboardHeightListener()
+        }
     }
 
     override fun onStop() {
@@ -290,6 +306,54 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
 
     }
 
+    /*---------------------------------------------------------------------------------------*/
+
+
+    override fun enableKeyboardHeightListener(): Boolean = false
+
+    override fun createKeyboardHeightProvider() {
+        keyboardHighProvider = keyboardHighProvider ?: KeyboardHeightProvider(this)
+    }
+
+    override fun keyboardHeightRootView(): View? = rootLayout
+
+    override fun setKeyboardHeightListener() {
+        keyboardHighProvider?.setKeyboardHeightListener { height, orientation ->
+            var keyBoardHeight = 0
+            if (mScreenHeight <= 0) {
+                hidePopBottom = height
+            } else {
+                if (keyBoardHeight <= 0 && height > hidePopBottom && height - hidePopBottom > mScreenHeight / 4) {
+                    keyBoardHeight = height - hidePopBottom
+                }
+                if (keyBoardHeight > mScreenHeight * 3 / 5) {
+                    keyBoardHeight = height - hidePopBottom
+                }
+            }
+            if (mScreenHeight <= 0) {
+                mScreenHeight = keyboardHeightRootView()?.getHeight() ?: 2000
+            }
+            if (isKeyboardShow(height, hidePopBottom)) { //软键盘弹出
+                onKeyboardHeightChange(true, keyBoardHeight)
+            } else {
+                onKeyboardHeightChange(false, 0)
+            }
+        }
+    }
+
+    override fun isKeyboardShow(height: Int, buffHeight: Int): Boolean {
+        return height - buffHeight > mScreenHeight / 4
+    }
+
+    override fun onKeyboardHeightChange(show: Boolean, height: Int) {
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        keyboardHighProvider?.setKeyboardHeightListener(null)
+    }
+
     inline fun <reified F : Fragment> fragmentInstance(fromType: Int): F? {
         return fragmentInstanceEx(fromType)
     }
@@ -300,6 +364,7 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
         broadcastReceivers?.keys?.toList()?.forEach {
             unregisterLocalEvent(it)
         }
+        keyboardHighProvider?.close()
     }
 
 }
