@@ -1,13 +1,11 @@
 package com.ljwx.baseapp
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Window
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
-import com.blankj.utilcode.util.ThreadUtils
 import com.ljwx.baseapp.extensions.visibleGone
 
 open class BasePopupLoading(private val context: Context) {
