@@ -3,6 +3,7 @@ package com.ljwx.basefragment
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -41,13 +42,22 @@ abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : BaseViewM
     open fun createViewModel(): ViewModel {
         val type = javaClass.genericSuperclass as ParameterizedType
         val modelClass = type.actualTypeArguments.getOrNull(1) as Class<ViewModel>
-        return if (useActivityScopeVM()) mViewModelScope.getActivityScopeViewModel(
+        return if (viewModelProviderFromFragment() != null)
+            mViewModelScope.getFragmentScopeViewModel(
+                viewModelProviderFromFragment()!!,
+                modelClass
+            )
+        else if (viewModelProviderFromActivity()) mViewModelScope.getActivityScopeViewModel(
             requireActivity(),
             modelClass
         ) else ViewModelProvider(this)[modelClass]
     }
 
-    open fun useActivityScopeVM() = false
+    open fun viewModelProviderFromActivity() = false
+
+    open fun viewModelProviderFromFragment(): Fragment? {
+        return null
+    }
 
     protected fun <L : LiveData<T>, T> L.observe(observer: Observer<T>) {
         observe(viewLifecycleOwner, observer)

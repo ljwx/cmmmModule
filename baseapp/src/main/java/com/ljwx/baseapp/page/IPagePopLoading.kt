@@ -11,7 +11,7 @@ interface IPagePopLoading {
         show: Boolean = true,
         message: CharSequence? = null,
         cancelable: Boolean = true,
-        transparent: Boolean = false,
+        transparent: Boolean = true,
         level: Int = 3
     )
 
