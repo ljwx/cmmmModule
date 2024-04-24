@@ -62,8 +62,8 @@ open class BasePopupLoading(private val context: Context) {
         }
         dialog.show()
         val lp = dialog.window?.attributes
-        lp?.width = 300
-        lp?.height = 300
+//        lp?.width = 300
+//        lp?.height = 300
         lp?.dimAmount = if (backgroundTransparent) 0f else 0.4f
 //        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.window?.attributes = lp
