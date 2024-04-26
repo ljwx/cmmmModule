@@ -23,7 +23,7 @@ fun CharSequence?.isDecimal(): Boolean {
     return this.isMatch(CommonRegex.decimal)
 }
 
-fun String?.toIntSafe(default: Int): Int {
+fun String?.toIntSafe(default: Int = -1): Int {
     return if (isNumber()) {
         this!!.toInt()
     } else {
@@ -31,7 +31,7 @@ fun String?.toIntSafe(default: Int): Int {
     }
 }
 
-fun String?.toLongSafe(default: Long): Long {
+fun String?.toLongSafe(default: Long = -1): Long {
     return if (isNumber()) {
         this!!.toLong()
     } else {
