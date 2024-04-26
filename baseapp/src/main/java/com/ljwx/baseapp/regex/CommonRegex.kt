@@ -6,7 +6,7 @@ object CommonRegex {
     val email = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*\$"
 
     //整数
-    val integer = "^\\d+\$"
+    val number = "^\\d+\$"
 
     //小数
     val decimal = "^\\d+\\.\\d+\$"

@@ -15,17 +15,25 @@ fun CharSequence?.isEmail(): Boolean {
     return this.isMatch(CommonRegex.email)
 }
 
-fun CharSequence?.isInt(): Boolean {
-    return this.isMatch(CommonRegex.integer)
+fun CharSequence?.isNumber(): Boolean {
+    return this.isMatch(CommonRegex.number)
 }
 
-fun CharSequence?.isFloat(): Boolean {
+fun CharSequence?.isDecimal(): Boolean {
     return this.isMatch(CommonRegex.decimal)
 }
 
 fun String?.toIntSafe(default: Int): Int {
-    return if (isInt()) {
+    return if (isNumber()) {
         this!!.toInt()
+    } else {
+        default
+    }
+}
+
+fun String?.toLongSafe(default: Long): Long {
+    return if (isNumber()) {
+        this!!.toLong()
     } else {
         default
     }
