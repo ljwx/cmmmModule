@@ -29,6 +29,8 @@ open class MultipleTypeAdapter(
         mItemTypes = itemTypes as Array<out ItemType<Any, ItemHolder>>
     }
 
+    protected var newList: List<Any?>? = null
+
 //    /**
 //     * ItemType赋值
 //     */
@@ -80,7 +82,47 @@ open class MultipleTypeAdapter(
         }
     }
 
-    fun addList(list: List<Any>) {
-        submitList(listOf<Any>() + currentList + list)
+    open fun addItem(position: Int, item: Any?) {
+        val list: List<Any?> =
+            newList?.toMutableList()?.apply { add(position, item) } ?: listOf(item)
+        submitList(list)
     }
+
+    open fun deletePosition(position: Int) {
+        if (position < (newList?.size ?: 0)) {
+            val list = newList?.toMutableList()?.apply { removeAt(position) }
+            submitList(list)
+        }
+    }
+
+    open fun deleteItem(item: Any?) {
+        val list = newList?.toMutableList()?.apply { remove(item) }
+        submitList(list)
+    }
+
+    fun addList(list: List<Any?>) {
+        submitList(listOf<Any?>() + currentList + list)
+    }
+
+    open fun getDataItem(position: Int): Any? {
+        if (newList == null || newList!!.size <= position) {
+            return null
+        }
+        return newList?.get(position)
+    }
+
+    open fun getDataSize(): Int {
+        return newList?.size ?: 0
+    }
+
+    override fun submitList(list: List<Any?>?) {
+        newList = list
+        super.submitList(list)
+    }
+
+    override fun submitList(list: List<Any?>?, commitCallback: Runnable?) {
+        newList = list
+        super.submitList(list, commitCallback)
+    }
+
 }
