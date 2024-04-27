@@ -49,7 +49,7 @@ class TestRepository : BaseSecondRepository<TestService, TestService>() {
                         val result = response.body().toString()
                         callback.onResult(DataResult.Success(result))
                     }
-                    callback.onResult(DataResult.Error(ClassNotFoundException()))
+                    callback.onResult(DataResult.Error(1))
                 }
 
                 override fun onFailure(call: Call<String>, t: Throwable) {

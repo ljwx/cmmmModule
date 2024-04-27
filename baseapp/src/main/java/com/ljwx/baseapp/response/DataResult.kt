@@ -3,8 +3,17 @@ package com.ljwx.baseapp.response
 sealed class DataResult<out R> {
 
     data class Success<out T>(val data: T) : DataResult<T>()
-    data class Fail<out T>(val code: Int? = null, val data: T? = null) : DataResult<T>()
-    data class Error(val exception: Exception?, val code: Int? = null) : DataResult<Nothing>()
+    data class Fail<out T>(
+        val code: Int? = null,
+        val message: String? = null,
+        val data: T? = null
+    ) : DataResult<T>()
+
+    data class Error(
+        val code: Int? = null,
+        val message: String? = null,
+        val exception: Exception? = null
+    ) : DataResult<Nothing>()
 
     interface Result<D : Any> {
         fun onResult(result: DataResult<D>)
