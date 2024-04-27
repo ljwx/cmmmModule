@@ -5,9 +5,13 @@ import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ljwx.recyclerview.BaseRecyclerLog
 
 internal class LoadMoreTrigger : RecyclerView.OnScrollListener(),
     NestedScrollView.OnScrollChangeListener, View.OnAttachStateChangeListener {
+
+    private val TAG = this.javaClass.simpleName
+
     var onLoadMore: () -> Unit = {}
     var hasMore = false
     var isLoading = false
@@ -20,6 +24,7 @@ internal class LoadMoreTrigger : RecyclerView.OnScrollListener(),
      * 加载更多回调
      */
     fun loadMore() {
+        BaseRecyclerLog.d(TAG, "触发onLoadMore")
         isLoading = true
         onLoadMore()
     }
@@ -29,6 +34,7 @@ internal class LoadMoreTrigger : RecyclerView.OnScrollListener(),
         rv.addOnAttachStateChangeListener(this)
 
         if (rv.isNestedScrollingEnabled) {
+            BaseRecyclerLog.d(TAG, "启用嵌套滑动")
             rv.addOnScrollListener(this)
         } else {
             attachNestedScrollView()
@@ -39,7 +45,6 @@ internal class LoadMoreTrigger : RecyclerView.OnScrollListener(),
         recyclerView?.removeOnAttachStateChangeListener(this)
         recyclerView?.removeOnScrollListener(this)
         recyclerView = null
-
         detachNestedScrollView()
     }
 
@@ -72,6 +77,7 @@ internal class LoadMoreTrigger : RecyclerView.OnScrollListener(),
 
     override fun onScrollStateChanged(rv: RecyclerView, newState: Int) {
         super.onScrollStateChanged(rv, newState)
+        BaseRecyclerLog.d(TAG, "onScrollStateChanged:$newState")
         if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
             return
         }
@@ -105,6 +111,7 @@ internal class LoadMoreTrigger : RecyclerView.OnScrollListener(),
             val last = manager.findLastVisibleItemPosition()
             if (needLoadMore(count, total, last)) {
                 // 触发加载更多
+                BaseRecyclerLog.d(TAG, "根据滑动计算,触发loadMore方法")
                 loadMore()
             }
         } else if (rv.layoutManager is GridLayoutManager) {
@@ -114,6 +121,7 @@ internal class LoadMoreTrigger : RecyclerView.OnScrollListener(),
             val last = manager.findLastVisibleItemPosition()
             if (needLoadMore(count, total, last)) {
                 // 触发加载更多
+                BaseRecyclerLog.d(TAG, "根据滑动计算,触发loadMore方法")
                 loadMore()
             }
         }

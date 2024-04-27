@@ -8,17 +8,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.blankj.utilcode.util.StringUtils
-import com.ljwx.baseapp.constant.ConstTag
+import com.ljwx.baseapp.constant.BaseLogTag
 import com.ljwx.baseapp.event.ISendLocalEvent
 import com.ljwx.baseapp.response.DataResult
 import com.ljwx.baseapp.util.BaseAppUtils
-import com.ljwx.baseapp.util.Log2
+import com.ljwx.baseapp.util.BaseModuleLog
 import com.ljwx.baseapp.vm.model.BaseDataRepository
 
 abstract class BaseViewModel<M : BaseDataRepository<*>> : ViewModel(), IBaseViewModel<M>,
     DefaultLifecycleObserver, IRxAutoCleared, ISendLocalEvent {
 
-    open val TAG = this.javaClass.simpleName + ConstTag.MVVM
+    open val TAG = this.javaClass.simpleName + BaseLogTag.VIEW_MODEL
 
     protected var mRepository: M
 
@@ -35,13 +35,12 @@ abstract class BaseViewModel<M : BaseDataRepository<*>> : ViewModel(), IBaseView
 
 
     init {
-        Log2.d(TAG, "创建repository")
         mRepository = createRepository()
     }
 
 
     override fun autoClear(disposable: io.reactivex.disposables.Disposable) {
-        Log2.d(TAG, "添加Rx自动取消")
+        BaseModuleLog.d(TAG, "添加Rx2自动取消")
         if (mCompositeDisposable2 == null) {
             mCompositeDisposable2 = io.reactivex.disposables.CompositeDisposable()
         }
@@ -49,7 +48,7 @@ abstract class BaseViewModel<M : BaseDataRepository<*>> : ViewModel(), IBaseView
     }
 
     override fun autoClear(disposable: io.reactivex.rxjava3.disposables.Disposable) {
-        Log2.d(TAG, "添加Rx自动取消")
+        BaseModuleLog.d(TAG, "添加Rx3自动取消")
         if (mCompositeDisposable3 == null) {
             mCompositeDisposable3 = io.reactivex.rxjava3.disposables.CompositeDisposable()
         }
@@ -57,35 +56,35 @@ abstract class BaseViewModel<M : BaseDataRepository<*>> : ViewModel(), IBaseView
     }
 
     override fun onRxCleared() {
-        Log2.d(TAG, "执行Rx自动取消")
+        BaseModuleLog.d(TAG, "执行Rx自动取消")
         mCompositeDisposable2?.clear()
         mCompositeDisposable3?.clear()
     }
 
     override fun onStop(owner: LifecycleOwner) {
         super.onStop(owner)
-        Log2.d(TAG, "LifecycleOwner的onStop执行")
+        BaseModuleLog.d(TAG, "onStop执行")
     }
 
     override fun onDestroy(owner: LifecycleOwner) {
         super.onDestroy(owner)
-        Log2.d(TAG, "LifecycleOwner的onDestroy执行")
+        BaseModuleLog.d(TAG, "onDestroy执行")
     }
 
     override fun onCleared() {
         super.onCleared()
         mRepository?.onRxCleared()
         onRxCleared()
-        Log2.d(TAG, "ViewModel的onCleared执行")
+        BaseModuleLog.d(TAG, "onCleared执行")
     }
 
     open fun showPopLoading(show: Boolean = true, code: Int? = 0, message: String? = "") {
-        Log2.d(TAG, "显示Loading弹窗")
+        BaseModuleLog.d(TAG, "显示Loading弹窗")
         mShowPopLoading.postValue(Triple(show, code ?: 0, message ?: ""))
     }
 
     open fun dismissPopLoading(dismiss: Boolean = true, code: Int? = 0, message: String? = "") {
-        Log2.d(TAG, "取消Loading弹窗")
+        BaseModuleLog.d(TAG, "取消Loading弹窗")
         mDismissPopLoading.postValue(Triple(dismiss, code ?: 0, message ?: ""))
     }
 
@@ -97,7 +96,7 @@ abstract class BaseViewModel<M : BaseDataRepository<*>> : ViewModel(), IBaseView
         if (action == null) {
             return
         }
-        Log2.d(TAG, "发送事件广播:$action")
+        BaseModuleLog.d(TAG, "发送事件广播:$action")
         LocalBroadcastManager.getInstance(BaseAppUtils.getApplication())
             .sendBroadcast(Intent(action))
     }

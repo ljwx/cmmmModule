@@ -6,6 +6,7 @@ import android.view.View
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.*
+import com.ljwx.recyclerview.BaseRecyclerLog
 import com.ljwx.recyclerview.loadmore.view.LoadMoreView
 import com.ljwx.recyclerview.loadmore.view.LoadMoreViewPresenter
 import com.ljwx.recyclerview.adapter.MultipleTypeAdapter
@@ -25,6 +26,8 @@ class QuickLoadMoreAdapter<Item : Any>(
 ) : MultipleTypeAdapter(config = AsyncDifferConfig.Builder(ItemDiffCallback()).build()),
     ItemBindClick<Item> {
 
+    private val TAG = this.javaClass.simpleName
+
     private var mItemType: ItemTypeLayout<Item>
 
     private val mLoadMoreItem = LoadMoreItem()
@@ -41,6 +44,7 @@ class QuickLoadMoreAdapter<Item : Any>(
         val loadMoreItem = mLoadMoreItemType as ItemType<Any, ItemHolder>
         mItemType = ItemTypeBinding(itemClass, layoutResId, itemClick = itemClick)
         mItemTypes = arrayOf(loadMoreItem, (mItemType as ItemType<Any, ItemHolder>))
+        BaseRecyclerLog.d(TAG, "初始化加载更多item")
     }
 
     private var mLoadMoreVisible: Boolean = true
@@ -80,6 +84,7 @@ class QuickLoadMoreAdapter<Item : Any>(
      * 触发加载更多
      */
     fun startLoadMore() {
+        BaseRecyclerLog.d(TAG, "触发加载更多显示")
         if (!mLoadMoreTrigger.isLoading) {
             setStatus(LoadMoreStatus.STATE_HAS_MORE)
             mLoadMoreTrigger.loadMore()
@@ -90,16 +95,19 @@ class QuickLoadMoreAdapter<Item : Any>(
      * 加载错误
      */
     fun showError() {
+        BaseRecyclerLog.d(TAG, "显示加载错误")
         setStatus(LoadMoreStatus.STATE_ERROR)
     }
 
     fun showComplete() {
+        BaseRecyclerLog.d(TAG, "显示完成")
         setStatus(LoadMoreStatus.STATE_COMPLETE)
     }
 
 
     @SuppressLint("NotifyDataSetChanged")
     fun addList(list: List<*>, hasMore: Boolean = false, isRefresh: Boolean = false) {
+        BaseRecyclerLog.d(TAG, "添加新数据数据")
         val newList = if (isRefresh) list else (listOf<Any>() + currentList + list)
         submitList(newList)
         when {
@@ -113,7 +121,7 @@ class QuickLoadMoreAdapter<Item : Any>(
         if (mLoadMoreVisible && mLoadMoreItem.state != status) {
             mLoadMoreItem.state = status
         }
-        Log.d(
+        BaseRecyclerLog.d(
             "加载更多",
             "newStatus:" + status + ",loadMoreVisible:" + mLoadMoreVisible + ",itemStatus:" + mLoadMoreItem.state
         )
@@ -138,6 +146,7 @@ class QuickLoadMoreAdapter<Item : Any>(
 
     override fun onAttachedToRecyclerView(rv: RecyclerView) {
         super.onAttachedToRecyclerView(rv)
+        BaseRecyclerLog.d(TAG, "onAttachedToRecyclerView")
         val manager = rv.layoutManager
         if (manager is GridLayoutManager) {
             manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
@@ -153,12 +162,14 @@ class QuickLoadMoreAdapter<Item : Any>(
 
     override fun onDetachedFromRecyclerView(rv: RecyclerView) {
         super.onDetachedFromRecyclerView(rv)
+        BaseRecyclerLog.d(TAG, "onDetachedFromRecyclerView")
         mLoadMoreTrigger.detach()
     }
 
 
     override fun onViewAttachedToWindow(holder: ItemHolder) {
         super.onViewAttachedToWindow(holder)
+        BaseRecyclerLog.d(TAG, "onViewAttachedToWindow")
         val lp = holder.itemView.layoutParams
         if (lp is StaggeredGridLayoutManager.LayoutParams && holder.itemView is LoadMoreView) {
             lp.isFullSpan = true

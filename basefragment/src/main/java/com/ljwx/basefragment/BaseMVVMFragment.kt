@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.ljwx.baseapp.util.BaseModuleLog
 import com.ljwx.baseapp.vm.BaseViewModel
 import com.ljwx.baseapp.vm.ViewModelScope
 import java.lang.reflect.ParameterizedType
@@ -42,6 +43,7 @@ abstract class BaseMVVMFragment<Binding : ViewDataBinding, ViewModel : BaseViewM
     open fun createViewModel(): ViewModel {
         val type = javaClass.genericSuperclass as ParameterizedType
         val modelClass = type.actualTypeArguments.getOrNull(1) as Class<ViewModel>
+        BaseModuleLog.d(TAG, "创建viewmodel")
         return if (viewModelProviderFromFragment() != null)
             mViewModelScope.getFragmentScopeViewModel(
                 viewModelProviderFromFragment()!!,

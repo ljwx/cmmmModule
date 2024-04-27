@@ -1,8 +1,8 @@
-package com.ljwx.baseactivity
+package com.ljwx.baseapp.util
 
 import android.util.Log
 
-internal object Log2 {
+object BaseModuleLog {
 
     fun i(tag: String, msg: String) {
         Log.i(tag, msg)

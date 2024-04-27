@@ -2,6 +2,7 @@ package com.ljwx.recyclerview.loadmore.view
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.ljwx.recyclerview.BaseRecyclerLog
 import com.ljwx.recyclerview.R
 import com.ljwx.recyclerview.loadmore.LoadMoreAdapter
 import com.ljwx.recyclerview.loadmore.LoadMoreStatus
@@ -10,11 +11,14 @@ import com.ljwx.recyclerview.singleClick
 
 class LoadMoreViewPresenter {
 
+    private val TAG = this.javaClass.simpleName
+
     var loadMoreLoadingLayout: Int? = null
     var loadMoreErrorLayout: Pair<Int, Int?>? = null
     var loadMoreCompleteLayout: Int? = null
 
-    fun showState(holderView: View,@LoadMoreStatus.LoadMoreStatus state: String) {
+    fun showState(holderView: View, @LoadMoreStatus.LoadMoreStatus state: String) {
+        BaseRecyclerLog.d(TAG, "showState:$state")
         if (state == LoadMoreStatus.STATE_HAS_MORE) {
             (holderView as? LoadMoreView)?.showStateLoading(loadMoreLoadingLayout)
         }

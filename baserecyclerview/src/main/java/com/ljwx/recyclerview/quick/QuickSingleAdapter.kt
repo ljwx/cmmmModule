@@ -1,12 +1,12 @@
 package com.ljwx.recyclerview.quick
 
-import android.util.Log
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.ljwx.recyclerview.BR
+import com.ljwx.recyclerview.BaseRecyclerLog
 import com.ljwx.recyclerview.diff.ItemDiffCallback
 import com.ljwx.recyclerview.holder.ItemHolder
 import com.ljwx.recyclerview.itemtype.ItemBindClick
@@ -23,7 +23,7 @@ open class QuickSingleAdapter<Item : Any> @JvmOverloads constructor(
 ) : ListAdapter<Item, ItemHolder>(AsyncDifferConfig.Builder(diff).build()),
     ItemBindClick<Item> {
 
-    private val TAG = this.javaClass.simpleName + "-[rv"
+    private val TAG = this.javaClass.simpleName
 
     private val mItemType: ItemTypeLayout<Item> =
         ItemTypeBinding(itemClass, layoutResId, brId = brId)
@@ -35,11 +35,12 @@ open class QuickSingleAdapter<Item : Any> @JvmOverloads constructor(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
+        BaseRecyclerLog.d(TAG, "onCreateViewHolder")
         return mItemType.create(parent)
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
-        Log.d(TAG, "onBindViewHolder:$position")
+        BaseRecyclerLog.d(TAG, "onBindViewHolder:$position,holder address:$holder")
         mItemType.bind(holder, getItem(position))
     }
 
@@ -70,6 +71,7 @@ open class QuickSingleAdapter<Item : Any> @JvmOverloads constructor(
     }
 
     override fun setOnItemClick(itemClick: ((ItemHolder, Item) -> Unit)) {
+        BaseRecyclerLog.d(TAG, "设置item点击")
         mItemType.setOnItemClick(itemClick)
     }
 
@@ -77,6 +79,7 @@ open class QuickSingleAdapter<Item : Any> @JvmOverloads constructor(
         vararg ids: Int,
         itemClick: ((ItemHolder, Item, Int) -> Unit)
     ) {
+        BaseRecyclerLog.d(TAG, "设置item子view点击")
         mItemType.setOnItemChildClick(*ids, itemClick = itemClick)
     }
 
@@ -95,11 +98,13 @@ open class QuickSingleAdapter<Item : Any> @JvmOverloads constructor(
         newList = list
         currentList
         super.submitList(list)
+        BaseRecyclerLog.d(TAG, "提交数据")
     }
 
     override fun submitList(list: List<Item>?, commitCallback: Runnable?) {
         newList = list
         super.submitList(list, commitCallback)
+        BaseRecyclerLog.d(TAG, "提交数据")
     }
 
 }

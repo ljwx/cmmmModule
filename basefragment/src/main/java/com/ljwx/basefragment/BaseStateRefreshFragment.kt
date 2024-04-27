@@ -12,6 +12,7 @@ import com.ljwx.baseapp.extensions.isMainThread
 import com.ljwx.baseapp.page.IPagePopLoading
 import com.ljwx.baseapp.page.IPageRefreshLayout
 import com.ljwx.baseapp.page.IPageStateLayout
+import com.ljwx.baseapp.util.BaseModuleLog
 
 abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int = R.layout.baseapp_state_layout_empty) :
     BaseFragment(layoutResID), IPagePopLoading, IPageStateLayout, IPageRefreshLayout {
@@ -212,6 +213,7 @@ abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int = R.layout.b
 
     override fun initRefreshLayout(refreshLayout: IViewRefreshLayout?) {
         if (enableRefresh()) {
+            BaseModuleLog.d(TAG, "启用下拉刷新")
             refreshLayout?.enableRefresh(true)
             this.mRefreshLayout = refreshLayout
             refreshLayout?.setRefreshPage(this)
@@ -223,6 +225,7 @@ abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int = R.layout.b
     override fun initRefreshLayout(refreshId: Int) {
         this.mRefreshLayout = view?.findViewById<View>(refreshId) as? IViewRefreshLayout
         if (enableRefresh()) {
+            BaseModuleLog.d(TAG, "启用下拉刷新")
             this.mRefreshLayout?.enableRefresh(true)
             this.mRefreshLayout?.setRefreshPage(this)
         } else {

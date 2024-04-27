@@ -1,15 +1,11 @@
 package com.ljwx.baseapp.vm.model
 
-import com.ljwx.baseapp.constant.ConstTag
+import com.ljwx.baseapp.constant.BaseLogTag
 import com.ljwx.baseapp.extensions.toIntSafe
 import com.ljwx.baseapp.response.BaseResponse
-import com.ljwx.baseapp.response.BaseResponseListData
-import com.ljwx.baseapp.util.Log2
+import com.ljwx.baseapp.util.BaseModuleLog
 
 abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
-
-    open val pageDataSize = 20
-    protected var pageDataOffset = 0
 
     companion object {
 
@@ -33,7 +29,10 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
         }
     }
 
-    open val TAG = this.javaClass.simpleName + ConstTag.MVVM
+    open val TAG = this.javaClass.simpleName + BaseLogTag.DATA_REPOSITORY
+
+    open val pageDataSize = 20
+    protected var pageDataOffset = 0
 
     private var mCompositeDisposable2: io.reactivex.disposables.CompositeDisposable? = null
     private var mCompositeDisposable3: io.reactivex.rxjava3.disposables.CompositeDisposable? = null
@@ -47,6 +46,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
 
     open fun increaseOffset(list: List<Any?>?) {
         pageDataOffset += list?.size ?: 0
+        BaseModuleLog.d(TAG, "当前offset值:$pageDataOffset")
     }
 
 
@@ -56,7 +56,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
      * @param disposable Rxjava2版本的dispose
      */
     override fun autoClear(disposable: io.reactivex.disposables.Disposable) {
-        Log2.d(TAG, "添加Rx自动取消")
+        BaseModuleLog.d(TAG, "添加Rx2自动取消")
         if (mCompositeDisposable2 == null) {
             mCompositeDisposable2 = io.reactivex.disposables.CompositeDisposable()
         }
@@ -69,7 +69,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
      * @param disposable Rxjava3版本的dispose
      */
     override fun autoClear(disposable: io.reactivex.rxjava3.disposables.Disposable) {
-        Log2.d(TAG, "添加Rx自动取消")
+        BaseModuleLog.d(TAG, "添加Rx3自动取消")
         if (mCompositeDisposable3 == null) {
             mCompositeDisposable3 = io.reactivex.rxjava3.disposables.CompositeDisposable()
         }
@@ -80,7 +80,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
      * 自动取消
      */
     override fun onRxCleared() {
-        Log2.d(TAG, "执行Rx自动取消")
+        BaseModuleLog.d(TAG, "执行Rx自动取消")
         mCompositeDisposable2?.clear()
         mCompositeDisposable3?.clear()
     }
@@ -95,12 +95,12 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
         }
 
         override fun onError(e: Throwable) {
-            Log2.d(TAG, "本次请求异常报错:" + e.message)
+            BaseModuleLog.d(TAG, "本次请求异常报错:" + e.message)
             onResponseError(null, null, e)
         }
 
         override fun onComplete() {
-            Log2.d(TAG, "本次请求完成")
+            BaseModuleLog.d(TAG, "本次请求完成")
         }
 
         override fun onNext(value: T) {
@@ -113,13 +113,13 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
          * @param response 结果
          */
         override fun onResponse(response: T) {
-            Log2.d(TAG, "接口返回response")
+            BaseModuleLog.d(TAG, "接口返回response")
             if (response is BaseResponse<*>) {
                 if (response.isSuccess()) {
-                    Log2.d(TAG, "接口返回response,结果为成功")
+                    BaseModuleLog.d(TAG, "接口返回response,成功")
                     onResponseSuccess(response)
                 } else {
-                    Log2.d(TAG, "接口返回response,结果为失败")
+                    BaseModuleLog.d(TAG, "接口返回response,失败")
                     onResponseFail(response.code, response.msg)
                 }
             }
@@ -142,6 +142,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
          * @param response 失败的结果
          */
         override fun onResponseFail(code: Int?, message: String?, data: Any?) {
+            BaseModuleLog.d(TAG, "请求失败,code:$code")
             onResponseFailGlobal(code, message)
         }
 
@@ -150,6 +151,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
         }
 
         override fun onResponseError(code: Int?, message: String?, e: Throwable?) {
+            BaseModuleLog.d(TAG, "请求错误,code:$code")
             onResponseErrorGlobal(null, e)
         }
 
@@ -168,12 +170,12 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
         }
 
         override fun onError(e: Throwable) {
-            Log2.d(TAG, "本次请求异常报错:" + e.message)
+            BaseModuleLog.d(TAG, "本次请求异常报错:" + e.message)
             onResponseError(null, null, e)
         }
 
         override fun onComplete() {
-            Log2.d(TAG, "本次请求完成")
+            BaseModuleLog.d(TAG, "本次请求完成")
         }
 
         override fun onNext(value: T) {
@@ -186,13 +188,13 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
          * @param response 结果
          */
         override fun onResponse(response: T) {
-            Log2.d(TAG, "接口返回response")
+            BaseModuleLog.d(TAG, "接口返回response")
             if (response is BaseResponse<*>) {
                 if (response.isSuccess()) {
-                    Log2.d(TAG, "接口返回response,结果为成功")
+                    BaseModuleLog.d(TAG, "接口返回response,结果为成功")
                     onResponseSuccess(response)
                 } else {
-                    Log2.d(TAG, "接口返回response,结果为失败")
+                    BaseModuleLog.d(TAG, "接口返回response,结果为失败")
                     onResponseFail(response.code, response.msg)
                 }
             }
@@ -215,6 +217,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
          * @param dataResult 失败的结果
          */
         override fun onResponseFail(code: Int?, message: String?, data: Any?) {
+            BaseModuleLog.d(TAG, "请求失败,code:$code")
             onResponseFailGlobal(code, message)
         }
 
@@ -223,6 +226,7 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
         }
 
         override fun onResponseError(code: Int?, message: String?, e: Throwable?) {
+            BaseModuleLog.d(TAG, "请求错误,code:$code")
             onResponseErrorGlobal(code, e)
         }
 
@@ -241,16 +245,16 @@ abstract class BaseDataRepository<Server> : IBaseDataRepository<Server> {
         }
 
         override fun onError(e: Throwable) {
-            Log2.d(TAG, "本次请求异常报错:" + e.message)
+            BaseModuleLog.d(TAG, "请求异常报错:" + e.message)
             globalObserverOnError?.invoke(null, e)
         }
 
         override fun onComplete() {
-            Log2.d(TAG, "本次请求完成")
+            BaseModuleLog.d(TAG, "请求完成")
         }
 
         override fun onNext(value: T) {
-            Log2.d(TAG, "本次请求结果已返回")
+            BaseModuleLog.d(TAG, "请求结果返回")
             onResponse(value)
         }
 

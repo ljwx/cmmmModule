@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.ljwx.baseactivity.statusbar.BaseStatusBar
 import com.ljwx.baseapp.constant.BaseConstBundleKey
+import com.ljwx.baseapp.constant.BaseLogTag
 import com.ljwx.baseapp.keyboard.KeyboardHeightProvider
 import com.ljwx.baseapp.page.IPageActivity
 import com.ljwx.baseapp.page.IPageLocalEvent
@@ -23,6 +25,7 @@ import com.ljwx.baseapp.page.IPageStartPage
 import com.ljwx.baseapp.page.IPageStatusBar
 import com.ljwx.baseapp.page.IPageToolbar
 import com.ljwx.baseapp.router.IPostcard
+import com.ljwx.baseapp.util.BaseModuleLog
 import com.ljwx.baseapp.view.IViewStatusBar
 import com.ljwx.basedialog.common.BaseDialogBuilder
 import com.ljwx.router.RouterPostcard
@@ -30,7 +33,7 @@ import com.ljwx.router.RouterPostcard
 open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPageLocalEvent,
     IPageDialogTips, IPageProcessStep, IPageActivity, IPageStartPage, IPageKeyboardHeight {
 
-    open val TAG = this.javaClass.simpleName + "-[page"
+    open val TAG = this.javaClass.simpleName + BaseLogTag.ACTIVITY
 
     /**
      * 键盘
@@ -57,6 +60,7 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        BaseModuleLog.d(TAG, "生命周期onCreate")
         setStatusBarLight(true)
         requestedOrientation = getScreenOrientation()
         if (enableKeyboardHeightListener()) {
@@ -81,7 +85,7 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
     }
 
     override fun routerTo(path: String): IPostcard {
-        Log2.d(TAG, "路由跳转到:$path")
+        BaseModuleLog.d(TAG, "路由跳转到:$path")
         return RouterPostcard(path)
     }
 
@@ -109,19 +113,19 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
     }
 
     override fun initToolbar(toolbarId: Int): Toolbar? {
-        Log2.d(TAG, "通过id初始化toolbar")
+        BaseModuleLog.d(TAG, "通过id初始化toolbar")
         val toolbar = findViewById(toolbarId) as? Toolbar
         return setToolbar(toolbar)
     }
 
     override fun initToolbar(toolbar: Toolbar?): Toolbar? {
-        Log2.d(TAG, "通过Toolbar控件初始化toolbar")
+        BaseModuleLog.d(TAG, "通过Toolbar控件初始化toolbar")
         return setToolbar(toolbar)
     }
 
     private fun setToolbar(toolbar: Toolbar?): Toolbar? {
         toolbar?.let {
-            Log2.d(TAG, "设置Toolbar返回")
+            BaseModuleLog.d(TAG, "设置Toolbar返回")
             setSupportActionBar(toolbar)
             toolbar?.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
         }
@@ -134,11 +138,13 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+        BaseModuleLog.d(TAG, "生命周期onSaveInstanceState")
         mStateSaved = true
     }
 
     override fun onResume() {
         super.onResume()
+        BaseModuleLog.d(TAG, "生命周期onResume")
         mStateSaved = false
         if (enableKeyboardHeightListener()) {
             setKeyboardHeightListener()
@@ -147,11 +153,13 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
 
     override fun onStop() {
         super.onStop()
+        BaseModuleLog.d(TAG, "生命周期onStop")
         mStateSaved = true
     }
 
     override fun onStart() {
         super.onStart()
+        BaseModuleLog.d(TAG, "生命周期onStart")
         mStateSaved = false
     }
 
@@ -160,7 +168,7 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
         content: String?,
         positiveText: String?
     ): Dialog? {
-        Log2.d(TAG, "快速显示Dialog提示弹窗,精简")
+        BaseModuleLog.d(TAG, "快速显示弹窗")
         return showDialogTips(title, content, positiveText, null, null, null, false, null, null)
     }
 
@@ -185,7 +193,7 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
         negativeListener: View.OnClickListener?,
         positiveListener: View.OnClickListener?
     ): Dialog? {
-        Log2.d(TAG, "快速显示Dialog提示弹窗,详细")
+        BaseModuleLog.d(TAG, "快速显示弹窗")
 //        if (tag.notNullOrBlank()) {
 //            val cache = supportFragmentManager.findFragmentByTag(tag)
 //            if (cache != null && cache is BaseDialogFragment) {
@@ -230,7 +238,7 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
         val receiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
                 intent.action?.let {
-                    Log2.d(TAG, "接收到事件广播:$it")
+                    BaseModuleLog.d(TAG, "接收到事件广播:$it")
                     if (intentFilter.matchAction(it)) {
                         observer(action, intent)
                     }
@@ -239,7 +247,7 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
         }
         broadcastReceivers = broadcastReceivers ?: HashMap()
         broadcastReceivers?.put(action, receiver)
-        Log2.d(TAG, "注册事件广播:$action")
+        BaseModuleLog.d(TAG, "注册事件广播:$action")
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, intentFilter)
     }
 
@@ -247,14 +255,14 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
         if (action == null) {
             return
         }
-        Log2.d(TAG, "发送事件广播:$action")
+        BaseModuleLog.d(TAG, "发送事件广播:$action")
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(action))
     }
 
     override fun unregisterLocalEvent(action: String?) {
         action?.let {
             broadcastReceivers?.get(it)?.let {
-                Log2.d(TAG, "注销事件广播:$action")
+                BaseModuleLog.d(TAG, "注销事件广播:$action")
                 LocalBroadcastManager.getInstance(this).unregisterReceiver(it)
             }
             broadcastReceivers?.remove(it)
@@ -267,10 +275,10 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
     }
 
     override fun onBackPressed() {
-        Log2.d(TAG, "返回是否需要拦截")
+        BaseModuleLog.d(TAG, "触发onBackPress")
         onBackPressInterceptors?.forEach {
             if (it.invoke()) {
-                Log2.d(TAG, "返回被拦截")
+                BaseModuleLog.d(TAG, "返回被拦截")
                 return
             }
         }
@@ -351,7 +359,18 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
 
     override fun onPause() {
         super.onPause()
+        BaseModuleLog.d(TAG, "生命周期onPause")
         keyboardHighProvider?.setKeyboardHeightListener(null)
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        BaseModuleLog.d(TAG, "生命周期onConfigurationChanged")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        BaseModuleLog.d(TAG, "生命周期onRestart")
     }
 
     inline fun <reified F : Fragment> fragmentInstance(fromType: Int): F? {
@@ -360,7 +379,7 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
 
     override fun onDestroy() {
         super.onDestroy()
-        Log2.d(TAG, "执行onDestroy")
+        BaseModuleLog.d(TAG, "生命周期onDestroy")
         broadcastReceivers?.keys?.toList()?.forEach {
             unregisterLocalEvent(it)
         }

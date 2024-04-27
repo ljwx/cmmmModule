@@ -1,11 +1,11 @@
 package com.ljwx.recyclerview.adapter
 
-import android.util.Log
 import android.view.ViewGroup
 import android.widget.Space
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.ljwx.recyclerview.BaseRecyclerLog
 import com.ljwx.recyclerview.diff.ItemDiffCallback
 import com.ljwx.recyclerview.holder.ItemHolder
 import com.ljwx.recyclerview.itemtype.ItemType
@@ -60,6 +60,7 @@ open class MultipleTypeAdapter(
         val item = getItem(position)
         for (viewType in mItemTypes.indices) {
             if (mItemTypes[viewType].matches(item)) {
+                BaseRecyclerLog.d(TAG, "getItemViewType:$viewType")
                 return viewType
             }
         }
@@ -68,6 +69,7 @@ open class MultipleTypeAdapter(
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
+        BaseRecyclerLog.d(TAG, "onCreateViewHolder,viewType:$viewType")
         if (viewType == RecyclerView.INVALID_TYPE) {
             return ItemHolder(Space(parent.context))
         }
@@ -75,7 +77,7 @@ open class MultipleTypeAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
-        Log.d(TAG, "onBindViewHolder:$position")
+        BaseRecyclerLog.d(TAG, "onBindViewHolder:$position,holder address:$holder")
         if (holder.itemViewType != RecyclerView.INVALID_TYPE) {
             val item = getItem(position)
             mItemTypes[holder.itemViewType].bind(holder, item)
@@ -118,11 +120,13 @@ open class MultipleTypeAdapter(
     override fun submitList(list: List<Any?>?) {
         newList = list
         super.submitList(list)
+        BaseRecyclerLog.d(TAG, "提交数据")
     }
 
     override fun submitList(list: List<Any?>?, commitCallback: Runnable?) {
         newList = list
         super.submitList(list, commitCallback)
+        BaseRecyclerLog.d(TAG, "提交数据")
     }
 
 }

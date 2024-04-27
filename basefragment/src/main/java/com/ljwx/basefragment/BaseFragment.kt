@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.ljwx.baseapp.constant.BaseConstBundleKey
+import com.ljwx.baseapp.constant.BaseLogTag
 import com.ljwx.baseapp.keyboard.KeyboardHeightProvider
 import com.ljwx.baseapp.page.IPageLocalEvent
 import com.ljwx.baseapp.page.IPageProcessStep
@@ -23,6 +24,7 @@ import com.ljwx.baseapp.page.IPageDialogTips
 import com.ljwx.baseapp.page.IPageKeyboardHeight
 import com.ljwx.baseapp.page.IPageStartPage
 import com.ljwx.baseapp.router.IPostcard
+import com.ljwx.baseapp.util.BaseModuleLog
 import com.ljwx.basedialog.common.BaseDialogBuilder
 import com.ljwx.router.RouterPostcard
 import kotlinx.coroutines.Dispatchers
@@ -35,7 +37,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
     IPageLocalEvent,
     IPageDialogTips, IPageProcessStep, IPageStartPage, IPageKeyboardHeight {
 
-    open val TAG = this.javaClass.simpleName + "-[page"
+    open val TAG = this.javaClass.simpleName + BaseLogTag.FRAGMENT
 
     protected var mActivity: AppCompatActivity? = null
 
@@ -63,7 +65,18 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        BaseModuleLog.d(TAG, "生命周期onAttach")
         mActivity = context as AppCompatActivity
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        BaseModuleLog.d(TAG, "生命周期onActivityCreated")
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        BaseModuleLog.d(TAG, "生命周期onCreate")
     }
 
     open fun getLayoutRes(): Int {
@@ -75,11 +88,13 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+        BaseModuleLog.d(TAG, "生命周期onCreateView")
         return LayoutInflater.from(requireContext()).inflate(getLayoutRes(), container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        BaseModuleLog.d(TAG, "生命周期onViewCreated")
         if (enableKeyboardHeightListener()) {
             createKeyboardHeightProvider()
             keyboardHeightRootView()?.post { keyboardHighProvider?.start() }
@@ -88,6 +103,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
 
     override fun onResume() {
         super.onResume()
+        BaseModuleLog.d(TAG, "生命周期onResume")
         if (!isLazyInitialized && !isHidden) {
             lazyInit()
             isLazyInitialized = true
@@ -105,7 +121,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
     }
 
     override fun routerTo(path: String): IPostcard {
-        Log2.d(TAG, "路由跳转到:$path")
+        BaseModuleLog.d(TAG, "路由跳转到:$path")
         return RouterPostcard(path)
     }
 
@@ -186,7 +202,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
         val receiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
                 intent.action?.let {
-                    Log2.d(TAG, "接收到事件广播:$it")
+                    BaseModuleLog.d(TAG, "接收到事件广播:$it")
                     if (intentFilter.matchAction(it)) {
                         observer(action, intent)
                     }
@@ -195,7 +211,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
         }
         broadcastReceivers = broadcastReceivers ?: HashMap()
         broadcastReceivers?.put(action, receiver)
-        Log2.d(TAG, "注册事件广播:$action")
+        BaseModuleLog.d(TAG, "注册事件广播:$action")
         context?.let {
             LocalBroadcastManager.getInstance(it).registerReceiver(receiver, intentFilter)
         }
@@ -205,7 +221,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
         if (action == null) {
             return
         }
-        Log2.d(TAG, "发送事件广播:$action")
+        BaseModuleLog.d(TAG, "发送事件广播:$action")
         context?.let {
             LocalBroadcastManager.getInstance(it).sendBroadcast(Intent(action))
         }
@@ -215,7 +231,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
         action?.let {
             broadcastReceivers?.get(action)?.let {
                 context?.let { c ->
-                    Log2.d(TAG, "注销事件广播:$action")
+                    BaseModuleLog.d(TAG, "注销事件广播:$action")
                     LocalBroadcastManager.getInstance(c).unregisterReceiver(it)
                 }
             }
@@ -224,7 +240,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
     }
 
     open fun lazyInit() {
-
+        BaseModuleLog.d(TAG, "触发懒加载")
     }
 
 
@@ -316,25 +332,45 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
 
     override fun onPause() {
         super.onPause()
+        BaseModuleLog.d(TAG, "生命周期onPause")
         keyboardHighProvider?.setKeyboardHeightListener(null)
+    }
 
+    override fun onStart() {
+        super.onStart()
+        BaseModuleLog.d(TAG, "生命周期onStart")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        BaseModuleLog.d(TAG, "生命周期onStop")
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        BaseModuleLog.d(TAG, "生命周期onHiddenChanged,hidden:$hidden")
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        BaseModuleLog.d(TAG, "生命周期onLowMemory")
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Log2.d(TAG, "执行onDestroyView")
+        BaseModuleLog.d(TAG, "执行onDestroyView")
         isLazyInitialized = false
     }
 
     override fun onDetach() {
         super.onDetach()
-        Log2.d(TAG, "执行onDetach")
+        BaseModuleLog.d(TAG, "执行onDetach")
         mActivity = null
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        Log2.d(TAG, "执行onDestroy")
+        BaseModuleLog.d(TAG, "执行onDestroy")
         broadcastReceivers?.keys?.toList()?.forEach {
             unregisterLocalEvent(it)
         }

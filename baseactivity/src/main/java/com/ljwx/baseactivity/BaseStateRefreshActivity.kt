@@ -12,6 +12,7 @@ import com.ljwx.baseapp.extensions.isMainThread
 import com.ljwx.baseapp.page.IPagePopLoading
 import com.ljwx.baseapp.page.IPageRefreshLayout
 import com.ljwx.baseapp.page.IPageStateLayout
+import com.ljwx.baseapp.util.BaseModuleLog
 
 open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStateLayout,
     IPageRefreshLayout {
@@ -99,6 +100,7 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
      * @param stateLayout 多状态布局容器
      */
     override fun initStateLayout(stateLayout: IViewStateLayout?) {
+        BaseModuleLog.d(TAG, "初始化多状态布局")
         this.mStateLayout = stateLayout
     }
 
@@ -170,6 +172,7 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
     }
 
     private fun showState(@BaseLayoutStatus.LayoutStatus state: Int, tag: Any?) {
+        BaseModuleLog.d(TAG, "多状态布局显示:$state")
         when (state) {
             BaseLayoutStatus.LOADING -> {
                 mStateLayout?.showLoading(tag)
@@ -199,7 +202,7 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
      * @param tag 携带数据
      */
     override fun onStateLayoutRetry(tag: Any?) {
-
+        BaseModuleLog.d(TAG, "多状态布局触发重试")
     }
 
     /*================================================================*/
@@ -208,6 +211,7 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
 
     override fun initRefreshLayout(refreshLayout: IViewRefreshLayout?) {
         if (enableRefresh()) {
+            BaseModuleLog.d(TAG, "view,启用下拉刷新")
             refreshLayout?.enableRefresh(true)
             this.mRefreshLayout = refreshLayout
             refreshLayout?.setRefreshPage(this)
@@ -219,6 +223,7 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
     override fun initRefreshLayout(refreshId: Int) {
         this.mRefreshLayout = findViewById<View>(refreshId) as? IViewRefreshLayout
         if (enableRefresh()) {
+            BaseModuleLog.d(TAG, "id,启用下拉刷新")
             this.mRefreshLayout?.enableRefresh(true)
             this.mRefreshLayout?.setRefreshPage(this)
         } else {
@@ -230,7 +235,7 @@ open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStat
      * 下拉刷新逻辑
      */
     override fun onRefreshData(manual: Boolean) {
-
+        BaseModuleLog.d(TAG, "出发刷新数据")
     }
 
     /**

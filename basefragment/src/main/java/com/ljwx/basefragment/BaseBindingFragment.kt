@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.ljwx.baseapp.util.BaseModuleLog
 
 abstract class BaseBindingFragment<Binding : ViewDataBinding>(@LayoutRes private val layoutRes: Int) :
     BaseStateRefreshFragment(layoutRes) {
@@ -27,6 +28,7 @@ abstract class BaseBindingFragment<Binding : ViewDataBinding>(@LayoutRes private
     }
 
     private fun quickLayout() {
+        BaseModuleLog.d(TAG, "静默初始化多状态和刷新")
         useCommonStateLayout()
         useCommonRefreshLayout()
     }

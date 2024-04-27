@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.ljwx.baseapp.util.BaseModuleLog
 
 open class BaseBindingActivity<Binding : ViewDataBinding>(@LayoutRes private val layoutResID: Int) :
     BaseStateRefreshActivity() {
@@ -20,6 +21,7 @@ open class BaseBindingActivity<Binding : ViewDataBinding>(@LayoutRes private val
 
 
     protected fun quickLayout() {
+        BaseModuleLog.d(TAG, "静默初始化多状态和刷新")
         useCommonStateLayout()
         useCommonRefreshLayout()
     }
