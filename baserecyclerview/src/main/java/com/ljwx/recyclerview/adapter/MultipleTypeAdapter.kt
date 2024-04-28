@@ -60,7 +60,6 @@ open class MultipleTypeAdapter(
         val item = getItem(position)
         for (viewType in mItemTypes.indices) {
             if (mItemTypes[viewType].matches(item)) {
-                BaseRecyclerLog.d(TAG, "getItemViewType:$viewType")
                 return viewType
             }
         }

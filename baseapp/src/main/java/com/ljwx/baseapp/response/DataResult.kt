@@ -12,7 +12,7 @@ sealed class DataResult<out R> {
     data class Error(
         val code: Int? = null,
         val message: String? = null,
-        val exception: Exception? = null
+        val exception: Throwable? = null
     ) : DataResult<Nothing>()
 
     interface Result<D : Any> {
