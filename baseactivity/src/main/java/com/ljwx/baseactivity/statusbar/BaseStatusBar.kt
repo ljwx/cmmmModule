@@ -41,6 +41,12 @@ open class BaseStatusBar : IViewStatusBar {
         return this
     }
 
+    override fun transparent(boolean: Boolean) {
+        if (boolean) {
+            statusBar.reset().transparentStatusBar().init()
+        }
+    }
+
     override fun setStatusBar(backgroundColor: Int, fontColor: Int): IViewStatusBar {
         return this
     }

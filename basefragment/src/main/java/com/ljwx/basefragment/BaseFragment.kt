@@ -25,6 +25,7 @@ import com.ljwx.baseapp.page.IPageKeyboardHeight
 import com.ljwx.baseapp.page.IPageStartPage
 import com.ljwx.baseapp.router.IPostcard
 import com.ljwx.baseapp.util.BaseModuleLog
+import com.ljwx.baseapp.util.LocalEventUtils
 import com.ljwx.basedialog.common.BaseDialogBuilder
 import com.ljwx.router.RouterPostcard
 import kotlinx.coroutines.Dispatchers
@@ -60,6 +61,8 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
     protected val argumentsFromType by lazy {
         arguments?.getInt(BaseConstBundleKey.FROM_TYPE, -10) ?: -10
     }
+
+    open val argumentIsConditionType by lazy { "" }
 
     protected val argumentsDataId by lazy { arguments?.getString(BaseConstBundleKey.DATA_ID) }
 
@@ -193,7 +196,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
      */
     override fun registerLocalEvent(
         action: String?,
-        observer: (action: String, intent: Intent) -> Unit
+        observer: (action: String, type: Int?, intent: Intent) -> Unit
     ) {
         if (action == null) {
             return
@@ -204,7 +207,9 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
                 intent.action?.let {
                     BaseModuleLog.d(TAG, "接收到事件广播:$it")
                     if (intentFilter.matchAction(it)) {
-                        observer(action, intent)
+                        val type =
+                            intent.getIntExtra(BaseConstBundleKey.LOCAL_EVENT_COMMON_TYPE, -1)
+                        observer(action, type, intent)
                     }
                 }
             }
@@ -217,14 +222,8 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
         }
     }
 
-    override fun sendLocalEvent(action: String?) {
-        if (action == null) {
-            return
-        }
-        BaseModuleLog.d(TAG, "发送事件广播:$action")
-        context?.let {
-            LocalBroadcastManager.getInstance(it).sendBroadcast(Intent(action))
-        }
+    override fun sendLocalEvent(action: String?, type: Int?) {
+        LocalEventUtils.sendAction(action, type)
     }
 
     override fun unregisterLocalEvent(action: String?) {
@@ -329,6 +328,9 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
     }
 
     /*----------------------------------------------------------------------------------------*/
+
+    open fun getConditionType(): Boolean =
+        arguments?.getBoolean(BaseConstBundleKey.IS_CONDITION_TYPE, false) ?: false
 
     override fun onPause() {
         super.onPause()

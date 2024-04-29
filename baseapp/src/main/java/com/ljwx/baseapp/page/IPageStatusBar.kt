@@ -19,4 +19,7 @@ interface IPageStatusBar {
     ): IViewStatusBar
 
     fun setStatusBarLight(light: Boolean)
+
+    fun setStatusBarTransparent(transparent: Boolean = true)
+
 }

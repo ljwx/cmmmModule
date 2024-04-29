@@ -5,7 +5,10 @@ import com.ljwx.baseapp.event.ISendLocalEvent
 
 interface IPageLocalEvent : ISendLocalEvent {
 
-    fun registerLocalEvent(action: String?, observer: (action: String, intent: Intent) -> Unit)
+    fun registerLocalEvent(
+        action: String?,
+        observer: (action: String, type: Int?, intent: Intent) -> Unit
+    )
 
     fun unregisterLocalEvent(action: String?)
 

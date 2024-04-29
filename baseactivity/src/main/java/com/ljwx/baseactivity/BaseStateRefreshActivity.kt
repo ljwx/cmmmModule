@@ -14,7 +14,8 @@ import com.ljwx.baseapp.page.IPageRefreshLayout
 import com.ljwx.baseapp.page.IPageStateLayout
 import com.ljwx.baseapp.util.BaseModuleLog
 
-open class BaseStateRefreshActivity : BaseActivity(), IPagePopLoading, IPageStateLayout,
+open class BaseStateRefreshActivity(@LayoutRes layoutResID: Int = R.layout.baseapp_state_layout_empty) :
+    BaseActivity(layoutResID), IPagePopLoading, IPageStateLayout,
     IPageRefreshLayout {
 
     private val mPopupLoading by lazy {

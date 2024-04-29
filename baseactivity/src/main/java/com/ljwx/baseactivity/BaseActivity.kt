@@ -9,6 +9,7 @@ import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -26,11 +27,13 @@ import com.ljwx.baseapp.page.IPageStatusBar
 import com.ljwx.baseapp.page.IPageToolbar
 import com.ljwx.baseapp.router.IPostcard
 import com.ljwx.baseapp.util.BaseModuleLog
+import com.ljwx.baseapp.util.LocalEventUtils
 import com.ljwx.baseapp.view.IViewStatusBar
 import com.ljwx.basedialog.common.BaseDialogBuilder
 import com.ljwx.router.RouterPostcard
 
-open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPageLocalEvent,
+open class BaseActivity(@LayoutRes private val layoutResID: Int = com.ljwx.baseapp.R.layout.baseapp_state_layout_empty) :
+    BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPageLocalEvent,
     IPageDialogTips, IPageProcessStep, IPageActivity, IPageStartPage, IPageKeyboardHeight {
 
     open val TAG = this.javaClass.simpleName + BaseLogTag.ACTIVITY
@@ -67,6 +70,10 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
             createKeyboardHeightProvider()
             keyboardHeightRootView()?.post { keyboardHighProvider?.start() }
         }
+    }
+
+    open fun getLayoutRes(): Int {
+        return layoutResID
     }
 
     /**
@@ -109,6 +116,12 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
                 com.ljwx.baseapp.R.color.base_app_textColorSecondary,
                 false
             )
+        }
+    }
+
+    override fun setStatusBarTransparent(transparent: Boolean) {
+        if (transparent) {
+            mStatusBar.transparent(transparent)
         }
     }
 
@@ -229,7 +242,7 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
      */
     override fun registerLocalEvent(
         action: String?,
-        observer: (action: String, intent: Intent) -> Unit
+        observer: (action: String, type: Int?, intent: Intent) -> Unit
     ) {
         if (action == null) {
             return
@@ -240,7 +253,9 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
                 intent.action?.let {
                     BaseModuleLog.d(TAG, "接收到事件广播:$it")
                     if (intentFilter.matchAction(it)) {
-                        observer(action, intent)
+                        val type =
+                            intent.getIntExtra(BaseConstBundleKey.LOCAL_EVENT_COMMON_TYPE, -1)
+                        observer(action, type, intent)
                     }
                 }
             }
@@ -251,12 +266,8 @@ open class BaseActivity : BaseToolsActivity(), IPageStatusBar, IPageToolbar, IPa
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, intentFilter)
     }
 
-    override fun sendLocalEvent(action: String?) {
-        if (action == null) {
-            return
-        }
-        BaseModuleLog.d(TAG, "发送事件广播:$action")
-        LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(action))
+    override fun sendLocalEvent(action: String?, type: Int?) {
+        LocalEventUtils.sendAction(action, type)
     }
 
     override fun unregisterLocalEvent(action: String?) {

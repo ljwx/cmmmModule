@@ -6,7 +6,7 @@ import com.blankj.utilcode.util.Utils
 
 object BaseAppUtils {
 
-    private lateinit var application: Application
+    private var application: Application? = null
 
     fun init(application: Application) {
         this.application = application
@@ -14,7 +14,7 @@ object BaseAppUtils {
     }
 
     fun getApplication(): Application {
-        return application
+        return application ?: Utils.getApp()
     }
 
     fun getApplicationViewModelStore(): ViewModelStoreOwner {

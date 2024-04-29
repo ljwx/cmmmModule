@@ -10,6 +10,8 @@ interface IViewStatusBar {
 
     fun darkMode(dark: Boolean = false, @ColorInt backgroundColor: Int): IViewStatusBar
 
+    fun transparent(boolean: Boolean)
+
     fun setStatusBar(@ColorInt backgroundColor: Int, @ColorInt fontColor: Int): IViewStatusBar
 
     fun setCustomStatusBar(@ColorRes backgroundColor: Int, fontDark: Boolean): IViewStatusBar

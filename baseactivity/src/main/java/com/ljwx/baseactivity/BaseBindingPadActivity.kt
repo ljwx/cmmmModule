@@ -1,4 +1,4 @@
-package com.ljwx.basefragment
+package com.ljwx.baseactivity
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,10 +10,10 @@ import androidx.databinding.ViewDataBinding
 import com.ljwx.baseapp.extensions.getStringRes
 import com.ljwx.baseapp.util.OtherUtils
 
-abstract class BaseBindingPadFragment<Binding : ViewDataBinding, BindingPad : ViewDataBinding>(
+abstract class BaseBindingPadActivity<Binding : ViewDataBinding, BindingPad : ViewDataBinding>(
     @LayoutRes private val layoutRes: Int,
     @LayoutRes private val layoutResPad: Int
-) : BaseStateRefreshFragment() {
+) : BaseStateRefreshActivity() {
 
     /**
      * DataBinding
@@ -23,18 +23,12 @@ abstract class BaseBindingPadFragment<Binding : ViewDataBinding, BindingPad : Vi
 
     protected var isPad = OtherUtils.isDevicePad()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        if (isPad) {
-            mBindingPad = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
-        } else {
-            mBinding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
-        }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mBinding = DataBindingUtil.setContentView(this, getLayoutRes())
+        //等待binding过后
+        initToolbar(com.ljwx.baseapp.R.id.base_app_toolbar)
         quickLayout()
-        return if (isPad) mBindingPad.root else mBinding.root
     }
 
     override fun getLayoutRes(): Int {
