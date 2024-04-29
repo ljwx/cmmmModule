@@ -6,6 +6,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
 import com.ljwx.baseapp.constant.BaseLayoutStatus
@@ -159,6 +160,10 @@ open class StateLayout @JvmOverloads constructor(
                 LayoutInflater.from(context).inflate(layout, this, false)
             }.let { showStateView(it) }
         }
+    }
+
+    override fun getView(): ViewGroup {
+        return this
     }
 
     override fun addClickListener(
