@@ -18,9 +18,9 @@ import com.ljwx.baseapp.constant.BaseConstBundleKey
 import com.ljwx.baseapp.constant.BaseLogTag
 import com.ljwx.baseapp.keyboard.KeyboardHeightProvider
 import com.ljwx.baseapp.page.IPageActivity
-import com.ljwx.baseapp.page.IPageLocalEvent
 import com.ljwx.baseapp.page.IPageDialogTips
 import com.ljwx.baseapp.page.IPageKeyboardHeight
+import com.ljwx.baseapp.page.IPageLocalEvent
 import com.ljwx.baseapp.page.IPageProcessStep
 import com.ljwx.baseapp.page.IPageStartPage
 import com.ljwx.baseapp.page.IPageStatusBar
@@ -386,6 +386,12 @@ open class BaseActivity(@LayoutRes private val layoutResID: Int = com.ljwx.basea
 
     inline fun <reified F : Fragment> fragmentInstance(fromType: Int): F? {
         return fragmentInstanceEx(fromType)
+    }
+
+    override fun overridePendingTransition(enterAnim: Int, exitAnim: Int) {
+        super.overridePendingTransition(enterAnim, exitAnim)
+//        overridePendingTransition(0, R.anim.bottom_out)
+        BaseModuleLog.d(TAG, "进出动画")
     }
 
     override fun onDestroy() {
