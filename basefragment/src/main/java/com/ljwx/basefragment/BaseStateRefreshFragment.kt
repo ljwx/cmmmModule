@@ -18,9 +18,7 @@ abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int = R.layout.b
     BaseFragment(layoutResID), IPagePopLoading, IPageStateLayout, IPageRefreshLayout {
 
 
-    private val mPopupLoading by lazy {
-        BasePopupLoading(requireContext())
-    }
+    private var mPopupLoading :BasePopupLoading? = null
 
     /**
      * 多状态
@@ -56,22 +54,23 @@ abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int = R.layout.b
             return
         }
         activity?.runOnUiThread {
+            mPopupLoading = mPopupLoading ?: BasePopupLoading(requireContext())
 //            mPopupLoading.setCancelable(cancelable)
 //            dialog.setCanceledOnTouchOutside(canceledOnTouchOutside)
-            mPopupLoading.showPopup(show, cancelable, message, backgroundTransparent = transparent)
+            mPopupLoading?.showPopup(show, cancelable, message, backgroundTransparent = transparent)
         }
     }
 
     override fun dismissPopLoading(dismiss: Boolean) {
         activity?.runOnUiThread {
-            mPopupLoading.dismiss()
+            mPopupLoading?.dismiss()
         }
     }
 
-    override fun isPopupLoadingShowing(): Boolean = mPopupLoading.isShowing()
+    override fun isPopupLoadingShowing(): Boolean = mPopupLoading?.isShowing() == true
 
     override fun setPopupLoadingLayout(@LayoutRes layout: Int) {
-        mPopupLoading.setLayout(layout)
+        mPopupLoading?.setLayout(layout)
     }
 
     /*================================================================*/
@@ -104,6 +103,7 @@ abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int = R.layout.b
      * @param stateLayout 多状态布局容器
      */
     override fun initStateLayout(stateLayout: IViewStateLayout?) {
+        BaseModuleLog.d(TAG, "初始化stateLayout")
         this.mStateLayout = stateLayout
     }
 
@@ -186,11 +186,11 @@ abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int = R.layout.b
 
 
     override fun onDestroy() {
-        super.onDestroy()
-        mPopupLoading.dismiss()
+        mPopupLoading?.dismiss()
         mStateLayout = null
         mStateRunnable = null
         mRefreshLayout = null
+        super.onDestroy()
     }
 
 }

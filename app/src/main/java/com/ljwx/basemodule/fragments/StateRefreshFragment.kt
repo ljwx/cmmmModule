@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.lifecycleScope
+import com.ljwx.baseapp.extensions.delayRun
 import com.ljwx.basefragment.BaseBindingFragment
 import com.ljwx.basemodule.R
 import com.ljwx.basemodule.databinding.FragmentStateRefreshBinding
@@ -20,6 +21,22 @@ class StateRefreshFragment :
 
 //        showStateLayout(LayoutStatus.LOADING)
 
+        showStateLoading()
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            delay(4000)
+            withContext(Dispatchers.Main) {
+                showStateEmpty()
+            }
+            delay(4000)
+            withContext(Dispatchers.Main) {
+                showStateError()
+            }
+            delay(4000)
+            withContext(Dispatchers.Main) {
+                showStateContent()
+            }
+        }
 
     }
 

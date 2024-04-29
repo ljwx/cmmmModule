@@ -146,15 +146,19 @@ open class StateLayout @JvmOverloads constructor(
     }
 
     override fun showStateView(state: Int, tag: Any?) {
-        var layout = emptyLayout
-        when(state) {
-            BaseLayoutStatus.EMPTY-> layout = emptyLayout
-            BaseLayoutStatus.LOADING-> layout = loadingLayout
-            BaseLayoutStatus.ERROR-> layout = errorLayout
+        var layout:Int? = null
+        when (state) {
+            BaseLayoutStatus.EMPTY -> layout = emptyLayout
+            BaseLayoutStatus.LOADING -> layout = loadingLayout
+            BaseLayoutStatus.ERROR -> layout = errorLayout
         }
-        getOrCreate(state) {
-            LayoutInflater.from(context).inflate(layout, this, false)
-        }.let { showStateView(it) }
+        if (layout == null) {
+            showStateContent()
+        } else {
+            getOrCreate(state) {
+                LayoutInflater.from(context).inflate(layout, this, false)
+            }.let { showStateView(it) }
+        }
     }
 
     override fun addClickListener(
@@ -184,7 +188,6 @@ open class StateLayout @JvmOverloads constructor(
             removeView(vContent)
         }
         vContent = view
-        views.put(BaseLayoutStatus.CONTENT, view)
     }
 
     override fun onFinishInflate() {

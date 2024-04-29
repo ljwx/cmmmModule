@@ -34,8 +34,8 @@ abstract class BaseBindingFragment<Binding : ViewDataBinding>(@LayoutRes private
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         mBinding.unbind()
+        super.onDestroy()
     }
 
 }
