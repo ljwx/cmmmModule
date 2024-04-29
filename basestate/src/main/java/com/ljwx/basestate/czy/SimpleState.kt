@@ -81,7 +81,7 @@ class SimpleState(
             } else {
                 showEmpty?.invoke(layout)
             }
-            STATE_CONTENT -> layout.showContent()
+            STATE_CONTENT -> layout.showStateContent()
         }
     }
 
@@ -141,7 +141,7 @@ class SimpleState(
 
         private fun ensureStateLayout(): StateLayout {
             return findStateLayout() ?: StateLayout(container.context).apply {
-                setContent(container.getChildAt(0))
+                setStateContent(container.getChildAt(0))
                 container.addView(this, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
             }
         }
@@ -159,7 +159,7 @@ class SimpleState(
         }
 
         override fun showContent() {
-            findStateLayout()?.showContent()
+            findStateLayout()?.showStateContent()
         }
     }
 }

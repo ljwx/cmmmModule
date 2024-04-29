@@ -14,6 +14,10 @@ open class BaseResponseListData<Item> {
         return offset == null || offset!! < 1
     }
 
+    open fun isRefreshAndEmpty(): Boolean {
+        return isRefresh() && items.isNullOrEmpty()
+    }
+
     override fun toString(): String {
         return "BaseResponseListData(limit=$limit, offset=$offset, total=$total, itemsSize=${items?.size ?: 0})"
     }

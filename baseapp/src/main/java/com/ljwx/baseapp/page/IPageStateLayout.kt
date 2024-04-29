@@ -23,14 +23,10 @@ interface IPageStateLayout {
     /**
      * 设置点击事件
      */
-    fun setStateLayoutClick(
+    fun addStateLayoutClick(
+        @BaseLayoutStatus.LayoutStatus stateLayout: Int,
         @IdRes id: Int,
-        listener: View.OnClickListener,
-        @BaseLayoutStatus.LayoutStatus vararg stateLayout: Int
+        listener: View.OnClickListener
     )
 
-    /**
-     * 多状态布局里的错误重试
-     */
-    fun onStateLayoutRetry(tag: Any? = null)
 }

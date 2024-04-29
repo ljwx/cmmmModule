@@ -107,50 +107,13 @@ abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int = R.layout.b
         this.mStateLayout = stateLayout
     }
 
-    override fun setStateLayoutClick(
+
+    override fun addStateLayoutClick(
+        @BaseLayoutStatus.LayoutStatus state: Int,
         id: Int,
         listener: View.OnClickListener,
-        @BaseLayoutStatus.LayoutStatus vararg stateLayout: Int
     ) {
-        this.mStateLayout?.setClickListener(id, listener)
-//        if (retryId != null) {
-//            stateLayout?.setRetryIds(retryId)
-//        }
-//        // 重试按钮触发
-//        stateLayout?.onRefresh {
-//            onStateLayoutRetry(this.tag)
-//        }
-    }
-
-    /**
-     * 设置布局样式
-     *
-     * @param state 哪种状态
-     * @param layout 对应的布局
-     */
-    fun setStateLayoutRes(@BaseLayoutStatus.LayoutStatus state: Int, @LayoutRes layout: Int) {
-        when (state) {
-            BaseLayoutStatus.LOADING -> {
-                mStateLayout?.setLayoutLoading(layout)
-//                mStateLayout?.emptyLayout = layout
-            }
-
-            BaseLayoutStatus.EMPTY -> {
-                mStateLayout?.setLayoutEmpty(layout)
-//                mStateLayout?.emptyLayout = layout
-            }
-
-            BaseLayoutStatus.ERROR -> {
-                mStateLayout?.setLayoutError(layout)
-//                mStateLayout?.errorLayout = layout
-            }
-
-            BaseLayoutStatus.OFFLINE -> {
-
-            }
-
-            else -> {}
-        }
+        mStateLayout?.addClickListener(state, id, listener)
     }
 
     /**
@@ -165,47 +128,19 @@ abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int = R.layout.b
             return
         }
         if (isMainThread) {
-            showState(state, tag)
+            mStateLayout?.showStateView(state, tag)
         } else {
             mStateRunnable = mStateRunnable ?: Runnable {
-                showState(state, tag)
+                mStateLayout?.showStateView(state, tag)
             }
             requireActivity().runOnUiThread(mStateRunnable)
         }
     }
 
-    private fun showState(@BaseLayoutStatus.LayoutStatus state: Int, tag: Any?) {
-        when (state) {
-            BaseLayoutStatus.LOADING -> {
-                mStateLayout?.showLoading(tag)
-            }
-
-            BaseLayoutStatus.CONTENT -> {
-                mStateLayout?.showContent()
-            }
-
-            BaseLayoutStatus.EMPTY -> {
-                mStateLayout?.showEmpty()
-            }
-
-            BaseLayoutStatus.ERROR -> {
-                mStateLayout?.showError(tag)
-            }
-
-            BaseLayoutStatus.OFFLINE -> {
-
-            }
-        }
-    }
-
-    /**
-     * 重试回调
-     *
-     * @param tag 携带数据
-     */
-    override fun onStateLayoutRetry(tag: Any?) {
-
-    }
+    open fun showStateContent() = showStateLayout(BaseLayoutStatus.CONTENT)
+    open fun showStateEmpty() = showStateLayout(BaseLayoutStatus.EMPTY)
+    open fun showStateLoading() = showStateLayout(BaseLayoutStatus.LOADING)
+    open fun showStateError() = showStateLayout(BaseLayoutStatus.ERROR)
 
     /*================================================================*/
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StateLayout">
+        <attr name="stateLayoutLoading" format="reference" />
+        <attr name="stateLayoutEmpty" format="reference" />
+        <attr name="stateLayoutError" format="reference" />
+        <attr name="stateLayoutOffline" format="reference" />
+        <attr name="stateLayoutExtension" format="reference" />
+    </declare-styleable>
+</resources>

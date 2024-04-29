@@ -105,54 +105,16 @@ open class BaseStateRefreshActivity(@LayoutRes layoutResID: Int = R.layout.basea
         this.mStateLayout = stateLayout
     }
 
-    override fun setStateLayoutClick(
+    override fun addStateLayoutClick(
+        @BaseLayoutStatus.LayoutStatus state: Int,
         id: Int,
         listener: View.OnClickListener,
-        @BaseLayoutStatus.LayoutStatus vararg stateLayout: Int
     ) {
-        this.mStateLayout?.setClickListener(id, listener)
-//        if (retryId != null) {
-//            stateLayout?.setRetryIds(retryId)
-//        }
-//        // 重试按钮触发
-//        stateLayout?.onRefresh {
-//            onStateLayoutRetry(this.tag)
-//        }
+        mStateLayout?.addClickListener(state, id, listener)
     }
 
     /**
-     * 重新设置布局样式
-     *
-     * @param state 哪种状态
-     * @param layout 对应的布局
-     */
-    fun setStateLayoutRes(@BaseLayoutStatus.LayoutStatus state: Int, @LayoutRes layout: Int) {
-        when (state) {
-            BaseLayoutStatus.LOADING -> {
-                mStateLayout?.setLayoutLoading(layout)
-//                mStateLayout?.emptyLayout = layout
-            }
-
-            BaseLayoutStatus.EMPTY -> {
-                mStateLayout?.setLayoutEmpty(layout)
-//                mStateLayout?.emptyLayout = layout
-            }
-
-            BaseLayoutStatus.ERROR -> {
-                mStateLayout?.setLayoutError(layout)
-//                mStateLayout?.errorLayout = layout
-            }
-
-            BaseLayoutStatus.OFFLINE -> {
-
-            }
-
-            else -> {}
-        }
-    }
-
-    /**
-     * 显示多种状态
+     * 显示布局状态
      *
      * @param state 哪种状态
      * @param show 是否需要显示
@@ -163,47 +125,13 @@ open class BaseStateRefreshActivity(@LayoutRes layoutResID: Int = R.layout.basea
             return
         }
         if (isMainThread) {
-            showState(state, tag)
+            mStateLayout?.showStateView(state, tag)
         } else {
             mStateRunnable = mStateRunnable ?: Runnable {
-                showState(state, tag)
+                mStateLayout?.showStateView(state, tag)
             }
             runOnUiThread(mStateRunnable)
         }
-    }
-
-    private fun showState(@BaseLayoutStatus.LayoutStatus state: Int, tag: Any?) {
-        BaseModuleLog.d(TAG, "多状态布局显示:$state")
-        when (state) {
-            BaseLayoutStatus.LOADING -> {
-                mStateLayout?.showLoading(tag)
-            }
-
-            BaseLayoutStatus.CONTENT -> {
-                mStateLayout?.showContent()
-            }
-
-            BaseLayoutStatus.EMPTY -> {
-                mStateLayout?.showEmpty()
-            }
-
-            BaseLayoutStatus.ERROR -> {
-                mStateLayout?.showError(tag)
-            }
-
-            BaseLayoutStatus.OFFLINE -> {
-
-            }
-        }
-    }
-
-    /**
-     * 重试回调
-     *
-     * @param tag 携带数据
-     */
-    override fun onStateLayoutRetry(tag: Any?) {
-        BaseModuleLog.d(TAG, "多状态布局触发重试")
     }
 
     /*================================================================*/

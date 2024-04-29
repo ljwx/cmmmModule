@@ -176,7 +176,7 @@ open class QuickStateRefreshLayout @JvmOverloads constructor(
      */
     private fun stateLayoutSetContent(content: View?) {
         content?.let {
-            mStateLayout?.setContent(it)
+            mStateLayout?.setStateContent(it)
             if (it.parent == null){
                 mStateLayout?.addView(it, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
             }
@@ -204,13 +204,13 @@ open class QuickStateRefreshLayout @JvmOverloads constructor(
         mStateLayout?.id = com.ljwx.baseapp.R.id.base_app_quick_state_layout
 //        mStateLayout?.setRetryIds(R.id.base_scaffold_state_retry_id)
         if (mLayoutLoading != null && mLayoutLoading != NO_ID) {
-            mStateLayout?.setLayoutLoading(mLayoutLoading!!)
+//            mStateLayout?.setLayoutLoading(mLayoutLoading!!)
         }
         if (mLayoutEmpty != null && mLayoutEmpty != NO_ID) {
-            mStateLayout?.setLayoutEmpty(mLayoutEmpty!!)
+//            mStateLayout?.setLayoutEmpty(mLayoutEmpty!!)
         }
         if (mLayoutError != null && mLayoutError != NO_ID) {
-            mStateLayout?.setLayoutError(mLayoutError!!)
+//            mStateLayout?.setLayoutError(mLayoutError!!)
         }
     }
 
@@ -244,28 +244,28 @@ open class QuickStateRefreshLayout @JvmOverloads constructor(
      * 显示内容布局
      */
     fun showStateContent() {
-        mStateLayout?.showContent()
+        mStateLayout?.showStateContent()
     }
 
     /**
      * 显示空布局
      */
     fun showStateEmpty() {
-        mStateLayout?.showEmpty()
+//        mStateLayout?.showEmpty()
     }
 
     /**
      * 显示加载中布局
      */
     fun showStateLoading() {
-        mStateLayout?.showLoading()
+//        mStateLayout?.showLoading()
     }
 
     /**
      * 显示错误布局
      */
     fun showStateError() {
-        mStateLayout?.showError()
+//        mStateLayout?.showError()
     }
 
     /**
