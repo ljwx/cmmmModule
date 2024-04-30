@@ -37,6 +37,10 @@ open class BaseStateRefreshActivity(@LayoutRes layoutResID: Int = R.layout.basea
      */
     private var mRefreshLayout: IViewRefreshLayout? = null
 
+    /**
+     * 多状态的数据是否成功获取过 成功过
+     */
+    protected var stateLoadingDataSucceeded = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -175,7 +179,6 @@ open class BaseStateRefreshActivity(@LayoutRes layoutResID: Int = R.layout.basea
             mRefreshLayout?.refreshFinish()
         }
     }
-
 
     override fun onDestroy() {
         mPopupLoading.dismiss()

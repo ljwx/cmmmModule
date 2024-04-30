@@ -18,7 +18,7 @@ abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int = R.layout.b
     BaseFragment(layoutResID), IPagePopLoading, IPageStateLayout, IPageRefreshLayout {
 
 
-    private var mPopupLoading :BasePopupLoading? = null
+    private var mPopupLoading: BasePopupLoading? = null
 
     /**
      * 多状态
@@ -34,6 +34,11 @@ abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int = R.layout.b
      * 下拉刷新
      */
     private var mRefreshLayout: IViewRefreshLayout? = null
+
+    /**
+     * 多状态的数据是否成功获取过 成功过
+     */
+    protected var stateLoadingDataSucceeded = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
