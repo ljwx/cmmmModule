@@ -76,18 +76,20 @@ open class StateLayout @JvmOverloads constructor(
         }
 
     init {
-        val transition = LayoutTransition()
-
-        transition.setAnimator(
-            LayoutTransition.APPEARING,
-            ObjectAnimator.ofFloat(null, View.ALPHA, 0f, 1f)
-        )
-        transition.setAnimator(
-            LayoutTransition.DISAPPEARING,
-            ObjectAnimator.ofFloat(null, View.ALPHA, 1f, 0f)
-        )
-
-        layoutTransition = transition
+        //viewpager切换的时候可能会导致崩溃
+        //java.lang.IllegalStateException: Page(s) contain a ViewGroup with a LayoutTransition (or animateLayoutChanges="true"), which interferes with the scrolling animation. Make sure to call getLayoutTransition().setAnimateParentHierarchy(false) on all ViewGroups with a LayoutTransition before an animation is started.
+//        val transition = LayoutTransition()
+//
+//        transition.setAnimator(
+//            LayoutTransition.APPEARING,
+//            ObjectAnimator.ofFloat(null, View.ALPHA, 0f, 1f)
+//        )
+//        transition.setAnimator(
+//            LayoutTransition.DISAPPEARING,
+//            ObjectAnimator.ofFloat(null, View.ALPHA, 1f, 0f)
+//        )
+//
+//        layoutTransition = transition
 
         if (layoutParams == null) {
             layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)

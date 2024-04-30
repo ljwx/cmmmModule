@@ -112,6 +112,10 @@ open class MultipleTypeAdapter(
         return newList?.get(position)
     }
 
+    open fun getData(): List<Any?>? {
+        return newList
+    }
+
     open fun getDataSize(): Int {
         return newList?.size ?: 0
     }
