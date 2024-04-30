@@ -146,6 +146,8 @@ abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int = R.layout.b
     open fun showStateEmpty() = showStateLayout(BaseLayoutStatus.EMPTY)
     open fun showStateLoading() = showStateLayout(BaseLayoutStatus.LOADING)
     open fun showStateError() = showStateLayout(BaseLayoutStatus.ERROR)
+    open fun showStateOffline() = showStateLayout(BaseLayoutStatus.OFFLINE)
+    open fun showStateExtend() = showStateLayout(BaseLayoutStatus.EXTEND)
 
     /*================================================================*/
 

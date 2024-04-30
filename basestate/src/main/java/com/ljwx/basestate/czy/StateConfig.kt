@@ -36,6 +36,11 @@ object StateConfig {
     @JvmStatic
     var offlineLayout = View.NO_ID
 
+    /** 加载页布局的layoutRes, 如果[StateLayout.loadingLayout]设置则该属性无效 */
+    @LayoutRes
+    @JvmStatic
+    var extendLayout = View.NO_ID
+
     /** 处理缺省页状态变更 */
 //    @JvmStatic
 //    var stateChangedHandler: StateChangedHandler = StateChangedHandler

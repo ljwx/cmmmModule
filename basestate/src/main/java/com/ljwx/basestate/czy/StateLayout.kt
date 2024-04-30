@@ -65,6 +65,16 @@ open class StateLayout @JvmOverloads constructor(
             }
         }
 
+    /** 加载中页面布局 */
+    @LayoutRes
+    var extendLayout: Int = NO_ID
+        get() = if (field == NO_ID) StateConfig.extendLayout else field
+        set(value) {
+            if (field != value) {
+                field = value
+            }
+        }
+
     init {
         val transition = LayoutTransition()
 
@@ -91,6 +101,8 @@ open class StateLayout @JvmOverloads constructor(
                 attributes.getResourceId(R.styleable.StateLayout_stateLayoutLoading, NO_ID)
             offlineLayout =
                 attributes.getResourceId(R.styleable.StateLayout_stateLayoutOffline, NO_ID)
+            extendLayout =
+                attributes.getResourceId(R.styleable.StateLayout_stateLayoutExtend, NO_ID)
         } finally {
             attributes.recycle()
         }
@@ -147,11 +159,13 @@ open class StateLayout @JvmOverloads constructor(
     }
 
     override fun showStateView(state: Int, tag: Any?) {
-        var layout:Int? = null
+        var layout: Int? = null
         when (state) {
             BaseLayoutStatus.EMPTY -> layout = emptyLayout
             BaseLayoutStatus.LOADING -> layout = loadingLayout
             BaseLayoutStatus.ERROR -> layout = errorLayout
+            BaseLayoutStatus.OFFLINE -> layout = offlineLayout
+            BaseLayoutStatus.EXTEND -> layout = extendLayout
         }
         if (layout == null) {
             showStateContent()
