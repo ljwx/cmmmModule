@@ -37,8 +37,8 @@ abstract class BaseLoadMoreFragment<Binding : ViewDataBinding, ViewModel : BaseV
 
     abstract fun onLoadData(isRefresh: Boolean)
 
-    override fun onRefreshData(manual: Boolean) {
-        super.onRefreshData(manual)
+    override fun onRefreshData(type: Int) {
+        super.onRefreshData(type)
         onLoadData(true)
     }
 

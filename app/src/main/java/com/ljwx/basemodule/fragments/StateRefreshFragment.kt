@@ -40,8 +40,8 @@ class StateRefreshFragment :
 
     }
 
-    override fun onRefreshData(manual: Boolean) {
-        super.onRefreshData(manual)
+    override fun onRefreshData(type: Int) {
+        super.onRefreshData(type)
         Log.d("ljwx2", "执行刷新")
         lifecycleScope.launch(Dispatchers.IO) {
             delay(2000)
