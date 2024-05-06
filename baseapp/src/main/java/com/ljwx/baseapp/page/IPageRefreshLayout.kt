@@ -17,7 +17,7 @@ interface IPageRefreshLayout {
     /**
      * 触发刷新
      */
-    fun onRefreshData(manual: Boolean = true)
+    fun onRefreshData(type: Int = 0)
 
     /**
      * 刷新结束

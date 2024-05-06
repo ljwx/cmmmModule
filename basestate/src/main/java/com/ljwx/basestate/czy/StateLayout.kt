@@ -187,7 +187,19 @@ open class StateLayout @JvmOverloads constructor(
         id: Int,
         listener: OnClickListener
     ) {
-        views.get(state)?.findViewById<View>(id)?.setOnClickListener(listener)
+        var layout: Int? = null
+        when (state) {
+            BaseLayoutStatus.EMPTY -> layout = emptyLayout
+            BaseLayoutStatus.LOADING -> layout = loadingLayout
+            BaseLayoutStatus.ERROR -> layout = errorLayout
+            BaseLayoutStatus.OFFLINE -> layout = offlineLayout
+            BaseLayoutStatus.EXTEND -> layout = extendLayout
+        }
+        if (layout != null) {
+            getOrCreate(state) {
+                LayoutInflater.from(context).inflate(layout, this, false)
+            }.findViewById<View>(id)?.setOnClickListener(listener)
+        }
     }
 
     fun showStateContent() {
