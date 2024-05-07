@@ -11,11 +11,7 @@ import androidx.annotation.LayoutRes
 import androidx.annotation.RestrictTo
 import com.ljwx.recyclerview.R
 
-class LoadMoreView @JvmOverloads constructor(
-    context: Context,
-    attributeSet: AttributeSet? = null,
-    style: Int = 0,
-) : FrameLayout(context, attributeSet, style) {
+class LoadMoreView  : FrameLayout {
 
     companion object {
 
@@ -40,6 +36,10 @@ class LoadMoreView @JvmOverloads constructor(
 
     }
 
+    constructor(context: Context) : super(context)
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+
     /**
      * 内容布局
      */
@@ -52,13 +52,13 @@ class LoadMoreView @JvmOverloads constructor(
 
     init {
         layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-        //动画
-        val transition = LayoutTransition()
-        transition.setAnimator(LayoutTransition.APPEARING,
-            ObjectAnimator.ofFloat(null, View.ALPHA, 0f, 1f))
-        transition.setAnimator(LayoutTransition.DISAPPEARING,
-            ObjectAnimator.ofFloat(null, View.ALPHA, 1f, 0f))
-        layoutTransition = transition
+        //动画,防止动画报错
+//        val transition = LayoutTransition()
+//        transition.setAnimator(LayoutTransition.APPEARING,
+//            ObjectAnimator.ofFloat(null, View.ALPHA, 0f, 1f))
+//        transition.setAnimator(LayoutTransition.DISAPPEARING,
+//            ObjectAnimator.ofFloat(null, View.ALPHA, 1f, 0f))
+//        layoutTransition = transition
     }
 
     /**
