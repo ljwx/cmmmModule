@@ -25,7 +25,11 @@ abstract class BaseBindingPadActivity<Binding : ViewDataBinding, BindingPad : Vi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, getLayoutRes())
+        if (isPad) {
+            mBindingPad = DataBindingUtil.setContentView(this, getLayoutRes())
+        } else {
+            mBinding = DataBindingUtil.setContentView(this, getLayoutRes())
+        }
         //等待binding过后
         initToolbar(com.ljwx.baseapp.R.id.base_app_toolbar)
         quickLayout()
