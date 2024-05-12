@@ -1,7 +1,6 @@
 package com.ljwx.recyclerview.quick
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.View
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
@@ -20,10 +19,10 @@ import com.ljwx.recyclerview.loadmore.view.LoadMoreItem
 @Suppress("UNCHECKED_CAST", "MemberVisibilityCanBePrivate")
 class QuickLoadMoreAdapter<Item : Any>(
     itemClass: Class<Item>,
-    @LayoutRes
-    private val layoutResId: Int,
+    @LayoutRes private val layoutResId: Int,
+    config: AsyncDifferConfig<Any> = AsyncDifferConfig.Builder(ItemDiffCallback()).build(),
     itemClick: ((ItemHolder, Item) -> Unit)? = null,
-) : MultipleTypeAdapter(config = AsyncDifferConfig.Builder(ItemDiffCallback()).build()),
+) : MultipleTypeAdapter(config = config),
     ItemBindClick<Item> {
 
     private val TAG = this.javaClass.simpleName
