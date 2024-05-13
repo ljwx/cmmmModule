@@ -2,10 +2,14 @@ package com.ljwx.basestate
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
+import com.ljwx.baseapp.constant.BaseLayoutStatus
+import com.ljwx.baseapp.constant.BaseLogTag
+import com.ljwx.baseapp.util.BaseModuleLog
 import com.ljwx.baseapp.view.IViewStateLayout
 
 open class StateLayout @JvmOverloads constructor(
@@ -16,7 +20,7 @@ open class StateLayout @JvmOverloads constructor(
 
     private var contentView: View? = null
 
-    private val stateViews = mutableMapOf<Any, View>()
+    private val stateViews = mutableMapOf<Int, View>()
 
     @LayoutRes
     var errorLayout: Int = NO_ID
@@ -89,12 +93,56 @@ open class StateLayout @JvmOverloads constructor(
         }
     }
 
-    override fun setStateView(state: Int, view: View) {
+    private fun createLayoutView(
+        @BaseLayoutStatus.LayoutStatus state: Int,
+        @LayoutRes layout: Int
+    ): View {
+        val view = LayoutInflater.from(context).inflate(layout, this, false)
+        stateViews[state] = view
+        return view
+    }
 
+    private fun getStateView(@BaseLayoutStatus.LayoutStatus state: Int): View? {
+        var view = stateViews[state]
+        if (view == null) {
+            var layout: Int? = null
+            when (state) {
+                BaseLayoutStatus.CONTENT -> return contentView
+                BaseLayoutStatus.EMPTY -> layout = emptyLayout
+                BaseLayoutStatus.LOADING -> layout = loadingLayout
+                BaseLayoutStatus.ERROR -> layout = errorLayout
+                BaseLayoutStatus.OFFLINE -> layout = offlineLayout
+                BaseLayoutStatus.EXTEND -> layout = extendLayout
+            }
+            layout?.let { view = view ?: createLayoutView(state, layout) }
+        }
+        return view
+    }
+
+    override fun setStateView(state: Int, view: View) {
+        stateViews[state] = view
     }
 
     override fun showStateView(state: Int, tag: Any?) {
+        if (state == BaseLayoutStatus.CONTENT) {
+            showStateContent()
+            return
+        }
+        visibility = View.VISIBLE
+        contentView?.visibility = View.GONE
 
+        val newView = getStateView(state)
+        val oldView = if (childCount != 0) getChildAt(0) else null
+
+        if (newView != oldView) {
+            if (contentView?.parent == this) {
+                removeViews(1, childCount - 1)
+            } else {
+                removeAllViews()
+            }
+            BaseModuleLog.d(BaseLogTag.STATE_LAYOUT, "showStateView,newView:$newView")
+            addView(newView)
+        }
     }
 
     override fun getView(): ViewGroup {
@@ -102,10 +150,11 @@ open class StateLayout @JvmOverloads constructor(
     }
 
     override fun addClickListener(state: Int, id: Int, listener: OnClickListener) {
-
+        getStateView(state)?.findViewById<View>(id)?.setOnClickListener(listener)
     }
 
     fun showStateContent() {
+        BaseModuleLog.d(BaseLogTag.STATE_LAYOUT, "showStateContent")
         if (contentView?.parent == this) {
             removeViews(1, childCount - 1)
         } else {
@@ -124,6 +173,7 @@ open class StateLayout @JvmOverloads constructor(
             removeView(contentView)
         }
         contentView = view
+        BaseModuleLog.d(BaseLogTag.STATE_LAYOUT, "setContentView,contentView:$contentView")
     }
 
     override fun onFinishInflate() {
@@ -135,6 +185,7 @@ open class StateLayout @JvmOverloads constructor(
             removeViews(1, childCount - 1)
         }
         contentView = getChildAt(0)
+        BaseModuleLog.d(BaseLogTag.STATE_LAYOUT, "onFinishInflate,contentView:$contentView")
     }
 
 }

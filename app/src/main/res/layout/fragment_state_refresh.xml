@@ -20,7 +20,7 @@
         app:qsrl_layout_loading="@layout/baseapp_state_layout_loading"
         app:qsrl_layout_model="refresh_state">
 
-        <com.ljwx.basestate.czy.StateLayout
+        <com.ljwx.basestate.StateLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:stateLayoutEmpty="@layout/baseapp_state_layout_empty"
@@ -49,7 +49,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
-        </com.ljwx.basestate.czy.StateLayout>
+        </com.ljwx.basestate.StateLayout>
     </FrameLayout>
 
 </layout>

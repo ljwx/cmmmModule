@@ -138,6 +138,14 @@ open class BaseStateRefreshActivity(@LayoutRes layoutResID: Int = R.layout.basea
         }
     }
 
+
+    open fun showStateContent() = showStateLayout(BaseLayoutStatus.CONTENT)
+    open fun showStateEmpty() = showStateLayout(BaseLayoutStatus.EMPTY)
+    open fun showStateLoading() = showStateLayout(BaseLayoutStatus.LOADING)
+    open fun showStateError() = showStateLayout(BaseLayoutStatus.ERROR)
+    open fun showStateOffline() = showStateLayout(BaseLayoutStatus.OFFLINE)
+    open fun showStateExtend() = showStateLayout(BaseLayoutStatus.EXTEND)
+
     /*================================================================*/
 
     override fun enableRefresh(): Boolean = true

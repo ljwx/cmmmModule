@@ -9,4 +9,5 @@ object BaseLogTag {
     const val VIEW_MODEL = COMMON_PRE + "VM"
     const val LOCAL_EVENT = COMMON_PRE + "event"
     const val VIEW_MODEL_SCOPE = COMMON_PRE + "VMScope"
+    const val STATE_LAYOUT = COMMON_PRE + "stateLayout"
 }
