@@ -27,10 +27,20 @@ class BaseDialog @JvmOverloads constructor(context: Context, theme: Int = 0) :
 
     private var builder: BaseDialogBuilder? = null
 
+    private var layout:Int? = null
+
     init {
         setDimAmount(0.7f)
-        setView(commonLayout)
+        if (layout != null) {
+            setView(layout!!)
+        } else {
+            setView(commonLayout)
+        }
         setWidthMatch()
+    }
+
+    fun setLayout(@LayoutRes layoutRes: Int) {
+        this.layout = layoutRes
     }
 
     internal fun setBuilder(builder: BaseDialogBuilder): BaseDialog {
