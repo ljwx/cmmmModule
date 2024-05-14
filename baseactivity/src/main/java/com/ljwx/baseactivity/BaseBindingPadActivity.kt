@@ -46,7 +46,11 @@ abstract class BaseBindingPadActivity<Binding : ViewDataBinding, BindingPad : Vi
 
     override fun onDestroy() {
         super.onDestroy()
-        mBinding.unbind()
+        if (isPad) {
+            mBindingPad.unbind()
+        } else {
+            mBinding.unbind()
+        }
     }
 
 }
