@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.ljwx.baseapp.extensions.getStringRes
 import com.ljwx.baseapp.util.OtherUtils
 
 abstract class BaseBindingPadFragment<Binding : ViewDataBinding, BindingPad : ViewDataBinding>(
@@ -48,7 +47,11 @@ abstract class BaseBindingPadFragment<Binding : ViewDataBinding, BindingPad : Vi
 
     override fun onDestroy() {
         super.onDestroy()
-        mBinding.unbind()
+        if (isPad) {
+            mBindingPad.unbind()
+        } else {
+            mBinding.unbind()
+        }
     }
 
 }
