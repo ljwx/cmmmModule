@@ -1,7 +1,6 @@
 package com.ljwx.basedialog.dialog
 
 import android.content.Context
-import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
@@ -15,8 +14,12 @@ import com.ljwx.baseapp.extensions.visibleGone
 import com.ljwx.basedialog.R
 import com.ljwx.basedialog.common.BaseDialogBuilder
 
-class BaseDialog @JvmOverloads constructor(context: Context, theme: Int = 0) :
-    CustomDialog(context, theme) ,IBaseDialog{
+class BaseDialog @JvmOverloads constructor(
+    context: Context,
+    @LayoutRes layoutRes: Int = commonLayout,
+    theme: Int = 0
+) :
+    CustomDialog(context, theme), IBaseDialog {
 
     companion object {
         private var commonLayout = R.layout.base_dialog_example
@@ -27,28 +30,18 @@ class BaseDialog @JvmOverloads constructor(context: Context, theme: Int = 0) :
 
     private var builder: BaseDialogBuilder? = null
 
-    private var layout:Int? = null
-
     init {
         setDimAmount(0.7f)
-        if (layout != null) {
-            setView(layout!!)
-        } else {
-            setView(commonLayout)
-        }
+        setView(layoutRes)
         setWidthMatch()
     }
 
-    fun setLayout(@LayoutRes layoutRes: Int) {
-        this.layout = layoutRes
-    }
-
-    internal fun setBuilder(builder: BaseDialogBuilder): BaseDialog {
+    fun setBuilder(builder: BaseDialogBuilder): BaseDialog {
         this.builder = builder
         return this
     }
 
-    internal fun setDataFromBuilder() {
+    fun setDataFromBuilder() {
         val view = vRoot.rootView
         builder?.apply {
             view.findViewById<View>(R.id.base_dialog_close)?.apply {
@@ -114,7 +107,10 @@ class BaseDialog @JvmOverloads constructor(context: Context, theme: Int = 0) :
         }
     }
 
-    override fun setPositiveButton(positiveText: CharSequence?, positiveListener: OnClickListener?) {
+    override fun setPositiveButton(
+        positiveText: CharSequence?,
+        positiveListener: OnClickListener?
+    ) {
         vRoot.rootView.findViewById<TextView>(R.id.base_dialog_positive)?.apply {
             builder?.setPositiveButton(positiveText, positiveListener)
             visibleGone(true)
@@ -131,7 +127,10 @@ class BaseDialog @JvmOverloads constructor(context: Context, theme: Int = 0) :
         }
     }
 
-    override fun setNegativeButton(negativeText: CharSequence?, negativeListener: OnClickListener?) {
+    override fun setNegativeButton(
+        negativeText: CharSequence?,
+        negativeListener: OnClickListener?
+    ) {
         vRoot.rootView.findViewById<TextView>(R.id.base_dialog_negative)?.apply {
             builder?.setNegativeButton(negativeText, negativeListener)
             visibleGone(true)
