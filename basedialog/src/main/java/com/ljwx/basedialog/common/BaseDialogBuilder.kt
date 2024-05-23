@@ -12,6 +12,9 @@ import com.ljwx.basedialog.dialogfragment.BaseDialogFragment
 
 class BaseDialogBuilder : IBaseDialogBuilder {
 
+    var rootLayout: Int? = null
+        private set
+
     var showClose: Boolean? = null
         private set
     var title: String? = null
@@ -42,6 +45,7 @@ class BaseDialogBuilder : IBaseDialogBuilder {
 
 
     override fun setViewLayout(rootLayout: Int): IBaseDialogBuilder {
+        this.rootLayout = rootLayout
         return this
     }
 
