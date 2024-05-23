@@ -22,6 +22,7 @@ open class BaseDialog @JvmOverloads constructor(
     CustomDialog(context, theme), IBaseDialog {
 
     companion object {
+
         private var commonLayout = R.layout.base_dialog_example
         fun setCommonLayout(@LayoutRes layoutRes: Int) {
             commonLayout = layoutRes
