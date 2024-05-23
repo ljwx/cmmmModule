@@ -10,6 +10,8 @@ import androidx.fragment.app.FragmentManager
 
 interface IBaseDialogBuilder {
 
+    fun setViewLayout(@LayoutRes rootLayout: Int):IBaseDialogBuilder
+
     fun showCloseIcon(show: Boolean?): IBaseDialogBuilder
 
     fun setTitle(title: CharSequence?): IBaseDialogBuilder
@@ -18,7 +20,7 @@ interface IBaseDialogBuilder {
 
     fun setContent(content: CharSequence?): IBaseDialogBuilder
 
-    fun setContent(@LayoutRes layout: Int): IBaseDialogBuilder
+    fun setContent(@LayoutRes contentLayout: Int): IBaseDialogBuilder
 
     fun setPositiveButton(
         text: CharSequence?,

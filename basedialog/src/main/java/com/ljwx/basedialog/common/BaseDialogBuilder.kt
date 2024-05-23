@@ -39,11 +39,16 @@ class BaseDialogBuilder : IBaseDialogBuilder {
         private set
     private var dialogFragment: BaseDialogFragment? = null
     private var dialog: BaseDialog? = null
+
+
+    override fun setViewLayout(rootLayout: Int): IBaseDialogBuilder {
+        return this
+    }
+
     override fun showCloseIcon(show: Boolean?): IBaseDialogBuilder {
         showClose = show
         return this
     }
-
 
     override fun setTitle(title: CharSequence?): IBaseDialogBuilder {
         this.title = title.toString()
