@@ -41,7 +41,7 @@ class BaseDialog @JvmOverloads constructor(
         return this
     }
 
-    fun setDataFromBuilder() {
+    open fun setDataFromBuilder() {
         val view = vRoot.rootView
         builder?.apply {
             view.findViewById<View>(R.id.base_dialog_close)?.apply {
