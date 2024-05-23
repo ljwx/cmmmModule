@@ -14,7 +14,7 @@ import com.ljwx.baseapp.extensions.visibleGone
 import com.ljwx.basedialog.R
 import com.ljwx.basedialog.common.BaseDialogBuilder
 
-class BaseDialog @JvmOverloads constructor(
+open class BaseDialog @JvmOverloads constructor(
     context: Context,
     @LayoutRes layoutRes: Int = commonLayout,
     theme: Int = 0
