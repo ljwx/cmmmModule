@@ -17,7 +17,10 @@ interface IPageRefreshLayout {
     /**
      * 触发刷新
      */
+    @Deprecated(message = "deprecated")
     fun onRefreshData(type: Int = 0)
+
+    fun onLoadData(type: Int = 0)
 
     /**
      * 刷新结束

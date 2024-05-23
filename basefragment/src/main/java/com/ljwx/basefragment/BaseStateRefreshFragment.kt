@@ -179,6 +179,10 @@ abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int = R.layout.b
      * 下拉刷新
      */
     override fun onRefreshData(type: Int) {
+        onLoadData(type)
+    }
+
+    override fun onLoadData(type: Int) {
 
     }
 
