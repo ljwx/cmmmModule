@@ -94,7 +94,7 @@ abstract class BaseViewModel<M : BaseDataRepository<*>> : ViewModel(), IBaseView
 
     }
 
-    override fun sendLocalEvent(action: String?, type: Int?) {
+    override fun sendLocalEvent(action: String?, type: Long?) {
         LocalEventUtils.sendAction(action, type)
     }
 

@@ -242,7 +242,7 @@ open class BaseActivity(@LayoutRes private val layoutResID: Int = com.ljwx.basea
      */
     override fun registerLocalEvent(
         action: String?,
-        observer: (action: String, type: Int?, intent: Intent) -> Unit
+        observer: (action: String, type: Long?, intent: Intent) -> Unit
     ) {
         if (action == null) {
             return
@@ -254,7 +254,7 @@ open class BaseActivity(@LayoutRes private val layoutResID: Int = com.ljwx.basea
                     BaseModuleLog.d(TAG, "接收到事件广播:$it")
                     if (intentFilter.matchAction(it)) {
                         val type =
-                            intent.getIntExtra(BaseConstBundleKey.LOCAL_EVENT_COMMON_TYPE, -1)
+                            intent.getLongExtra(BaseConstBundleKey.LOCAL_EVENT_COMMON_TYPE, -1)
                         observer(action, type, intent)
                     }
                 }
@@ -266,7 +266,7 @@ open class BaseActivity(@LayoutRes private val layoutResID: Int = com.ljwx.basea
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, intentFilter)
     }
 
-    override fun sendLocalEvent(action: String?, type: Int?) {
+    override fun sendLocalEvent(action: String?, type: Long?) {
         LocalEventUtils.sendAction(action, type)
     }
 

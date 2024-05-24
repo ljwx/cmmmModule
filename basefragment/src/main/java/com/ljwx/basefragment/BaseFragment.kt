@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -186,7 +185,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
             }
             //是否反转按钮
             buttonsReversal(reversalButtons)
-            Log.d(TAG, "${(tag ?: content) ?: "tag为空"},dialog新创建")
+            BaseModuleLog.d(TAG, "${(tag ?: content) ?: "tag为空"},dialog新创建")
             return showDialog(requireContext())
         }
     }
@@ -196,7 +195,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
      */
     override fun registerLocalEvent(
         action: String?,
-        observer: (action: String, type: Int?, intent: Intent) -> Unit
+        observer: (action: String, type: Long?, intent: Intent) -> Unit
     ) {
         if (action == null) {
             return
@@ -208,7 +207,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
                     BaseModuleLog.d(TAG, "接收到事件广播:$it")
                     if (intentFilter.matchAction(it)) {
                         val type =
-                            intent.getIntExtra(BaseConstBundleKey.LOCAL_EVENT_COMMON_TYPE, -1)
+                            intent.getLongExtra(BaseConstBundleKey.LOCAL_EVENT_COMMON_TYPE, -1)
                         observer(action, type, intent)
                     }
                 }
@@ -222,7 +221,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
         }
     }
 
-    override fun sendLocalEvent(action: String?, type: Int?) {
+    override fun sendLocalEvent(action: String?, type: Long?) {
         LocalEventUtils.sendAction(action, type)
     }
 
@@ -297,6 +296,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
 
     override fun setKeyboardHeightListener() {
         keyboardHighProvider?.setKeyboardHeightListener { height, orientation ->
+            BaseModuleLog.d(TAG, "keyboardHeightListener:$height")
             var keyBoardHeight = 0
             if (mScreenHeight <= 0) {
                 hidePopBottom = height
@@ -312,6 +312,7 @@ open class BaseFragment(@LayoutRes private val layoutResID: Int = com.ljwx.basea
                 mScreenHeight = keyboardHeightRootView()?.getHeight() ?: 2000
             }
             if (isKeyboardShow(height, hidePopBottom)) { //软键盘弹出
+                BaseModuleLog.d(TAG, "keyboardHeightListener,判定键盘弹出")
                 onKeyboardHeightChange(true, keyBoardHeight)
             } else {
                 onKeyboardHeightChange(false, 0)

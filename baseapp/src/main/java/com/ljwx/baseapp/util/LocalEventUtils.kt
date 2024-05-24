@@ -8,7 +8,7 @@ import com.ljwx.baseapp.constant.BaseLogTag
 
 object LocalEventUtils {
 
-    fun sendAction(action: String?, type: Int?) {
+    fun sendAction(action: String?, type: Long?) {
         if (action == null) {
             return
         }
