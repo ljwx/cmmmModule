@@ -128,15 +128,15 @@ abstract class BaseStateRefreshFragment(@LayoutRes layoutResID: Int = R.layout.b
      * @param show 是否需要显示
      * @param tag 携带数据
      */
-    override fun showStateLayout(state: Int, show: Boolean, tag: Any?) {
+    override fun showStateLayout(state: Int, show: Boolean, view: View?, tag: Any?) {
         if (!show || requireActivity().isFinishing) {
             return
         }
         if (isMainThread) {
-            mStateLayout?.showStateView(state, tag)
+            mStateLayout?.showStateView(state, view, tag)
         } else {
             mStateRunnable = mStateRunnable ?: Runnable {
-                mStateLayout?.showStateView(state, tag)
+                mStateLayout?.showStateView(state, view, tag)
             }
             requireActivity().runOnUiThread(mStateRunnable)
         }

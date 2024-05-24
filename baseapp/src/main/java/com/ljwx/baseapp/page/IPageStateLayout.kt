@@ -17,6 +17,7 @@ interface IPageStateLayout {
     fun showStateLayout(
         @BaseLayoutStatus.LayoutStatus state: Int,
         show: Boolean = true,
+        view: View? = null,
         tag: Any? = null
     )
 

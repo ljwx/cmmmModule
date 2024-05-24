@@ -11,7 +11,11 @@ interface IViewStateLayout {
 
     fun setStateView(@BaseLayoutStatus.LayoutStatus state: Int, view: View)
 
-    fun showStateView(@BaseLayoutStatus.LayoutStatus state: Int, tag: Any? = null)
+    fun showStateView(
+        @BaseLayoutStatus.LayoutStatus state: Int,
+        view: View? = null,
+        tag: Any? = null
+    )
 
     fun getView(): ViewGroup
 

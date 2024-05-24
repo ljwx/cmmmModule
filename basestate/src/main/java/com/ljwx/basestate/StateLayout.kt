@@ -123,7 +123,7 @@ open class StateLayout @JvmOverloads constructor(
         stateViews[state] = view
     }
 
-    override fun showStateView(state: Int, tag: Any?) {
+    override fun showStateView(state: Int, view: View?, tag: Any?) {
         if (state == BaseLayoutStatus.CONTENT) {
             showStateContent()
             return

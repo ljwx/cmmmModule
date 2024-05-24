@@ -124,15 +124,15 @@ open class BaseStateRefreshActivity(@LayoutRes layoutResID: Int = R.layout.basea
      * @param show 是否需要显示
      * @param tag 携带数据
      */
-    override fun showStateLayout(state: Int, show: Boolean, tag: Any?) {
+    override fun showStateLayout(state: Int, show: Boolean, view: View?, tag: Any?) {
         if (!show || isFinishing) {
             return
         }
         if (isMainThread) {
-            mStateLayout?.showStateView(state, tag)
+            mStateLayout?.showStateView(state, view, tag)
         } else {
             mStateRunnable = mStateRunnable ?: Runnable {
-                mStateLayout?.showStateView(state, tag)
+                mStateLayout?.showStateView(state, view, tag)
             }
             runOnUiThread(mStateRunnable)
         }

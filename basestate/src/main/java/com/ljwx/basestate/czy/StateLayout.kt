@@ -160,7 +160,7 @@ open class StateLayout @JvmOverloads constructor(
         views.put(state, view)
     }
 
-    override fun showStateView(state: Int, tag: Any?) {
+    override fun showStateView(state: Int, view: View?, tag: Any?) {
         var layout: Int? = null
         when (state) {
             BaseLayoutStatus.EMPTY -> layout = emptyLayout
